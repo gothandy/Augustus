@@ -54,6 +54,27 @@ namespace Augustus.Connect
             Console.WriteLine(crmSvc.LastCrmException.StackTrace);
         }
 
+        /*<fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
+              <entity name="new_invoice">
+                <attribute name="new_invoicedate" />
+                <attribute name="new_directclient" />
+                <attribute name="new_margin" />
+                <attribute name="new_invoiceid" />
+                <attribute name="statuscode" />
+                <attribute name="new_wip_previous" />
+                <attribute name="new_wip_current" />
+                <attribute name="new_name" />
+                <order attribute="new_invoicedate" descending="false" />
+                <filter type="and">
+                  <filter type="or">
+                    <condition attribute="new_invoicedate" operator="this-month" />
+                    <condition attribute="new_invoicedate" operator="next-x-months" value="100" />
+                  </filter>
+                  <condition attribute="statecode" operator="eq" value="0" />
+                </filter>
+              </entity>
+            </fetch>*/
+
         private static void WriteInvoices(IOrganizationService _orgService)
         {
             QueryExpression query = new QueryExpression
@@ -67,7 +88,45 @@ namespace Augustus.Connect
                         "statuscode",
                         "new_wip_previous",
                         "new_wip_current",
-                        "new_name")
+                        "new_name"),
+                Criteria = new FilterExpression
+                {
+                    FilterOperator = LogicalOperator.And,
+                    Filters =
+                    {
+                        new FilterExpression
+                        {
+                            FilterOperator = LogicalOperator.Or,
+                            Conditions =
+                            {
+                                new ConditionExpression
+                                {
+                                    AttributeName = "new_invoicedate",
+                                    Operator = ConditionOperator.ThisMonth
+                                },
+                                new ConditionExpression
+                                {
+                                    AttributeName = "new_invoicedate",
+                                    Operator = ConditionOperator.NextXMonths,
+                                    Values = { 100 }
+                                }
+                            }
+                        },
+                        new FilterExpression
+                        {
+                            FilterOperator = LogicalOperator.And,
+                            Conditions =
+                            {
+                                new ConditionExpression
+                                {
+                                    AttributeName = "statecode",
+                                    Operator = ConditionOperator.Equal,
+                                    Values = { 0 }
+                                }
+                            }
+                        }
+                    }
+                }
             };
 
             foreach (new_invoice invoice in _orgService.RetrieveMultiple(query).Entities)
