@@ -10,6 +10,15 @@ To find the CRM url simply login to CRM and use the url given there of the forma
   </appSettings>
 ```
 
+## Generated Code
+
+Install the [Microsoft Dynamics CRM 2016 SDK](https://www.microsoft.com/en-us/download/details.aspx?id=50032). In the `SDK\Bin` folder create a batch file with the following. The command takes sometime to run without feedback. Be patient.
+
+```
+cd {root}/SDK/Bin
+CrmSvcUtil.exe /url:{url}/XRMServices/2011/Organization.svc /out:GeneratedCode.cs /username:"{email}" /password:"{password}"
+```  
+
 
 
 
