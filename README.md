@@ -16,7 +16,7 @@ Install the [Microsoft Dynamics CRM 2016 SDK](https://www.microsoft.com/en-us/do
 
 ```
 cd {root}/SDK/Bin
-CrmSvcUtil.exe /url:{url}/XRMServices/2011/Organization.svc /out:GeneratedCode.cs /username:"{email}" /password:"{password}"
+CrmSvcUtil.exe /url:{url}/XRMServices/2011/Organization.svc /out:GeneratedCode.cs /serviceContextName:CrmServiceContext /username:"{email}" /password:"{password}"
 ```  
 
 
