@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Augustus.Interfaces")]
+[assembly: AssemblyTitle("Augustus.CRM.GeneratedProxyCode.Test")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Augustus.Interfaces")]
+[assembly: AssemblyProduct("Augustus.CRM.GeneratedProxyCode.Test")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("7998dd08-8366-46d7-b6fb-0aee9f36460b")]
+[assembly: Guid("bb7e68ce-9539-41b8-af59-5cf6a82b8382")]
 
 // Version information for an assembly consists of the following four values:
 //

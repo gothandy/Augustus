@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Configuration;
 using Augustus.CRM;
-using Augustus.CRM.Entities;
 using System.Linq;
+using Augustus.Interfaces;
 
 namespace Augustus.Connect
 {
@@ -16,9 +16,13 @@ namespace Augustus.Connect
             using (CrmClient crm = new CrmClient(connectionString))
             {
 
-                Account easyJet = crm.GetAccount("easyJet");
+                /*
+                IAccount easyJet = (from a in crm.Organization.Accounts
+                                    where a.Name == "easyJet"
+                                    select a).Single();
+
                 Console.WriteLine(easyJet.Id);
-                
+                */
             }
 
             Console.ReadKey();
