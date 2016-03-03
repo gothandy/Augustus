@@ -21,7 +21,7 @@ namespace Augustus.CRM
         {
             get
             {
-                return this.CreateQuery<Account>().AsEnumerable();
+                return this.CreateQuery<Account>();
             }
         }
 
@@ -29,7 +29,7 @@ namespace Augustus.CRM
         {
             get
             {
-                return this.CreateQuery<Invoice>().AsEnumerable();
+                return this.CreateQuery<Invoice>();
             }
         }
     }
