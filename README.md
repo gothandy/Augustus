@@ -17,7 +17,11 @@ Install the [Microsoft Dynamics CRM 2016 SDK](https://www.microsoft.com/en-us/do
 ```
 cd {root}/SDK/Bin
 CrmSvcUtil.exe /url:{url}/XRMServices/2011/Organization.svc /out:GeneratedCode.cs /serviceContextName:CrmServiceContext /username:"{email}" /password:"{password}"
-```  
+``` 
+
+## NuGet
+
+This is the one package required to add CRM access to a project Microsoft.CrmSdk.XrmTooling.CoreAssembly [8.0.2].  
 
 
 
