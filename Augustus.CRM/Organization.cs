@@ -2,7 +2,6 @@
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Client;
 using System.Collections.Generic;
-using System.Linq;
 
 [assembly: ProxyTypesAssemblyAttribute()]
 
