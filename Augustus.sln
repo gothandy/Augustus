@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.CRM", "Augustus.CRM\Augustus.CRM.csproj", "{4385A42C-2424-4C8D-9788-B8B22AE5FC2E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augusts.GeneratedProxyCode", "Augusts.GeneratedProxyCode\Augusts.GeneratedProxyCode.csproj", "{02FC3DE1-2239-4B98-827A-CB5C1A51C488}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.CRM.GeneratedProxyCode", "Augustus.CRM.GeneratedProxyCode\Augustus.CRM.GeneratedProxyCode.csproj", "{02FC3DE1-2239-4B98-827A-CB5C1A51C488}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

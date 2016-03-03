@@ -31,6 +31,21 @@ namespace Augustus.CRM
             }
         }
 
+        public IQueryable<Entities.Account> Accounts
+        {
+            get
+            {
+                return
+                    (IQueryable<Entities.Account>)
+                    (from a in this.context.AccountSet
+                    select new Entities.Account
+                    {
+                        Id = a.Id,
+                        Name = a.Name
+                    }).ToList().AsQueryable<Entities.Account>();
+            }
+        }
+
         public void Dispose()
         {
             context.Dispose();
@@ -46,7 +61,7 @@ namespace Augustus.CRM
                                Name = a.Name
                            };
 
-            return accounts.First();
+            return accounts.Single();
         }
     }
 }

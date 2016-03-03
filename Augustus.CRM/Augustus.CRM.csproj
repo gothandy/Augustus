@@ -115,9 +115,9 @@
     <Folder Include="bin\Release\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Augusts.GeneratedProxyCode\Augusts.GeneratedProxyCode.csproj">
+    <ProjectReference Include="..\Augustus.CRM.GeneratedProxyCode\Augustus.CRM.GeneratedProxyCode.csproj">
       <Project>{02fc3de1-2239-4b98-827a-cb5c1a51c488}</Project>
-      <Name>Augusts.GeneratedProxyCode</Name>
+      <Name>Augustus.CRM.GeneratedProxyCode</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
