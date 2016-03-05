@@ -85,7 +85,7 @@
   <ItemGroup>
     <Compile Include="Account.cs" />
     <Compile Include="BaseEntity.cs" />
-    <Compile Include="CrmClient.cs" />
+    <Compile Include="BaseOrganization.cs" />
     <Compile Include="Invoice.cs" />
     <Compile Include="OrgQueryable.cs" />
     <Compile Include="Organization.cs" />

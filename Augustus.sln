@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.Connect", "Augustus.Connect\Augustus.Connect.csproj", "{ECC06C0A-0752-4DE5-A1F3-0D32D28749C1}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AEC8F121-94D3-4535-B4BC-3FEB2A598BB2}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
@@ -12,13 +10,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.CRM", "Augustus.CRM\Augustus.CRM.csproj", "{4385A42C-2424-4C8D-9788-B8B22AE5FC2E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.CRM.GeneratedProxyCode", "Augustus.CRM.GeneratedProxyCode\Augustus.CRM.GeneratedProxyCode.csproj", "{02FC3DE1-2239-4B98-827A-CB5C1A51C488}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.GeneratedProxyCode", "Augustus.GeneratedProxyCode\Augustus.GeneratedProxyCode.csproj", "{02FC3DE1-2239-4B98-827A-CB5C1A51C488}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.Interfaces", "Augustus.Interfaces\Augustus.Interfaces.csproj", "{7998DD08-8366-46D7-B6FB-0AEE9F36460B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.CRM.GeneratedProxyCode.Test", "Augustus.CRM.GeneratedProxyCode.Test\Augustus.CRM.GeneratedProxyCode.Test.csproj", "{BB7E68CE-9539-41B8-AF59-5CF6A82B8382}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.GeneratedProxyCode.Test", "Augustus.GeneratedProxyCode.Test\Augustus.GeneratedProxyCode.Test.csproj", "{BB7E68CE-9539-41B8-AF59-5CF6A82B8382}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.CRM.Test", "Augustus.CRM.Test\Augustus.CRM.Test.csproj", "{E5C1690C-D262-4196-BC2E-4D471F343538}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.Console.InvoiceWipCsv", "Augustus.Console.InvoiceWipCsv\Augustus.Console.InvoiceWipCsv.csproj", "{32921085-F3F6-4E90-8720-3BAB504855B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,10 +26,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{ECC06C0A-0752-4DE5-A1F3-0D32D28749C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ECC06C0A-0752-4DE5-A1F3-0D32D28749C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ECC06C0A-0752-4DE5-A1F3-0D32D28749C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ECC06C0A-0752-4DE5-A1F3-0D32D28749C1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4385A42C-2424-4C8D-9788-B8B22AE5FC2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4385A42C-2424-4C8D-9788-B8B22AE5FC2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4385A42C-2424-4C8D-9788-B8B22AE5FC2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -50,6 +46,10 @@ Global
 		{E5C1690C-D262-4196-BC2E-4D471F343538}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5C1690C-D262-4196-BC2E-4D471F343538}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5C1690C-D262-4196-BC2E-4D471F343538}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32921085-F3F6-4E90-8720-3BAB504855B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32921085-F3F6-4E90-8720-3BAB504855B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32921085-F3F6-4E90-8720-3BAB504855B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32921085-F3F6-4E90-8720-3BAB504855B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

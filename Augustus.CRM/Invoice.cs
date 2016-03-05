@@ -24,7 +24,7 @@ namespace Augustus.CRM
         {
             get
             {
-                return this.GetAttributeValue<System.Nullable<System.Guid>>("new_invoiceid");
+                return GetAttributeValue<Guid?>("new_invoiceid");
             }
             set
             {
@@ -58,7 +58,7 @@ namespace Augustus.CRM
         {
             get
             {
-                return this.GetAttributeValue<System.Nullable<System.DateTime>>("new_invoicedate");
+                return GetAttributeValue<DateTime?>("new_invoicedate");
             }
             set
             {
@@ -84,7 +84,7 @@ namespace Augustus.CRM
         {
             get
             {
-                return GetAttributeValueEntityReference("new_directclient");
+                return GetAttributeValueEntityReferenceId("new_directclient");
             }
             /*set
             {
@@ -97,7 +97,7 @@ namespace Augustus.CRM
         {
             get
             {
-                return this.GetAttributeValue<System.Nullable<System.DateTime>>("new_clientapproveddate");
+                return GetAttributeValue<DateTime?>("new_clientapproveddate");
             }
             set
             {
@@ -136,11 +136,11 @@ namespace Augustus.CRM
         {
             get
             {
-                return this.GetAttributeValue<string>("new_name");
+                return GetAttributeValue<string>("new_name");
             }
             set
             {
-                this.SetAttributeValue("new_name", value);
+                SetAttributeValue("new_name", value);
             }
         }
 
@@ -149,7 +149,7 @@ namespace Augustus.CRM
         {
             get
             {
-                return this.GetAttributeValueEntityReference("new_opportunity");
+                return GetAttributeValueEntityReferenceId("new_opportunity");
             }
             /*set
             {
@@ -162,7 +162,7 @@ namespace Augustus.CRM
         {
             get
             {
-                return this.GetAttributeValue<string>("new_ponumber");
+                return GetAttributeValue<string>("new_ponumber");
             }
             set
             {
@@ -201,7 +201,7 @@ namespace Augustus.CRM
         {
             get
             {
-                return this.GetAttributeValueMoney("new_wip_previous");
+                return GetAttributeValueMoney("new_wip_previous");
             }
             /*set
             {

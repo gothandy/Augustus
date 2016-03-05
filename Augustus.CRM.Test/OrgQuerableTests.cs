@@ -1,10 +1,9 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Configuration;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Tooling.Connector;
+using System;
+using System.Configuration;
 using System.Linq;
-using Augustus.Interfaces;
 
 namespace Augustus.CRM.Test
 {
@@ -18,11 +17,7 @@ namespace Augustus.CRM.Test
         {
             string connectionString = ConfigurationManager.AppSettings["AugustusCRM"];
 
-            CrmServiceClient crmSvc = new CrmServiceClient(connectionString);
-
-            IOrganizationService _orgService = (IOrganizationService)crmSvc.OrganizationWebProxyClient;
-
-            org = new OrgQueryable(_orgService);
+            org = new OrgQueryable(connectionString);
         }
 
         [ClassCleanup]

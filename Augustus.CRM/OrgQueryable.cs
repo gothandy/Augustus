@@ -1,23 +1,17 @@
-﻿using Microsoft.Xrm.Sdk;
-using Microsoft.Xrm.Sdk.Client;
-using System.Linq;
+﻿using System.Linq;
 
 namespace Augustus.CRM
 {
 
-    public class OrgQueryable : OrganizationServiceContext
+    public class OrgQueryable : BaseOrganization
     {
-
-        public OrgQueryable(IOrganizationService service) :
-                base(service)
-        {
-        }
+        public OrgQueryable(string connectionString) : base(connectionString) { }
 
         public IQueryable<Account> Accounts
         {
             get
             {
-                return this.CreateQuery<Account>();
+                return context.CreateQuery<Account>();
             }
         }
 
@@ -25,7 +19,7 @@ namespace Augustus.CRM
         {
             get
             {
-                return this.CreateQuery<Invoice>();
+                return context.CreateQuery<Invoice>();
             }
         }
     }

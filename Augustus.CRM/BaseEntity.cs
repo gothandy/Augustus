@@ -24,7 +24,7 @@ namespace Augustus.CRM
             }
         }
 
-        protected Guid? GetAttributeValueEntityReference(string attributeLogicalName)
+        protected Guid? GetAttributeValueEntityReferenceId(string attributeLogicalName)
         {
             EntityReference entRef = GetAttributeValue<EntityReference>(attributeLogicalName);
 

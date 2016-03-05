@@ -1,26 +1,18 @@
 ﻿using Augustus.Interfaces;
-using Microsoft.Xrm.Sdk;
-using Microsoft.Xrm.Sdk.Client;
 using System.Collections.Generic;
-
-[assembly: ProxyTypesAssemblyAttribute()]
 
 namespace Augustus.CRM
 {
 
-    public class Organization : OrganizationServiceContext, IOrganization
+    public class Organization : BaseOrganization, IOrganization
     {
-
-        public Organization(IOrganizationService service) :
-                base(service)
-        {
-        }
+        public Organization(string connectionString) : base(connectionString) { }
 
         public IEnumerable<IAccount> Accounts
         {
             get
             {
-                return this.CreateQuery<Account>();
+                return context.CreateQuery<Account>();
             }
         }
 
@@ -28,7 +20,7 @@ namespace Augustus.CRM
         {
             get
             {
-                return this.CreateQuery<Invoice>();
+                return context.CreateQuery<Invoice>();
             }
         }
     }
