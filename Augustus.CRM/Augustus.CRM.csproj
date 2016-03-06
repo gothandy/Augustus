@@ -87,6 +87,7 @@
     <Compile Include="BaseEntity.cs" />
     <Compile Include="BaseOrganization.cs" />
     <Compile Include="Invoice.cs" />
+    <Compile Include="Status.cs" />
     <Compile Include="OrgQueryable.cs" />
     <Compile Include="Organization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -11,10 +11,7 @@ namespace Augustus.CRM
     public class Invoice : BaseEntity, IInvoice
     {
 
-        public Invoice() :
-                base(EntityLogicalName)
-        {
-        }
+        public Invoice() : base(EntityLogicalName) { }
 
         public const string EntityLogicalName = "new_invoice";
         public const int EntityTypeCode = 10010;
@@ -206,6 +203,19 @@ namespace Augustus.CRM
             /*set
             {
                 this.SetAttributeValue("new_wip_previous", value);
+            }*/
+        }
+
+        [AttributeLogicalName("statuscode")]
+        public int Status
+        {
+            get
+            {
+                return GetAttributeValue<OptionSetValue>("statuscode").Value;
+            }
+            /*set
+            {
+                this.SetAttributeValue("statuscode", value);
             }*/
         }
     }
