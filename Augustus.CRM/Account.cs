@@ -8,7 +8,7 @@ namespace Augustus.CRM
 
     [DataContract()]
     [EntityLogicalName("account")]
-    public class Account : Entity, IAccount
+    public class Account : BaseEntity, IAccount
     {
 
         public Account() : base(EntityLogicalName) { }

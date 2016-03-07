@@ -83,10 +83,17 @@ namespace Augustus.CRM
             {
                 return GetAttributeValueEntityReferenceId("new_directclient");
             }
-            /*set
+            set
             {
-                this.SetAttributeValue("new_directclient", value);
-            }*/
+                if (value.HasValue)
+                {
+                    this.SetAttributeValue("new_directclient",
+                        new EntityReference(
+                            Account.EntityLogicalName,
+                            value.Value));
+                }
+                
+            }
         }
 
         [AttributeLogicalName("new_clientapproveddate")]

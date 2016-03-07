@@ -9,7 +9,7 @@ using System.Diagnostics;
 namespace Augustus.CRM.GeneratedProxyCode.Test
 {
     [TestClass]
-    public class GeneratedProxyCodeTests
+    public class WriteTest
     {
         private static CrmServiceContext context;
 
@@ -32,25 +32,42 @@ namespace Augustus.CRM.GeneratedProxyCode.Test
         }
 
         [TestMethod]
-        public void GeneratedProxyCode_GetAccount()
+        public void GeneratedProxyCode_CrudAccount()
         {
-            Account account = context.AccountSet.First(a => a.Name == "easyJet");
-            Assert.AreEqual("easyJet", account.Name);
+            createAccount();
+            updateAccount();
+            deleteAccount();
         }
 
-        [TestMethod]
-        public void GeneratedProxyCode_GetActiveAccounts()
+        private void createAccount()
         {
-            var Accounts = (from a in context.AccountSet
-                            join i in context.new_invoiceSet
-                            on a.Id equals i.new_account_new_invoice_DirectClient.Id
-                            where i.new_InvoiceDate > new DateTime(2015,1,1)
-                            select a).Distinct();
-
-            foreach (var account in Accounts)
+            Account account = new Account()
             {
-                Console.WriteLine(account.Name);
-            }
+                Name = "TestAccount"
+            };
+
+            context.AddObject(account);
+            context.SaveChanges();
+        }
+
+        private void updateAccount()
+        {
+            Account account = getAccount("TestAccount");
+            account.Name = "TestAccount2";
+            context.UpdateObject(account);
+            context.SaveChanges();
+        }
+
+        private void deleteAccount()
+        {
+            Account account = getAccount("TestAccount2");
+            context.DeleteObject(account);
+            context.SaveChanges();
+        }
+
+        private Account getAccount(string name)
+        {
+            return context.AccountSet.Single(a => a.Name == name);
         }
     }
 }

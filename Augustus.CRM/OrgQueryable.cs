@@ -22,5 +22,33 @@ namespace Augustus.CRM
                 return context.CreateQuery<Invoice>();
             }
         }
+
+        public IQueryable<WorkDoneItem> WorkDoneItems
+        {
+            get
+            {
+                return context.CreateQuery<WorkDoneItem>();
+            }
+        }
+
+        public void Create<T>(T entity) where T : BaseEntity
+        {
+            context.AddObject(entity);
+        }
+
+        public void Update<T>(T entity) where T : BaseEntity
+        {
+            context.UpdateObject(entity);
+        }
+
+        public void Delete<T>(T entity) where T : BaseEntity
+        {
+            context.DeleteObject(entity);
+        }
+
+        public void Save()
+        {
+            context.SaveChanges();
+        }
     }
 }

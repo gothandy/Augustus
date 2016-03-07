@@ -10,6 +10,8 @@ To find the CRM url simply login to CRM and use the url given there of the forma
   </appSettings>
 ```
 
+I tend to use `machine.config` found here `%WinDir%\Microsoft.NET\Framework\v4.0.30319\Config`.
+
 ## Generated Code
 
 Install the [Microsoft Dynamics CRM 2016 SDK](https://www.microsoft.com/en-us/download/details.aspx?id=50032). In the `SDK\Bin` folder create a batch file with the following. The command takes sometime to run without feedback. Be patient.
