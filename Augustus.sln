@@ -18,7 +18,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.GeneratedProxyCode
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.CRM.Test", "Augustus.CRM.Test\Augustus.CRM.Test.csproj", "{E5C1690C-D262-4196-BC2E-4D471F343538}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.Console.InvoiceWipCsv", "Augustus.Console.InvoiceWipCsv\Augustus.Console.InvoiceWipCsv.csproj", "{32921085-F3F6-4E90-8720-3BAB504855B1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.App.ExportInvoiceWipCsv", "Augustus.App.ExportInvoiceWipCsv\Augustus.App.ExportInvoiceWipCsv.csproj", "{32921085-F3F6-4E90-8720-3BAB504855B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
