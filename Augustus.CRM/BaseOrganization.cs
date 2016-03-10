@@ -2,6 +2,7 @@
 using Microsoft.Xrm.Sdk.Client;
 using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Metadata;
+using Microsoft.Xrm.Sdk.WebServiceClient;
 using Microsoft.Xrm.Tooling.Connector;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,19 @@ namespace Augustus.CRM
     {
         protected OrganizationServiceContext context;
         private IOrganizationService service;
+
+        public BaseOrganization(Uri crmUrl, string accessToken)
+        {
+            var uri = new Uri(crmUrl, "/XRMServices/2011/Organization.svc/web");
+
+            service = new OrganizationWebProxyClient(uri, useStrongTypes: true)
+            {
+                HeaderToken = accessToken,
+                SdkClientVersion = "7.0",
+            };
+            
+            context = new OrganizationServiceContext(service);
+        }
 
         public BaseOrganization(string connectionString)
         {

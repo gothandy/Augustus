@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using Microsoft.Xrm.Sdk;
+using System;
+using System.Linq;
 
 namespace Augustus.CRM
 {
@@ -6,6 +8,7 @@ namespace Augustus.CRM
     public class OrgQueryable : BaseOrganization
     {
         public OrgQueryable(string connectionString) : base(connectionString) { }
+        public OrgQueryable(Uri crmUrl, string accessToken) : base(crmUrl, accessToken) { }
 
         public IQueryable<Account> Accounts
         {

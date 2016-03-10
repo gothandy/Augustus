@@ -1,15 +1,11 @@
 ﻿using Microsoft.Xrm.Sdk;
-using Microsoft.Xrm.Sdk.Messages;
 using System;
 
 namespace Augustus.CRM
 {
     public class BaseEntity : Entity
     {
-        public BaseEntity(string entityLogicalName) :
-            base(entityLogicalName)
-        {
-        }
+        public BaseEntity(string entityLogicalName) : base(entityLogicalName) { }
 
         protected decimal? GetAttributeValueMoney(string attributeLogicalName)
         {
