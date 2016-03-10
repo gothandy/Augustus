@@ -41,20 +41,24 @@ namespace Augustus.Web.Portal.Controllers
             return await authContext.AcquireTokenSilentAsync(resource, credential, userIdentifier);
         }
 
-        public async Task<ActionResult> About()
+        public async Task<ActionResult> Accounts()
         {
+            IEnumerable<Account> activeAccounts;
+
             Uri crmUrl = new Uri(ConfigurationManager.AppSettings["crm:Url"]);
 
             var result = await WaitForAuthenticationResult();
 
             using (OrgQueryable org = new OrgQueryable(crmUrl, result.AccessToken))
             {
-                var accounts = org.Accounts;
-                var account = accounts.Single(a => a.Name == "easyJet");
-                ViewBag.Message = "easyJet Account Id is " + account.AccountId.Value.ToString();
+                activeAccounts = (from a in org.Accounts
+                                  join i in org.Invoices
+                                  on a.Id equals i.DirectClientId
+                                  where i.InvoiceDate > new DateTime(2015, 3, 1)
+                                  select a).Distinct().AsEnumerable();
             }
 
-            return View();
+            return View(activeAccounts);
         }
 
         public ActionResult Contact()

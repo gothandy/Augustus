@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Augustus.CRM.Account>
+@{
+    ViewBag.Title = "Accounts";
+}
+<h2>@ViewBag.Title.</h2>
+
+<ul>
+    @foreach(var a in Model)
+    {
+        <li>@a.Name</li>
+    }
+</ul>
