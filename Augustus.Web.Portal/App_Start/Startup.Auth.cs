@@ -8,6 +8,9 @@ using Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OpenIdConnect;
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
+using System.IdentityModel.Claims;
+using System.Threading.Tasks;
 
 namespace Augustus.Web.Portal
 {
@@ -17,6 +20,7 @@ namespace Augustus.Web.Portal
         private static string aadInstance = ConfigurationManager.AppSettings["ida:AADInstance"];
         private static string tenantId = ConfigurationManager.AppSettings["ida:TenantId"];
         private static string postLogoutRedirectUri = ConfigurationManager.AppSettings["ida:PostLogoutRedirectUri"];
+        private static string clientSecret = ConfigurationManager.AppSettings["ida:ClientSecret"];
         private static string authority = aadInstance + tenantId;
 
         public void ConfigureAuth(IAppBuilder app)
@@ -30,7 +34,24 @@ namespace Augustus.Web.Portal
                 {
                     ClientId = clientId,
                     Authority = authority,
-                    PostLogoutRedirectUri = postLogoutRedirectUri
+                    PostLogoutRedirectUri = postLogoutRedirectUri,
+                    Notifications = new OpenIdConnectAuthenticationNotifications()
+                    {
+                        AuthorizationCodeReceived = (context) =>
+                        {
+                            var code = context.Code;
+
+                            ClientCredential credential = new ClientCredential(clientId, clientSecret);
+                            string tenantID = context.AuthenticationTicket.Identity.FindFirst("http://schemas.microsoft.com/identity/claims/tenantid").Value;
+                            string signedInUserID = context.AuthenticationTicket.Identity.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+                            AuthenticationContext authContext = new AuthenticationContext(string.Format("https://login.windows.net/{0}", tenantID));
+                            AuthenticationResult result = authContext.AcquireTokenByAuthorizationCode(code, new Uri(HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path)), credential, "Microsoft.CRM");
+
+                            return Task.FromResult(0);
+                        }
+                    },
+                    ClientSecret = clientSecret
                 });
         }
     }
