@@ -2,11 +2,14 @@
 @{
     ViewBag.Title = "Accounts";
 }
-<h2>@ViewBag.Title.</h2>
-
 <ul>
-    @foreach(var a in Model)
+    @foreach (var a in Model)
     {
-        <li>@a.Name</li>
+        <li>@Html.ActionLink(a.Name, "View", new { id = a.Id })</li>
     }
 </ul>
+
+
+
+
+

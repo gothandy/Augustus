@@ -1,44 +1,81 @@
-﻿using System;
+﻿using Augustus.CRM;
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
-using System.Web;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using System.Web.Mvc;
-using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.OpenIdConnect;
-using Microsoft.Owin.Security;
 
 namespace Augustus.Web.Portal.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
-        public void SignIn()
+        private const string tenantIdUrl = "http://schemas.microsoft.com/identity/claims/tenantid";
+        private const string objectIdentifierUrl = "http://schemas.microsoft.com/identity/claims/objectidentifier";
+
+        private async Task<AuthenticationResult> WaitForAuthenticationResult()
         {
-            // Send an OpenID Connect sign-in request.
-            if (!Request.IsAuthenticated)
-            {
-                HttpContext.GetOwinContext().Authentication.Challenge(new AuthenticationProperties { RedirectUri = "/" },
-                    OpenIdConnectAuthenticationDefaults.AuthenticationType);
-            }
+            string clientId = ConfigurationManager.AppSettings["ida:ClientId"];
+            string clientSecret = ConfigurationManager.AppSettings["ida:ClientSecret"];
+            string signedInUserID = ClaimsPrincipal.Current.FindFirst(ClaimTypes.NameIdentifier).Value;
+            string tenantID = ClaimsPrincipal.Current.FindFirst(tenantIdUrl).Value;
+            string userObjectID = ClaimsPrincipal.Current.FindFirst(objectIdentifierUrl).Value;
+            string authority = string.Format("https://login.windows.net/{0}", tenantID);
+            string resource = "Microsoft.CRM";
+
+            var authContext = new AuthenticationContext(authority);
+            var credential = new ClientCredential(clientId, clientSecret);
+            var userIdentifier = new UserIdentifier(userObjectID, UserIdentifierType.UniqueId);
+
+            return await authContext.AcquireTokenSilentAsync(resource, credential, userIdentifier);
         }
 
-        public void SignOut()
+        private async Task<OrgQueryable> GetOrgQueryable()
         {
-            string callbackUrl = Url.Action("SignOutCallback", "Account", routeValues: null, protocol: Request.Url.Scheme);
+            Uri crmUrl = new Uri(ConfigurationManager.AppSettings["crm:Url"]);
 
-            HttpContext.GetOwinContext().Authentication.SignOut(
-                new AuthenticationProperties { RedirectUri = callbackUrl },
-                OpenIdConnectAuthenticationDefaults.AuthenticationType, CookieAuthenticationDefaults.AuthenticationType);
+            var result = await WaitForAuthenticationResult();
+
+            return new OrgQueryable(crmUrl, result.AccessToken);
         }
 
-        public ActionResult SignOutCallback()
+        public async Task<ActionResult> Index()
         {
-            if (Request.IsAuthenticated)
+            IEnumerable<Account> activeAccounts;
+
+            using (OrgQueryable org = await GetOrgQueryable())
             {
-                // Redirect to home page if the user is authenticated.
-                return RedirectToAction("Index", "Home");
+                activeAccounts = (from a in org.Accounts
+                                  join i in org.Invoices
+                                  on a.Id equals i.DirectClientId
+                                  where i.InvoiceDate > new DateTime(2015, 3, 1)
+                                  select a).Distinct().AsEnumerable();
             }
 
-            return View();
+            return View(activeAccounts);
+        }
+
+        public async Task<ActionResult> View(Guid id)
+        {
+            IEnumerable<Invoice> invoices;
+
+            using (OrgQueryable org = await GetOrgQueryable())
+            {
+                ViewBag.Account = (from a in org.Accounts
+                                   where a.Id == id
+                                   select a).Single();
+
+                invoices = (from i in org.Invoices
+                            where i.DirectClientId == id
+                            && i.InvoiceDate > new DateTime(2015, 3, 1)
+                            orderby i.InvoiceDate descending
+                            select i).AsEnumerable();
+            }
+
+            return View(invoices);
         }
     }
 }

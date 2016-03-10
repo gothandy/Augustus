@@ -1,15 +1,12 @@
 ﻿using Augustus.CRM;
-using Microsoft.Crm.Sdk.Messages;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
-using Microsoft.Xrm.Sdk.WebServiceClient;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Security.Claims;
-using System.Web;
-using System.Web.Mvc;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace Augustus.Web.Portal.Controllers
 {
@@ -41,15 +38,20 @@ namespace Augustus.Web.Portal.Controllers
             return await authContext.AcquireTokenSilentAsync(resource, credential, userIdentifier);
         }
 
-        public async Task<ActionResult> Accounts()
+        private async Task<OrgQueryable> GetOrgQueryable()
         {
-            IEnumerable<Account> activeAccounts;
-
             Uri crmUrl = new Uri(ConfigurationManager.AppSettings["crm:Url"]);
 
             var result = await WaitForAuthenticationResult();
 
-            using (OrgQueryable org = new OrgQueryable(crmUrl, result.AccessToken))
+            return new OrgQueryable(crmUrl, result.AccessToken);
+        }
+
+        public async Task<ActionResult> Accounts()
+        {
+            IEnumerable<Account> activeAccounts;
+
+            using (OrgQueryable org = await GetOrgQueryable())
             {
                 activeAccounts = (from a in org.Accounts
                                   join i in org.Invoices

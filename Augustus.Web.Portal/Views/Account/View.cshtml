@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Augustus.CRM.Invoice>
+@{
+    Augustus.CRM.Account account = (Augustus.CRM.Account)ViewBag.Account;
+    ViewBag.Title = account.Name;
+}
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Margin</th>
+                <th>Revenue</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var i in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(i.InvoiceDate.Value.ToShortDateString(), "View", "Invoice", new { id = i.Id }, null)</td>
+                    <td>@i.Margin</td>
+                    <td>@i.Revenue</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
