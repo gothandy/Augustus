@@ -5,7 +5,7 @@
 <ul>
     @foreach (var a in Model)
     {
-        <li>@Html.ActionLink(a.Name, "View", new { id = a.Id })</li>
+        <li>@Html.ActionLink(a.Name, "Details", new { id = a.Id })</li>
     }
 </ul>
 

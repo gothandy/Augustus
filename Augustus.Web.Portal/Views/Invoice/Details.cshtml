@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Augustus.CRM.WorkDoneItem>
+@{
+    Augustus.CRM.Invoice invoice = (Augustus.CRM.Invoice)ViewBag.Invoice;
+    ViewBag.Title = invoice.Name;
+}
+<p>
+    @Html.ActionLink("Back", "Details", "Account", new { id = invoice.DirectClientId }, null)
+    <a target="_blank" href="https://trueclarity4.crm4.dynamics.com/main.aspx?etc=10010&id={@invoice.Id}&pagetype=entityrecord">CRM</a>
+</p>
+
+<h2>Summary</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <table class="table">
+            <tr>
+                <td><strong>Margin</strong></td>
+                <td class="currency">@CurrencyHelper.Format(invoice.Margin)</td>
+            </tr>
+            <tr>
+                <td><strong>Cost</strong></td>
+                <td class="currency">@CurrencyHelper.Format(invoice.Cost)</td>
+            </tr>
+            <tr>
+                <td><strong>Revenue</strong></td>
+                <td class="currency">@CurrencyHelper.Format(invoice.Revenue)</td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-4">
+        <table class="table">
+            <tr>
+                <td><strong>Proposal Date</strong></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><strong>SDN Date</strong></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><strong>Invoice Date</strong></td>
+                <td>@DateTimeHelper.Format(invoice.InvoiceDate)</td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-4">
+        <table class="table">
+            <tr>
+                <td><strong>PO No.</strong></td>
+                <td>@invoice.PONumber</td>
+            </tr>
+            <tr>
+                <td><strong>Inv. No.</strong></td>
+                <td>@invoice.InvoiceNo</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<h2>Work Done</h2>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th class="currency">Margin</th>
+                </tr>
+            </thead>
+            @foreach (var i in Model)
+            {
+                <tr>
+                    <td>@DateTimeHelper.Format(i.WorkDoneDate)</td>
+                    <td class="currency">@CurrencyHelper.Format(i.Margin)</td>
+                </tr>
+            }
+            <tfoot>
+                <tr>
+                    <td>Total</td>
+                    <td class="currency">@CurrencyHelper.Format(Model.Sum(i => i.Margin))</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>

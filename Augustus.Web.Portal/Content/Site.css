@@ -22,3 +22,11 @@ select,
 textarea {
     max-width: 280px;
 }
+
+th { text-align: left; }
+
+td.currency, td.number, th.currency, th.number { text-align: right; }
+
+td { white-space: nowrap; }
+
+tfoot tr td { font-weight: bold; }
