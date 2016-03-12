@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.App.ImportWorkDone
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.Web.Portal", "Augustus.Web.Portal\Augustus.Web.Portal.csproj", "{9A77BFE5-C00D-4544-8EE4-783A58429C7F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.App.WebRole", "Augustus.App.WebRole\Augustus.App.WebRole.csproj", "{838EDB8A-A63E-456B-A821-8576D6849511}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +64,10 @@ Global
 		{9A77BFE5-C00D-4544-8EE4-783A58429C7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A77BFE5-C00D-4544-8EE4-783A58429C7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A77BFE5-C00D-4544-8EE4-783A58429C7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{838EDB8A-A63E-456B-A821-8576D6849511}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{838EDB8A-A63E-456B-A821-8576D6849511}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{838EDB8A-A63E-456B-A821-8576D6849511}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{838EDB8A-A63E-456B-A821-8576D6849511}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

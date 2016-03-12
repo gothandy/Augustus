@@ -6,7 +6,7 @@ namespace Augustus.Interfaces
     {
         Guid Id { get; set; }
         Guid? InvoiceId { get; set; }
-        Guid? DirectClientId { get; }
+        Guid? AccountId { get; }
         Guid? OpportunityId { get; }
         string Name { get; set; }
         string PONumber { get; set; }

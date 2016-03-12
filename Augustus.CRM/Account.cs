@@ -2,6 +2,8 @@
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Client;
 using System.Runtime.Serialization;
+using System.ComponentModel.DataAnnotations;
+using System;
 
 namespace Augustus.CRM
 {
@@ -17,28 +19,21 @@ namespace Augustus.CRM
         public const int EntityTypeCode = 1;
 
         [AttributeLogicalName("accountid")]
-        public System.Guid? AccountId
+        public Guid? AccountId
         {
             get
             {
-                return this.GetAttributeValue<System.Nullable<System.Guid>>("accountid");
+                return GetAttributeValue<Guid?>("accountid");
             }
             set
             {
-                this.SetAttributeValue("accountid", value);
-                if (value.HasValue)
-                {
-                    base.Id = value.Value;
-                }
-                else
-                {
-                    base.Id = System.Guid.Empty;
-                }
+                SetAttributeValue("accountid", value);
+                base.Id = value.GetValueOrDefault();
             }
         }
 
         [AttributeLogicalName("accountid")]
-        public override System.Guid Id
+        public override Guid Id
         {
             get
             {
@@ -50,16 +45,26 @@ namespace Augustus.CRM
             }
         }
 
+        [Required]
         [AttributeLogicalName("name")]
         public string Name
         {
             get
             {
-                return this.GetAttributeValue<string>("name");
+                return GetAttributeValue<string>("name");
             }
             set
             {
-                this.SetAttributeValue("name", value);
+                SetAttributeValue("name", value);
+            }
+        }
+
+        [AttributeLogicalName("createdon")]
+        public DateTime? Created
+        {
+            get
+            {
+                return GetAttributeValue<DateTime?>("createdon");
             }
         }
     }

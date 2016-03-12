@@ -1,9 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.Xrm.Sdk;
-using Microsoft.Xrm.Tooling.Connector;
 using System;
 using System.Configuration;
 using System.Linq;
+using Microsoft.Xrm.Client;
+using Microsoft.Xrm.Client.Services;
 
 namespace Augustus.CRM.GeneratedProxyCode.Test
 {
@@ -15,13 +15,22 @@ namespace Augustus.CRM.GeneratedProxyCode.Test
         [ClassInitialize]
         public static void ClassInit(TestContext testContext)
         {
-            string connectionString = ConfigurationManager.AppSettings["AugustusCRM"];
+            string connectionString = ConfigurationManager.AppSettings["crm:ConnectionString"];
 
-            CrmServiceClient crmSvc = new CrmServiceClient(connectionString);
+            CrmConnection connection = CrmConnection.Parse(connectionString);
 
-            IOrganizationService _orgService = (IOrganizationService)crmSvc.OrganizationWebProxyClient;
+            var service = new OrganizationService(connection);
+            context = new CrmServiceContext(service);
 
-            context = new CrmServiceContext(_orgService);
+            //OrganizationService organisationservice = new OrganizationService(connection);
+
+            //CrmServiceClient crmSvc = new CrmServiceClient(connectionString);
+
+           // if (!crmSvc.IsReady) throw new Exception(crmSvc.LastCrmError);
+
+            //IOrganizationService _orgService = organisationservice;
+
+            //context = new CrmServiceContext(_orgService);
         }
 
         [ClassCleanup]

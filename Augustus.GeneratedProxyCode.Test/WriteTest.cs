@@ -16,11 +16,20 @@ namespace Augustus.CRM.GeneratedProxyCode.Test
         [ClassInitialize]
         public static void ClassInit(TestContext testContext)
         {
-            string connectionString = ConfigurationManager.AppSettings["AugustusCRM"];
+            string connectionString = ConfigurationManager.AppSettings["crm:ConnectionString"];
 
             CrmServiceClient crmSvc = new CrmServiceClient(connectionString);
 
-            IOrganizationService _orgService = (IOrganizationService)crmSvc.OrganizationWebProxyClient;
+            IOrganizationService _orgService;
+
+            if (crmSvc.OrganizationWebProxyClient == null)
+            {
+                _orgService = crmSvc.OrganizationServiceProxy;
+            }
+            else
+            {
+                _orgService = crmSvc.OrganizationWebProxyClient;
+            }
 
             context = new CrmServiceContext(_orgService);
         }

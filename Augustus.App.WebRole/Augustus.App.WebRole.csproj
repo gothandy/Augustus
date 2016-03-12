@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4385A42C-2424-4C8D-9788-B8B22AE5FC2E}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{838EDB8A-A63E-456B-A821-8576D6849511}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Augustus.CRM</RootNamespace>
-    <AssemblyName>Augustus.CRM</AssemblyName>
+    <RootNamespace>Augustus.App.WebRole</RootNamespace>
+    <AssemblyName>Augustus.App.WebRole</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -64,10 +67,10 @@
     </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Activities" />
     <Reference Include="System.Activities.Presentation" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.IdentityModel" />
@@ -80,52 +83,20 @@
     <Reference Include="System.Workflow.Activities" />
     <Reference Include="System.Workflow.ComponentModel" />
     <Reference Include="System.Workflow.Runtime" />
-    <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account.cs" />
-    <Compile Include="BaseEntity.cs" />
-    <Compile Include="BaseOrganization.cs" />
-    <Compile Include="Invoice.cs" />
-    <Compile Include="Status.cs" />
-    <Compile Include="OrgQueryable.cs" />
-    <Compile Include="Organization.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WorkDoneItem.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="bin\Debug\Augustus.CRM.dll" />
-    <Content Include="bin\Debug\Augustus.CRM.pdb" />
-    <Content Include="bin\Debug\Microsoft.Crm.Sdk.Proxy.dll" />
-    <Content Include="bin\Debug\Microsoft.Crm.Sdk.Proxy.xml" />
-    <Content Include="bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.dll" />
-    <Content Include="bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.WindowsForms.dll" />
-    <Content Include="bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.xml" />
-    <Content Include="bin\Debug\Microsoft.IdentityModel.dll" />
-    <Content Include="bin\Debug\Microsoft.Xrm.Sdk.Deployment.dll" />
-    <Content Include="bin\Debug\Microsoft.Xrm.Sdk.Deployment.xml" />
-    <Content Include="bin\Debug\Microsoft.Xrm.Sdk.dll" />
-    <Content Include="bin\Debug\Microsoft.Xrm.Sdk.Workflow.dll" />
-    <Content Include="bin\Debug\Microsoft.Xrm.Sdk.Workflow.xml" />
-    <Content Include="bin\Debug\Microsoft.Xrm.Sdk.xml" />
-    <Content Include="bin\Debug\Microsoft.Xrm.Tooling.Connector.dll" />
-    <Content Include="bin\Debug\Microsoft.Xrm.Tooling.Connector.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="bin\Release\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Augustus.Interfaces\Augustus.Interfaces.csproj">
-      <Project>{7998dd08-8366-46d7-b6fb-0aee9f36460b}</Project>
-      <Name>Augustus.Interfaces</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

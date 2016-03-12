@@ -11,7 +11,7 @@ namespace Augustus.App.ImportWorkDoneItems
     {
         static void Main(string[] args)
         {
-            string connectionString = ConfigurationManager.AppSettings["AugustusCRM"];
+            string connectionString = ConfigurationManager.AppSettings["crm:ConnectionString"];
 
             using (OrgQueryable org = new OrgQueryable(connectionString))
             {
@@ -21,8 +21,8 @@ namespace Augustus.App.ImportWorkDoneItems
                 {
                     foreach(WorkDoneItem item in GetWorkDoneItemsFromCsv(line))
                     {
-                        // Duplicates created.
-                        org.Create<WorkDoneItem>(item);
+                        // Duplicates created. Commented out for safety.
+                        // org.Create<WorkDoneItem>(item);
                     }
                 }
 

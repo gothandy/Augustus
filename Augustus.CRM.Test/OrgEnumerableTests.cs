@@ -13,7 +13,7 @@ namespace Augustus.CRM.Test
         [ClassInitialize]
         public static void ClassInit(TestContext testContext)
         {
-            string connectionString = ConfigurationManager.AppSettings["AugustusCRM"];
+            string connectionString = ConfigurationManager.AppSettings["crm:ConnectionString"];
 
             org = new Organization(connectionString);
         }
@@ -47,7 +47,7 @@ namespace Augustus.CRM.Test
 
             foreach(var invoice in invoices)
             {
-                Console.WriteLine("{0} {1} {2}", invoice.DirectClientId, invoice.InvoiceDate, invoice.Cost);
+                Console.WriteLine("{0} {1} {2}", invoice.AccountId, invoice.InvoiceDate, invoice.Cost);
             }
         }
 
@@ -56,7 +56,7 @@ namespace Augustus.CRM.Test
         {
             var activeAccounts = (from a in org.Accounts
                                   join i in org.Invoices
-                                  on a.Id equals i.DirectClientId
+                                  on a.Id equals i.AccountId
                                   where i.InvoiceDate > new DateTime(2015, 1, 1)
                                   select a).Distinct();
 

@@ -10,7 +10,7 @@ namespace Augustus.Console.InvoiceWipCsv
     {
         static void Main(string[] args)
         {
-            string connectionString = ConfigurationManager.AppSettings["AugustusCRM"];
+            string connectionString = ConfigurationManager.AppSettings["crm:ConnectionString"];
 
             using (OrgQueryable org = new OrgQueryable(connectionString))
             {
@@ -18,7 +18,7 @@ namespace Augustus.Console.InvoiceWipCsv
                 var month = new DateTime(2016, 2, 1);
                 var invoices =
                     (from a in org.Accounts
-                     join i in org.Invoices on a.AccountId equals i.DirectClientId
+                     join i in org.Invoices on a.Id equals i.AccountId
                      where i.InvoiceDate > month
                      select new Invoice
                      {

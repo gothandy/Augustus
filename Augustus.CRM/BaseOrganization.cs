@@ -33,7 +33,21 @@ namespace Augustus.CRM
         public BaseOrganization(string connectionString)
         {
             CrmServiceClient crmSvc = new CrmServiceClient(connectionString);
-            service = (IOrganizationService)crmSvc.OrganizationWebProxyClient;
+
+            if (!crmSvc.IsReady)
+            {
+                throw new Exception(crmSvc.LastCrmError, crmSvc.LastCrmException);
+            }
+
+            if (crmSvc.OrganizationWebProxyClient == null)
+            {
+                service = crmSvc.OrganizationServiceProxy;
+            }
+            else
+            {
+                service = crmSvc.OrganizationWebProxyClient;
+            }
+
             context = new OrganizationServiceContext(service);
         }
 

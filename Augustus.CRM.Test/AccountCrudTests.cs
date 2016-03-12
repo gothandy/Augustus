@@ -12,7 +12,7 @@ namespace Augustus.CRM.Test
         [ClassInitialize]
         public static void ClassInit(TestContext testContext)
         {
-            string connectionString = ConfigurationManager.AppSettings["AugustusCRM"];
+            string connectionString = ConfigurationManager.AppSettings["crm:ConnectionString"];
 
             org = new OrgQueryable(connectionString);
         }

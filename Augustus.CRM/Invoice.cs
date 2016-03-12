@@ -77,7 +77,7 @@ namespace Augustus.CRM
         }
 
         [AttributeLogicalName("new_directclient")]
-        public Guid? DirectClientId
+        public Guid? AccountId
         {
             get
             {
@@ -87,7 +87,7 @@ namespace Augustus.CRM
             {
                 if (value.HasValue)
                 {
-                    this.SetAttributeValue("new_directclient",
+                    SetAttributeValue("new_directclient",
                         new EntityReference(
                             Account.EntityLogicalName,
                             value.Value));

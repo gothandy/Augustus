@@ -243,6 +243,7 @@
     <Content Include="Views\Authentication\SignOutCallback.cshtml" />
     <Content Include="Views\Account\Details.cshtml" />
     <Content Include="Views\Invoice\Details.cshtml" />
+    <Content Include="Views\Account\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
