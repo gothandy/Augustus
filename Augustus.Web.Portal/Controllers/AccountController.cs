@@ -13,19 +13,29 @@ namespace Augustus.Web.Portal.Controllers
     {
         public async Task<ActionResult> Index()
         {
-            IEnumerable<Account> activeAccounts;
+            IEnumerable<Account> accounts;
+
+            var newDate = DateTime.Now.AddMonths(-12);
+
+            ViewBag.NewDate = newDate;
 
             using (OrgQueryable org = await GetOrgQueryable())
             {
-                activeAccounts = (from a in org.Accounts
+                var activeAccounts = (from a in org.Accounts
                                   join i in org.Invoices
                                   on a.Id equals i.AccountId
-                                  where i.InvoiceDate > new DateTime(2015, 3, 1)
+                                  where i.InvoiceDate > newDate
                                   orderby a.Name ascending
                                   select a).Distinct().AsEnumerable();
+
+                var newAccounts = (from a in org.Accounts
+                               where a.Created > newDate
+                               select a).AsEnumerable();
+
+                accounts = activeAccounts.Union(newAccounts).Distinct().OrderBy(a => a.Name);
             }
 
-            return View(activeAccounts);
+            return View(accounts);
         }
 
         public async Task<ActionResult> Details(Guid? id)

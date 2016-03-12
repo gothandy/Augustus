@@ -3,10 +3,10 @@
     Augustus.CRM.Invoice invoice = (Augustus.CRM.Invoice)ViewBag.Invoice;
     ViewBag.Title = invoice.Name;
 }
-<p>
-    @Html.ActionLink("Back", "Details", "Account", new { id = invoice.DirectClientId }, null)
-    <a target="_blank" href="https://trueclarity4.crm4.dynamics.com/main.aspx?etc=10010&id={@invoice.Id}&pagetype=entityrecord">CRM</a>
-</p>
+<div class="btn-group">
+    @Html.ActionLink("Back to Account", "Details", "Account", new { id = invoice.AccountId }, new { @class = "btn" })
+    <a class="btn" target="_blank" href="https://trueclarity4.crm4.dynamics.com/main.aspx?etc=10010&id={@invoice.Id}&pagetype=entityrecord">Open in CRM</a>
+</div>
 
 <h2>Summary</h2>
 

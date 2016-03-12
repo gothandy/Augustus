@@ -67,5 +67,18 @@ namespace Augustus.CRM.Test
                 Console.WriteLine(account.Name);
             }
         }
+
+        [TestMethod]
+        public void OrgQueryable_AccountByCreated()
+        {
+            var newAccounts = from a in org.Accounts
+                              where a.Created > new DateTime(2015, 1, 1)
+                              select a;
+
+            foreach (var account in newAccounts)
+            {
+                Console.WriteLine(account.Name);
+            }
+        }
     }
 }

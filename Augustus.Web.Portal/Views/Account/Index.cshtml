@@ -3,13 +3,27 @@
     ViewBag.Title = "Accounts";
 }
 
-@Html.ActionLink("New", "Create")
-<ul>
+
+
+<div class="list-group">
     @foreach (var a in Model)
     {
-        <li>@Html.ActionLink(a.Name, "Details", new { id = a.Id })</li>
+        <a class="list-group-item"
+           href="@Url.Action("Details", new { id = a.Id })">
+            @a.Name
+
+
+            @if (a.Created.GetValueOrDefault() > ViewBag.NewDate)
+            {
+                <span class="badge">New</span>
+            }
+        </a>
     }
-</ul>
+</div>
+
+<div class="btn-group">
+    <a href="@Url.Action("Create")" class="btn">Add New ...</a>
+</div>
 
 
 
