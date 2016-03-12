@@ -6,7 +6,15 @@ To find the CRM url simply login to CRM and use the url given there of the forma
 
 ```
 <appSettings>
-    <add key="augustusCRM" value="AuthType=OAuth;Url={url};AppId={client id};RedirectUri={redirect uris};TokenCacheStorePath={path};LoginPrompt=Auto"/>
+    <add key="crm:ConnectionString" value="AuthType=OAuth; Url={url}; AppId={client id}; RedirectUri={redirect uris}; TokenCacheStorePath={path}; LoginPrompt=Auto"/>
+  </appSettings>
+```
+
+or simpler but less secure
+
+```
+<appSettings>
+    <add key="crm:ConnectionString" value="AuthType=Office365; Url={url}; AppId={client id}; Username={username}; Password={password}"/>
   </appSettings>
 ```
 
