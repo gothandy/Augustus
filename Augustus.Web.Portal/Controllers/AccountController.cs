@@ -11,6 +11,7 @@ namespace Augustus.Web.Portal.Controllers
     [Authorize]
     public class AccountController : CrmBaseController
     {
+        // GET: /Account
         public async Task<ActionResult> Index()
         {
             IEnumerable<Account> accounts;
@@ -38,6 +39,7 @@ namespace Augustus.Web.Portal.Controllers
             return View(accounts);
         }
 
+        //GET: /Account/Details/{id}
         public async Task<ActionResult> Details(Guid? id)
         {
             if (!id.HasValue) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -67,16 +69,34 @@ namespace Augustus.Web.Portal.Controllers
 
         // POST: /Account/Create
         [HttpPost]
-        public ActionResult Create([Bind(Include = "Name")] Account account)
+        public async Task<ActionResult> Create([Bind(Include = "Name")] Account account)
         {
             if (ModelState.IsValid)
             {
-                //db.Movies.Add(account);
-                //db.SaveChanges();
+                using (OrgQueryable org = await GetOrgQueryable())
+                {
+                    org.Create<Account>(account);
+                    org.Save();
+                }
+
                 return RedirectToAction("Index");
             }
 
             return View(account);
+        }
+
+        // DELETE: /Account/Delete/{id}
+        // GET: Invoice/Delete/5
+        public async Task<ActionResult> Delete(Guid id)
+        {
+            using (OrgQueryable org = await GetOrgQueryable())
+            {
+                var account = org.Accounts.Single(a => a.Id == id);
+
+                //Delete
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }
