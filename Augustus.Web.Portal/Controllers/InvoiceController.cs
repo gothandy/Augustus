@@ -1,4 +1,5 @@
 ﻿using Augustus.CRM;
+using Augustus.CRM.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

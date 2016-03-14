@@ -2,6 +2,7 @@
 using System;
 using System.Configuration;
 using System.Linq;
+using Augustus.CRM.Entities;
 
 namespace Augustus.CRM.Test
 {
@@ -38,11 +39,11 @@ namespace Augustus.CRM.Test
             };
 
             org.Create<WorkDoneItem>(item1);
-            org.Save();
+            org.SaveChanges();
 
             item1 = org.WorkDoneItems.Single(i => i.Id == item1.Id);
             org.Delete<WorkDoneItem>(item1);
-            org.Save();
+            org.SaveChanges();
         }
     }
 }

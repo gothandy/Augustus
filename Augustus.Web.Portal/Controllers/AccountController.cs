@@ -1,4 +1,5 @@
 ﻿using Augustus.CRM;
+using Augustus.CRM.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -76,7 +77,7 @@ namespace Augustus.Web.Portal.Controllers
                 using (OrgQueryable org = await GetOrgQueryable())
                 {
                     org.Create<Account>(account);
-                    org.Save();
+                    org.SaveChanges();
                 }
 
                 return RedirectToAction("Index");
@@ -93,7 +94,8 @@ namespace Augustus.Web.Portal.Controllers
             {
                 var account = org.Accounts.Single(a => a.Id == id);
 
-                //Delete
+                org.Delete<Account>(account);
+                org.SaveChanges();
             }
 
             return RedirectToAction("Index");

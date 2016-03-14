@@ -7,6 +7,7 @@ using Microsoft.Xrm.Tooling.Connector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Augustus.CRM.Entities;
 
 [assembly: ProxyTypesAssemblyAttribute()]
 

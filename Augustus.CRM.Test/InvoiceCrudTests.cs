@@ -2,6 +2,7 @@
 using System;
 using System.Configuration;
 using System.Linq;
+using Augustus.CRM.Entities;
 
 namespace Augustus.CRM.Test
 {
@@ -33,7 +34,7 @@ namespace Augustus.CRM.Test
             };
 
             org.Create<Account>(testAccount);
-            org.Save();
+            org.SaveChanges();
 
             Console.WriteLine(testAccount.Id);
 
@@ -44,7 +45,7 @@ namespace Augustus.CRM.Test
             Console.WriteLine(testAccount.Id);
 
             org.Delete<Account>(testAccount);
-            org.Save();
+            org.SaveChanges();
 
         }
     }

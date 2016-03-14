@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xrm.Sdk;
 using System;
 using System.Linq;
+using Augustus.CRM.Entities;
 
 namespace Augustus.CRM
 {
@@ -49,7 +50,7 @@ namespace Augustus.CRM
             context.DeleteObject(entity);
         }
 
-        public void Save()
+        public void SaveChanges()
         {
             context.SaveChanges();
         }

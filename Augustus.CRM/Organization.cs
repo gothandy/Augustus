@@ -1,5 +1,6 @@
 ﻿using Augustus.Interfaces;
 using System.Collections.Generic;
+using Augustus.CRM.Entities;
 
 namespace Augustus.CRM
 {

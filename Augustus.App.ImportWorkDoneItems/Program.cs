@@ -1,4 +1,5 @@
 ﻿using Augustus.CRM;
+using Augustus.CRM.Entities;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -26,7 +27,7 @@ namespace Augustus.App.ImportWorkDoneItems
                     }
                 }
 
-                org.Save();
+                org.SaveChanges();
 
                 Console.ReadKey();
             }

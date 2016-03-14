@@ -1,4 +1,5 @@
 ﻿using Augustus.CRM;
+using Augustus.CRM.Entities;
 using System;
 using System.Configuration;
 using System.IO;

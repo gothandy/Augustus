@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.ComponentModel.DataAnnotations;
 using System;
 
-namespace Augustus.CRM
+namespace Augustus.CRM.Entities
 {
 
     [DataContract()]

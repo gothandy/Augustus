@@ -3,7 +3,7 @@ using Microsoft.Xrm.Sdk.Client;
 using System;
 using System.Runtime.Serialization;
 
-namespace Augustus.CRM
+namespace Augustus.CRM.Entities
 {
     [DataContract()]
     public enum WorkDoneItemState

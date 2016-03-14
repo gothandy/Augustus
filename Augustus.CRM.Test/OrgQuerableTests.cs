@@ -4,6 +4,7 @@ using Microsoft.Xrm.Tooling.Connector;
 using System;
 using System.Configuration;
 using System.Linq;
+using Augustus.CRM.Entities;
 
 namespace Augustus.CRM.Test
 {

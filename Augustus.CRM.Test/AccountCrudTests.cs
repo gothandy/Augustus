@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Configuration;
 using System.Linq;
+using Augustus.CRM.Entities;
 
 namespace Augustus.CRM.Test
 {
@@ -39,7 +40,7 @@ namespace Augustus.CRM.Test
             };
 
             org.Create<Account>(account);
-            org.Save();
+            org.SaveChanges();
         }
 
         private void updateAccount()
@@ -47,14 +48,14 @@ namespace Augustus.CRM.Test
             Account account = getAccount("TestAccount");
             account.Name = "TestAccount2";
             org.Update<Account>(account);
-            org.Save();
+            org.SaveChanges();
         }
 
         private void deleteAccount()
         {
             Account account = getAccount("TestAccount2");
             org.Delete<Account>(account);
-            org.Save();
+            org.SaveChanges();
         }
 
         private Account getAccount(string name)
