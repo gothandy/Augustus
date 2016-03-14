@@ -4,6 +4,8 @@ using System.Configuration;
 using System.Linq;
 using Microsoft.Xrm.Client;
 using Microsoft.Xrm.Client.Services;
+using Microsoft.Xrm.Tooling.Connector;
+using Microsoft.Xrm.Sdk;
 
 namespace Augustus.CRM.GeneratedProxyCode.Test
 {
@@ -17,20 +19,20 @@ namespace Augustus.CRM.GeneratedProxyCode.Test
         {
             string connectionString = ConfigurationManager.AppSettings["crm:ConnectionString"];
 
-            CrmConnection connection = CrmConnection.Parse(connectionString);
+            CrmServiceClient crmSvc = new CrmServiceClient(connectionString);
 
-            var service = new OrganizationService(connection);
-            context = new CrmServiceContext(service);
+            IOrganizationService _orgService;
 
-            //OrganizationService organisationservice = new OrganizationService(connection);
+            if (crmSvc.OrganizationWebProxyClient == null)
+            {
+                _orgService = crmSvc.OrganizationServiceProxy;
+            }
+            else
+            {
+                _orgService = crmSvc.OrganizationWebProxyClient;
+            }
 
-            //CrmServiceClient crmSvc = new CrmServiceClient(connectionString);
-
-           // if (!crmSvc.IsReady) throw new Exception(crmSvc.LastCrmError);
-
-            //IOrganizationService _orgService = organisationservice;
-
-            //context = new CrmServiceContext(_orgService);
+            context = new CrmServiceContext(_orgService);
         }
 
         [ClassCleanup]

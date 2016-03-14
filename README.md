@@ -1,21 +1,45 @@
 # Augustus
 
-## Connection String
+## Configuration Settings
 
+For the Console Apps and test harnesses a connection string is used.
+There are two options. The first is preferred as no password is stored. 
+However it can be problematic if you have multiple accounts for testing.
 To find the CRM url simply login to CRM and use the url given there of the format `https://xxx.dynamics.com`. Goto the Office 365 Admin page select Azure AD this will take you to the Azure portal. Here select the True Clarity AD, select Applications and select augustus. You will be able to get the client id and the redirect uris from here. I generally put the token cache store path in the solution folder for dev.
 
 ```
 <appSettings>
-    <add key="crm:ConnectionString" value="AuthType=OAuth; Url={url}; AppId={client id}; RedirectUri={redirect uris}; TokenCacheStorePath={path}; LoginPrompt=Auto"/>
-  </appSettings>
+  <add key="crm:ConnectionString" value="AuthType=OAuth; Url={url}; AppId={client id}; RedirectUri={redirect uris}; TokenCacheStorePath={path}; LoginPrompt=Auto"/>
+</appSettings>
 ```
 
 or simpler but less secure
 
 ```
 <appSettings>
-    <add key="crm:ConnectionString" value="AuthType=Office365; Url={url}; AppId={client id}; Username={username}; Password={password}"/>
-  </appSettings>
+  <add key="crm:ConnectionString" value="AuthType=Office365; Url={url}; AppId={client id}; Username={username}; Password={password}"/>
+</appSettings>
+```
+
+For the web application integration with the Azure AD means using a different method for authentication.
+There are two applications registered with Azure AD. For development use `AugustusWebPortalDev` and in production use `Augustus.Web.Portal`.
+The keys required are shown below.
+Domain is created by the visual studio wizard but doesn't appear to be used.
+You will need to create a new client secret for each development instance.
+
+```
+<appSettings>
+  
+  <!-- AugustusWebPortalDev -->
+  <add key="crm:Url" value="{url}"/>
+  <add key="ida:ClientId" value="{client id}"/>
+  <add key="ida:ClientSecret" value="{client secret}"/>
+  <add key="ida:AADInstance" value="https://login.microsoftonline.com/"/>
+  <add key="ida:TenantId" value="{azure AD guid}"/>
+  <add key="ida:PostLogoutRedirectUri" value="https://localhost:44300/"/>
+  <!--<add key="ida:Domain" value="{primary domain}" />-->
+
+</appSettings>
 ```
 
 I tend to use `machine.config` found here `%WinDir%\Microsoft.NET\Framework\v4.0.30319\Config`.
