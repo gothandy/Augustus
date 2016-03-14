@@ -1,5 +1,4 @@
-﻿using Augustus.Interfaces;
-using Microsoft.Xrm.Sdk;
+﻿using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Client;
 using System.Runtime.Serialization;
 using System.ComponentModel.DataAnnotations;
@@ -10,7 +9,7 @@ namespace Augustus.CRM.Entities
 
     [DataContract()]
     [EntityLogicalName("account")]
-    public class Account : BaseEntity, IAccount
+    public class Account : BaseEntity
     {
 
         public Account() : base(EntityLogicalName) { }

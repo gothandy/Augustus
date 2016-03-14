@@ -1,10 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Configuration;
 
 namespace Augustus.CRM.Test
 {
     [TestClass]
-    public class AccountCrudTests : BaseCrudTest
+    public class OpportunityCrudTests : BaseCrudTest
     {
         [ClassInitialize]
         public static void ClassInit(TestContext testContext)
@@ -19,11 +18,12 @@ namespace Augustus.CRM.Test
         }
 
         [TestMethod]
-        public void CRM_CrudAccount()
+        public void CRM_CrudOpportunity()
         {
-            createAccount("Test Account");
-            updateAccount("Test Account", "Test Account2");
-            deleteAccount("Test Account2");
+            createAccount("TestAccount");
+            createOpportunity();
+            deleteOpportunity();
+            deleteAccount("TestAccount");
         }
     }
 }

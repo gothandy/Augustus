@@ -2,8 +2,6 @@
 using System;
 using System.Configuration;
 using System.Linq;
-using Microsoft.Xrm.Client;
-using Microsoft.Xrm.Client.Services;
 using Microsoft.Xrm.Tooling.Connector;
 using Microsoft.Xrm.Sdk;
 

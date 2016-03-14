@@ -103,8 +103,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AccountCrudTests.cs" />
+    <Compile Include="BaseCrudTest.cs" />
+    <Compile Include="OpportunityCrudTests.cs" />
     <Compile Include="OrgQuerableTests.cs" />
-    <Compile Include="OrgEnumerableTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="InvoiceCrudTests.cs" />
     <Compile Include="WorkDoneItemCrudTests.cs" />
@@ -116,10 +117,6 @@
     <ProjectReference Include="..\Augustus.CRM\Augustus.CRM.csproj">
       <Project>{4385a42c-2424-4c8d-9788-b8b22ae5fc2e}</Project>
       <Name>Augustus.CRM</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Augustus.Interfaces\Augustus.Interfaces.csproj">
-      <Project>{7998dd08-8366-46d7-b6fb-0aee9f36460b}</Project>
-      <Name>Augustus.Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

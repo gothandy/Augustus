@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.CRM", "Augustus.CR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.GeneratedProxyCode", "Augustus.GeneratedProxyCode\Augustus.GeneratedProxyCode.csproj", "{02FC3DE1-2239-4B98-827A-CB5C1A51C488}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.Interfaces", "Augustus.Interfaces\Augustus.Interfaces.csproj", "{7998DD08-8366-46D7-B6FB-0AEE9F36460B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.GeneratedProxyCode.Test", "Augustus.GeneratedProxyCode.Test\Augustus.GeneratedProxyCode.Test.csproj", "{BB7E68CE-9539-41B8-AF59-5CF6A82B8382}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.CRM.Test", "Augustus.CRM.Test\Augustus.CRM.Test.csproj", "{E5C1690C-D262-4196-BC2E-4D471F343538}"
@@ -43,10 +41,6 @@ Global
 		{02FC3DE1-2239-4B98-827A-CB5C1A51C488}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02FC3DE1-2239-4B98-827A-CB5C1A51C488}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02FC3DE1-2239-4B98-827A-CB5C1A51C488}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7998DD08-8366-46D7-B6FB-0AEE9F36460B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7998DD08-8366-46D7-B6FB-0AEE9F36460B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7998DD08-8366-46D7-B6FB-0AEE9F36460B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7998DD08-8366-46D7-B6FB-0AEE9F36460B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BB7E68CE-9539-41B8-AF59-5CF6A82B8382}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BB7E68CE-9539-41B8-AF59-5CF6A82B8382}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB7E68CE-9539-41B8-AF59-5CF6A82B8382}.Release|Any CPU.ActiveCfg = Release|Any CPU

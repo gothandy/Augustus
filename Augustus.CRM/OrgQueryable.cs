@@ -1,11 +1,9 @@
-﻿using Microsoft.Xrm.Sdk;
+﻿using Augustus.CRM.Entities;
 using System;
 using System.Linq;
-using Augustus.CRM.Entities;
 
 namespace Augustus.CRM
 {
-
     public class OrgQueryable : BaseOrganization
     {
         public OrgQueryable(string connectionString) : base(connectionString) { }
@@ -32,6 +30,14 @@ namespace Augustus.CRM
             get
             {
                 return context.CreateQuery<WorkDoneItem>();
+            }
+        }
+
+        public IQueryable<Opportunity> Opportunities
+        {
+            get
+            {
+                return context.CreateQuery<Opportunity>();
             }
         }
 

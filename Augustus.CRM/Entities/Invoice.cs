@@ -1,6 +1,4 @@
-﻿using Augustus.Interfaces;
-using Augustus.CRM.Entities;
-using Microsoft.Xrm.Sdk;
+﻿using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Client;
 using System;
 using System.Runtime.Serialization;
@@ -9,7 +7,7 @@ namespace Augustus.CRM.Entities
 {
     [DataContract()]
     [EntityLogicalName("new_invoice")]
-    public class Invoice : BaseEntity, IInvoice
+    public class Invoice : BaseEntity
     {
 
         public Invoice() : base(EntityLogicalName) { }
