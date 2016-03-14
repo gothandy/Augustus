@@ -23,28 +23,19 @@ namespace Augustus.Web.Portal.Controllers
         {
             if (!id.HasValue) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            IEnumerable<Invoice> invoices;
-
-            var date = DateTime.Now.AddMonths(-12);
-
             using (OrgQueryable org = await GetOrgQueryable())
             {
-                ViewBag.Opportunity = org.Opportunities.Single(o => o.Id == id.Value);
+                var opp = new Domain.Opportunity()
+                {
+                    Id = id.Value,
+                    Organization = org
+                };
 
-                ViewBag.Account = (from a in org.Accounts
-                                   join o in org.Opportunities
-                                   on a.Id equals o.AccountId
-                                   where o.Id == id.Value
-                                   select a).Single();
+                ViewBag.Account = opp.GetAccount();
+                ViewBag.Opportunity = opp.GetOpportunity();
 
-                invoices = (from i in org.Invoices
-                            where i.AccountId == id.Value
-                            && i.InvoiceDate > date
-                            orderby i.InvoiceDate descending
-                            select i).AsEnumerable();
+                return View(opp.GetInvoices());
             }
-
-            return View(invoices);
         }
 
         // GET: Opportunity/Details/5

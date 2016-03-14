@@ -91,6 +91,47 @@ namespace Augustus.Web.Portal.Controllers
             return View(account);
         }
 
+        // GET: Opportunity/Edit/5
+        public async Task<ActionResult> Edit(Guid? id)
+        {
+            if (!id.HasValue) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            using (OrgQueryable org = await GetOrgQueryable())
+            {
+                var account = new Account()
+                {
+                    Organization = org,
+                    Id = id.Value
+                };
+
+                return View(account.GetAccount());
+            }
+                
+        }
+
+        // POST: Opportunity/Edit/5
+        [HttpPost]
+        public async Task<ActionResult> Edit(Guid? id, [Bind(Include = "Name")] CRM.Entities.Account newAccount)
+        {
+            using (OrgQueryable org = await GetOrgQueryable())
+            {
+                var account = new Account()
+                {
+                    Organization = org,
+                    Id = id.Value
+                };
+                var oldAccount = account.GetAccount();
+
+                oldAccount.Name = newAccount.Name;
+
+                org.Update<CRM.Entities.Account>(oldAccount);
+                
+                org.SaveChanges();
+
+                return RedirectToAction("Invoices", new { Id = id });
+            }
+        }
+
         // DELETE: /Account/Delete/{id}
         // GET: /Account/Delete/{id}
         public async Task<ActionResult> Delete(Guid id)

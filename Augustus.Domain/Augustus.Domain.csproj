@@ -51,6 +51,8 @@
   <ItemGroup>
     <Compile Include="Accounts.cs" />
     <Compile Include="Account.cs" />
+    <Compile Include="Opportunities.cs" />
+    <Compile Include="Opportunity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

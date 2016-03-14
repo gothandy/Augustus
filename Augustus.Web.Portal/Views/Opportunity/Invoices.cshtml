@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Invoice>
+@{
+    var account = (Account)ViewBag.Account;
+    var opportunity = (Opportunity)ViewBag.Opportunity;
+
+    ViewBag.Title = account.Name + " " + opportunity.Name;
+}
+@if (Model.Count() == 0)
+{
+    <div class="panel">No invoices.</div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Name</th>
+                    <th class="currency">Margin</th>
+                    <th class="currency">Revenue</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var i in Model)
+                {
+                    <tr>
+                        <td>@DateTimeHelper.Format(i.InvoiceDate)</td>
+                        <td>@Html.ActionLink(i.Name, "Details", "Invoice", new { id = i.Id }, null)</td>
+                        <td class="currency">@CurrencyHelper.Format(i.Margin)</td>
+                        <td class="currency">@CurrencyHelper.Format(i.Revenue)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+<div class="btn-group">
+    <a class="btn" href="@Url.Action("Edit", new { id = opportunity.Id })">Edit Opportunity</a>
+    <a class="btn" href="@Url.Action("Delete", new { id = opportunity.Id })">Delete Opportunity</a>
+    <a class="btn" href="@Url.Action("Create", "Invoice")">Create Invoice</a>
+</div>
+

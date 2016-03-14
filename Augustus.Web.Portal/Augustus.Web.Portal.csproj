@@ -243,15 +243,16 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Authentication\SignOutCallback.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
     <None Include="Views\Account\Invoices.cshtml" />
     <Content Include="Views\Invoice\Details.cshtml" />
     <Content Include="Views\Account\Create.cshtml" />
     <Content Include="Views\Account\Opportunities.cshtml" />
+    <Content Include="Views\Opportunity\Invoices.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Opportunity\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

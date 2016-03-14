@@ -10,11 +10,19 @@ namespace Augustus.CRM
         public BaseEntity(string entityLogicalName) : base(entityLogicalName) { }
 
         [AttributeLogicalName("statuscode")]
-        public int Status
+        public int? Status
         {
             get
             {
-                return GetAttributeValue<OptionSetValue>("statuscode").Value;
+                OptionSetValue statusCode = GetAttributeValue<OptionSetValue>("statuscode");
+                if (statusCode == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return statusCode.Value;
+                }
             }
             /*set
             {
