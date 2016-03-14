@@ -16,7 +16,6 @@ namespace Augustus.CRM.Entities
         Inactive = 1,
     }
 
-    [DataContract()]
     [EntityLogicalName("new_workdoneitem")]
     public partial class WorkDoneItem : BaseEntity
     {

@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 
 namespace Augustus.CRM.Entities
 {
-    [DataContract()]
+
     [EntityLogicalName("opportunity")]
     public class Opportunity : BaseEntity
     {
@@ -76,19 +76,6 @@ namespace Augustus.CRM.Entities
             {
                 SetAttributeValue("name", value);
             }
-        }
-
-        [AttributeLogicalName("statuscode")]
-        public int Status
-        {
-            get
-            {
-                return GetAttributeValue<OptionSetValue>("statuscode").Value;
-            }
-            /*set
-            {
-                this.SetAttributeValue("statuscode", value);
-            }*/
         }
     }
 }

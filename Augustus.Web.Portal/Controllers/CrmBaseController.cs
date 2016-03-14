@@ -14,7 +14,7 @@ namespace Augustus.Web.Portal.Controllers
         private const string tenantIdUrl = "http://schemas.microsoft.com/identity/claims/tenantid";
         private const string objectIdentifierUrl = "http://schemas.microsoft.com/identity/claims/objectidentifier";
 
-        private async Task<AuthenticationResult> WaitForAuthenticationResult()
+        private async static Task<AuthenticationResult> WaitForAuthenticationResult()
         {
             string clientId = ConfigurationManager.AppSettings["ida:ClientId"];
             string clientSecret = ConfigurationManager.AppSettings["ida:ClientSecret"];
@@ -31,7 +31,7 @@ namespace Augustus.Web.Portal.Controllers
             return await authContext.AcquireTokenSilentAsync(resource, credential, userIdentifier);
         }
 
-        protected async Task<OrgQueryable> GetOrgQueryable()
+        protected async static Task<OrgQueryable> GetOrgQueryable()
         {
             Uri crmUrl = new Uri(ConfigurationManager.AppSettings["crm:Url"]);
 

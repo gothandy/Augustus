@@ -196,6 +196,7 @@
     <Compile Include="Controllers\CrmBaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InvoiceController.cs" />
+    <Compile Include="Controllers\OpportunityController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -242,13 +243,15 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Authentication\SignOutCallback.cshtml" />
-    <Content Include="Views\Account\Details.cshtml" />
+    <None Include="Views\Account\Invoices.cshtml" />
     <Content Include="Views\Invoice\Details.cshtml" />
     <Content Include="Views\Account\Create.cshtml" />
+    <Content Include="Views\Account\Opportunities.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Opportunity\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -262,6 +265,10 @@
     <ProjectReference Include="..\Augustus.CRM\Augustus.CRM.csproj">
       <Project>{4385a42c-2424-4c8d-9788-b8b22ae5fc2e}</Project>
       <Name>Augustus.CRM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Augustus.Domain\Augustus.Domain.csproj">
+      <Project>{08d81a8f-f287-4460-9b3d-11d54cc1e7ad}</Project>
+      <Name>Augustus.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

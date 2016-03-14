@@ -1,13 +1,11 @@
 ﻿using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Client;
-using System.Runtime.Serialization;
 using System.ComponentModel.DataAnnotations;
 using System;
 
 namespace Augustus.CRM.Entities
 {
 
-    [DataContract()]
     [EntityLogicalName("account")]
     public class Account : BaseEntity
     {
@@ -55,15 +53,6 @@ namespace Augustus.CRM.Entities
             set
             {
                 SetAttributeValue("name", value);
-            }
-        }
-
-        [AttributeLogicalName("createdon")]
-        public DateTime? Created
-        {
-            get
-            {
-                return GetAttributeValue<DateTime?>("createdon");
             }
         }
     }

@@ -1,7 +1,6 @@
 ﻿using Augustus.CRM;
-using Augustus.CRM.Entities;
+using Augustus.Domain;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -15,52 +14,58 @@ namespace Augustus.Web.Portal.Controllers
         // GET: /Account
         public async Task<ActionResult> Index()
         {
-            IEnumerable<Account> accounts;
-
-            var newDate = DateTime.Now.AddMonths(-12);
-
-            ViewBag.NewDate = newDate;
-
-            using (OrgQueryable org = await GetOrgQueryable())
+            using (var org = await GetOrgQueryable())
             {
-                var activeAccounts = (from a in org.Accounts
-                                  join i in org.Invoices
-                                  on a.Id equals i.AccountId
-                                  where i.InvoiceDate > newDate
-                                  orderby a.Name ascending
-                                  select a).Distinct().AsEnumerable();
+                var accounts = new Accounts()
+                {
+                    Organization = org,
+                    ActiveDate = DateTime.Now.AddYears(-1),
+                    NewDate = DateTime.Now.AddMonths(-3)
+                };
 
-                var newAccounts = (from a in org.Accounts
-                               where a.Created > newDate
-                               select a).AsEnumerable();
-
-                accounts = activeAccounts.Union(newAccounts).Distinct().OrderBy(a => a.Name);
+                ViewBag.NewDate = accounts.NewDate;
+                return View(accounts.GetNewAndActiveAccounts());
             }
-
-            return View(accounts);
         }
 
-        //GET: /Account/Details/{id}
-        public async Task<ActionResult> Details(Guid? id)
+        //GET: /Account/Invoices/{id}
+        public async Task<ActionResult> Invoices(Guid? id)
         {
             if (!id.HasValue) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            IEnumerable<Invoice> invoices;
+            using (var org = await GetOrgQueryable())
+            {
+                var account = new Domain.Account()
+                {
+                    Organization = org,
+                    Id = id.Value,
+                    ActiveDate = DateTime.Now.AddYears(-1)
+                };
+
+                ViewBag.Account = account.GetAccount();
+                return View(account.GetInvoices());
+            }
+        }
+
+        // GET: /Account/Opportunities/{id}
+        public async Task<ActionResult> Opportunities(Guid? id)
+        {
+            if (!id.HasValue) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             using (OrgQueryable org = await GetOrgQueryable())
             {
-                ViewBag.Account = (from a in org.Accounts
-                                   where a.Id == id.Value
-                                   select a).Single();
+                var account = new Domain.Account()
+                {
+                    Organization = org,
+                    Id = id.Value,
+                    ActiveDate = DateTime.Now.AddYears(-1)
+                };
 
-                invoices = (from i in org.Invoices
-                            where i.AccountId == id.Value
-                            && i.InvoiceDate > new DateTime(2015, 3, 1)
-                            orderby i.InvoiceDate descending
-                            select i).AsEnumerable();
+                ViewBag.Account = account.GetAccount();
+                ViewBag.ActiveDate = account.ActiveDate;
+
+                return View(account.GetOpportunities());
             }
-
-            return View(invoices);
         }
 
         public ActionResult Create()
@@ -70,13 +75,13 @@ namespace Augustus.Web.Portal.Controllers
 
         // POST: /Account/Create
         [HttpPost]
-        public async Task<ActionResult> Create([Bind(Include = "Name")] Account account)
+        public async Task<ActionResult> Create([Bind(Include = "Name")] CRM.Entities.Account account)
         {
             if (ModelState.IsValid)
             {
                 using (OrgQueryable org = await GetOrgQueryable())
                 {
-                    org.Create<Account>(account);
+                    org.Create<CRM.Entities.Account>(account);
                     org.SaveChanges();
                 }
 
@@ -87,18 +92,18 @@ namespace Augustus.Web.Portal.Controllers
         }
 
         // DELETE: /Account/Delete/{id}
-        // GET: Invoice/Delete/5
+        // GET: /Account/Delete/{id}
         public async Task<ActionResult> Delete(Guid id)
         {
             using (OrgQueryable org = await GetOrgQueryable())
             {
                 var account = org.Accounts.Single(a => a.Id == id);
 
-                org.Delete<Account>(account);
+                org.Delete<CRM.Entities.Account>(account);
                 org.SaveChanges();
-            }
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
         }
     }
 }
