@@ -228,6 +228,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\table-row-clickable.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Account\Invoices.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -244,7 +245,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Authentication\SignOutCallback.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
-    <None Include="Views\Account\Invoices.cshtml" />
     <Content Include="Views\Invoice\Details.cshtml" />
     <Content Include="Views\Account\Create.cshtml" />
     <Content Include="Views\Account\Opportunities.cshtml" />
