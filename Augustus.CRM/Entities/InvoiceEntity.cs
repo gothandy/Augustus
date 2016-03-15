@@ -1,4 +1,5 @@
-﻿using Microsoft.Xrm.Sdk;
+﻿using Augustus.Domain.Objects;
+using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Client;
 using System;
 using System.Runtime.Serialization;
@@ -33,6 +34,26 @@ namespace Augustus.CRM.Entities
                     base.Id = System.Guid.Empty;
                 }
             }
+        }
+
+        public static Invoice ToDomainObject(InvoiceEntity i)
+        {
+            return new Invoice()
+            {
+                Id = i.Id,
+                Name = i.Name,
+                AccountId = i.AccountId,
+                ClientApprovedDate = i.ClientApprovedDate,
+                Cost = i.Cost,
+                Created = i.Created,
+                InvoiceDate = i.InvoiceDate,
+                InvoiceId = i.InvoiceId,
+                InvoiceNo = i.InvoiceNo,
+                Margin = i.Margin,
+                OpportunityId = i.OpportunityId,
+                PONumber = i.PONumber,
+                Revenue = i.Revenue
+            };
         }
 
         [AttributeLogicalName("new_invoiceid")]

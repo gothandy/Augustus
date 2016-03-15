@@ -2,6 +2,7 @@
 using Microsoft.Xrm.Sdk.Client;
 using System.ComponentModel.DataAnnotations;
 using System;
+using Augustus.Domain.Objects;
 
 namespace Augustus.CRM.Entities
 {
@@ -54,6 +55,17 @@ namespace Augustus.CRM.Entities
             {
                 SetAttributeValue("name", value);
             }
+        }
+
+        public static Account ToDomainObject(AccountEntity a)
+        {
+            
+            return new Account
+            {
+                Id = a.Id,
+                Name = a.Name,
+                Created = a.Created
+            };
         }
     }
 }

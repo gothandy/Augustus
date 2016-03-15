@@ -1,30 +1,32 @@
 ﻿using Augustus.CRM;
+using Augustus.CRM.Entities;
+using Augustus.Domain.Interfaces;
+using Augustus.Domain.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Augustus.CRM.Queries
 {
-    public class AccountQuery
+    public class AccountQuery : BaseQuery, IAccountQuery
     {
-        public DateTime ActiveDate { get; set; }
         public Guid Id { get; set; }
-        public OrgQueryable Organization { get; set; }
+        public DateTime ActiveDate { get; set; }
 
-        public CRM.Entities.AccountEntity GetAccount()
+        public Account GetAccount()
         {
             return (from a in Organization.Accounts
                     where a.Id == Id
-                    select a).Single();
+                    select AccountEntity.ToDomainObject(a)).Single();
         }
 
-        public IEnumerable<CRM.Entities.InvoiceEntity> GetInvoices()
+        public IEnumerable<Invoice> GetInvoices()
         {
             return (from i in Organization.Invoices
                     where i.AccountId == Id
                     && i.InvoiceDate > ActiveDate
                     orderby i.InvoiceDate descending
-                    select i).AsEnumerable();
+                    select InvoiceEntity.ToDomainObject(i)).AsEnumerable();
         }
 
         public IEnumerable<CRM.Entities.OpportunityEntity> GetOpportunities()

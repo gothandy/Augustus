@@ -1,4 +1,6 @@
 ﻿using Augustus.CRM;
+using Augustus.CRM.Queries;
+using Augustus.Domain.Interfaces;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using System;
 using System.Configuration;
@@ -37,7 +39,29 @@ namespace Augustus.Web.Portal.Controllers
 
             var result = await WaitForAuthenticationResult();
 
-            return new OrgQueryable(crmUrl, result.AccessToken);
+            var org = new OrgQueryable(crmUrl, result.AccessToken);
+
+            return org;
+        }
+
+        protected async static Task<IOrganizationQuery> GetOrganizationQuery()
+        {
+            var org = await GetOrgQueryable();
+
+            return (IOrganizationQuery)new OrganizationQuery()
+            {
+                Organization = org
+            };
+        }
+
+        protected async static Task<IAccountQuery> GetAccountQuery()
+        {
+            var org = await GetOrgQueryable();
+
+            return (IAccountQuery)new AccountQuery()
+            {
+                Organization = org
+            };
         }
 
     }

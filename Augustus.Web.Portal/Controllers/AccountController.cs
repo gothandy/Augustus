@@ -1,5 +1,7 @@
 ﻿using Augustus.CRM;
 using Augustus.CRM.Queries;
+using Augustus.Domain.Interfaces;
+using Augustus.Domain.Objects;
 using System;
 using System.Linq;
 using System.Net;
@@ -14,17 +16,13 @@ namespace Augustus.Web.Portal.Controllers
         // GET: /Account
         public async Task<ActionResult> Index()
         {
-            using (var org = await GetOrgQueryable())
+            using (var query = await GetOrganizationQuery())
             {
-                var accounts = new AccountsQuery()
-                {
-                    Organization = org,
-                    ActiveDate = DateTime.Now.AddYears(-1),
-                    NewDate = DateTime.Now.AddMonths(-3)
-                };
+                query.ActiveDate = DateTime.Now.AddYears(-1);
+                query.NewDate = DateTime.Now.AddMonths(-3);
 
-                ViewBag.NewDate = accounts.NewDate;
-                return View(accounts.GetNewAndActiveAccounts());
+                ViewBag.NewDate = query.NewDate;
+                return View(query.GetNewAndActiveAccounts());
             }
         }
 
@@ -33,17 +31,14 @@ namespace Augustus.Web.Portal.Controllers
         {
             if (!id.HasValue) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            using (var org = await GetOrgQueryable())
+            using (var query = await GetAccountQuery())
             {
-                var account = new AccountQuery()
-                {
-                    Organization = org,
-                    Id = id.Value,
-                    ActiveDate = DateTime.Now.AddYears(-1)
-                };
+                query.Id = id.Value;
+                query.ActiveDate = DateTime.Now.AddYears(-1);
 
-                ViewBag.Account = account.GetAccount();
-                return View(account.GetInvoices());
+                ViewBag.Account = query.GetAccount();
+
+                return View(query.GetInvoices());
             }
         }
 
@@ -111,10 +106,11 @@ namespace Augustus.Web.Portal.Controllers
 
         // POST: Opportunity/Edit/5
         [HttpPost]
-        public async Task<ActionResult> Edit(Guid? id, [Bind(Include = "Name")] CRM.Entities.AccountEntity newAccount)
+        public async Task<ActionResult> Edit(Guid? id, [Bind(Include = "Name")] Account newAccount)
         {
             using (OrgQueryable org = await GetOrgQueryable())
             {
+                // Do this inside query.
                 var account = new AccountQuery()
                 {
                     Organization = org,
@@ -124,7 +120,7 @@ namespace Augustus.Web.Portal.Controllers
 
                 oldAccount.Name = newAccount.Name;
 
-                org.Update<CRM.Entities.AccountEntity>(oldAccount);
+                //org.Update<CRM.Entities.AccountEntity>(oldAccount);
                 
                 org.SaveChanges();
 

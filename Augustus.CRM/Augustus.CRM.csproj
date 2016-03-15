@@ -84,14 +84,14 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseQuery.cs" />
     <Compile Include="Entities\AccountEntity.cs" />
     <Compile Include="BaseEntity.cs" />
     <Compile Include="BaseOrganization.cs" />
     <Compile Include="Entities\OpportunityEntity.cs" />
     <Compile Include="Entities\InvoiceEntity.cs" />
     <Compile Include="Queries\AccountQuery.cs" />
-    <Compile Include="Queries\AccountsQuery.cs" />
-    <Compile Include="Queries\OpportunitiesQuery.cs" />
+    <Compile Include="Queries\OrganizationQuery.cs" />
     <Compile Include="Queries\OpportunityQuery.cs" />
     <Compile Include="Status.cs" />
     <Compile Include="OrgQueryable.cs" />
@@ -124,6 +124,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Release\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Augustus.Domain\Augustus.Domain.csproj">
+      <Project>{08d81a8f-f287-4460-9b3d-11d54cc1e7ad}</Project>
+      <Name>Augustus.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
