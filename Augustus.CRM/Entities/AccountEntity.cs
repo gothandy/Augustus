@@ -7,10 +7,10 @@ namespace Augustus.CRM.Entities
 {
 
     [EntityLogicalName("account")]
-    public class Account : BaseEntity
+    public class AccountEntity : BaseEntity
     {
 
-        public Account() : base(EntityLogicalName) { }
+        public AccountEntity() : base(EntityLogicalName) { }
 
         public const string EntityLogicalName = "account";
         public const int EntityTypeCode = 1;

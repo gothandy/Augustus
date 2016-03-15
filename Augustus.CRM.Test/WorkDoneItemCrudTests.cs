@@ -29,20 +29,20 @@ namespace Augustus.CRM.Test
         public void CRM_WorkDoneItemCrud()
         {
 
-            Invoice invoiceTest01 = org.Invoices.Single(a => a.Name == "Augustus Test 01");
+            InvoiceEntity invoiceTest01 = org.Invoices.Single(a => a.Name == "Augustus Test 01");
 
-            WorkDoneItem item1 = new WorkDoneItem()
+            WorkDoneItemEntity item1 = new WorkDoneItemEntity()
             {
                 InvoiceId = invoiceTest01.InvoiceId,
                 WorkDoneDate = new DateTime(2015, 6, 1),
                 Margin = (decimal?)12345.67
             };
 
-            org.Create<WorkDoneItem>(item1);
+            org.Create<WorkDoneItemEntity>(item1);
             org.SaveChanges();
 
             item1 = org.WorkDoneItems.Single(i => i.Id == item1.Id);
-            org.Delete<WorkDoneItem>(item1);
+            org.Delete<WorkDoneItemEntity>(item1);
             org.SaveChanges();
         }
     }

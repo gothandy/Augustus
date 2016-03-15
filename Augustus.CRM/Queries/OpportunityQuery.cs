@@ -5,19 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using Augustus.CRM;
 
-namespace Augustus.Domain
+namespace Augustus.CRM.Queries
 {
-    public class Opportunity
+    public class OpportunityQuery
     {
         public Guid Id { get; set; }
         public OrgQueryable Organization { get; set; }
 
-        public CRM.Entities.Opportunity GetOpportunity()
+        public CRM.Entities.OpportunityEntity GetOpportunity()
         {
             return Organization.Opportunities.Single(o => o.Id == Id);
         }
 
-        public CRM.Entities.Account GetAccount()
+        public CRM.Entities.AccountEntity GetAccount()
         {
             return (from a in Organization.Accounts
                     join o in Organization.Opportunities
@@ -26,7 +26,7 @@ namespace Augustus.Domain
                     select a).Single();
         }
 
-        public IEnumerable<CRM.Entities.Invoice> GetInvoices()
+        public IEnumerable<CRM.Entities.InvoiceEntity> GetInvoices()
         {
             return (from i in Organization.Invoices
                     where i.OpportunityId == Id

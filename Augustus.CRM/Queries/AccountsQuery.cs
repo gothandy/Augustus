@@ -4,15 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Augustus.Domain
+namespace Augustus.CRM.Queries
 {
-    public class Accounts 
+    public class AccountsQuery 
     {
         public OrgQueryable Organization { get; set; }
         public DateTime ActiveDate { get; set; }
         public DateTime NewDate { get; set; }
         
-        public IEnumerable<CRM.Entities.Account> GetNewAndActiveAccounts()
+        public IEnumerable<CRM.Entities.AccountEntity> GetNewAndActiveAccounts()
         {
             var activeAccounts = GetActiveAccounts();
             var newAccounts = GetNewAccounts();
@@ -20,14 +20,14 @@ namespace Augustus.Domain
             return activeAccounts.Union(newAccounts).Distinct().OrderBy(a => a.Name);
         }
 
-        private IEnumerable<CRM.Entities.Account> GetNewAccounts()
+        private IEnumerable<CRM.Entities.AccountEntity> GetNewAccounts()
         {
             return (from a in Organization.Accounts
                     where a.Created > NewDate
                     select a).AsEnumerable();
         }
 
-        private IEnumerable<CRM.Entities.Account> GetActiveAccounts()
+        private IEnumerable<CRM.Entities.AccountEntity> GetActiveAccounts()
         {
             return (from a in Organization.Accounts
                     join i in Organization.Invoices

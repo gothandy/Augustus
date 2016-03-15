@@ -56,7 +56,7 @@ namespace Augustus.CRM
         {
             get
             {
-                return GetOptionSet(Invoice.EntityLogicalName, "statuscode");
+                return GetOptionSet(InvoiceEntity.EntityLogicalName, "statuscode");
             }
         }
         

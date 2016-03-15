@@ -30,7 +30,7 @@ namespace Augustus.CRM.Test
         [TestMethod]
         public void OrgQueryable_GetAccount()
         {
-            var account = (Account)org.Accounts.Single(a => a.Name == "easyJet");
+            var account = (AccountEntity)org.Accounts.Single(a => a.Name == "easyJet");
             Assert.AreEqual(new Guid("33b343c7-a684-e011-8da5-00271336e9df"), account.Id);
         }
 

@@ -1,10 +1,10 @@
-﻿@model IEnumerable<WorkDoneItem>
+﻿@model IEnumerable<WorkDoneItemEntity>
 @{
-    Invoice invoice = (Invoice)ViewBag.Invoice;
+    var invoice = (InvoiceEntity)ViewBag.Invoice;
     ViewBag.Title = invoice.Name;
 }
 <div class="btn-group">
-    @Html.ActionLink("Back to Account", "Details", "Account", new { id = invoice.AccountId }, new { @class = "btn" })
+    @Html.ActionLink("Back to Account", "Invoices", "Account", new { id = invoice.AccountId }, new { @class = "btn" })
     <a class="btn" target="_blank" href="https://trueclarity4.crm4.dynamics.com/main.aspx?etc=10010&id={@invoice.Id}&pagetype=entityrecord">Open in CRM</a>
 </div>
 

@@ -1,5 +1,6 @@
 ﻿using Augustus.CRM;
 using Augustus.CRM.Entities;
+using Augustus.CRM.Queries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace Augustus.Web.Portal.Controllers
 
             using (OrgQueryable org = await GetOrgQueryable())
             {
-                var opp = new Domain.Opportunity()
+                var opp = new OpportunityQuery()
                 {
                     Id = id.Value,
                     Organization = org

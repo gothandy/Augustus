@@ -6,10 +6,10 @@ using System.Runtime.Serialization;
 namespace Augustus.CRM.Entities
 {
     [EntityLogicalName("new_invoice")]
-    public class Invoice : BaseEntity
+    public class InvoiceEntity : BaseEntity
     {
 
-        public Invoice() : base(EntityLogicalName) { }
+        public InvoiceEntity() : base(EntityLogicalName) { }
 
         public const string EntityLogicalName = "new_invoice";
         public const int EntityTypeCode = 10010;
@@ -87,7 +87,7 @@ namespace Augustus.CRM.Entities
                 {
                     SetAttributeValue("new_directclient",
                         new EntityReference(
-                            Account.EntityLogicalName,
+                            AccountEntity.EntityLogicalName,
                             value.Value));
                 }
                 

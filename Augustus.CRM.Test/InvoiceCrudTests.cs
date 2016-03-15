@@ -28,12 +28,12 @@ namespace Augustus.CRM.Test
         [TestMethod]
         public void CRM_CrudInvoice()
         {
-            Account testAccount = new Account()
+            AccountEntity testAccount = new AccountEntity()
             {
                 Name = "TestAccount"
             };
 
-            org.Create<Account>(testAccount);
+            org.Create<AccountEntity>(testAccount);
             org.SaveChanges();
 
             Console.WriteLine(testAccount.Id);
@@ -44,7 +44,7 @@ namespace Augustus.CRM.Test
 
             Console.WriteLine(testAccount.Id);
 
-            org.Delete<Account>(testAccount);
+            org.Delete<AccountEntity>(testAccount);
             org.SaveChanges();
 
         }

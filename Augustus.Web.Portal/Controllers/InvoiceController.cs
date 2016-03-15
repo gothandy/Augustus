@@ -19,7 +19,7 @@ namespace Augustus.Web.Portal.Controllers
         // GET: Invoice/Details/5
         public async Task<ActionResult> Details(Guid id)
         {
-            IEnumerable<WorkDoneItem> items;
+            IEnumerable<WorkDoneItemEntity> items;
 
             using (OrgQueryable org = await GetOrgQueryable())
             {

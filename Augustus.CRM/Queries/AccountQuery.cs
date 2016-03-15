@@ -3,22 +3,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Augustus.Domain
+namespace Augustus.CRM.Queries
 {
-    public class Account
+    public class AccountQuery
     {
         public DateTime ActiveDate { get; set; }
         public Guid Id { get; set; }
         public OrgQueryable Organization { get; set; }
 
-        public CRM.Entities.Account GetAccount()
+        public CRM.Entities.AccountEntity GetAccount()
         {
             return (from a in Organization.Accounts
                     where a.Id == Id
                     select a).Single();
         }
 
-        public IEnumerable<CRM.Entities.Invoice> GetInvoices()
+        public IEnumerable<CRM.Entities.InvoiceEntity> GetInvoices()
         {
             return (from i in Organization.Invoices
                     where i.AccountId == Id
@@ -27,7 +27,7 @@ namespace Augustus.Domain
                     select i).AsEnumerable();
         }
 
-        public IEnumerable<CRM.Entities.Opportunity> GetOpportunities()
+        public IEnumerable<CRM.Entities.OpportunityEntity> GetOpportunities()
         {
             var activeOpps = (from o in Organization.Opportunities
                               join i in Organization.Invoices

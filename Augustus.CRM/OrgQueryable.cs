@@ -9,35 +9,35 @@ namespace Augustus.CRM
         public OrgQueryable(string connectionString) : base(connectionString) { }
         public OrgQueryable(Uri crmUrl, string accessToken) : base(crmUrl, accessToken) { }
 
-        public IQueryable<Account> Accounts
+        public IQueryable<AccountEntity> Accounts
         {
             get
             {
-                return context.CreateQuery<Account>();
+                return context.CreateQuery<AccountEntity>();
             }
         }
 
-        public IQueryable<Invoice> Invoices
+        public IQueryable<InvoiceEntity> Invoices
         {
             get
             {
-                return context.CreateQuery<Invoice>();
+                return context.CreateQuery<InvoiceEntity>();
             }
         }
 
-        public IQueryable<WorkDoneItem> WorkDoneItems
+        public IQueryable<WorkDoneItemEntity> WorkDoneItems
         {
             get
             {
-                return context.CreateQuery<WorkDoneItem>();
+                return context.CreateQuery<WorkDoneItemEntity>();
             }
         }
 
-        public IQueryable<Opportunity> Opportunities
+        public IQueryable<OpportunityEntity> Opportunities
         {
             get
             {
-                return context.CreateQuery<Opportunity>();
+                return context.CreateQuery<OpportunityEntity>();
             }
         }
 

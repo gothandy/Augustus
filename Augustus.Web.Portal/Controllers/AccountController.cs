@@ -1,5 +1,5 @@
 ﻿using Augustus.CRM;
-using Augustus.Domain;
+using Augustus.CRM.Queries;
 using System;
 using System.Linq;
 using System.Net;
@@ -16,7 +16,7 @@ namespace Augustus.Web.Portal.Controllers
         {
             using (var org = await GetOrgQueryable())
             {
-                var accounts = new Accounts()
+                var accounts = new AccountsQuery()
                 {
                     Organization = org,
                     ActiveDate = DateTime.Now.AddYears(-1),
@@ -35,7 +35,7 @@ namespace Augustus.Web.Portal.Controllers
 
             using (var org = await GetOrgQueryable())
             {
-                var account = new Domain.Account()
+                var account = new AccountQuery()
                 {
                     Organization = org,
                     Id = id.Value,
@@ -54,7 +54,7 @@ namespace Augustus.Web.Portal.Controllers
 
             using (OrgQueryable org = await GetOrgQueryable())
             {
-                var account = new Domain.Account()
+                var account = new AccountQuery()
                 {
                     Organization = org,
                     Id = id.Value,
@@ -75,13 +75,13 @@ namespace Augustus.Web.Portal.Controllers
 
         // POST: /Account/Create
         [HttpPost]
-        public async Task<ActionResult> Create([Bind(Include = "Name")] CRM.Entities.Account account)
+        public async Task<ActionResult> Create([Bind(Include = "Name")] CRM.Entities.AccountEntity account)
         {
             if (ModelState.IsValid)
             {
                 using (OrgQueryable org = await GetOrgQueryable())
                 {
-                    org.Create<CRM.Entities.Account>(account);
+                    org.Create<CRM.Entities.AccountEntity>(account);
                     org.SaveChanges();
                 }
 
@@ -98,7 +98,7 @@ namespace Augustus.Web.Portal.Controllers
 
             using (OrgQueryable org = await GetOrgQueryable())
             {
-                var account = new Account()
+                var account = new AccountQuery()
                 {
                     Organization = org,
                     Id = id.Value
@@ -111,11 +111,11 @@ namespace Augustus.Web.Portal.Controllers
 
         // POST: Opportunity/Edit/5
         [HttpPost]
-        public async Task<ActionResult> Edit(Guid? id, [Bind(Include = "Name")] CRM.Entities.Account newAccount)
+        public async Task<ActionResult> Edit(Guid? id, [Bind(Include = "Name")] CRM.Entities.AccountEntity newAccount)
         {
             using (OrgQueryable org = await GetOrgQueryable())
             {
-                var account = new Account()
+                var account = new AccountQuery()
                 {
                     Organization = org,
                     Id = id.Value
@@ -124,7 +124,7 @@ namespace Augustus.Web.Portal.Controllers
 
                 oldAccount.Name = newAccount.Name;
 
-                org.Update<CRM.Entities.Account>(oldAccount);
+                org.Update<CRM.Entities.AccountEntity>(oldAccount);
                 
                 org.SaveChanges();
 
@@ -140,7 +140,7 @@ namespace Augustus.Web.Portal.Controllers
             {
                 var account = org.Accounts.Single(a => a.Id == id);
 
-                org.Delete<CRM.Entities.Account>(account);
+                org.Delete<CRM.Entities.AccountEntity>(account);
                 org.SaveChanges();
 
                 return RedirectToAction("Index");

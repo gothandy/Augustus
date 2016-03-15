@@ -7,10 +7,10 @@ namespace Augustus.CRM.Entities
 {
 
     [EntityLogicalName("opportunity")]
-    public class Opportunity : BaseEntity
+    public class OpportunityEntity : BaseEntity
     {
 
-        public Opportunity() : base(EntityLogicalName) { }
+        public OpportunityEntity() : base(EntityLogicalName) { }
 
         public const string EntityLogicalName = "opportunity";
         public const int EntityTypeCode = 3;
@@ -53,11 +53,11 @@ namespace Augustus.CRM.Entities
 
         [AttributeLogicalName("parentaccountid")]
         [RelationshipSchemaName("opportunity_parent_account")]
-        public Account ParentAccount
+        public AccountEntity ParentAccount
         {
             get
             {
-                return GetRelatedEntity<Account>("opportunity_parent_account", null);
+                return GetRelatedEntity<AccountEntity>("opportunity_parent_account", null);
             }
             set
             {

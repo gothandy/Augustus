@@ -17,10 +17,10 @@ namespace Augustus.CRM.Entities
     }
 
     [EntityLogicalName("new_workdoneitem")]
-    public partial class WorkDoneItem : BaseEntity
+    public partial class WorkDoneItemEntity : BaseEntity
     {
 
-        public WorkDoneItem() : base(EntityLogicalName) { }
+        public WorkDoneItemEntity() : base(EntityLogicalName) { }
 
         public const string EntityLogicalName = "new_workdoneitem";
         public const int EntityTypeCode = 10049;
@@ -38,7 +38,7 @@ namespace Augustus.CRM.Entities
                 {
                     SetAttributeValue("new_invoiceid",
                         new EntityReference(
-                            Invoice.EntityLogicalName,
+                            InvoiceEntity.EntityLogicalName,
                             value.Value));
                 }
             }

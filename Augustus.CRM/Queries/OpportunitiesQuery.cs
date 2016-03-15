@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Augustus.Domain
+namespace Augustus.CRM.Queries
 {
-    public class Opportunities
+    public class OpportunitiesQuery
     {
         
         public OrgQueryable Organization { get; set; }

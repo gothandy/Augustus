@@ -20,7 +20,7 @@ namespace Augustus.App.ImportWorkDoneItems
 
                 foreach (string line in File.ReadLines(path))
                 {
-                    foreach(WorkDoneItem item in GetWorkDoneItemsFromCsv(line))
+                    foreach(WorkDoneItemEntity item in GetWorkDoneItemsFromCsv(line))
                     {
                         // Duplicates created. Commented out for safety.
                         // org.Create<WorkDoneItem>(item);
@@ -33,9 +33,9 @@ namespace Augustus.App.ImportWorkDoneItems
             }
         }
 
-        private static List<WorkDoneItem> GetWorkDoneItemsFromCsv(string line)
+        private static List<WorkDoneItemEntity> GetWorkDoneItemsFromCsv(string line)
         {
-            var list = new List<WorkDoneItem>();
+            var list = new List<WorkDoneItemEntity>();
             var items = line.Split(',');
 
             var invoiceId = new Guid(items[0]);
@@ -51,7 +51,7 @@ namespace Augustus.App.ImportWorkDoneItems
                     var date = new DateTime(2015, 1, 1).AddMonths(i);
 
                     list.Add(
-                        new WorkDoneItem()
+                        new WorkDoneItemEntity()
                         {
                             InvoiceId = invoiceId,
                             WorkDoneDate = date,

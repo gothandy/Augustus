@@ -1,6 +1,6 @@
-﻿@model IEnumerable<Opportunity>
+﻿@model IEnumerable<OpportunityEntity>
 @{
-    Account account = (Account)ViewBag.Account;
+    var account = (AccountEntity)ViewBag.Account;
     ViewBag.Title = account.Name;
 }
 @if (Model.Count() == 0)

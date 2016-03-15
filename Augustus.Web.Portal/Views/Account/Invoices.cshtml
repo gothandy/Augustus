@@ -1,6 +1,6 @@
-﻿@model IEnumerable<Invoice>
+﻿@model IEnumerable<InvoiceEntity>
 @{
-    Account account = (Account)ViewBag.Account;
+    var account = (AccountEntity)ViewBag.Account;
     ViewBag.Title = account.Name;
 }
 
