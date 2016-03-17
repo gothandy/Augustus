@@ -1,6 +1,7 @@
 ﻿using Augustus.CRM;
 using Augustus.CRM.Entities;
 using Augustus.CRM.Queries;
+using Augustus.Domain.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,50 +21,40 @@ namespace Augustus.Web.Portal.Controllers
         }
 
         //GET: /Opportunity/Invoices/{id}
-        public async Task<ActionResult> Invoices(Guid? id)
+        public async Task<ActionResult> Invoices(Guid id)
         {
-            if (!id.HasValue) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-
-            using (OrgQueryable org = await GetOrgQueryable())
+            using (var query = await GetOpportunityQuery())
             {
-                var opp = new OpportunityQuery()
-                {
-                    Id = id.Value,
-                    Organization = org
-                };
+                ViewBag.Account = query.GetAccount(id);
+                ViewBag.Opportunity = query.GetOpportunity(id);
 
-                ViewBag.Account = opp.GetAccount();
-                ViewBag.Opportunity = opp.GetOpportunity();
-
-                return View(opp.GetInvoices());
+                return View(query.GetInvoices(id));
             }
         }
 
-        // GET: Opportunity/Details/5
-        public ActionResult Details(Guid? id)
+        // GET: Opportunity/Create/{id}
+        public async Task<ActionResult> Create(Guid id)
         {
-            return View();
-        }
+            using (var query = await GetOrganizationQuery())
+            {
+                ViewBag.AccountId = id;
+                ViewBag.Accounts = query.GetNewAndActiveAccounts(
+                    createdAfter: DateTime.Now.AddMonths(-3),
+                    invoicesFrom: DateTime.Now.AddYears(-1));
 
-        // GET: Opportunity/Create
-        public ActionResult Create()
-        {
-            return View();
+                return View();
+            }
         }
 
         // POST: Opportunity/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public async Task<ActionResult> Create([Bind(Include = "Name,AccountId")] Opportunity opportunity)
         {
-            try
+            using (var query = await GetOpportunityQuery())
             {
-                // TODO: Add insert logic here
+                var id = query.CreateOpportunity(opportunity);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
+                return RedirectToAction("Invoices", new { id = id });
             }
         }
 
@@ -90,25 +81,14 @@ namespace Augustus.Web.Portal.Controllers
         }
 
         // GET: Opportunity/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(Guid id)
         {
-            return View();
-        }
-
-        // POST: Opportunity/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
+            using (var query = await GetOpportunityQuery())
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+                var opportunity = query.GetOpportunity(id);
+                query.DeleteOpportunity(id);
+                return RedirectToAction("Opportunites", "Account", new { id = opportunity.AccountId });
+            };
         }
     }
 }

@@ -50,9 +50,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IAccountQuery.cs" />
+    <Compile Include="Interfaces\IOpportunityQuery.cs" />
     <Compile Include="Interfaces\IOrganizationQuery.cs" />
     <Compile Include="Objects\Account.cs" />
     <Compile Include="Objects\Invoice.cs" />
+    <Compile Include="Objects\Opportunity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

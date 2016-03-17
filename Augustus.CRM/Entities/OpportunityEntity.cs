@@ -1,4 +1,5 @@
-﻿using Microsoft.Xrm.Sdk;
+﻿using Augustus.Domain.Objects;
+using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Client;
 using System;
 using System.Runtime.Serialization;
@@ -42,27 +43,30 @@ namespace Augustus.CRM.Entities
             }
         }
 
-        [AttributeLogicalName("accountid")]
+        private const string CustomerIdLogicalName = "customerid";
+
+        [AttributeLogicalName(CustomerIdLogicalName)]
         public Guid? AccountId
         {
             get
             {
-                return GetAttributeValueEntityReferenceId("accountid");
-            }
-        }
-
-        [AttributeLogicalName("parentaccountid")]
-        [RelationshipSchemaName("opportunity_parent_account")]
-        public AccountEntity ParentAccount
-        {
-            get
-            {
-                return GetRelatedEntity<AccountEntity>("opportunity_parent_account", null);
+                return GetAttributeEntityReferenceId(CustomerIdLogicalName);
             }
             set
             {
-                SetRelatedEntity("opportunity_parent_account", null, value);
+                SetAttributeEntityReferenceId(CustomerIdLogicalName, AccountEntity.EntityLogicalName, value);
             }
+        }
+
+        public static Opportunity ToDomainObject(OpportunityEntity o)
+        {
+            return new Opportunity
+            {
+                AccountId = o.AccountId,
+                Created = o.Created,
+                Id = o.Id,
+                Name = o.Name
+            };
         }
 
         [AttributeLogicalName("name")]

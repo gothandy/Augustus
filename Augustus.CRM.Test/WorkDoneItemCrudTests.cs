@@ -26,7 +26,7 @@ namespace Augustus.CRM.Test
         }
 
         [TestMethod]
-        public void CRM_WorkDoneItemCrud()
+        public void CRM_Entity_WorkDoneItem_CrUD()
         {
 
             InvoiceEntity invoiceTest01 = org.Invoices.Single(a => a.Name == "Augustus Test 01");

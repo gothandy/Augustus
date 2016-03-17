@@ -64,5 +64,14 @@ namespace Augustus.Web.Portal.Controllers
             };
         }
 
+        protected async static Task<IOpportunityQuery> GetOpportunityQuery()
+        {
+            var org = await GetOrgQueryable();
+
+            return (IOpportunityQuery)new OpportunityQuery()
+            {
+                Organization = org
+            };
+        }
     }
 }

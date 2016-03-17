@@ -6,11 +6,14 @@ namespace Augustus.Domain.Interfaces
 {
     public interface IAccountQuery : IDisposable
     {
-        Guid Id { get; set; }
-        DateTime ActiveDate { get; set; }
+        Account GetAccount(Guid id);
+        IEnumerable<Invoice> GetInvoices(Guid accountId, DateTime from);
+        IEnumerable<Opportunity> GetNewOpportunities(Guid accountId, DateTime createdAfter);
+        IEnumerable<Opportunity> GetActiveOpportunities(Guid accountId, DateTime invoiceFrom);
+        IEnumerable<Opportunity> GetNewAndActiveOpportunities(Guid accountId, DateTime createdAfter, DateTime invoiceFrom);
 
-        Account GetAccount();
-        IEnumerable<Invoice> GetInvoices();
-        //IEnumerable<Opportunity> GetOpportunities();
+        Guid CreateAccount(Account account);
+        void UpdateAccount(Account account);
+        void DeleteAccount(Guid id);
     }
 }

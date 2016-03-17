@@ -36,8 +36,9 @@ else
 }
 
 <div class="btn-group">
-    <a class="btn" href="@Url.Action("Opportunities", new { id = account.Id })">Opportunities</a>
+    <a class="btn" href="@Url.Action("Opportunities", new { id = account.Id })">View Opportunities</a>
     <a class="btn" href="@Url.Action("Edit", new { id = account.Id })">Edit Account</a>
     <a class="btn" href="@Url.Action("Delete", new { id = account.Id })">Delete Account</a> 
-    <a class="btn" href="@Url.Action("Create", "Invoice")">Create Invoice</a>
+    <a class="btn" href="@Url.Action("Create", "Invoice", new { id = account.Id })">Create Invoice</a>
+    <a class="btn" href="@Url.Action("Create", "Opportunity", new { id = account.Id })">Create Opportunity</a>
 </div>

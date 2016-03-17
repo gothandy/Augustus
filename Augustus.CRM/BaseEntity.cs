@@ -53,7 +53,7 @@ namespace Augustus.CRM
             }
         }
 
-        protected Guid? GetAttributeValueEntityReferenceId(string attributeLogicalName)
+        protected Guid? GetAttributeEntityReferenceId(string attributeLogicalName)
         {
             EntityReference entRef = GetAttributeValue<EntityReference>(attributeLogicalName);
 
@@ -65,6 +65,15 @@ namespace Augustus.CRM
             {
                 return entRef.Id;
             }
+        }
+
+        protected void SetAttributeEntityReferenceId(string attributeLogicalName, string entityLogicalName, Guid? id)
+        {
+            EntityReference entRef = null;
+
+            if (id.HasValue) entRef = new EntityReference(entityLogicalName, id.Value);
+
+            SetAttributeValue(attributeLogicalName, entRef);
         }
     }
 }

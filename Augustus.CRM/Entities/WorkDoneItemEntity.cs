@@ -30,7 +30,7 @@ namespace Augustus.CRM.Entities
         {
             get
             {
-                return GetAttributeValueEntityReferenceId("new_invoiceid");
+                return GetAttributeEntityReferenceId("new_invoiceid");
             }
             set
             {

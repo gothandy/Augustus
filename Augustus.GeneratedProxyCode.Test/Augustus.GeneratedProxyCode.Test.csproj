@@ -106,9 +106,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="ReadTests.cs" />
+    <Compile Include="OpportunityTests.cs" />
+    <Compile Include="AccountTests.cs" />
+    <Compile Include="OpportunityTools.cs" />
+    <Compile Include="AccountTools.cs" />
+    <Compile Include="ContextCreator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WriteTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

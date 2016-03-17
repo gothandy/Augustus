@@ -25,6 +25,7 @@ namespace Augustus.CRM.Test
             org.Dispose();
         }
 
+        /*
         [TestMethod]
         public void CRM_CrudInvoice()
         {
@@ -48,5 +49,6 @@ namespace Augustus.CRM.Test
             org.SaveChanges();
 
         }
+        */
     }
 }

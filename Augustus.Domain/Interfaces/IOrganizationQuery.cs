@@ -6,11 +6,8 @@ namespace Augustus.Domain.Interfaces
 {
     public interface IOrganizationQuery : IDisposable
     {
-        DateTime ActiveDate { get; set; }
-        DateTime NewDate { get; set; }
-
-        IEnumerable<Account> GetNewAccounts();
-        IEnumerable<Account> GetActiveAccounts();
-        IEnumerable<Account> GetNewAndActiveAccounts();
+        IEnumerable<Account> GetNewAccounts(DateTime createdAfter);
+        IEnumerable<Account> GetActiveAccounts(DateTime invoicesFrom);
+        IEnumerable<Account> GetNewAndActiveAccounts(DateTime createdAfter, DateTime invoicesFrom);
     }
 }

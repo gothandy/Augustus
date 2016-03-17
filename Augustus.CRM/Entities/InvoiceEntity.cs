@@ -100,7 +100,7 @@ namespace Augustus.CRM.Entities
         {
             get
             {
-                return GetAttributeValueEntityReferenceId("new_directclient");
+                return GetAttributeEntityReferenceId("new_directclient");
             }
             set
             {
@@ -167,17 +167,18 @@ namespace Augustus.CRM.Entities
             }
         }
 
-        [AttributeLogicalName("new_opportunity")]
+        private const string OpportunityIdLogicalName = "new_opportunity";
+        [AttributeLogicalName(OpportunityIdLogicalName)]
         public Guid? OpportunityId
         {
             get
             {
-                return GetAttributeValueEntityReferenceId("new_opportunity");
+                return GetAttributeEntityReferenceId(OpportunityIdLogicalName);
             }
-            /*set
+            set
             {
-                this.SetAttributeValue("new_opportunity", value);
-            }*/
+                SetAttributeEntityReferenceId(OpportunityIdLogicalName, OpportunityEntity.EntityLogicalName, value);
+            }
         }
 
         [AttributeLogicalName("new_ponumber")]

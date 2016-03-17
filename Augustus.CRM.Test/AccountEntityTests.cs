@@ -4,26 +4,28 @@ using System.Configuration;
 namespace Augustus.CRM.Test
 {
     [TestClass]
-    public class AccountCrudTests : BaseCrudTest
+    public class AccountEntityTests : BaseCrudTest
     {
         [ClassInitialize]
         public static void ClassInit(TestContext testContext)
         {
             CreateOrg();
+            deleteAllAccounts();
         }
 
         [ClassCleanup]
         public static void ClassCleanup()
         {
+            deleteAllAccounts();
             org.Dispose();
         }
 
         [TestMethod]
-        public void CRM_CrudAccount()
+        public void CRM_Entity_Account_CrUD()
         {
-            createAccount("Test Account");
-            updateAccount("Test Account", "Test Account2");
-            deleteAccount("Test Account2");
+            createAccount(accountName);
+            updateAccount(accountName, accountRename);
+            deleteAccount(accountRename);
         }
     }
 }

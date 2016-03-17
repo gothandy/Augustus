@@ -8,6 +8,11 @@ namespace Augustus.CRM.Test
     [TestClass]
     public class BaseCrudTest
     {
+        protected const string accountName = "CRM Account Name";
+        protected const string accountRename = "CRM Account Name 2";
+        protected const string opportunityName = "CRM Opportunity Name";
+        protected const string opportunityRename = "CRM Opportunity Name 2";
+
         protected static OrgQueryable org;
 
         protected static void CreateOrg()
@@ -17,7 +22,7 @@ namespace Augustus.CRM.Test
             org = new OrgQueryable(connectionString);
         }
 
-        protected void createAccount(string name)
+        protected static void createAccount(string name)
         {
             AccountEntity account = new AccountEntity()
             {
@@ -28,7 +33,7 @@ namespace Augustus.CRM.Test
             org.SaveChanges();
         }
 
-        protected void updateAccount(string name1, string name2)
+        protected static void updateAccount(string name1, string name2)
         {
             AccountEntity account = getAccount(name1);
             account.Name = name2;
@@ -36,40 +41,76 @@ namespace Augustus.CRM.Test
             org.SaveChanges();
         }
 
-        protected void deleteAccount(string name)
+        protected static void deleteAccount(string name)
         {
             AccountEntity account = getAccount(name);
             org.Delete<AccountEntity>(account);
             org.SaveChanges();
         }
 
-        protected AccountEntity getAccount(string name)
+        protected static AccountEntity getAccount(string name)
         {
             return org.Accounts.Single(a => a.Name == name);
         }
 
-        protected void createOpportunity()
+        protected static OpportunityEntity getOpportunity(string name)
         {
-            AccountEntity testAccount = org.Accounts.Single(a => a.Name == "TestAccount");
+            return org.Opportunities.Single(a => a.Name == name);
+        }
 
+        protected static void createOpportunity(string name, AccountEntity account)
+        {
             OpportunityEntity newOpp = new OpportunityEntity()
             {
-                Name = "Test Opp",
-                ParentAccount = testAccount
+                Name = name,
+                AccountId = account.Id
             };
 
             org.Create<OpportunityEntity>(newOpp);
             org.SaveChanges();
         }
 
-        protected void deleteOpportunity()
+        protected static void deleteOpportunity(string name)
         {
-            OpportunityEntity newOpp = org.Opportunities.Single(o => o.Name == "Test Opp");
+            OpportunityEntity newOpp = org.Opportunities.Single(o => o.Name == name);
 
             org.Delete<OpportunityEntity>(newOpp);
 
             org.SaveChanges();
         }
 
+        protected static void deleteAllAccounts()
+        {
+            deleteAccounts(accountName);
+            deleteAccounts(accountRename);
+        }
+
+        private static void deleteAccounts(string name)
+        {
+            var accounts = org.Accounts.Where(a => a.Name == name);
+
+            foreach (var account in accounts)
+            {
+                org.Delete<AccountEntity>(account);
+            }
+            org.SaveChanges();
+        }
+
+        protected static void deleteAllOpportunities()
+        {
+            deleteOpportunities(accountName);
+            deleteOpportunities(accountRename);
+        }
+
+        private static void deleteOpportunities(string name)
+        {
+            var entities = org.Opportunities.Where(a => a.Name == name);
+
+            foreach (var entity in entities)
+            {
+                org.Delete<OpportunityEntity>(entity);
+            }
+            org.SaveChanges();
+        }
     }
 }

@@ -1,7 +1,7 @@
-﻿@model IEnumerable<InvoiceEntity>
+﻿@model IEnumerable<Invoice>
 @{
-    var account = (AccountEntity)ViewBag.Account;
-    var opportunity = (OpportunityEntity)ViewBag.Opportunity;
+    var account = (Account)ViewBag.Account;
+    var opportunity = (Opportunity)ViewBag.Opportunity;
 
     ViewBag.Title = account.Name + " " + opportunity.Name;
 }
