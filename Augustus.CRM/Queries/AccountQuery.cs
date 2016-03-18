@@ -10,7 +10,6 @@ namespace Augustus.CRM.Queries
 {
     public class AccountQuery : BaseQuery, IAccountQuery
     {
-
         public Account GetAccount(Guid id)
         {
             return (from a in Organization.Accounts

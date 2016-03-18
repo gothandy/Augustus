@@ -1,4 +1,5 @@
-﻿using Microsoft.Xrm.Sdk;
+﻿using Augustus.Domain.Objects;
+using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Client;
 using System;
 using System.Runtime.Serialization;
@@ -58,6 +59,18 @@ namespace Augustus.CRM.Entities
                     SetAttributeValue("new_margin", new Money(value.Value));
                 }
             }
+        }
+
+        public static WorkDoneItem ToDomainObject(WorkDoneItemEntity entity)
+        {
+            return new WorkDoneItem
+            {
+                Id = entity.Id,
+                Created = entity.Created,
+                InvoiceId = entity.InvoiceId,
+                WorkDoneDate = entity.WorkDoneDate,
+                Margin = entity.Margin
+            };
         }
 
         [AttributeLogicalName("new_workdonedate")]

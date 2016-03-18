@@ -91,6 +91,7 @@
     <Compile Include="Entities\OpportunityEntity.cs" />
     <Compile Include="Entities\InvoiceEntity.cs" />
     <Compile Include="Queries\AccountQuery.cs" />
+    <Compile Include="Queries\InvoiceQuery.cs" />
     <Compile Include="Queries\OrganizationQuery.cs" />
     <Compile Include="Queries\OpportunityQuery.cs" />
     <Compile Include="Status.cs" />

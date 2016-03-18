@@ -102,6 +102,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="InvoiceQueryTests.cs" />
     <Compile Include="OpportunityQueryTests.cs" />
     <Compile Include="OrganizationQueryTests.cs" />
     <Compile Include="AccountQueryTests.cs" />

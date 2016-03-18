@@ -55,6 +55,7 @@
     <Compile Include="Objects\Account.cs" />
     <Compile Include="Objects\Invoice.cs" />
     <Compile Include="Objects\Opportunity.cs" />
+    <Compile Include="Objects\WorkDoneItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
