@@ -60,25 +60,33 @@ namespace Augustus.Web.Portal.Controllers
             }
         }
 
-        // GET: Opportunity/Edit/5
-        public ActionResult Edit(int id)
+        // GET: Opportunity/Edit/{id}
+        public async Task<ActionResult> Edit(Guid id)
         {
-            return View();
+            using (var query = await GetOrganizationQuery())
+            {
+                ViewBag.Accounts = query.GetNewAndActiveAccounts(
+                    createdAfter: DateTime.Now.AddMonths(-3),
+                    invoicesFrom: DateTime.Now.AddYears(-1));
+            }
+
+            using (var query = await GetOpportunityQuery())
+            {
+                ViewBag.AccountId = query.GetAccount(id).Id;
+                return View(query.GetOpportunity(id));
+            }
         }
 
-        // POST: Opportunity/Edit/5
+        // POST: Opportunity/Edit/{id}
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public async Task<ActionResult> Edit(Guid id, [Bind(Include = "Name,AccountId")] Opportunity opportunity)
         {
-            try
+            using (var query = await GetOpportunityQuery())
             {
-                // TODO: Add update logic here
+                opportunity.Id = id;
+                query.UpdateOpportunity(opportunity);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
+                return RedirectToAction("Invoices", new { Id = id });
             }
         }
 
@@ -89,7 +97,7 @@ namespace Augustus.Web.Portal.Controllers
             {
                 var opportunity = query.GetOpportunity(id);
                 query.DeleteOpportunity(id);
-                return RedirectToAction("Opportunites", "Account", new { id = opportunity.AccountId });
+                return RedirectToAction("Opportunities", "Account", new { id = opportunity.AccountId });
             };
         }
     }

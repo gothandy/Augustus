@@ -61,6 +61,7 @@ namespace Augustus.CRM.Queries
             var entity = Organization.Opportunities.Single(o => o.Id == opportunity.Id);
 
             entity.Name = opportunity.Name;
+            entity.AccountId = opportunity.AccountId;
 
             Organization.Update(entity);
             Organization.SaveChanges();

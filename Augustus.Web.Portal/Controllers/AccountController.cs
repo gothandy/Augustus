@@ -72,26 +72,21 @@ namespace Augustus.Web.Portal.Controllers
         }
 
         // GET: Account/Edit/{id}
-        public async Task<ActionResult> Edit(Guid? id)
+        public async Task<ActionResult> Edit(Guid id)
         {
-            if (!id.HasValue) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-
             using (var query = await GetAccountQuery())
             {
-                return View(query.GetAccount(id.Value));
+                return View(query.GetAccount(id));
             }
-                
         }
 
         // POST: Account/Edit/{id}
         [HttpPost]
-        public async Task<ActionResult> Edit(Guid? id, [Bind(Include = "Name")] Account account)
+        public async Task<ActionResult> Edit(Guid id, [Bind(Include = "Name")] Account account)
         {
-            if (!id.HasValue) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-
             using (var query = await GetAccountQuery())
             {
-                account.Id = id.Value;
+                account.Id = id;
                 query.UpdateAccount(account);
 
                 return RedirectToAction("Invoices", new { Id = id });
