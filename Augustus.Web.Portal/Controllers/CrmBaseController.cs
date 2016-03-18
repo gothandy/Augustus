@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace Augustus.Web.Portal.Controllers
 {
-    [Authorize]
+    [CrmAuthorize]
     public class CrmBaseController : Controller
     {
         private const string tenantIdUrl = "http://schemas.microsoft.com/identity/claims/tenantid";
@@ -35,13 +35,22 @@ namespace Augustus.Web.Portal.Controllers
 
         protected async static Task<OrgQueryable> GetOrgQueryable()
         {
-            Uri crmUrl = new Uri(ConfigurationManager.AppSettings["crm:Url"]);
+            string useAzureAuth = ConfigurationManager.AppSettings["crm:UseAzureAuth"];
 
-            var result = await WaitForAuthenticationResult();
+            if (useAzureAuth == "true" || useAzureAuth == null)
+            {
+                Uri crmUrl = new Uri(ConfigurationManager.AppSettings["crm:Url"]);
 
-            var org = new OrgQueryable(crmUrl, result.AccessToken);
+                var result = await WaitForAuthenticationResult();
 
-            return org;
+                return new OrgQueryable(crmUrl, result.AccessToken);
+            }
+            else
+            {
+                string connectionString = ConfigurationManager.AppSettings["crm:ConnectionString"];
+
+                return new OrgQueryable(connectionString);
+            }
         }
 
         protected async static Task<IOrganizationQuery> GetOrganizationQuery()

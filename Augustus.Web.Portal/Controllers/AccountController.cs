@@ -1,6 +1,4 @@
-﻿using Augustus.CRM;
-using Augustus.CRM.Queries;
-using Augustus.Domain.Objects;
+﻿using Augustus.Domain.Objects;
 using System;
 using System.Net;
 using System.Threading.Tasks;
@@ -8,7 +6,6 @@ using System.Web.Mvc;
 
 namespace Augustus.Web.Portal.Controllers
 {
-    [Authorize]
     public class AccountController : CrmBaseController
     {
 

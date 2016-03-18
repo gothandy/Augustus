@@ -3,7 +3,7 @@
 namespace Augustus.CRM.Test
 {
     [TestClass]
-    public class OpportunityCrudTests : BaseCrudTest
+    public class OpportunityEntityTests : BaseCrudTest
     {
         [ClassInitialize]
         public static void ClassInit(TestContext testContext)
