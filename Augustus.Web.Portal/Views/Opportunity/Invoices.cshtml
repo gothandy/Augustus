@@ -3,8 +3,13 @@
     var account = (Account)ViewBag.Account;
     var opportunity = (Opportunity)ViewBag.Opportunity;
 
-    ViewBag.Title = account.Name + " " + opportunity.Name;
+    ViewBag.Title = opportunity.Name;
 }
+<ol class="breadcrumb">
+    <li>@Html.ActionLink("Accounts","Index","Account")</li>
+    <li>@Html.ActionLink(account.Name, "Invoices", "Account", new { id = account.Id }, null)</li>
+</ol>
+
 @if (Model.Count() == 0)
 {
     <div class="panel">No invoices.</div>

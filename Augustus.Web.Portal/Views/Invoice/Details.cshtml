@@ -1,12 +1,16 @@
 ﻿@model IEnumerable<WorkDoneItem>
 @{
+    var account = (Account)ViewBag.Account;
+    var opportunity = (Opportunity)ViewBag.Opportunity;
     var invoice = (Invoice)ViewBag.Invoice;
     ViewBag.Title = invoice.Name;
 }
-<div class="btn-group">
-    @Html.ActionLink("Back to Account", "Invoices", "Account", new { id = invoice.AccountId }, new { @class = "btn" })
-    <a class="btn" target="_blank" href="https://trueclarity4.crm4.dynamics.com/main.aspx?etc=10010&id={@invoice.Id}&pagetype=entityrecord">Open in CRM</a>
-</div>
+
+<ol class="breadcrumb">
+    <li>@Html.ActionLink("Accounts", "Index", "Account")</li>
+    <li>@Html.ActionLink(account.Name, "Invoices", "Account", new { id = account.Id }, null)</li>
+    <li>@Html.ActionLink(opportunity.Name, "Invoices", "Opportunity", new { id = opportunity.Id }, null)</li>
+</ol>
 
 <h2>Summary</h2>
 
@@ -80,4 +84,8 @@
             </tr>
         </tfoot>
     </table>
+</div>
+
+<div class="btn-group">
+    <a class="btn" target="_blank" href="https://trueclarity4.crm4.dynamics.com/main.aspx?etc=10010&id={@invoice.Id}&pagetype=entityrecord">Open in CRM</a>
 </div>

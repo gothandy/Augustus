@@ -21,6 +21,8 @@ namespace Augustus.Web.Portal.Controllers
         {
             using (var query = await GetInvoiceQuery())
             {
+                ViewBag.Account = query.GetAccount(id);
+                ViewBag.Opportunity = query.GetOpportunity(id);
                 ViewBag.Invoice = query.GetInvoice(id);
 
                 return View(query.GetWorkDoneItems(id));
