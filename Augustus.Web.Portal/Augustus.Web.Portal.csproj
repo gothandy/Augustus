@@ -245,9 +245,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Authentication\SignOutCallback.cshtml" />
-    <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Invoice\Details.cshtml" />
-    <Content Include="Views\Account\Create.cshtml" />
+    <Content Include="Views\Account\Form.cshtml" />
     <Content Include="Views\Account\Opportunities.cshtml" />
     <Content Include="Views\Opportunity\Invoices.cshtml" />
     <Content Include="Views\Opportunity\Create.cshtml" />

@@ -46,7 +46,9 @@ namespace Augustus.Web.Portal.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            ViewBag.Title = "New Account";
+            ViewBag.SubmitButton = "Create";
+            return View("Form");
         }
 
         // POST: /Account/Create
@@ -65,7 +67,9 @@ namespace Augustus.Web.Portal.Controllers
         {
             using (var query = await GetAccountQuery())
             {
-                return View(query.GetAccount(id));
+                ViewBag.Title = "Edit Account";
+                ViewBag.SubmitButton = "Edit";
+                return View("Form", query.GetAccount(id));
             }
         }
 

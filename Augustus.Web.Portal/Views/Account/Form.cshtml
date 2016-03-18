@@ -1,7 +1,4 @@
 ﻿@model Account
-@{
-    ViewBag.Title = "Edit Account";
-}
 
 @using (Html.BeginForm())
 {
@@ -23,7 +20,7 @@
         </div>
 
         <div class="button-group">
-                <input type="submit" value="Update" class="btn btn-default" />
+                <input type="submit" value="@ViewBag.SubmitButton" class="btn btn-default" />
             <a href="@Url.Action("Index")" class="btn">Cancel</a>
         </div>
     </div>
