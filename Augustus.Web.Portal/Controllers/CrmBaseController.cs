@@ -16,6 +16,9 @@ namespace Augustus.Web.Portal.Controllers
         private const string tenantIdUrl = "http://schemas.microsoft.com/identity/claims/tenantid";
         private const string objectIdentifierUrl = "http://schemas.microsoft.com/identity/claims/objectidentifier";
 
+        protected DateTime lastYear = DateTime.Now.AddYears(-1);
+        protected DateTime lastThreeMonths = DateTime.Now.AddMonths(-3);
+
         private async static Task<AuthenticationResult> WaitForAuthenticationResult()
         {
             string clientId = ConfigurationManager.AppSettings["ida:ClientId"];

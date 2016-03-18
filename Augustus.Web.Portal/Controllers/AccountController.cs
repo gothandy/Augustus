@@ -1,6 +1,5 @@
 ﻿using Augustus.Domain.Objects;
 using System;
-using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -14,11 +13,10 @@ namespace Augustus.Web.Portal.Controllers
         {
             using (var query = await GetOrganizationQuery())
             {
-                var lastYear = DateTime.Now.AddYears(-1);
-                var lastThreeMonths = DateTime.Now.AddMonths(-3);
-
                 ViewBag.NewDate = lastThreeMonths;
-                return View(query.GetNewAndActiveAccounts(createdAfter:lastThreeMonths, invoicesFrom:lastYear));
+                return View(query.GetNewAndActiveAccounts(
+                    createdAfter:lastThreeMonths,
+                    invoicesFrom:lastYear));
             }
         }
 
@@ -27,30 +25,22 @@ namespace Augustus.Web.Portal.Controllers
         {
             using (var query = await GetAccountQuery())
             {
-                
-                var pastYear = DateTime.Now.AddYears(-1);
-
                 Response.AppendHeader("guid", id.ToString());
-
                 ViewBag.Account = query.GetAccount(id);
-
-                return View(query.GetInvoices(id, from:pastYear));
+                return View(query.GetInvoices(id, from:lastYear));
             }
         }
 
         // GET: /Account/Opportunities/{id}
-        public async Task<ActionResult> Opportunities(Guid? id)
+        public async Task<ActionResult> Opportunities(Guid id)
         {
-            if (!id.HasValue) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-
             using (var query = await GetAccountQuery())
             {
-                var invoiceFrom = DateTime.Now.AddYears(-1);
-                var createdAfter = DateTime.Now.AddMonths(-3);
-
-                ViewBag.ActiveDate = invoiceFrom;
-                ViewBag.Account = query.GetAccount(id.Value);
-                return View(query.GetNewAndActiveOpportunities(id.Value, createdAfter, invoiceFrom));
+                ViewBag.Account = query.GetAccount(id);
+                return View(query.GetNewAndActiveOpportunities(
+                    accountId: id,
+                    createdAfter: lastThreeMonths,
+                    invoiceFrom: lastYear));
             }
         }
 
@@ -66,7 +56,6 @@ namespace Augustus.Web.Portal.Controllers
             using (var query = await GetAccountQuery())
             {
                 var id = query.CreateAccount(account);
-
                 return RedirectToAction("Invoices", new { id = id });
             }
         }
@@ -88,7 +77,6 @@ namespace Augustus.Web.Portal.Controllers
             {
                 account.Id = id;
                 query.UpdateAccount(account);
-
                 return RedirectToAction("Invoices", new { Id = id });
             }
         }
@@ -99,7 +87,6 @@ namespace Augustus.Web.Portal.Controllers
             using (var query = await GetAccountQuery())
             {
                 query.DeleteAccount(id);
-
                 return RedirectToAction("Index");
             }
         }
