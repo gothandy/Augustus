@@ -82,5 +82,15 @@ namespace Augustus.Web.Portal.Controllers
                 Organization = org
             };
         }
+
+        protected async static Task<InvoiceQuery> GetInvoiceQuery()
+        {
+            var org = await GetOrgQueryable();
+
+            return (InvoiceQuery)new InvoiceQuery()
+            {
+                Organization = org
+            };
+        }
     }
 }

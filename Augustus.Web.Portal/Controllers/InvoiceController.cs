@@ -19,21 +19,12 @@ namespace Augustus.Web.Portal.Controllers
         // GET: Invoice/Details/5
         public async Task<ActionResult> Details(Guid id)
         {
-            IEnumerable<WorkDoneItemEntity> items;
-
-            using (OrgQueryable org = await GetOrgQueryable())
+            using (var query = await GetInvoiceQuery())
             {
-                ViewBag.Invoice = (from a in org.Invoices
-                                   where a.Id == id
-                                   select a).Single();
+                ViewBag.Invoice = query.GetInvoice(id);
 
-                items = (from i in org.WorkDoneItems
-                         where i.InvoiceId == id
-                         orderby i.WorkDoneDate descending
-                         select i).AsEnumerable();
+                return View(query.GetWorkDoneItems(id));
             }
-
-            return View(items);
         }
 
         // GET: Invoice/Create

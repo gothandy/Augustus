@@ -25,6 +25,8 @@ namespace Augustus.Web.Portal.Controllers
         {
             using (var query = await GetOpportunityQuery())
             {
+                Response.AppendHeader("guid", id.ToString());
+
                 ViewBag.Account = query.GetAccount(id);
                 ViewBag.Opportunity = query.GetOpportunity(id);
 

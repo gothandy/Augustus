@@ -1,6 +1,6 @@
-﻿@model IEnumerable<WorkDoneItemEntity>
+﻿@model IEnumerable<WorkDoneItem>
 @{
-    var invoice = (InvoiceEntity)ViewBag.Invoice;
+    var invoice = (Invoice)ViewBag.Invoice;
     ViewBag.Title = invoice.Name;
 }
 <div class="btn-group">

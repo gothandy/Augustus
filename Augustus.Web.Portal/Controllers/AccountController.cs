@@ -23,17 +23,18 @@ namespace Augustus.Web.Portal.Controllers
         }
 
         //GET: /Account/Invoices/{id}
-        public async Task<ActionResult> Invoices(Guid? id)
+        public async Task<ActionResult> Invoices(Guid id)
         {
-            if (!id.HasValue) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-
             using (var query = await GetAccountQuery())
             {
+                
                 var pastYear = DateTime.Now.AddYears(-1);
 
-                ViewBag.Account = query.GetAccount(id.Value);
+                Response.AppendHeader("guid", id.ToString());
 
-                return View(query.GetInvoices(id.Value, from:pastYear));
+                ViewBag.Account = query.GetAccount(id);
+
+                return View(query.GetInvoices(id, from:pastYear));
             }
         }
 
