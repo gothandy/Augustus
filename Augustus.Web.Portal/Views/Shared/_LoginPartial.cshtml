@@ -3,7 +3,7 @@
     <text>
     <ul class="nav navbar-nav navbar-right">
         <li>
-            @Html.ActionLink("Sign out", "SignOut", "Account")
+            @Html.ActionLink("Sign out", "SignOut", "Authentication")
         </li>
     </ul>
     </text>
@@ -11,6 +11,6 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Sign in", "SignIn", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.ActionLink("Sign in", "SignIn", "Authentication", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }
