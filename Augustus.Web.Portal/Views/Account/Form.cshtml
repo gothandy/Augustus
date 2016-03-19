@@ -2,43 +2,50 @@
 
 <ol class="breadcrumb">
     <li><a href="@Url.Action("ActiveAccounts", "Organization")">True Clarity</a></li>
+    @if (Model != null)
+    {
+        <li><a href="@Url.Action("Invoices", new { Id = Model.Id })">@Model.Name</a></li>
+    }
 </ol>
 
-<div class="well-sm">
+
     @using (Html.BeginForm())
     {
         //@Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
-            @Html.ValidationSummary(true)
+        <div class="well">
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true)
 
-            <div class="form-group">
-                <div class="col-xs-2">
-                    @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+                <div class="form-group">
+                    <div class="col-xs-2">
+                        @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+                    </div>
+                    <div class="col-xs-6">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.ValidationMessageFor(model => model.Name, null, new { @class = "help-block text-danger" })
+                    </div>
                 </div>
-                <div class="col-xs-6">
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                </div>
-                <div class="col-xs-4">
-                    @Html.ValidationMessageFor(model => model.Name, null, new { @class = "help-block text-danger" })
-                </div>
-            </div>
-
-            <div class="button-group">
-                <input type="submit" value="@ViewBag.SubmitButton" class="btn btn-default" />
-                @if (Model != null)
-                {
-                    <a href="@Url.Action("Invoices", new { Id = Model.Id })" class="btn">Cancel Edit</a>
-                    <a href="@Url.Action("Delete", new { Id = Model.Id })" class="btn">Delete Account</a>
-                }
-                else
-                {
-                    <a href="@Url.Action("ActiveAccounts", "Organization")" class="btn">Cancel Create</a>
-                }
             </div>
         </div>
+
+        <div>
+            <input type="submit" value="Save" class="btn btn-primary" />
+
+            @if (Model != null)
+            {
+                <a href="@Url.Action("Invoices", new { Id = Model.Id })" class="btn btn-default">Cancel</a>
+                <a href="@Url.Action("Delete", new { Id = Model.Id })" class="btn btn-danger pull-right">Delete</a>
+            }
+            else
+            {
+                <a href="@Url.Action("ActiveAccounts", "Organization")" class="btn btn-default">Cancel</a>
+            }
+        </div>
+
     }
-</div>
 
 
 

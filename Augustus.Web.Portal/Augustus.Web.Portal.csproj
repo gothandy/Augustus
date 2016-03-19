@@ -248,8 +248,7 @@
     <Content Include="Views\Account\Form.cshtml" />
     <Content Include="Views\Account\Opportunities.cshtml" />
     <Content Include="Views\Opportunity\Invoices.cshtml" />
-    <Content Include="Views\Opportunity\Create.cshtml" />
-    <Content Include="Views\Opportunity\Edit.cshtml" />
+    <Content Include="Views\Opportunity\Form.cshtml" />
     <Content Include="Views\Organization\NewAccounts.cshtml" />
   </ItemGroup>
   <ItemGroup>

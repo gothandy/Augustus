@@ -14,6 +14,7 @@ namespace Augustus.CRM.Queries
         {
             return (from a in Organization.Accounts
                     where a.Created > createdAfter
+                    orderby a.Name ascending
                     select AccountEntity.ToDomainObject(a)).AsEnumerable();
         }
 

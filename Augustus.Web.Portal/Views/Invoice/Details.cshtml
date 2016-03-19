@@ -43,7 +43,7 @@
             </tr>
             <tr>
                 <td><strong>Invoice Date</strong></td>
-                <td>@DateTimeHelper.Format(invoice.InvoiceDate)</td>
+                <td class="number">@DateTimeHelper.Format(invoice.InvoiceDate)</td>
             </tr>
         </table>
     </div>
@@ -51,11 +51,11 @@
         <table class="table">
             <tr>
                 <td><strong>PO No.</strong></td>
-                <td>@invoice.PONumber</td>
+                <td class="number">@invoice.PONumber</td>
             </tr>
             <tr>
                 <td><strong>Inv. No.</strong></td>
-                <td>@invoice.InvoiceNo</td>
+                <td class="number">@invoice.InvoiceNo</td>
             </tr>
         </table>
     </div>
@@ -86,6 +86,6 @@
     </table>
 </div>
 
-<div class="btn-group">
-    <a class="btn" target="_blank" href="https://trueclarity4.crm4.dynamics.com/main.aspx?etc=10010&id={@invoice.Id}&pagetype=entityrecord">Open in CRM</a>
+<div>
+    <a class="btn btn-default" target="_blank" href="https://trueclarity4.crm4.dynamics.com/main.aspx?etc=10010&id={@invoice.Id}&pagetype=entityrecord">Open in CRM</a>
 </div>

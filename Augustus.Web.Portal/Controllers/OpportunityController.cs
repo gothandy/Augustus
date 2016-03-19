@@ -1,13 +1,6 @@
-﻿using Augustus.CRM;
-using Augustus.CRM.Entities;
-using Augustus.CRM.Queries;
-using Augustus.Domain.Objects;
+﻿using Augustus.Domain.Objects;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Augustus.Web.Portal.Controllers
@@ -37,14 +30,20 @@ namespace Augustus.Web.Portal.Controllers
         // GET: Opportunity/Create/{id}
         public async Task<ActionResult> Create(Guid id)
         {
+            using (var query = await GetAccountQuery())
+            {
+                ViewBag.Account = query.GetAccount(id);
+            }
+
             using (var query = await GetOrganizationQuery())
             {
-                ViewBag.AccountId = id;
-                ViewBag.Accounts = query.GetNewAndActiveAccounts(
-                    createdAfter: DateTime.Now.AddMonths(-3),
-                    invoicesFrom: DateTime.Now.AddYears(-1));
+                ViewBag.Title = "Create Opportunity";
 
-                return View();
+                ViewBag.Accounts = query.GetNewAndActiveAccounts(
+                    createdAfter: lastThreeMonths,
+                    invoicesFrom: lastYear);
+
+                return View("Form");
             }
         }
 
@@ -65,6 +64,8 @@ namespace Augustus.Web.Portal.Controllers
         {
             using (var query = await GetOrganizationQuery())
             {
+                ViewBag.Title = "Edit Opportunity";
+
                 ViewBag.Accounts = query.GetNewAndActiveAccounts(
                     createdAfter: DateTime.Now.AddMonths(-3),
                     invoicesFrom: DateTime.Now.AddYears(-1));
@@ -72,8 +73,8 @@ namespace Augustus.Web.Portal.Controllers
 
             using (var query = await GetOpportunityQuery())
             {
-                ViewBag.AccountId = query.GetAccount(id).Id;
-                return View(query.GetOpportunity(id));
+                ViewBag.Account = query.GetAccount(id);
+                return View("Form", query.GetOpportunity(id));
             }
         }
 
