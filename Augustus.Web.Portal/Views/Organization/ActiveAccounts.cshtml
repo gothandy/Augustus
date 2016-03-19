@@ -1,9 +1,8 @@
 ﻿@model IEnumerable<Account>
 
 <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="@Url.Action("ActiveAccounts")">Active Accounts</a></li>
-    <li role="presentation"><a href="@Url.Action("NewAccounts")">New Accounts</a></li>
-    <li role="presentation"><a href="@Url.Action("Create", "Account")">Create Account</a></li>
+    <li role="presentation" class="active"><a href="@Url.Action("ActiveAccounts")"><span class="visible-xs">Active</span><span class="hidden-xs">Active Accounts</span></a></li>
+    <li role="presentation"><a href="@Url.Action("NewAccounts")"><span class="visible-xs">New</span><span class="hidden-xs">New Accounts</span></a></li>
 </ul>
 
 <div class="well-sm">
@@ -13,6 +12,10 @@
             <a href="@Url.Action("Invoices", "Account", new { id = a.Id })" class="list-group-item">@a.Name</a>
         }
     </div>
+</div>
+
+<div class="btn-group">
+    <a class="btn" href="@Url.Action("Create", "Account")">Create Account</a>
 </div>
 
 

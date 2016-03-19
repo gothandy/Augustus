@@ -4,17 +4,6 @@
     <li><a href="@Url.Action("ActiveAccounts", "Organization")">True Clarity</a></li>
 </ol>
 
-@if (Model != null)
-{
-<div class="row">
-    <ul class="nav nav-tabs">
-        <li role="presentation"><a href="@Url.Action("Invoices", new { id = Model.Id })">Invoices</a></li>
-        <li role="presentation"><a href="@Url.Action("Opportunities", new { id = Model.Id })">Opportunities</a></li>
-        <li role="presentation" class="active"><a class="btn" href="@Url.Action("Edit", new { id = Model.Id })">Edit Account</a></li>
-    </ul>
-</div>
-}
-
 <div class="well-sm">
     @using (Html.BeginForm())
     {
@@ -37,10 +26,14 @@
 
             <div class="button-group">
                 <input type="submit" value="@ViewBag.SubmitButton" class="btn btn-default" />
-                <a href="@Url.Action("Index")" class="btn">Cancel</a>
                 @if (Model != null)
                 {
+                    <a href="@Url.Action("Invoices", new { Id = Model.Id })" class="btn">Cancel Edit</a>
                     <a href="@Url.Action("Delete", new { Id = Model.Id })" class="btn">Delete Account</a>
+                }
+                else
+                {
+                    <a href="@Url.Action("ActiveAccounts", "Organization")" class="btn">Cancel Create</a>
                 }
             </div>
         </div>

@@ -11,7 +11,7 @@
 <ul class="nav nav-tabs">
     <li role="presentation"><a href="@Url.Action("Invoices", new { id = account.Id })">Invoices</a></li>
     <li role="presentation" class="active"><a href="@Url.Action("Opportunities", new { id = account.Id })">Opportunities</a></li>
-    <li role="presentation"><a class="btn" href="@Url.Action("Edit", new { id = account.Id })">Edit Account</a></li>
+    <li role="presentation"><a class="btn" href="@Url.Action("Edit", new { id = account.Id })"><span class="visible-xs">Edit</span><span class="hidden-xs">Edit Account</span></a></li>
 </ul>
 
 @if (Model.Count() == 0)
@@ -20,27 +20,28 @@
 }
 else
 {
-    <div class="table-responsive">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var i in Model)
-                {
+    <div class="well-sm">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
                     <tr>
-                        <td>@Html.ActionLink(i.Name, "Invoices", "Opportunity", new { id = i.Id }, null)</td>
+                        <th>Name</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var i in Model)
+                {
+                        <tr>
+                            <td>@Html.ActionLink(i.Name, "Invoices", "Opportunity", new { id = i.Id }, null)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
-}
+    }
 
-<div class="btn-group">
-    <a class="btn" href="@Url.Action("Create", "Opportunity", new { id = account.Id })">Create Opportunity</a>
-    <a class="btn" href="@Url.Action("Edit", new { id = account.Id })">Edit Account</a>
-    <a class="btn" href="@Url.Action("Delete", new { id = account.Id })">Delete Account</a>
-</div>
+    <div class="btn-group">
+        <a class="btn" href="@Url.Action("Create", "Opportunity", new { id = account.Id })">Create Opportunity</a>
+        <a class="btn" href="@Url.Action("Edit", "Account", new { id = account.Id })">Edit Account</a>
+    </div>
