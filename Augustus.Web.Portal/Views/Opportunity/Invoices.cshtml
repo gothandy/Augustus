@@ -6,7 +6,7 @@
     ViewBag.Title = opportunity.Name;
 }
 <ol class="breadcrumb">
-    <li>@Html.ActionLink("Accounts","Index","Account")</li>
+    <li><a href="@Url.Action("ActiveAccounts", "Organization")">True Clarity</a></li>
     <li>@Html.ActionLink(account.Name, "Invoices", "Account", new { id = account.Id }, null)</li>
 </ol>
 

@@ -8,18 +8,6 @@ namespace Augustus.Web.Portal.Controllers
     public class AccountController : CrmBaseController
     {
 
-        // GET: /Account
-        public async Task<ActionResult> Index()
-        {
-            using (var query = await GetOrganizationQuery())
-            {
-                ViewBag.NewDate = lastThreeMonths;
-                return View(query.GetNewAndActiveAccounts(
-                    createdAfter:lastThreeMonths,
-                    invoicesFrom:lastYear));
-            }
-        }
-
         //GET: /Account/Invoices/{id}
         public async Task<ActionResult> Invoices(Guid id)
         {
@@ -91,7 +79,7 @@ namespace Augustus.Web.Portal.Controllers
             using (var query = await GetAccountQuery())
             {
                 query.DeleteAccount(id);
-                return RedirectToAction("Index");
+                return RedirectToAction("ActiveAccounts", "Organization");
             }
         }
     }

@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Account>
+
+<ul class="nav nav-tabs" role="tablist">
+    <li role="presentation"><a href="@Url.Action("ActiveAccounts")">Active Accounts</a></li>
+    <li role="presentation" class="active"><a href="@Url.Action("NewAccounts")">New Accounts</a></li>
+    <li role="presentation"><a href="@Url.Action("Create", "Account")">Create Account</a></li>
+</ul>
+
+<div class="well-sm">
+    <div class="list-group">
+        @foreach (var a in Model)
+            {
+            <a href="@Url.Action("Invoices", "Account", new { id = a.Id })" class="list-group-item">@a.Name</a>
+        }
+    </div>
+</div>
+
+
+
+
+
+

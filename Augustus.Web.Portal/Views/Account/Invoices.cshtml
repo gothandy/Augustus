@@ -5,7 +5,7 @@
 }
 
 <ol class="breadcrumb">
-    <li><a href="@Url.Action("Index")">Accounts</a></li>
+    <li><a href="@Url.Action("ActiveAccounts", "Organization")">True Clarity</a></li>
 </ol>
 
 <ul class="nav nav-tabs">
@@ -20,31 +20,33 @@
 }
 else
 {
-    <div class="table-responsive">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Name</th>
-                    <th class="currency">Margin</th>
-                    <th class="currency">Revenue</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var i in Model)
-                {
+    <div class="well-sm">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
                     <tr>
-                        <td>@DateTimeHelper.Format(i.InvoiceDate)</td>
-                        <td>@Html.ActionLink(i.Name, "Details", "Invoice", new { id = i.Id }, null)</td>
-                        <td class="currency">@CurrencyHelper.Format(i.Margin)</td>
-                        <td class="currency">@CurrencyHelper.Format(i.Revenue)</td>
+                        <th>Date</th>
+                        <th>Name</th>
+                        <th class="currency">Margin</th>
+                        <th class="currency">Revenue</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var i in Model)
+                {
+                        <tr>
+                            <td>@DateTimeHelper.Format(i.InvoiceDate)</td>
+                            <td>@Html.ActionLink(i.Name, "Details", "Invoice", new { id = i.Id }, null)</td>
+                            <td class="currency">@CurrencyHelper.Format(i.Margin)</td>
+                            <td class="currency">@CurrencyHelper.Format(i.Revenue)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
-}
+    }
 
-<div class="btn-group">
-    <a class="btn" href="@Url.Action("Create", "Invoice", new { id = account.Id })">Create Invoice</a>
-</div>
+    <div class="btn-group">
+        <a class="btn" href="@Url.Action("Create", "Invoice", new { id = account.Id })">Create Invoice</a>
+    </div>

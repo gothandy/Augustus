@@ -195,7 +195,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CrmAuthorizeAttribute.cs" />
     <Compile Include="Controllers\CrmBaseController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrganizationController.cs" />
     <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Controllers\OpportunityController.cs" />
     <Compile Include="Global.asax.cs">
@@ -241,8 +241,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Account\Index.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Organization\ActiveAccounts.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Authentication\SignOutCallback.cshtml" />
     <Content Include="Views\Invoice\Details.cshtml" />
@@ -251,6 +250,7 @@
     <Content Include="Views\Opportunity\Invoices.cshtml" />
     <Content Include="Views\Opportunity\Create.cshtml" />
     <Content Include="Views\Opportunity\Edit.cshtml" />
+    <Content Include="Views\Organization\NewAccounts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
