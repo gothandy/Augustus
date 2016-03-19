@@ -1,5 +1,20 @@
 ﻿@model Account
 
+<ol class="breadcrumb">
+    <li><a href="@Url.Action("Index")">Accounts</a></li>
+</ol>
+
+@if (Model != null)
+{
+<div class="row">
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a href="@Url.Action("Invoices", new { id = Model.Id })">Invoices</a></li>
+        <li role="presentation"><a href="@Url.Action("Opportunities", new { id = Model.Id })">Opportunities</a></li>
+        <li role="presentation" class="active"><a class="btn" href="@Url.Action("Edit", new { id = Model.Id })">Edit Account</a></li>
+    </ul>
+</div>
+}
+
 @using (Html.BeginForm())
 {
     //@Html.AntiForgeryToken()
@@ -9,7 +24,7 @@
 
         <div class="form-group">
             <div class="col-xs-2">
-                @Html.LabelFor(a => a.Name, new { @class = "control-label" })
+                @Html.LabelFor(model => model.Name, new { @class = "control-label" })
             </div>
             <div class="col-xs-6">
                 @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
@@ -22,6 +37,10 @@
         <div class="button-group">
                 <input type="submit" value="@ViewBag.SubmitButton" class="btn btn-default" />
             <a href="@Url.Action("Index")" class="btn">Cancel</a>
+            @if (Model != null)
+            {
+            <a href="@Url.Action("Delete", new { Id = Model.Id })" class="btn">Delete Account</a>
+            }
         </div>
     </div>
 }
