@@ -12,78 +12,96 @@
     <li>@Html.ActionLink(opportunity.Name, "Invoices", "Opportunity", new { id = opportunity.Id }, null)</li>
 </ol>
 
-<h2>Summary</h2>
-
 <div class="row">
     <div class="col-md-4">
-        <table class="table">
-            <tr>
-                <td><strong>Margin</strong></td>
-                <td class="currency">@CurrencyHelper.Format(invoice.Margin)</td>
-            </tr>
-            <tr>
-                <td><strong>Cost</strong></td>
-                <td class="currency">@CurrencyHelper.Format(invoice.Cost)</td>
-            </tr>
-            <tr>
-                <td><strong>Revenue</strong></td>
-                <td class="currency">@CurrencyHelper.Format(invoice.Revenue)</td>
-            </tr>
-        </table>
+        <div class="list-group">
+            <div class="list-group-item">
+                <div class="row">
+                    <div class="col-xs-6"><strong>Margin</strong></div>
+                    <div class="col-xs-6 text-right">@CurrencyHelper.Format(invoice.Margin)</div>
+                </div>
+            </div>
+            <div class="list-group-item">
+                <div class="row">
+                    <div class="col-xs-6"><strong>Cost</strong></div>
+                    <div class="col-xs-6 text-right">@CurrencyHelper.Format(invoice.Cost)</div>
+                </div>
+            </div>
+            <div class="list-group-item">
+                <div class="row">
+                    <div class="col-xs-6"><strong>Revenue</strong></div>
+                    <div class="col-xs-6 text-right">@CurrencyHelper.Format(invoice.Revenue)</div>
+                </div>
+            </div>
+        </div>
     </div>
+
     <div class="col-md-4">
-        <table class="table">
-            <tr>
-                <td><strong>Proposal Date</strong></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td><strong>SDN Date</strong></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td><strong>Invoice Date</strong></td>
-                <td class="number">@DateTimeHelper.Format(invoice.InvoiceDate)</td>
-            </tr>
-        </table>
+        <div class="list-group">
+            <div class="list-group-item">
+                <div class="row">
+                    <div class="col-xs-6"><strong>Proposal Date</strong></div>
+                    <div class="col-xs-6 text-right"></div>
+                </div>
+            </div>
+            <div class="list-group-item">
+                <div class="row">
+                    <div class="col-xs-6"><strong>SDN Date</strong></div>
+                    <div class="col-xs-6 text-right"></div>
+                </div>
+            </div>
+            <div class="list-group-item">
+                <div class="row">
+                    <div class="col-xs-6"><strong>Invoice Date</strong></div>
+                    <div class="col-xs-6 text-right">@DateTimeHelper.Format(invoice.InvoiceDate)</div>
+                </div>
+            </div>
+        </div>
     </div>
+
     <div class="col-md-4">
-        <table class="table">
-            <tr>
-                <td><strong>PO No.</strong></td>
-                <td class="number">@invoice.PONumber</td>
-            </tr>
-            <tr>
-                <td><strong>Inv. No.</strong></td>
-                <td class="number">@invoice.InvoiceNo</td>
-            </tr>
-        </table>
+        <div class="list-group">
+            <div class="list-group-item">
+                <div class="row">
+                    <div class="col-xs-6"><strong>PO No.</strong></div>
+                    <div class="col-xs-6 text-right">@invoice.PONumber</div>
+                </div>
+            </div>
+            <div class="list-group-item">
+                <div class="row">
+                    <div class="col-xs-6"><strong>Invoice No.</strong></div>
+                    <div class="col-xs-6 text-right">@invoice.InvoiceNo</div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<h2>Work Done</h2>
-<div class="table-responsive">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th class="currency">Margin</th>
-            </tr>
-        </thead>
-        @foreach (var i in Model)
-        {
-            <tr>
-                <td>@DateTimeHelper.Format(i.WorkDoneDate)</td>
-                <td class="currency">@CurrencyHelper.Format(i.Margin)</td>
-            </tr>
-        }
-        <tfoot>
-            <tr>
-                <td>Total</td>
-                <td class="currency">@CurrencyHelper.Format(Model.Sum(i => i.Margin))</td>
-            </tr>
-        </tfoot>
-    </table>
+<div class="panel panel-default">
+    <div class="panel-heading">Work Done</div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th class="currency">Margin</th>
+                </tr>
+            </thead>
+            @foreach (var i in Model)
+            {
+                <tr>
+                    <td>@DateTimeHelper.Format(i.WorkDoneDate)</td>
+                    <td class="currency">@CurrencyHelper.Format(i.Margin)</td>
+                </tr>
+            }
+            <tfoot>
+                <tr>
+                    <td>Total</td>
+                    <td class="currency">@CurrencyHelper.Format(Model.Sum(i => i.Margin))</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
 </div>
 
 <div>
