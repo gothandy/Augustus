@@ -102,6 +102,7 @@ namespace Augustus.CRM.Test
             var inv = query.GetInvoice(id);
             Assert.AreEqual(10000, inv.Margin);
             Assert.AreEqual(opportunity.Id, inv.OpportunityId);
+            Assert.AreEqual(new DateTime(2016, 3, 1), inv.InvoiceDate);
             
 
             // Update Invoice

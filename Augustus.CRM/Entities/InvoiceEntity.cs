@@ -47,6 +47,8 @@ namespace Augustus.CRM.Entities
             i.Cost = invoice.Cost;
             i.Revenue = invoice.Revenue;
             i.Margin = invoice.Margin;
+            i.InvoiceDate = invoice.InvoiceDate;
+            i.ClientApprovedDate = invoice.ClientApprovedDate;
         }
 
         public Invoice ToDomainObject()
