@@ -49,7 +49,7 @@ namespace Augustus.Web.Portal.Controllers
             if (capturedException != null)
             {
 
-                //throw new Exception("Caught it. Now what?", capturedException.SourceException);
+                throw new Exception("Caught it. Now what?", capturedException.SourceException);
             }
 
             return result;    
