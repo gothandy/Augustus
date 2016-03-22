@@ -47,7 +47,6 @@ namespace Augustus.CRM.Entities
                 Cost = i.Cost,
                 Created = i.Created,
                 InvoiceDate = i.InvoiceDate,
-                InvoiceId = i.InvoiceId,
                 InvoiceNo = i.InvoiceNo,
                 Margin = i.Margin,
                 OpportunityId = i.OpportunityId,

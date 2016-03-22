@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Augustus.Domain.Objects
 {
@@ -8,6 +9,7 @@ namespace Augustus.Domain.Objects
         public DateTime? Created { get; set; }
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public IEnumerable<Invoice> Invoices { get; set; }
 
         public override bool Equals(object obj)
         {
