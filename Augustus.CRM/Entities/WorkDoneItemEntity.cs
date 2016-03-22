@@ -149,5 +149,8 @@ namespace Augustus.CRM.Entities
                 }
             }
         }
+
+        public Guid? AccountId { get; internal set; }
+        public Guid? OpportunityId { get; internal set; }
     }
 }

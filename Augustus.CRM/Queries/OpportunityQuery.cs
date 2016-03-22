@@ -19,8 +19,7 @@ namespace Augustus.CRM.Queries
 
         public Account GetAccount(Guid opportunityId)
         {
-            var opp = Organization.Opportunities.Single(o => o.Id == opportunityId);
-
+            var opp = GetOpportunity(opportunityId);
             var acc = Organization.Accounts.Single(a => a.Id == opp.AccountId);
 
             return AccountEntity.ToDomainObject(acc);

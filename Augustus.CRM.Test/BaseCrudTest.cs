@@ -12,6 +12,8 @@ namespace Augustus.CRM.Test
         protected const string accountRename = "CRM Account Name 2";
         protected const string opportunityName = "CRM Opportunity Name";
         protected const string opportunityRename = "CRM Opportunity Name 2";
+        protected const string invoiceName = "CRM Invoice Name";
+        protected const string invoiceRename = "CRM Invoice Name 2";
 
         protected static OrgQueryable org;
 

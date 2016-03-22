@@ -41,7 +41,7 @@ namespace Augustus.CRM
 
         protected decimal? GetAttributeValueMoney(string attributeLogicalName)
         {
-            Money money = GetAttributeValue<Money>(attributeLogicalName);
+            var money = GetAttributeValue<Money>(attributeLogicalName);
 
             if (money == null)
             {
@@ -50,6 +50,19 @@ namespace Augustus.CRM
             else
             {
                 return money.Value;
+            }
+        }
+
+        protected void SetAttributeValueMoney(string attributeLogicalName, decimal? value)
+        {
+            if (value.HasValue)
+            {
+                var money = new Money(value.Value);
+                SetAttributeValue(attributeLogicalName, money);
+            }
+            else
+            {
+                SetAttributeValue(attributeLogicalName, null);
             }
         }
 

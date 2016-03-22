@@ -70,29 +70,53 @@ namespace Augustus.CRM.Test
         }
 
 
-        /*
         [TestMethod]
         public void CRM_Query_Invoice_CrUD()
         {
             // Create Account
             createAccount(accountName);
-            var accountId = getAccount(accountName).Id;
-            
+            var account = getAccount(accountName);
+
+            createOpportunity(opportunityName, account);
+            var opportunity = getOpportunity(opportunityName);
+
             // Create Invoice
-            Invoice Invoice = new Invoice { Name = InvoiceName, AccountId = accountId };
-            var id = query.CreateInvoice(Invoice);
+            Invoice invoice = new Invoice
+            {
+                Name = invoiceName,
+                OpportunityId = opportunity.Id,
+                
+                Cost = 5000,
+                Revenue = 15000,
+                
+                ClientApprovedDate = new DateTime(2016, 1, 1),
+                InvoiceDate = new DateTime(2016, 3, 1),
+
+                InvoiceNo = "Inv No.",
+                PONumber = "PO No."
+            };
+
+            var id = query.CreateInvoice(invoice);
+
+            // Assert values
+            var inv = query.GetInvoice(id);
+            Assert.AreEqual(10000, inv.Margin);
+            Assert.AreEqual(opportunity.Id, inv.OpportunityId);
+            
 
             // Update Invoice
-            Invoice.Id = id;
-            Invoice.Name = InvoiceRename;
-            query.UpdateInvoice(Invoice);
+            invoice.Id = id;
+            invoice.Name = invoiceRename;
+            query.UpdateInvoice(invoice);
 
             // Delete Invoice
             query.DeleteInvoice(id);
 
+            // Delete Opportunity
+            deleteOpportunity(opportunityName);
+
             // Delete Account
             deleteAccount(accountName);
         }
-        */
     }
 }

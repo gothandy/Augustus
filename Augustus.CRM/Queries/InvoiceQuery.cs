@@ -14,15 +14,7 @@ namespace Augustus.CRM.Queries
     {
         public Invoice GetInvoice(Guid id)
         {
-            return InvoiceEntity.ToDomainObject(Organization.Invoices.Single(i => i.Id == id));
-        }
-
-        public Account GetAccount(Guid invoiceId)
-        {
-            var inv = GetInvoice(invoiceId);
-            var acc = Organization.Accounts.Single(a => a.Id == inv.AccountId);
-
-            return AccountEntity.ToDomainObject(acc);
+            return Organization.Invoices.Single(i => i.Id == id).ToDomainObject();
         }
 
         public Opportunity GetOpportunity(Guid invoiceId)
@@ -33,6 +25,14 @@ namespace Augustus.CRM.Queries
             return OpportunityEntity.ToDomainObject(opp);
         }
 
+        public Account GetAccount(Guid invoiceId)
+        {
+            var opp = GetOpportunity(invoiceId);
+            var acc = Organization.Accounts.Single(a => a.Id == opp.AccountId);
+
+            return AccountEntity.ToDomainObject(acc);
+        }
+
         public IEnumerable<WorkDoneItem> GetWorkDoneItems(Guid id)
         {
             return (from i in Organization.WorkDoneItems
@@ -41,13 +41,11 @@ namespace Augustus.CRM.Queries
                     select WorkDoneItemEntity.ToDomainObject(i)).AsEnumerable();
         }
 
-        public Guid CreateInvoice(Invoice Invoice)
+        public Guid CreateInvoice(Invoice invoice)
         {
-            var entity = new InvoiceEntity
-            {
-                Name = Invoice.Name,
-                AccountId = Invoice.AccountId
-            };
+            var entity = new InvoiceEntity();
+
+            entity.SetUsingDomain(invoice);
 
             Organization.Create(entity);
             Organization.SaveChanges();
@@ -55,24 +53,24 @@ namespace Augustus.CRM.Queries
             return entity.Id;
         }
 
-        public void DeleteInvoice(Guid InvoiceId)
+        public void DeleteInvoice(Guid invoiceId)
         {
-            var entity = Organization.Opportunities.Single(o => o.Id == InvoiceId);
+            var entity = Organization.Invoices.Single(o => o.Id == invoiceId);
 
             Organization.Delete(entity);
             Organization.SaveChanges();
         }
 
-
-
-        public void UpdateInvoice(Invoice Invoice)
+        public void UpdateInvoice(Invoice invoice)
         {
-            var entity = Organization.Opportunities.Single(o => o.Id == Invoice.Id);
+            var entity = Organization.Invoices.Single(o => o.Id == invoice.Id);
 
-            entity.Name = Invoice.Name;
+            entity.SetUsingDomain(invoice);
 
             Organization.Update(entity);
             Organization.SaveChanges();
         }
+
+
     }
 }

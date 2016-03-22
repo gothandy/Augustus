@@ -36,22 +36,40 @@ namespace Augustus.CRM.Entities
             }
         }
 
-        public static Invoice ToDomainObject(InvoiceEntity i)
+        public void SetUsingDomain(Invoice invoice)
+        {
+            var i = this;
+
+            i.Name = invoice.Name;
+            i.OpportunityId = invoice.OpportunityId;
+            i.InvoiceNo = invoice.InvoiceNo;
+            i.PONumber = invoice.PONumber;
+            i.Cost = invoice.Cost;
+            i.Revenue = invoice.Revenue;
+            i.Margin = invoice.Margin;
+        }
+
+        public Invoice ToDomainObject()
+        {
+            return InvoiceEntity.ToDomainObject(this);
+        }
+
+        public static Invoice ToDomainObject(InvoiceEntity entity)
         {
             return new Invoice()
             {
-                Id = i.Id,
-                Name = i.Name,
-                AccountId = i.AccountId,
-                ClientApprovedDate = i.ClientApprovedDate,
-                Cost = i.Cost,
-                Created = i.Created,
-                InvoiceDate = i.InvoiceDate,
-                InvoiceNo = i.InvoiceNo,
-                Margin = i.Margin,
-                OpportunityId = i.OpportunityId,
-                PONumber = i.PONumber,
-                Revenue = i.Revenue
+                Id = entity.Id,
+                Name = entity.Name,
+                // Account from opportunity
+                OpportunityId = entity.OpportunityId,
+                ClientApprovedDate = entity.ClientApprovedDate,
+                Created = entity.Created,
+                InvoiceDate = entity.InvoiceDate,
+                InvoiceNo = entity.InvoiceNo,
+                PONumber = entity.PONumber,
+                Revenue = entity.Revenue,
+                Cost = entity.Cost
+                //Margin is calculated
             };
         }
 
@@ -88,13 +106,14 @@ namespace Augustus.CRM.Entities
             {
                 return GetAttributeValueMoney("new_cost");
             }
-            /*set
+            set
             {
-                SetAttributeValue("new_cost", value);
-            }*/
+                SetAttributeValueMoney("new_cost", value);
+            }
         }
 
-        [AttributeLogicalName("new_directclient")]
+        private const string AccountIdLogicalName = "new_directclient";
+        [AttributeLogicalName(AccountIdLogicalName)]
         public Guid? AccountId
         {
             get
@@ -103,14 +122,7 @@ namespace Augustus.CRM.Entities
             }
             set
             {
-                if (value.HasValue)
-                {
-                    SetAttributeValue("new_directclient",
-                        new EntityReference(
-                            AccountEntity.EntityLogicalName,
-                            value.Value));
-                }
-                
+                SetAttributeEntityReferenceId(AccountIdLogicalName, AccountEntity.EntityLogicalName, value);
             }
         }
 
@@ -147,10 +159,10 @@ namespace Augustus.CRM.Entities
             {
                 return GetAttributeValueMoney("new_margin");
             }
-            /*set
+            set
             {
-                this.SetAttributeValue("new_margin", value);
-            }*/
+                SetAttributeValueMoney("new_margin", value);
+            }
         }
 
         [AttributeLogicalName("new_name")]
@@ -200,10 +212,10 @@ namespace Augustus.CRM.Entities
             {
                 return GetAttributeValueMoney("new_revenue");
             }
-            /*set
+            set
             {
-                this.SetAttributeValue("new_revenue", value);
-            }*/
+                SetAttributeValueMoney("new_revenue", value);
+            }
         }
 
         [AttributeLogicalName("new_wip_current")]
