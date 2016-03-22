@@ -2,6 +2,9 @@
 using Augustus.CRM.Queries;
 using Augustus.Domain.Interfaces;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
+using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.OpenIdConnect;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -9,6 +12,7 @@ using System.Linq;
 using System.Runtime.ExceptionServices;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Augustus.Web.Portal.Controllers
@@ -23,7 +27,7 @@ namespace Augustus.Web.Portal.Controllers
         protected DateTime lastMonth = DateTime.Now.AddMonths(-1);
         protected DateTime lastThreeMonths = DateTime.Now.AddMonths(-3);
 
-        private async static Task<AuthenticationResult> WaitForAuthenticationResult()
+        private async Task<AuthenticationResult> WaitForAuthenticationResult()
         {
             string clientId = ConfigurationManager.AppSettings["ida:ClientId"];
             string clientSecret = ConfigurationManager.AppSettings["ida:ClientSecret"];
@@ -52,17 +56,22 @@ namespace Augustus.Web.Portal.Controllers
 
             if (capturedException != null)
             {
-                var tokens = authContext.TokenCache.ReadItems().ToList();
+                // Problem with tokens so sign out.
+                string callbackUrl = Url.Action("SignOutCallback", "Authentication", routeValues: null, protocol: Request.Url.Scheme);
 
-                var message = string.Format("{0} Tokens.", tokens.Count());
-
-                throw new Exception(message, capturedException.SourceException);
+                HttpContext.GetOwinContext().Authentication.SignOut(
+                    new AuthenticationProperties { RedirectUri = callbackUrl },
+                    OpenIdConnectAuthenticationDefaults.AuthenticationType,
+                    CookieAuthenticationDefaults.AuthenticationType);
+                return null;
             }
-
-            return result;    
+            else
+            {
+                return result;
+            }
         }
 
-        protected async static Task<OrgQueryable> GetOrgQueryable()
+        protected async Task<OrgQueryable> GetOrgQueryable()
         {
             string useAzureAuth = ConfigurationManager.AppSettings["crm:UseAzureAuth"];
 
@@ -82,7 +91,7 @@ namespace Augustus.Web.Portal.Controllers
             }
         }
 
-        protected async static Task<IOrganizationQuery> GetOrganizationQuery()
+        protected async Task<IOrganizationQuery> GetOrganizationQuery()
         {
             var org = await GetOrgQueryable();
 
@@ -92,7 +101,7 @@ namespace Augustus.Web.Portal.Controllers
             };
         }
 
-        protected async static Task<IAccountQuery> GetAccountQuery()
+        protected async Task<IAccountQuery> GetAccountQuery()
         {
             var org = await GetOrgQueryable();
 
@@ -102,7 +111,7 @@ namespace Augustus.Web.Portal.Controllers
             };
         }
 
-        protected async static Task<IOpportunityQuery> GetOpportunityQuery()
+        protected async Task<IOpportunityQuery> GetOpportunityQuery()
         {
             var org = await GetOrgQueryable();
 
@@ -112,7 +121,7 @@ namespace Augustus.Web.Portal.Controllers
             };
         }
 
-        protected async static Task<InvoiceQuery> GetInvoiceQuery()
+        protected async Task<InvoiceQuery> GetInvoiceQuery()
         {
             var org = await GetOrgQueryable();
 
