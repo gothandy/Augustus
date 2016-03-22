@@ -4,6 +4,7 @@ using Augustus.Domain.Interfaces;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using System;
 using System.Configuration;
+using System.Runtime.ExceptionServices;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -34,7 +35,23 @@ namespace Augustus.Web.Portal.Controllers
             var credential = new ClientCredential(clientId, clientSecret);
             var userIdentifier = new UserIdentifier(userObjectID, UserIdentifierType.UniqueId);
 
-            return await authContext.AcquireTokenSilentAsync(resource, credential, userIdentifier);
+            ExceptionDispatchInfo capturedException = null;
+            AuthenticationResult result = null;
+            try
+            {
+                result = await authContext.AcquireTokenSilentAsync(resource, credential, userIdentifier);
+            }
+            catch (AdalSilentTokenAcquisitionException ex)
+            {
+                capturedException = ExceptionDispatchInfo.Capture(ex);
+            }
+
+            if (capturedException != null)
+            {
+                throw new Exception("Caught it. Now what?", capturedException.SourceException);
+            }
+
+            return result;    
         }
 
         protected async static Task<OrgQueryable> GetOrgQueryable()
