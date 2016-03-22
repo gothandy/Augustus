@@ -3,7 +3,9 @@ using Augustus.CRM.Queries;
 using Augustus.Domain.Interfaces;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
 using System.Runtime.ExceptionServices;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -37,6 +39,8 @@ namespace Augustus.Web.Portal.Controllers
 
             ExceptionDispatchInfo capturedException = null;
             AuthenticationResult result = null;
+
+            
             try
             {
                 result = await authContext.AcquireTokenSilentAsync(resource, credential, userIdentifier);
@@ -48,8 +52,11 @@ namespace Augustus.Web.Portal.Controllers
 
             if (capturedException != null)
             {
+                var tokens = authContext.TokenCache.ReadItems().ToList();
 
-                throw new Exception("Caught it. Now what?", capturedException.SourceException);
+                var message = string.Format("{0} Tokens.", tokens.Count());
+
+                throw new Exception(message, capturedException.SourceException);
             }
 
             return result;    
