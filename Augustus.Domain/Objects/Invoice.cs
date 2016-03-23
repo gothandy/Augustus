@@ -1,27 +1,10 @@
-﻿using System;
+﻿using Augustus.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Augustus.Domain.Objects
 {
-    public enum InvoiceStatus : int
-    {
-        New,
-        Proposed,
-        Approved,
-        [Display(Name = "In Progress")]
-        InProgress,
-        Accepted,
-        [Display(Name = "SDN Sent")]
-        SDNSent,
-        [Display(Name = "SDN Approved")]
-        SDNApproved,
-        [Display(Name = "Invoice Sent")]
-        InvoiceSent,
-        [Display(Name = "Invoice Paid")]
-        InvoicePaid
-    }
-
     public class Invoice
     {
         public Guid? Id { get; set; }
@@ -38,7 +21,9 @@ namespace Augustus.Domain.Objects
         public Account Account { get; set; }
         public Opportunity Opportunity { get; set; }
         public IEnumerable<WorkDoneItem> WorkDoneItems { get; set; }
-        public InvoiceStatus? Status { get; set; }
+
+        [EnumDataType(typeof(InvoiceStatus))]
+        public InvoiceStatus Status { get; set; }
 
         public decimal? Margin
         {

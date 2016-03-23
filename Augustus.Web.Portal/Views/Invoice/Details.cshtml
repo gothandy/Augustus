@@ -1,15 +1,12 @@
-﻿@model IEnumerable<WorkDoneItem>
+﻿@model Invoice
 @{
-    var account = (Account)ViewBag.Account;
-    var opportunity = (Opportunity)ViewBag.Opportunity;
-    var invoice = (Invoice)ViewBag.Invoice;
-    ViewBag.Title = invoice.Name;
+    ViewBag.Title = Model.Name;
 }
 
 <ol class="breadcrumb">
     <li><a class="hidden-xs" href="@Url.Action("ActiveAccounts", "Organization")">True Clarity</a><span class="visible-xs">...</span></li>
-    <li>@Html.ActionLink(account.Name, "Invoices", "Account", new { id = account.Id }, null)</li>
-    <li>@Html.ActionLink(opportunity.Name, "Invoices", "Opportunity", new { id = opportunity.Id }, null)</li>
+    <li>@Html.ActionLink(Model.Account.Name, "Invoices", "Account", new { id = Model.Account.Id }, null)</li>
+    <li>@Html.ActionLink(Model.Opportunity.Name, "Invoices", "Opportunity", new { id = Model.Opportunity.Id }, null)</li>
 </ol>
 
 <div class="row">
@@ -18,19 +15,19 @@
             <div class="list-group-item">
                 <div class="row">
                     <div class="col-xs-6"><strong>Margin</strong></div>
-                    <div class="col-xs-6 text-right">@CurrencyHelper.Format(invoice.Margin)</div>
+                    <div class="col-xs-6 text-right">@CurrencyHelper.Format(Model.Margin)</div>
                 </div>
             </div>
             <div class="list-group-item">
                 <div class="row">
                     <div class="col-xs-6"><strong>Cost</strong></div>
-                    <div class="col-xs-6 text-right">@CurrencyHelper.Format(invoice.Cost)</div>
+                    <div class="col-xs-6 text-right">@CurrencyHelper.Format(Model.Cost)</div>
                 </div>
             </div>
             <div class="list-group-item">
                 <div class="row">
                     <div class="col-xs-6"><strong>Revenue</strong></div>
-                    <div class="col-xs-6 text-right">@CurrencyHelper.Format(invoice.Revenue)</div>
+                    <div class="col-xs-6 text-right">@CurrencyHelper.Format(Model.Revenue)</div>
                 </div>
             </div>
         </div>
@@ -53,7 +50,7 @@
             <div class="list-group-item">
                 <div class="row">
                     <div class="col-xs-6"><strong>Invoice Date</strong></div>
-                    <div class="col-xs-6 text-right">@DateTimeHelper.Format(invoice.InvoiceDate)</div>
+                    <div class="col-xs-6 text-right">@DateTimeHelper.Format(Model.InvoiceDate)</div>
                 </div>
             </div>
         </div>
@@ -65,19 +62,19 @@
             <div class="list-group-item">
                 <div class="row">
                     <div class="col-xs-6"><strong>PO No.</strong></div>
-                    <div class="col-xs-6 text-right">@invoice.PONumber</div>
+                    <div class="col-xs-6 text-right">@Model.PONumber</div>
                 </div>
             </div>
             <div class="list-group-item">
                 <div class="row">
                     <div class="col-xs-6"><strong>Invoice No.</strong></div>
-                    <div class="col-xs-6 text-right">@invoice.InvoiceNo</div>
+                    <div class="col-xs-6 text-right">@Model.InvoiceNo</div>
                 </div>
             </div>
             <div class="list-group-item">
                 <div class="row">
                     <div class="col-xs-6"><strong>Status</strong></div>
-                    <div class="col-xs-6 text-right">@invoice.Status</div>
+                    <div class="col-xs-6 text-right">@Html.DisplayFor(m => m.Status)</div>
                 </div>
             </div>
         </div>
@@ -94,7 +91,7 @@
                     <th class="currency">Margin</th>
                 </tr>
             </thead>
-            @foreach (var i in Model)
+            @foreach (var i in Model.WorkDoneItems)
             {
                 <tr>
                     <td>@DateTimeHelper.Format(i.WorkDoneDate)</td>
@@ -104,7 +101,7 @@
             <tfoot>
                 <tr>
                     <td>Total</td>
-                    <td class="currency">@CurrencyHelper.Format(Model.Sum(i => i.Margin))</td>
+                    <td class="currency">@CurrencyHelper.Format(Model.WorkDoneItems.Sum(i => i.Margin))</td>
                 </tr>
             </tfoot>
         </table>
@@ -112,5 +109,5 @@
 </div>
 
 <div>
-    <a class="btn btn-default" target="_blank" href="https://trueclarity4.crm4.dynamics.com/main.aspx?etc=10010&id={@invoice.Id}&pagetype=entityrecord">Open in CRM</a>
+    <a class="btn btn-default" target="_blank" href="https://trueclarity4.crm4.dynamics.com/main.aspx?etc=10010&id={@Model.Id}&pagetype=entityrecord">Open in CRM</a>
 </div>
