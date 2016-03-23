@@ -1,0 +1,65 @@
+﻿@model Invoice
+@{
+    var opportunities = (IEnumerable<Opportunity>)ViewBag.Opportunities;
+}
+
+<ol class="breadcrumb">
+    <li><a href="@Url.Action("ActiveAccounts", "Organization")">True Clarity</a></li>
+    <li>@Html.ActionLink(Model.Account.Name, "Opportunities", "Account", new { id = Model.Account.Id }, null)</li>
+    <li>@Html.ActionLink(Model.Opportunity.Name, "Invoices", "Opportunity", new { id = Model.Opportunity.Id }, null)</li>
+</ol>
+
+    @using (Html.BeginForm("Edit", "Invoice", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        //@Html.AntiForgeryToken()
+
+        <div class="well">
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.OpportunityId, "Opportunity", new { @class = "control-label col-sm-3" })
+
+                    <div class="col-sm-5">
+                        @Html.DropDownListFor(
+                            model => model.AccountId,
+                            new SelectList(opportunities, "Id", "Name", Model.Opportunity.Id),
+                            new { @class = "form-control selectpicker" }
+                        )
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.ValidationMessageFor(model => model.Opportunity.Id, null, new { @class = "help-block text-danger" })
+                    </div>
+                </div>
+
+                @Html.EditorFor(m => m.Name)
+                @Html.EditorFor(m => m.Revenue)
+                @Html.EditorFor(m => m.Cost)
+                @Html.EditorFor(m => m.ClientApprovedDate)
+                @Html.EditorFor(m => m.InvoiceDate)
+                @Html.EditorFor(m => m.PONumber)
+                @Html.EditorFor(m => m.InvoiceNo)
+                @Html.EditorFor(m => m.Status)
+
+            </div>
+        </div>
+
+        <div>
+            <input type="submit" value="Save" class="btn btn-primary" />
+
+
+            @if (Model != null)
+            {
+                <a href="@Url.Action("Details", new { Id = Model.Id })" class="btn btn-default">Cancel</a>
+                <a href="@Url.Action("Delete", new { Id = Model.Id })" class="btn btn-danger pull-right">Delete</a>
+            }
+            else
+            {
+                <a href="@Url.Action("Invoices", "Opportunity", new { id = Model.Opportunity.Id})" class="btn btn-default">Cancel</a>
+            }
+        </div>
+    }
+
+
+
+

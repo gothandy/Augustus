@@ -62,10 +62,10 @@ namespace Augustus.Web.Portal.Controllers
         // GET: Opportunity/Edit/{id}
         public async Task<ActionResult> Edit(Guid id)
         {
+            ViewBag.Title = "Edit Opportunity";
+
             using (var query = await GetOrganizationQuery())
             {
-                ViewBag.Title = "Edit Opportunity";
-
                 ViewBag.Accounts = query.GetNewAndActiveAccounts(
                     createdAfter: DateTime.Now.AddMonths(-3),
                     invoicesFrom: DateTime.Now.AddYears(-1));

@@ -1,4 +1,5 @@
-﻿using Augustus.Domain.Objects;
+﻿using Augustus.Domain.Enums;
+using Augustus.Domain.Objects;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Client;
 using System;

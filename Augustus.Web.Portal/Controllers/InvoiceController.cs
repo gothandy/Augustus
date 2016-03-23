@@ -1,5 +1,6 @@
 ﻿using Augustus.CRM;
 using Augustus.CRM.Entities;
+using Augustus.Domain.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,9 +49,25 @@ namespace Augustus.Web.Portal.Controllers
         }
 
         // GET: Invoice/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(Guid id)
         {
-            return View();
+            ViewBag.Title = "Edit Invoice";
+            Invoice inv = null;
+
+            using (var query = await GetInvoiceQuery())
+            {
+                inv = query.GetInvoice(id);
+            }
+
+            using (var query = await GetAccountQuery())
+            {
+                ViewBag.Opportunities = query.GetNewAndActiveOpportunities(
+                    accountId: inv.AccountId.Value,
+                    createdAfter: DateTime.Now.AddMonths(-3),
+                    invoicesFrom: DateTime.Now.AddYears(-1));
+            }
+
+            return View("Form", inv);
         }
 
         // POST: Invoice/Edit/5

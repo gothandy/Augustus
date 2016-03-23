@@ -28,7 +28,7 @@ namespace Augustus.Web.Portal.Controllers
                 return View(query.GetNewAndActiveOpportunities(
                     accountId: id,
                     createdAfter: lastThreeMonths,
-                    invoiceFrom: lastYear));
+                    invoicesFrom: lastYear));
             }
         }
 

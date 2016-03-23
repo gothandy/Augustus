@@ -10,8 +10,7 @@ namespace Augustus.Domain.Interfaces
         IEnumerable<Invoice> GetInvoices(Guid accountId, DateTime from);
         IEnumerable<Opportunity> GetNewOpportunities(Guid accountId, DateTime createdAfter);
         IEnumerable<Opportunity> GetActiveOpportunities(Guid accountId, DateTime invoiceFrom);
-        IEnumerable<Opportunity> GetNewAndActiveOpportunities(Guid accountId, DateTime createdAfter, DateTime invoiceFrom);
-
+        IEnumerable<Opportunity> GetNewAndActiveOpportunities(Guid accountId, DateTime createdAfter, DateTime invoicesFrom);
         Guid CreateAccount(Account account);
         void UpdateAccount(Account account);
         void DeleteAccount(Guid id);

@@ -1,5 +1,6 @@
 ﻿using Augustus.CRM.Entities;
 using Augustus.CRM.Queries;
+using Augustus.Domain.Enums;
 using Augustus.Domain.Objects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
