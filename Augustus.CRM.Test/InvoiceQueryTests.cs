@@ -38,32 +38,33 @@ namespace Augustus.CRM.Test
             var invoice = query.GetInvoice(easyJetJan16Inv);
 
             Assert.AreEqual(new DateTime(2016,1,31), invoice.InvoiceDate);
+            Assert.AreEqual(InvoiceStatus.InvoiceSent, invoice.Status);
         }
 
         [TestMethod]
         public void CRM_Query_Invoice_GetAccount()
         {
-            var account = query.GetAccount(easyJetJan16Inv);
+            var inv = query.GetInvoice(easyJetJan16Inv);
 
-            Assert.AreEqual("easyJet", account.Name);
+            Assert.AreEqual("easyJet", inv.Account.Name);
         }
 
         [TestMethod]
         public void CRM_Query_Invoice_GetOpportunity()
         {
-            var opp = query.GetOpportunity(easyJetJan16Inv);
+            var inv = query.GetInvoice(easyJetJan16Inv);
 
-            Assert.AreEqual(new DateTime(2016,1,11,11,42,34), opp.Created);
+            Assert.AreEqual(new DateTime(2016,1,11,11,42,34), inv.Opportunity.Created);
         }
 
         [TestMethod]
         public void CRM_Query_Invoice_GetWorkDoneItems()
         {
-            var items = query.GetWorkDoneItems(easyJetJan16Inv);
+            var inv = query.GetInvoice(easyJetJan16Inv);
 
-            Assert.AreEqual(5, items.Count());
+            Assert.AreEqual(5, inv.WorkDoneItems.Count());
 
-            foreach(var item in items)
+            foreach(var item in inv.WorkDoneItems)
             {
                 Console.WriteLine(item.Margin);
             }
@@ -85,13 +86,10 @@ namespace Augustus.CRM.Test
             {
                 Name = invoiceName,
                 OpportunityId = opportunity.Id,
-                
                 Cost = 5000,
                 Revenue = 15000,
-                
                 ClientApprovedDate = new DateTime(2016, 1, 1),
                 InvoiceDate = new DateTime(2016, 3, 1),
-
                 InvoiceNo = "Inv No.",
                 PONumber = "PO No."
             };
@@ -103,6 +101,7 @@ namespace Augustus.CRM.Test
             Assert.AreEqual(10000, inv.Margin);
             Assert.AreEqual(opportunity.Id, inv.OpportunityId);
             Assert.AreEqual(new DateTime(2016, 3, 1), inv.InvoiceDate);
+            Assert.AreEqual(account.Id, inv.AccountId);
             
 
             // Update Invoice

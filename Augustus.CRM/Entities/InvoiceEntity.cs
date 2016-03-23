@@ -2,6 +2,7 @@
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Client;
 using System;
+using System.Linq;
 using System.Runtime.Serialization;
 
 namespace Augustus.CRM.Entities
@@ -14,6 +15,29 @@ namespace Augustus.CRM.Entities
 
         public const string EntityLogicalName = "new_invoice";
         public const int EntityTypeCode = 10010;
+
+        private static int[] statusLookup = { 4, 0, 5, 6, 7, 1, 8, 2, 3 };
+
+        [AttributeLogicalName("statuscode")]
+        public int? Status
+        {
+            get
+            {
+                OptionSetValue statusCode = GetAttributeValue<OptionSetValue>("statuscode");
+                if (statusCode == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return Array.FindIndex(statusLookup, a => statusCode.Value == 100000000 + a);
+                }
+            }
+            /*set
+            {
+                this.SetAttributeValue("statuscode", value);
+            }*/
+        }
 
         [AttributeLogicalName("new_invoiceid")]
         public Guid? InvoiceId
@@ -36,19 +60,20 @@ namespace Augustus.CRM.Entities
             }
         }
 
-        public void SetUsingDomain(Invoice invoice)
+        public void SetUsingDomain(Invoice domain)
         {
-            var i = this;
+            var entity = this;
 
-            i.Name = invoice.Name;
-            i.OpportunityId = invoice.OpportunityId;
-            i.InvoiceNo = invoice.InvoiceNo;
-            i.PONumber = invoice.PONumber;
-            i.Cost = invoice.Cost;
-            i.Revenue = invoice.Revenue;
-            i.Margin = invoice.Margin;
-            i.InvoiceDate = invoice.InvoiceDate;
-            i.ClientApprovedDate = invoice.ClientApprovedDate;
+            entity.Name = domain.Name;
+            // AccountId set using lookup on Opportunity in query.
+            entity.OpportunityId = domain.OpportunityId;
+            entity.InvoiceNo = domain.InvoiceNo;
+            entity.PONumber = domain.PONumber;
+            entity.Cost = domain.Cost;
+            entity.Revenue = domain.Revenue;
+            entity.Margin = domain.Margin;
+            entity.InvoiceDate = domain.InvoiceDate;
+            entity.ClientApprovedDate = domain.ClientApprovedDate;
         }
 
         public Invoice ToDomainObject()
@@ -58,21 +83,23 @@ namespace Augustus.CRM.Entities
 
         public static Invoice ToDomainObject(InvoiceEntity entity)
         {
-            return new Invoice()
-            {
-                Id = entity.Id,
-                Name = entity.Name,
-                // Account from opportunity
-                OpportunityId = entity.OpportunityId,
-                ClientApprovedDate = entity.ClientApprovedDate,
-                Created = entity.Created,
-                InvoiceDate = entity.InvoiceDate,
-                InvoiceNo = entity.InvoiceNo,
-                PONumber = entity.PONumber,
-                Revenue = entity.Revenue,
-                Cost = entity.Cost
-                //Margin is calculated
-            };
+            var domain = new Invoice();
+
+            domain.Id = entity.Id;
+            domain.Name = entity.Name;
+            domain.AccountId = entity.AccountId;
+            domain.OpportunityId = entity.OpportunityId;
+            domain.ClientApprovedDate = entity.ClientApprovedDate;
+            domain.Created = entity.Created;
+            domain.InvoiceDate = entity.InvoiceDate;
+            domain.InvoiceNo = entity.InvoiceNo;
+            domain.PONumber = entity.PONumber;
+            domain.Revenue = entity.Revenue;
+            domain.Cost = entity.Cost;
+            //Margin is calculated
+            domain.Status = (InvoiceStatus)entity.Status;
+
+            return domain;
         }
 
         [AttributeLogicalName("new_invoiceid")]

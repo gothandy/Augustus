@@ -1,12 +1,8 @@
-﻿using System;
+﻿using Augustus.CRM.Entities;
+using Augustus.Domain.Objects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Augustus.CRM;
-using Augustus.CRM.Entities;
-using Augustus.Domain.Objects;
-using Augustus.Domain.Interfaces;
 
 namespace Augustus.CRM.Queries
 {
@@ -14,26 +10,15 @@ namespace Augustus.CRM.Queries
     {
         public Invoice GetInvoice(Guid id)
         {
-            return Organization.Invoices.Single(i => i.Id == id).ToDomainObject();
+            var inv = Organization.Invoices.Single(i => i.Id == id).ToDomainObject();
+
+            inv.Opportunity = OpportunityEntity.ToDomainObject(Organization.Opportunities.Single(o => o.Id == inv.OpportunityId));
+            inv.Account = AccountEntity.ToDomainObject(Organization.Accounts.Single(a => a.Id == inv.Opportunity.AccountId));
+            inv.WorkDoneItems = GetWorkDoneItems(id);
+            return inv;
         }
 
-        public Opportunity GetOpportunity(Guid invoiceId)
-        {
-            var inv = GetInvoice(invoiceId);
-            var opp = Organization.Opportunities.Single(o => o.Id == inv.OpportunityId);
-
-            return OpportunityEntity.ToDomainObject(opp);
-        }
-
-        public Account GetAccount(Guid invoiceId)
-        {
-            var opp = GetOpportunity(invoiceId);
-            var acc = Organization.Accounts.Single(a => a.Id == opp.AccountId);
-
-            return AccountEntity.ToDomainObject(acc);
-        }
-
-        public IEnumerable<WorkDoneItem> GetWorkDoneItems(Guid id)
+        private IEnumerable<WorkDoneItem> GetWorkDoneItems(Guid id)
         {
             return (from i in Organization.WorkDoneItems
                     where i.InvoiceId == id
@@ -43,9 +28,14 @@ namespace Augustus.CRM.Queries
 
         public Guid CreateInvoice(Invoice invoice)
         {
-            var entity = new InvoiceEntity();
 
+            var entity = new InvoiceEntity();
             entity.SetUsingDomain(invoice);
+
+            // Ignore the AccountId being set on the domain object. Should raise exception?
+            var opp = Organization.Opportunities.Single(o => o.Id == invoice.OpportunityId);
+            entity.AccountId = opp.AccountId;
+            
 
             Organization.Create(entity);
             Organization.SaveChanges();

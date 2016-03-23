@@ -9,27 +9,6 @@ namespace Augustus.CRM
     {
         public BaseEntity(string entityLogicalName) : base(entityLogicalName) { }
 
-        [AttributeLogicalName("statuscode")]
-        public int? Status
-        {
-            get
-            {
-                OptionSetValue statusCode = GetAttributeValue<OptionSetValue>("statuscode");
-                if (statusCode == null)
-                {
-                    return null;
-                }
-                else
-                {
-                    return statusCode.Value;
-                }
-            }
-            /*set
-            {
-                this.SetAttributeValue("statuscode", value);
-            }*/
-        }
-
         [AttributeLogicalName("createdon")]
         public DateTime? Created
         {

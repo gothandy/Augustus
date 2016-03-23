@@ -21,11 +21,12 @@ namespace Augustus.Web.Portal.Controllers
         {
             using (var query = await GetInvoiceQuery())
             {
-                ViewBag.Account = query.GetAccount(id);
-                ViewBag.Opportunity = query.GetOpportunity(id);
-                ViewBag.Invoice = query.GetInvoice(id);
+                var inv = query.GetInvoice(id);
+                ViewBag.Account = inv.Account;
+                ViewBag.Opportunity = inv.Opportunity;
+                ViewBag.Invoice = inv;
 
-                return View(query.GetWorkDoneItems(id));
+                return View(inv.WorkDoneItems);
             }
         }
 
