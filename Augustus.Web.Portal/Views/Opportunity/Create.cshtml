@@ -1,8 +1,10 @@
 ﻿@model Opportunity
 @{
     var account = (Account)ViewBag.Account;
-    var accounts = (IEnumerable<Account>)ViewBag.Accounts;
-
+    var formButtons = new FormButtons
+    {
+        CancelUrl = @Url.Action("Opportunities", "Account", new { id = account.Id })
+    };
 }
 
 @Html.Partial("Breadcrumb", account)
@@ -11,8 +13,5 @@
 {
     @Html.Partial("Form", Model, ViewData)
 
-    <div>
-        <input type="submit" value="Save" class="btn btn-primary" />
-        <a href="@Url.Action("Opportunities", "Account", new { id = account.Id })" class="btn btn-default">Cancel</a>
-    </div>
+    @Html.Partial("CreateButtons", formButtons)
 }

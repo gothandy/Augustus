@@ -9,21 +9,7 @@
 
         @Html.ValidationSummary(true)
 
-        <div class="form-group">
-
-            @Html.LabelFor(model => model.AccountId, "Account", new { @class = "control-label col-sm-3" })
-
-            <div class="col-sm-5">
-                @Html.DropDownListFor(
-                    model => model.AccountId,
-                    new SelectList(accounts, "Id", "Name", account.Id),
-                    new { @class = "form-control selectpicker" }
-                )
-            </div>
-            <div class="col-sm-4">
-                @Html.ValidationMessageFor(model => model.AccountId, null, new { @class = "help-block text-danger" })
-            </div>
-        </div>
+        @Html.EditorFor(m => m.AccountId, "Account")
 
         @Html.EditorFor(m => m.Name)
 
