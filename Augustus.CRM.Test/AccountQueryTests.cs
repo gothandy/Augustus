@@ -85,17 +85,17 @@ namespace Augustus.CRM.Test
         {
             // Create
             Account account = new Account { Name = accountName };
-            var id = query.CreateAccount(account);
+            var id = query.Create(account);
 
             // Updated
             account.Id = id;
             account.Name = accountRename;
-            query.UpdateAccount(account);
+            query.Update(account);
             var accountEntity = getAccount(accountRename);
             Assert.AreEqual(accountRename, accountEntity.Name);
 
             // Delete
-            query.DeleteAccount(id);
+            query.Delete(id);
         }
     }
 }

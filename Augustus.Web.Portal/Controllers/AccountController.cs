@@ -14,7 +14,7 @@ namespace Augustus.Web.Portal.Controllers
             using (var query = await GetAccountQuery())
             {
                 Response.AppendHeader("guid", id.ToString());
-                ViewBag.Account = query.GetAccount(id);
+                ViewBag.Account = query.Get(id);
                 return View(query.GetInvoices(id, from:lastYear));
             }
         }
@@ -24,7 +24,7 @@ namespace Augustus.Web.Portal.Controllers
         {
             using (var query = await GetAccountQuery())
             {
-                ViewBag.Account = query.GetAccount(id);
+                ViewBag.Account = query.Get(id);
                 return View(query.GetNewAndActiveOpportunities(
                     accountId: id,
                     createdAfter: lastThreeMonths,
@@ -57,7 +57,7 @@ namespace Augustus.Web.Portal.Controllers
             {
                 ViewBag.Title = "Edit Account";
                 ViewBag.SubmitButton = "Edit";
-                return View(query.GetAccount(id));
+                return View(query.Get(id));
             }
         }
 

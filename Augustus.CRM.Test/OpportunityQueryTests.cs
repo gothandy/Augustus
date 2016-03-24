@@ -64,15 +64,15 @@ namespace Augustus.CRM.Test
             
             // Create Opportunity
             Opportunity opportunity = new Opportunity { Name = opportunityName, AccountId = accountId };
-            var id = query.CreateOpportunity(opportunity);
+            var id = query.Create(opportunity);
 
             // Update Opportunity
             opportunity.Id = id;
             opportunity.Name = opportunityRename;
-            query.UpdateOpportunity(opportunity);
+            query.Update(opportunity);
 
             // Delete Opportunity
-            query.DeleteOpportunity(id);
+            query.Delete(id);
 
             // Delete Account
             deleteAccount(accountName);

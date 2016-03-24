@@ -20,7 +20,7 @@ namespace Augustus.CRM.Queries
             {
                 var accountQuery = new AccountQuery { Organization = Organization };
 
-                account.Id = accountQuery.CreateAccount(account);
+                account.Id = accountQuery.Create(account);
             }
             else
             {
@@ -46,7 +46,7 @@ namespace Augustus.CRM.Queries
             {
                 var opportunityQuery = new OpportunityQuery { Organization = Organization };
 
-                opportunity.Id = opportunityQuery.CreateOpportunity(opportunity);
+                opportunity.Id = opportunityQuery.Create(opportunity);
             }
             else
             {
@@ -72,7 +72,7 @@ namespace Augustus.CRM.Queries
             {
                 var invoiceQuery = new InvoiceQuery { Organization = Organization };
 
-                invoice.Id = invoiceQuery.CreateInvoice(invoice);
+                invoice.Id = invoiceQuery.Create(invoice);
             }
             else
             {
@@ -99,7 +99,7 @@ namespace Augustus.CRM.Queries
             {
                 var workDoneItemQuery = new WorkDoneItemQuery { Organization = Organization };
 
-                workDoneItem.Id = workDoneItemQuery.CreateWorkDoneItem(workDoneItem);
+                workDoneItem.Id = workDoneItemQuery.Create(workDoneItem);
             }
             else
             {

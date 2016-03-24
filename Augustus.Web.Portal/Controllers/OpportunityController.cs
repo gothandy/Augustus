@@ -32,7 +32,7 @@ namespace Augustus.Web.Portal.Controllers
         {
             using (var query = await GetAccountQuery())
             {
-                ViewBag.Account = query.GetAccount(id);
+                ViewBag.Account = query.Get(id);
             }
 
             using (var query = await GetOrganizationQuery())

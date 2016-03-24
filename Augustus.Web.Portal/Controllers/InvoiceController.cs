@@ -22,7 +22,7 @@ namespace Augustus.Web.Portal.Controllers
         {
             using (var query = await GetInvoiceQuery())
             {
-                return View(query.GetInvoice(id));
+                return View(query.GetItem(id));
             }
         }
 
@@ -56,7 +56,7 @@ namespace Augustus.Web.Portal.Controllers
 
             using (var query = await GetInvoiceQuery())
             {
-                inv = query.GetInvoice(id);
+                inv = query.GetItem(id);
             }
 
             using (var query = await GetAccountQuery())
@@ -78,7 +78,7 @@ namespace Augustus.Web.Portal.Controllers
         {
             using (var query = await GetInvoiceQuery())
             {
-                query.UpdateInvoice(invoice);
+                query.Update(invoice);
 
                 return RedirectToAction("Invoices", new { id = id });
             }

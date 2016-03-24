@@ -1,4 +1,5 @@
 ﻿using Augustus.CRM.Entities;
+using Augustus.Domain.Interfaces;
 using Augustus.Domain.Objects;
 using System;
 using System.Collections.Generic;
@@ -6,9 +7,9 @@ using System.Linq;
 
 namespace Augustus.CRM.Queries
 {
-    public class InvoiceQuery : BaseQuery
+    public class InvoiceQuery : BaseQuery, IQuery<Invoice>
     {
-        public Invoice GetInvoice(Guid id)
+        public Invoice GetItem(Guid id)
         {
             var inv = Organization.Invoices.Single(i => i.Id == id).ToDomainObject();
 
@@ -26,7 +27,7 @@ namespace Augustus.CRM.Queries
                     select WorkDoneItemEntity.ToDomainObject(i)).AsEnumerable();
         }
 
-        public Guid CreateInvoice(Invoice invoice)
+        public Guid Create(Invoice invoice)
         {
 
             var entity = new InvoiceEntity();
@@ -43,7 +44,7 @@ namespace Augustus.CRM.Queries
             return entity.Id;
         }
 
-        public void DeleteInvoice(Guid invoiceId)
+        public void Delete(Guid invoiceId)
         {
             var entity = Organization.Invoices.Single(o => o.Id == invoiceId);
 
@@ -51,7 +52,7 @@ namespace Augustus.CRM.Queries
             Organization.SaveChanges();
         }
 
-        public void UpdateInvoice(Invoice invoice)
+        public void Update(Invoice invoice)
         {
             var entity = Organization.Invoices.Single(o => o.Id == invoice.Id);
 
@@ -60,7 +61,5 @@ namespace Augustus.CRM.Queries
             Organization.Update(entity);
             Organization.SaveChanges();
         }
-
-
     }
 }

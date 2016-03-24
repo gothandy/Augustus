@@ -8,9 +8,9 @@ using System.Linq;
 
 namespace Augustus.CRM.Queries
 {
-    public class AccountQuery : BaseQuery, IAccountQuery
+    public class AccountQuery : BaseQuery, IQuery<Account>
     {
-        public Account GetAccount(Guid id)
+        public Account GetItem(Guid id)
         {
             return (from a in Organization.Accounts
                     where a.Id == id
@@ -51,7 +51,7 @@ namespace Augustus.CRM.Queries
             return GetNewOpportunities(accountId, createdAfter).Union(GetActiveOpportunities(accountId, invoicesFrom)).Distinct();
         }
 
-        public Guid CreateAccount(Account account)
+        public Guid Create(Account account)
         {
             var entity = new AccountEntity
             {
@@ -64,7 +64,7 @@ namespace Augustus.CRM.Queries
             return entity.Id;
         }
 
-        public void UpdateAccount(Account account)
+        public void Update(Account account)
         {
             var entity = Organization.Accounts.Single(a => a.Id == account.Id);
 
@@ -73,7 +73,7 @@ namespace Augustus.CRM.Queries
             Organization.SaveChanges();
         }
 
-        public void DeleteAccount(Guid id)
+        public void Delete(Guid id)
         {
             var entity = Organization.Accounts.Single(a => a.Id == id);
 

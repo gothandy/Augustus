@@ -1,25 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Augustus.CRM;
-using Augustus.CRM.Entities;
-using Augustus.Domain.Objects;
+﻿using Augustus.CRM.Entities;
 using Augustus.Domain.Interfaces;
+using Augustus.Domain.Objects;
+using System;
+using System.Linq;
 
 namespace Augustus.CRM.Queries
 {
-    public class WorkDoneItemQuery : BaseQuery
+    public class WorkDoneItemQuery : BaseQuery, IQuery<WorkDoneItem>
     {
-        public WorkDoneItem GetWorkDoneItem(Guid id)
+        public WorkDoneItem GetItem(Guid id)
         {
             return WorkDoneItemEntity.ToDomainObject(Organization.WorkDoneItems.Single(i => i.Id == id));
         }
 
         public Invoice GetInvoice(Guid workDoneItemId)
         {
-            var wdi = GetWorkDoneItem(workDoneItemId);
+            var wdi = GetItem(workDoneItemId);
             var inv = Organization.Invoices.Single(i => i.Id == wdi.InvoiceId);
 
             return inv.ToDomainObject();
@@ -41,7 +37,7 @@ namespace Augustus.CRM.Queries
             return AccountEntity.ToDomainObject(acc);
         }
 
-        public Guid CreateWorkDoneItem(WorkDoneItem workDoneItem)
+        public Guid Create(WorkDoneItem workDoneItem)
         {
             var entity = new WorkDoneItemEntity
             {
@@ -56,7 +52,7 @@ namespace Augustus.CRM.Queries
             return entity.Id;
         }
 
-        public void DeleteWorkDoneItem(Guid workDoneItemId)
+        public void Delete(Guid workDoneItemId)
         {
             var entity = Organization.Opportunities.Single(o => o.Id == workDoneItemId);
 
@@ -64,7 +60,7 @@ namespace Augustus.CRM.Queries
             Organization.SaveChanges();
         }
 
-        public void UpdateWorkDoneItem(WorkDoneItem workDoneItem)
+        public void Update(WorkDoneItem workDoneItem)
         {
             var entity = Organization.WorkDoneItems.Single(o => o.Id == workDoneItem.Id);
 

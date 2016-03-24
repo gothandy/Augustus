@@ -10,16 +10,16 @@ using Augustus.Domain.Interfaces;
 
 namespace Augustus.CRM.Queries
 {
-    public class OpportunityQuery : BaseQuery, IOpportunityQuery
+    public class OpportunityQuery : BaseQuery, IQuery<Opportunity>
     {
-        public Opportunity GetOpportunity(Guid id)
+        public Opportunity GetItem(Guid id)
         {
             return OpportunityEntity.ToDomainObject(Organization.Opportunities.Single(o => o.Id == id));
         }
 
         public Account GetAccount(Guid opportunityId)
         {
-            var opp = GetOpportunity(opportunityId);
+            var opp = GetItem(opportunityId);
             var acc = Organization.Accounts.Single(a => a.Id == opp.AccountId);
 
             return AccountEntity.ToDomainObject(acc);
@@ -33,7 +33,7 @@ namespace Augustus.CRM.Queries
                     select InvoiceEntity.ToDomainObject(i)).AsEnumerable();
         }
 
-        public Guid CreateOpportunity(Opportunity opportunity)
+        public Guid Create(Opportunity opportunity)
         {
             var entity = new OpportunityEntity
             {
@@ -47,7 +47,7 @@ namespace Augustus.CRM.Queries
             return entity.Id;
         }
 
-        public void DeleteOpportunity(Guid opportunityId)
+        public void Delete(Guid opportunityId)
         {
             var entity = Organization.Opportunities.Single(o => o.Id == opportunityId);
 
@@ -55,7 +55,7 @@ namespace Augustus.CRM.Queries
             Organization.SaveChanges();
         }
 
-        public void UpdateOpportunity(Opportunity opportunity)
+        public void Update(Opportunity opportunity)
         {
             var entity = Organization.Opportunities.Single(o => o.Id == opportunity.Id);
 

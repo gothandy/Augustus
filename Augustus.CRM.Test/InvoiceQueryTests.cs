@@ -36,7 +36,7 @@ namespace Augustus.CRM.Test
         [TestMethod]
         public void CRM_Query_Invoice_GetInvoice()
         {
-            var invoice = query.GetInvoice(easyJetJan16Inv);
+            var invoice = query.GetItem(easyJetJan16Inv);
 
             Assert.AreEqual(new DateTime(2016,1,31), invoice.InvoiceDate);
             Assert.AreEqual(InvoiceStatus.InvoiceSent, invoice.Status);
@@ -45,7 +45,7 @@ namespace Augustus.CRM.Test
         [TestMethod]
         public void CRM_Query_Invoice_GetAccount()
         {
-            var inv = query.GetInvoice(easyJetJan16Inv);
+            var inv = query.GetItem(easyJetJan16Inv);
 
             Assert.AreEqual("easyJet", inv.Account.Name);
         }
@@ -53,7 +53,7 @@ namespace Augustus.CRM.Test
         [TestMethod]
         public void CRM_Query_Invoice_GetOpportunity()
         {
-            var inv = query.GetInvoice(easyJetJan16Inv);
+            var inv = query.GetItem(easyJetJan16Inv);
 
             Assert.AreEqual(new DateTime(2016,1,11,11,42,34), inv.Opportunity.Created);
         }
@@ -61,7 +61,7 @@ namespace Augustus.CRM.Test
         [TestMethod]
         public void CRM_Query_Invoice_GetWorkDoneItems()
         {
-            var inv = query.GetInvoice(easyJetJan16Inv);
+            var inv = query.GetItem(easyJetJan16Inv);
 
             Assert.AreEqual(5, inv.WorkDoneItems.Count());
 
@@ -95,10 +95,10 @@ namespace Augustus.CRM.Test
                 PONumber = "PO No."
             };
 
-            var id = query.CreateInvoice(invoice);
+            var id = query.Create(invoice);
 
             // Assert values
-            var inv = query.GetInvoice(id);
+            var inv = query.GetItem(id);
             Assert.AreEqual(10000, inv.Margin);
             Assert.AreEqual(opportunity.Id, inv.OpportunityId);
             Assert.AreEqual(new DateTime(2016, 3, 1), inv.InvoiceDate);
@@ -108,10 +108,10 @@ namespace Augustus.CRM.Test
             // Update Invoice
             invoice.Id = id;
             invoice.Name = invoiceRename;
-            query.UpdateInvoice(invoice);
+            query.Update(invoice);
 
             // Delete Invoice
-            query.DeleteInvoice(id);
+            query.Delete(id);
 
             // Delete Opportunity
             deleteOpportunity(opportunityName);

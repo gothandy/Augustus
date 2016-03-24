@@ -6,7 +6,7 @@ namespace Augustus.Domain.Interfaces
 {
     public interface IAccountQuery : IDisposable
     {
-        Account GetAccount(Guid id);
+        Account Get(Guid id);
         IEnumerable<Invoice> GetInvoices(Guid accountId, DateTime from);
         IEnumerable<Opportunity> GetNewOpportunities(Guid accountId, DateTime createdAfter);
         IEnumerable<Opportunity> GetActiveOpportunities(Guid accountId, DateTime invoiceFrom);
