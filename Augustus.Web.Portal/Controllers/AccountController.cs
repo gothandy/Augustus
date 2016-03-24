@@ -36,7 +36,7 @@ namespace Augustus.Web.Portal.Controllers
         {
             ViewBag.Title = "New Account";
             ViewBag.SubmitButton = "Create";
-            return View("Form");
+            return View();
         }
 
         // POST: /Account/Create
@@ -57,7 +57,7 @@ namespace Augustus.Web.Portal.Controllers
             {
                 ViewBag.Title = "Edit Account";
                 ViewBag.SubmitButton = "Edit";
-                return View("Form", query.GetAccount(id));
+                return View(query.GetAccount(id));
             }
         }
 

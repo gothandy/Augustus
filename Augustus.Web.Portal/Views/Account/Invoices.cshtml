@@ -4,9 +4,7 @@
     ViewBag.Title = account.Name;
 }
 
-<ol class="breadcrumb">
-    <li><a href="@Url.Action("ActiveAccounts", "Organization")">True Clarity</a></li>
-</ol>
+@Html.Partial("Breadcrumb")
 
 <ul class="nav nav-tabs">
     <li role="presentation" class="active"><a href="@Url.Action("Invoices", new { id = account.Id })">Invoices</a></li>

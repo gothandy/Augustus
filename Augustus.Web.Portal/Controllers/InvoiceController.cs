@@ -72,17 +72,15 @@ namespace Augustus.Web.Portal.Controllers
 
         // POST: Invoice/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public async Task<ActionResult> Edit(Guid id,
+            [Bind(Include = "OpportunityId,Revenue,Cost,InvoiceDate,PONumber,InvoiceNo,Status")]
+            Invoice invoice)
         {
-            try
+            using (var query = await GetInvoiceQuery())
             {
-                // TODO: Add update logic here
+                query.UpdateInvoice(invoice);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
+                return RedirectToAction("Invoices", new { id = id });
             }
         }
 

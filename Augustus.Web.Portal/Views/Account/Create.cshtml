@@ -1,0 +1,10 @@
+﻿@model Account
+
+@Html.Partial("Breadcrumb")
+
+@using (Html.BeginForm())
+{
+    @Html.Partial("Form", Model)
+
+    @Html.Partial("CreateButtons", new FormButtons { CancelUrl = @Url.Action("ActiveAccounts", "Organization") })
+}

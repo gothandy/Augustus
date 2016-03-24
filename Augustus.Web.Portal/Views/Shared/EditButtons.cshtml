@@ -1,0 +1,21 @@
+﻿@model FormButtons
+
+<div class="btn-group">
+
+    <a href="@Url.Action("Delete", new { Id = Model.Id.Value })" class="btn btn-danger">
+        Delete <span class="glyphicon glyphicon-trash"></span>
+    </a>
+
+</div>
+
+<div class="btn-group pull-right">
+
+    <a href="@Model.CancelUrl" class="btn btn-default">
+        Cancel
+    </a>
+
+    <button type="submit" class="btn btn-primary">
+        Save <span class="glyphicon glyphicon-floppy-disk"></span>
+    </button>
+
+</div>
