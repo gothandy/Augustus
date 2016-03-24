@@ -43,7 +43,7 @@ namespace Augustus.Web.Portal.Controllers
                     createdAfter: lastThreeMonths,
                     invoicesFrom: lastYear);
 
-                return View("Form");
+                return View();
             }
         }
 
@@ -74,7 +74,7 @@ namespace Augustus.Web.Portal.Controllers
             using (var query = await GetOpportunityQuery())
             {
                 ViewBag.Account = query.GetAccount(id);
-                return View("Form", query.GetOpportunity(id));
+                return View(query.GetOpportunity(id));
             }
         }
 

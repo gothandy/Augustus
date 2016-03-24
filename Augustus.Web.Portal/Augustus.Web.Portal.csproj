@@ -361,6 +361,9 @@
     <Content Include="Views\Account\Form.cshtml" />
     <Content Include="Views\Shared\CreateButtons.cshtml" />
     <Content Include="Views\Account\Breadcrumb.cshtml" />
+    <Content Include="Views\Opportunity\Edit.cshtml" />
+    <Content Include="Views\Opportunity\Create.cshtml" />
+    <Content Include="Views\Opportunity\Breadcrumb.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

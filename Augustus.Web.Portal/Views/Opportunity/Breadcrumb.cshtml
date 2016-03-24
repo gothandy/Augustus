@@ -1,0 +1,5 @@
+﻿@model Account
+<ol class="breadcrumb">
+    <li><a href="@Url.Action("ActiveAccounts", "Organization")">True Clarity</a></li>
+    <li>@Html.ActionLink(Model.Name, "Opportunities", "Account", new { id = Model.Id }, null)</li>
+</ol>

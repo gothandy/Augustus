@@ -1,0 +1,20 @@
+﻿@model Opportunity
+@{
+    var account = (Account)ViewBag.Account;
+    var accounts = (IEnumerable<Account>)ViewBag.Accounts;
+}
+
+@Html.Partial("Breadcrumb", account)
+
+@using (Html.BeginForm())
+{
+    @Html.Partial("Form", Model, ViewData)
+
+    <div>
+        <input type="submit" value="Save" class="btn btn-primary" />
+        <a href="@Url.Action("Invoices", new { Id = Model.Id })" class="btn btn-default">Cancel</a>
+        <a href="@Url.Action("Delete", new { Id = Model.Id })" class="btn btn-danger pull-right">Delete</a>
+    </div>
+}
+
+
