@@ -35,7 +35,7 @@ namespace Augustus.Domain.Objects
         public IEnumerable<WorkDoneItem> WorkDoneItems { get; set; }
 
         [EnumDataType(typeof(InvoiceStatus))]
-        public InvoiceStatus Status { get; set; }
+        public InvoiceStatus? Status { get; set; }
 
         public decimal? Margin
         {

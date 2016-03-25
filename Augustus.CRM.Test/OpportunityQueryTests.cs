@@ -35,7 +35,7 @@ namespace Augustus.CRM.Test
         {
             Opportunity opp = OpportunityEntity.ToDomainObject(org.Opportunities.Single(o => o.Id == new Guid("2d1a82de-4479-e411-be1f-6c3be5becb24")));
 
-            var invoices = query.GetInvoices(opp.Id);
+            var invoices = query.GetInvoices(opp.Id.Value);
 
             Assert.AreNotEqual(0, invoices.Count());
 
@@ -50,7 +50,7 @@ namespace Augustus.CRM.Test
         {
             Opportunity opp = OpportunityEntity.ToDomainObject(org.Opportunities.Single(o => o.Id == new Guid("2d1a82de-4479-e411-be1f-6c3be5becb24")));
 
-            var account = query.GetAccount(opp.Id);
+            var account = query.GetAccount(opp.Id.Value);
 
             Assert.AreEqual("easyJet", account.Name);
         }
