@@ -112,7 +112,7 @@
     <Compile Include="OpportunityEntityTests.cs" />
     <Compile Include="OrgQuerableTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WorkDoneItemCrudTests.cs" />
+    <Compile Include="WorkDoneItemQueryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

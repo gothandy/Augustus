@@ -12,15 +12,20 @@ namespace Augustus.CRM.Test
     public class AccountQueryTests : BaseCrudTest
     {
         private static AccountQuery query;
-        private static DateTime pastYear;
         private static AccountEntity easyJet;
 
         [ClassInitialize]
         public static void ClassInit(TestContext testContext)
         {
             CreateOrg();
-            query = new AccountQuery { Organization = org };
-            pastYear = DateTime.Now.AddYears(-1);
+
+            query = new AccountQuery
+            {
+                Organization = org,
+                ActiveAfter = DateTime.Now.AddYears(-1),
+                CreatedAfter = DateTime.Now.AddMonths(-3)
+            };
+
             easyJet = org.Accounts.Single(a => a.Name == "easyJet");
 
             deleteAllAccounts();
@@ -36,38 +41,22 @@ namespace Augustus.CRM.Test
         [TestMethod]
         public void CRM_Query_Account_GetInvoices()
         {
-            var invoices = query.GetInvoices(easyJet.Id, from: pastYear);
+            var acc = query.GetItem(easyJet.Id);
 
-            Assert.AreNotEqual(0, invoices.Count());
+            Assert.AreNotEqual(0, acc.Invoices.Count());
 
-            foreach(var invoice in invoices)
+            foreach(var invoice in acc.Invoices)
             {
                 Console.WriteLine(invoice.Name);
             }
         }
 
         [TestMethod]
-        public void CRM_Query_Account_GeNewOpportunities()
-        {
-            var opportunities = query.GetNewOpportunities(easyJet.Id, createdAfter: pastYear);
-
-            AssertNotEmptyAndWriteNames(opportunities);
-        }
-
-        [TestMethod]
-        public void CRM_Query_Account_GetActiveOpportunities()
-        {
-            var opportunities = query.GetActiveOpportunities(easyJet.Id, invoicesFrom: pastYear);
-
-            AssertNotEmptyAndWriteNames(opportunities);
-        }
-
-        [TestMethod]
         public void CRM_Query_Account_GetNewAndActiveOpportunities()
         {
-            var opportunities = query.GetNewAndActiveOpportunities(easyJet.Id, pastYear, pastYear);
+            var acc = query.GetItem(easyJet.Id);
 
-            AssertNotEmptyAndWriteNames(opportunities);
+            AssertNotEmptyAndWriteNames(acc.Opportunities);
         }
 
         private static void AssertNotEmptyAndWriteNames(IEnumerable<Opportunity> opportunities)

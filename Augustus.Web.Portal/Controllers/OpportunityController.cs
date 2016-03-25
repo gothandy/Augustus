@@ -21,7 +21,7 @@ namespace Augustus.Web.Portal.Controllers
                 Response.AppendHeader("guid", id.ToString());
 
                 ViewBag.Account = query.GetAccount(id);
-                ViewBag.Opportunity = query.GetOpportunity(id);
+                ViewBag.Opportunity = query.GetItem(id);
 
                 return View(query.GetInvoices(id));
             }
@@ -32,7 +32,7 @@ namespace Augustus.Web.Portal.Controllers
         {
             using (var query = await GetAccountQuery())
             {
-                ViewBag.Account = query.Get(id);
+                ViewBag.Account = query.GetItem(id);
             }
 
             using (var query = await GetOrganizationQuery())
@@ -41,7 +41,7 @@ namespace Augustus.Web.Portal.Controllers
 
                 ViewBag.Accounts = query.GetNewAndActiveAccounts(
                     createdAfter: lastThreeMonths,
-                    invoicesFrom: lastYear);
+                    withInvoicesFrom: lastYear);
 
                 return View();
             }
@@ -53,7 +53,7 @@ namespace Augustus.Web.Portal.Controllers
         {
             using (var query = await GetOpportunityQuery())
             {
-                var id = query.CreateOpportunity(opportunity);
+                var id = query.Create(opportunity);
 
                 return RedirectToAction("Invoices", new { id = id });
             }
@@ -68,13 +68,13 @@ namespace Augustus.Web.Portal.Controllers
             {
                 ViewBag.Accounts = query.GetNewAndActiveAccounts(
                     createdAfter: DateTime.Now.AddMonths(-3),
-                    invoicesFrom: DateTime.Now.AddYears(-1));
+                    withInvoicesFrom: DateTime.Now.AddYears(-1));
             }
 
             using (var query = await GetOpportunityQuery())
             {
                 ViewBag.Account = query.GetAccount(id);
-                return View(query.GetOpportunity(id));
+                return View(query.GetItem(id));
             }
         }
 
@@ -85,7 +85,7 @@ namespace Augustus.Web.Portal.Controllers
             using (var query = await GetOpportunityQuery())
             {
                 opportunity.Id = id;
-                query.UpdateOpportunity(opportunity);
+                query.Update(opportunity);
 
                 return RedirectToAction("Invoices", new { Id = id });
             }
@@ -96,8 +96,8 @@ namespace Augustus.Web.Portal.Controllers
         {
             using (var query = await GetOpportunityQuery())
             {
-                var opportunity = query.GetOpportunity(id);
-                query.DeleteOpportunity(id);
+                var opportunity = query.GetItem(id);
+                query.Delete(id);
                 return RedirectToAction("Opportunities", "Account", new { id = opportunity.AccountId });
             };
         }

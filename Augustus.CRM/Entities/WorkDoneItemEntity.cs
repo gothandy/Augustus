@@ -35,13 +35,7 @@ namespace Augustus.CRM.Entities
             }
             set
             {
-                if (value.HasValue)
-                {
-                    SetAttributeValue("new_invoiceid",
-                        new EntityReference(
-                            InvoiceEntity.EntityLogicalName,
-                            value.Value));
-                }
+                SetAttributeEntityReferenceId("new_invoiceid", InvoiceEntity.EntityLogicalName, value);
             }
         }
 
@@ -67,6 +61,7 @@ namespace Augustus.CRM.Entities
             {
                 Id = entity.Id,
                 Created = entity.Created,
+                AccountId = entity.AccountId,
                 InvoiceId = entity.InvoiceId,
                 WorkDoneDate = entity.WorkDoneDate,
                 Margin = entity.Margin
@@ -78,11 +73,11 @@ namespace Augustus.CRM.Entities
         {
             get
             {
-                return GetAttributeValue<DateTime?>("new_workdonedate");
+                return GetAttributeValueDateTime("new_workdonedate");
             }
             set
             {
-                SetAttributeValue("new_workdonedate", value);
+                SetAttributeValueDateTime("new_workdonedate", value);
             }
         }
 
@@ -150,7 +145,19 @@ namespace Augustus.CRM.Entities
             }
         }
 
-        public Guid? AccountId { get; internal set; }
-        public Guid? OpportunityId { get; internal set; }
+
+        [AttributeLogicalName("new_account")]
+        public Guid? AccountId
+        {
+            get
+            {
+                return GetAttributeEntityReferenceId("new_account");
+            }
+
+            set
+            {
+                SetAttributeEntityReferenceId("new_account", AccountEntity.EntityLogicalName, value);
+            }
+        }
     }
 }

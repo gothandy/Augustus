@@ -218,7 +218,7 @@ namespace Augustus.CRM.Entities
             }
             set
             {
-                SetAttributeEntityReferenceId(OpportunityIdLogicalName, OpportunityEntity.EntityLogicalName, value);
+                SetAttributeEntityReferenceId(OpportunityIdLogicalName, InvoiceEntity.EntityLogicalName, value);
             }
         }
 

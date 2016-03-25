@@ -14,8 +14,7 @@ namespace Augustus.Web.Portal.Controllers
             using (var query = await GetAccountQuery())
             {
                 Response.AppendHeader("guid", id.ToString());
-                ViewBag.Account = query.Get(id);
-                return View(query.GetInvoices(id, from:lastYear));
+                return View(query.GetItem(id));
             }
         }
 
@@ -24,11 +23,8 @@ namespace Augustus.Web.Portal.Controllers
         {
             using (var query = await GetAccountQuery())
             {
-                ViewBag.Account = query.Get(id);
-                return View(query.GetNewAndActiveOpportunities(
-                    accountId: id,
-                    createdAfter: lastThreeMonths,
-                    invoicesFrom: lastYear));
+                Response.AppendHeader("guid", id.ToString());
+                return View(query.GetItem(id));
             }
         }
 
@@ -45,7 +41,7 @@ namespace Augustus.Web.Portal.Controllers
         {
             using (var query = await GetAccountQuery())
             {
-                var id = query.CreateAccount(account);
+                var id = query.Create(account);
                 return RedirectToAction("Invoices", new { id = id });
             }
         }
@@ -57,7 +53,7 @@ namespace Augustus.Web.Portal.Controllers
             {
                 ViewBag.Title = "Edit Account";
                 ViewBag.SubmitButton = "Edit";
-                return View(query.Get(id));
+                return View(query.GetItem(id));
             }
         }
 
@@ -68,7 +64,7 @@ namespace Augustus.Web.Portal.Controllers
             using (var query = await GetAccountQuery())
             {
                 account.Id = id;
-                query.UpdateAccount(account);
+                query.Update(account);
                 return RedirectToAction("Invoices", new { Id = id });
             }
         }
@@ -78,7 +74,7 @@ namespace Augustus.Web.Portal.Controllers
         {
             using (var query = await GetAccountQuery())
             {
-                query.DeleteAccount(id);
+                query.Delete(id);
                 return RedirectToAction("ActiveAccounts", "Organization");
             }
         }

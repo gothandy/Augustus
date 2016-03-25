@@ -91,31 +91,33 @@ namespace Augustus.Web.Portal.Controllers
             }
         }
 
-        protected async Task<IOrganizationQuery> GetOrganizationQuery()
+        protected async Task<OrganizationQuery> GetOrganizationQuery()
         {
             var org = await GetOrgQueryable();
 
-            return (IOrganizationQuery)new OrganizationQuery()
+            return (OrganizationQuery)new OrganizationQuery()
             {
                 Organization = org
             };
         }
 
-        protected async Task<IAccountQuery> GetAccountQuery()
+        protected async Task<AccountQuery> GetAccountQuery()
         {
             var org = await GetOrgQueryable();
 
-            return (IAccountQuery)new AccountQuery()
+            return (AccountQuery)new AccountQuery()
             {
-                Organization = org
+                Organization = org,
+                CreatedAfter = lastThreeMonths,
+                ActiveAfter = lastYear
             };
         }
 
-        protected async Task<IOpportunityQuery> GetOpportunityQuery()
+        protected async Task<OpportunityQuery> GetOpportunityQuery()
         {
             var org = await GetOrgQueryable();
 
-            return (IOpportunityQuery)new OpportunityQuery()
+            return (OpportunityQuery)new OpportunityQuery()
             {
                 Organization = org
             };

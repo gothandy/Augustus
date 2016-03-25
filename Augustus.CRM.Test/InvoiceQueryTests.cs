@@ -79,6 +79,7 @@ namespace Augustus.CRM.Test
             createAccount(accountName);
             var account = getAccount(accountName);
 
+            // Create Opportunity
             createOpportunity(opportunityName, account);
             var opportunity = getOpportunity(opportunityName);
 

@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Augustus.CRM.Queries
 {
-    public class OrganizationQuery : BaseQuery, IOrganizationQuery
+    public class OrganizationQuery : BaseQuery
     {
 
         public IEnumerable<Account> GetNewAccounts(DateTime createdAfter)

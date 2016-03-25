@@ -1,5 +1,6 @@
 ﻿using Augustus.CRM.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Configuration;
 using System.Linq;
 
@@ -8,12 +9,12 @@ namespace Augustus.CRM.Test
     [TestClass]
     public class BaseCrudTest
     {
-        protected const string accountName = "CRM Account Name";
-        protected const string accountRename = "CRM Account Name 2";
-        protected const string opportunityName = "CRM Opportunity Name";
-        protected const string opportunityRename = "CRM Opportunity Name 2";
-        protected const string invoiceName = "CRM Invoice Name";
-        protected const string invoiceRename = "CRM Invoice Name 2";
+        protected const string accountName = "Augustus Account Name";
+        protected const string accountRename = "Augustus  Account Rename";
+        protected const string opportunityName = "Augustus Opportunity Name";
+        protected const string opportunityRename = "Augustus Opportunity Rename";
+        protected const string invoiceName = "Augustus Invoice Name";
+        protected const string invoiceRename = "Augustus Invoice Rename";
 
         protected static OrgQueryable org;
 
@@ -43,12 +44,7 @@ namespace Augustus.CRM.Test
             org.SaveChanges();
         }
 
-        protected static void deleteAccount(string name)
-        {
-            AccountEntity account = getAccount(name);
-            org.Delete<AccountEntity>(account);
-            org.SaveChanges();
-        }
+
 
         protected static AccountEntity getAccount(string name)
         {
@@ -59,10 +55,14 @@ namespace Augustus.CRM.Test
         {
             return org.Opportunities.Single(a => a.Name == name);
         }
+        protected static InvoiceEntity getInvoice(string name)
+        {
+            return org.Invoices.Single(a => a.Name == name);
+        }
 
         protected static void createOpportunity(string name, AccountEntity account)
         {
-            OpportunityEntity newOpp = new OpportunityEntity()
+            var newOpp = new OpportunityEntity()
             {
                 Name = name,
                 AccountId = account.Id
@@ -72,12 +72,34 @@ namespace Augustus.CRM.Test
             org.SaveChanges();
         }
 
+        protected static void createInvoice(string name, OpportunityEntity opportunity)
+        {
+            var newInv = new InvoiceEntity()
+            {
+                Name = name,
+                AccountId = opportunity.AccountId,
+                OpportunityId = opportunity.Id
+            };
+
+            org.Create<InvoiceEntity>(newInv);
+            org.SaveChanges();
+        }
+
+        protected static void deleteAccount(string name)
+        {
+            org.Delete(getAccount(name));
+            org.SaveChanges();
+        }
+
         protected static void deleteOpportunity(string name)
         {
-            OpportunityEntity newOpp = org.Opportunities.Single(o => o.Name == name);
+            org.Delete(getOpportunity(name));
+            org.SaveChanges();
+        }
 
-            org.Delete<OpportunityEntity>(newOpp);
-
+        protected static void deleteInvoice(string name)
+        {
+            org.Delete(getInvoice(name));
             org.SaveChanges();
         }
 
@@ -89,30 +111,84 @@ namespace Augustus.CRM.Test
 
         private static void deleteAccounts(string name)
         {
-            var accounts = org.Accounts.Where(a => a.Name == name);
-
-            foreach (var account in accounts)
-            {
-                org.Delete<AccountEntity>(account);
-            }
-            org.SaveChanges();
+            DeleteEntities(org.Accounts, a => a.Name == name, a => a.Name);
         }
 
         protected static void deleteAllOpportunities()
         {
-            deleteOpportunities(accountName);
-            deleteOpportunities(accountRename);
+            deleteOpportunities(opportunityName);
+            deleteOpportunities(opportunityRename);
         }
 
         private static void deleteOpportunities(string name)
         {
-            var entities = org.Opportunities.Where(a => a.Name == name);
+            DeleteEntities(org.Opportunities, a => a.Name == name, a => a.Name);
+        }
 
-            foreach (var entity in entities)
+        protected static void deleteAllInvoices()
+        {
+            deleteInvoices(invoiceName);
+            deleteInvoices(invoiceRename);
+        }
+
+
+
+        private static void deleteInvoices(string name)
+        {
+            DeleteEntities(org.Invoices, a => a.Name == name, a => a.Name);
+        }
+
+        protected static void deleteAllWorkDoneItems()
+        {
+            deleteWorkDoneItems(invoiceName);
+            deleteWorkDoneItems(invoiceRename);
+        }
+
+        protected static void deleteWorkDoneItems(string invoiceName)
+        {
+            var invoices = org.Invoices.Where(i => i.Name == invoiceName);
+
+            var save = false;
+
+            foreach (var invoice in invoices)
             {
-                org.Delete<OpportunityEntity>(entity);
+                if (invoice.Name.StartsWith("Augustus"))
+                {
+                    var items = org.WorkDoneItems.Where(i => i.InvoiceId.Value == invoice.Id);
+
+                    foreach (var item in items)
+                    {
+                        if (item.InvoiceId == invoice.Id)
+                        {
+                            org.Delete<WorkDoneItemEntity>(item);
+                            Console.WriteLine("{0} {1} Work Done Item Deleted.", invoice.Name, item.WorkDoneDate);
+                            save = true;
+                        }
+                    }
+                }
             }
-            org.SaveChanges();
+
+            if (save) org.SaveChanges();
+        }
+
+        private static void DeleteEntities<T>(IQueryable<T> entities, Func<T, bool> whereClause, Func<T, string> getName) where T : BaseEntity
+        {
+            var entitiesToDelete = entities.Where(whereClause);
+
+            var save = false;
+
+            foreach (var entity in entitiesToDelete)
+            {
+                // Danger, danger, check name just in case whereClause fails and returns everything.
+                if (getName(entity).StartsWith("Augustus"))
+                {
+                    org.Delete<T>(entity);
+                    Console.WriteLine("{0} Entity Deleted.", getName(entity));
+                    save = true;
+                }
+            }
+
+            if (save) org.SaveChanges();
         }
     }
 }

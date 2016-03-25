@@ -41,6 +41,7 @@ namespace Augustus.CRM.Queries
         {
             var entity = new WorkDoneItemEntity
             {
+                AccountId = workDoneItem.AccountId,
                 InvoiceId = workDoneItem.InvoiceId,
                 WorkDoneDate = workDoneItem.WorkDoneDate,
                 Margin = workDoneItem.Margin
@@ -54,7 +55,7 @@ namespace Augustus.CRM.Queries
 
         public void Delete(Guid workDoneItemId)
         {
-            var entity = Organization.Opportunities.Single(o => o.Id == workDoneItemId);
+            var entity = Organization.WorkDoneItems.Single(o => o.Id == workDoneItemId);
 
             Organization.Delete(entity);
             Organization.SaveChanges();
@@ -64,6 +65,7 @@ namespace Augustus.CRM.Queries
         {
             var entity = Organization.WorkDoneItems.Single(o => o.Id == workDoneItem.Id);
 
+            entity.AccountId = workDoneItem.AccountId;
             entity.InvoiceId = workDoneItem.InvoiceId;
             entity.WorkDoneDate = workDoneItem.WorkDoneDate;
             entity.Margin = workDoneItem.Margin;

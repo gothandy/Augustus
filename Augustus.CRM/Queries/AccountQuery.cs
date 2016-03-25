@@ -10,14 +10,22 @@ namespace Augustus.CRM.Queries
 {
     public class AccountQuery : BaseQuery, IQuery<Account>
     {
+        public DateTime ActiveAfter { get; set; }
+        public DateTime CreatedAfter { get; set; }
+
         public Account GetItem(Guid id)
         {
-            return (from a in Organization.Accounts
-                    where a.Id == id
-                    select AccountEntity.ToDomainObject(a)).Single();
+            var account = (from a in Organization.Accounts
+                           where a.Id == id
+                           select AccountEntity.ToDomainObject(a)).Single();
+
+            account.Invoices = GetInvoices(id, ActiveAfter);
+            account.Opportunities = GetNewAndActiveOpportunities(id, CreatedAfter, ActiveAfter);
+
+            return account;
         }
 
-        public IEnumerable<Invoice> GetInvoices(Guid accountId, DateTime from)
+        private IEnumerable<Invoice> GetInvoices(Guid accountId, DateTime from)
         {
             return (from i in Organization.Invoices
                     where i.AccountId == accountId
@@ -26,7 +34,7 @@ namespace Augustus.CRM.Queries
                     select InvoiceEntity.ToDomainObject(i)).AsEnumerable();
         }
 
-        public IEnumerable<Opportunity> GetActiveOpportunities(Guid accountId, DateTime invoicesFrom)
+        private IEnumerable<Opportunity> GetActiveOpportunities(Guid accountId, DateTime invoicesFrom)
         {
             return (from o in Organization.Opportunities
                     join i in Organization.Invoices
@@ -37,7 +45,7 @@ namespace Augustus.CRM.Queries
                     select OpportunityEntity.ToDomainObject(o)).Distinct().AsEnumerable();
         }
 
-        public IEnumerable<Opportunity> GetNewOpportunities(Guid accountId, DateTime createdAfter)
+        private IEnumerable<Opportunity> GetNewOpportunities(Guid accountId, DateTime createdAfter)
         {
             return (from o in Organization.Opportunities
                     where o.Created > createdAfter
@@ -46,7 +54,7 @@ namespace Augustus.CRM.Queries
                     select OpportunityEntity.ToDomainObject(o)).AsEnumerable();
         }
 
-        public IEnumerable<Opportunity> GetNewAndActiveOpportunities(Guid accountId, DateTime createdAfter, DateTime invoicesFrom)
+        private IEnumerable<Opportunity> GetNewAndActiveOpportunities(Guid accountId, DateTime createdAfter, DateTime invoicesFrom)
         {
             return GetNewOpportunities(accountId, createdAfter).Union(GetActiveOpportunities(accountId, invoicesFrom)).Distinct();
         }

@@ -1,9 +1,4 @@
-﻿using Augustus.CRM;
-using Augustus.CRM.Entities;
-using Augustus.Domain.Interfaces;
-using Augustus.Domain.Objects;
-using System;
-using System.Collections.Generic;
+﻿using Augustus.Domain.Objects;
 using System.Linq;
 
 namespace Augustus.CRM.Queries
@@ -55,6 +50,7 @@ namespace Augustus.CRM.Queries
 
             foreach (var invoice in opportunity.Invoices)
             {
+                invoice.AccountId = opportunity.AccountId;
                 invoice.OpportunityId = opportunity.Id;
 
                 BulkUpdate(invoice);
@@ -81,21 +77,21 @@ namespace Augustus.CRM.Queries
 
             foreach (var workDoneItem in invoice.WorkDoneItems)
             {
-                workDoneItem.OpportunityId = invoice.OpportunityId;
+                workDoneItem.AccountId = invoice.AccountId;
                 workDoneItem.InvoiceId = invoice.Id;
 
-                //BulkUpdate(workDoneItem);
+                BulkUpdate(workDoneItem);
             }
         }
 
         public void BulkUpdate(WorkDoneItem workDoneItem)
         {
-            var invoiceEntity =
+            var workDoneItemEntity =
                 Organization.WorkDoneItems.SingleOrDefault(a =>
                     a.InvoiceId == workDoneItem.InvoiceId &&
                     a.WorkDoneDate == workDoneItem.WorkDoneDate);
 
-            if (invoiceEntity == null)
+            if (workDoneItemEntity == null)
             {
                 var workDoneItemQuery = new WorkDoneItemQuery { Organization = Organization };
 
@@ -103,7 +99,7 @@ namespace Augustus.CRM.Queries
             }
             else
             {
-                workDoneItem.Id = invoiceEntity.Id;
+                workDoneItem.Id = workDoneItemEntity.Id;
             }
         }
     }

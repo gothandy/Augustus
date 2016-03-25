@@ -13,7 +13,6 @@ namespace Augustus.Domain.Objects
         public Guid Id { get; set; }
         public Guid? InvoiceId { get; set; }
         public decimal? Margin { get; set; }
-        public Guid? OpportunityId { get; set; }
         public DateTime? WorkDoneDate { get; set; }
     }
 }

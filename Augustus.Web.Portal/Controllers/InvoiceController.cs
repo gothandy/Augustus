@@ -61,10 +61,7 @@ namespace Augustus.Web.Portal.Controllers
 
             using (var query = await GetAccountQuery())
             {
-                ViewBag.Opportunities = query.GetNewAndActiveOpportunities(
-                    accountId: inv.AccountId.Value,
-                    createdAfter: DateTime.Now.AddMonths(-3),
-                    invoicesFrom: DateTime.Now.AddYears(-1));
+                ViewBag.Opportunities = query.GetItem(inv.AccountId.Value).Opportunities;
             }
 
             return View("Form", inv);

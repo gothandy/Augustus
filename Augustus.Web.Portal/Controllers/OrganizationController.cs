@@ -12,7 +12,7 @@ namespace Augustus.Web.Portal.Controllers
             using (var query = await GetOrganizationQuery())
             {
                 ViewBag.Title = "True Clarity";
-                return View(query.GetActiveAccounts(invoicesFrom: lastYear));
+                return View(query.GetActiveAccounts(withInvoicesFrom: lastYear));
             }
         }
 

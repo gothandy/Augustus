@@ -14,7 +14,33 @@ namespace Augustus.CRM
         {
             get
             {
-                return GetAttributeValue<DateTime?>("createdon");
+                return GetAttributeValueDateTime("createdon");
+            }
+        }
+
+        protected DateTime? GetAttributeValueDateTime(string attributeLogicalName)
+        {
+            var date = GetAttributeValue<DateTime?>(attributeLogicalName);
+
+            if (date.HasValue)
+            {
+                return date.Value.ToLocalTime();
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        protected void SetAttributeValueDateTime(string attributeLogicalName, DateTime? value)
+        {
+            if (value.HasValue)
+            {
+                SetAttributeValue(attributeLogicalName, value.Value.ToUniversalTime());
+            }
+            else
+            {
+                SetAttributeValue(attributeLogicalName, value);
             }
         }
 
