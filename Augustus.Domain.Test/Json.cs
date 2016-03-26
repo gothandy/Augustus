@@ -12,11 +12,11 @@ namespace Augustus.Domain.Test
     {
         private const string accountJson = "{\"Name\":\"easyJet\"}";
         private const string opportunitiesJson = "{\"Name\":\"easyJet\",\"Opportunities\":[{\"Name\":\"Out of Hours\"},{\"Name\":\"Team\"}]}";
-        private const string invoicesJson = "{\"Name\":\"easyJet\",\"Opportunities\":[{\"Name\":\"Team\",\"Invoices\":[{\"Name\":\"2016 Jan\",\"Revenue\":1234.56,\"InvoiceDate\":\"2016-01-01T00:00:00\",\"Margin\":1234.56}]}]}";
+        private const string invoicesJson = "{\"Name\":\"easyJet\",\"Opportunities\":[{\"Name\":\"Team\",\"Invoices\":[{\"Name\":\"2016 Jan\",\"Revenue\":1234.56,\"InvoiceDate\":\"2016-01-01T00:00:00\"}]}]}";
         private const string workDoneItemsJson = "{\"Name\":\"2016 Jan\",\"WorkDoneItems\":[{\"Margin\":1111.0,\"WorkDoneDate\":\"2016-01-01T00:00:00\"},{\"Margin\":1212.0,\"WorkDoneDate\":\"2016-01-02T00:00:00\"}]}";
 
         [TestMethod]
-        public void Account_Serialize()
+        public void Json_Account_Serialize()
         {
             var account = new Account
             {
@@ -28,7 +28,7 @@ namespace Augustus.Domain.Test
         }
 
         [TestMethod]
-        public void Account_Deserialize()
+        public void Json_Account_Deserialize()
         {
             var account = JsonConvert.DeserializeObject<Account>(accountJson);
             Assert.AreEqual("easyJet", account.Name);
@@ -36,7 +36,7 @@ namespace Augustus.Domain.Test
 
 
         [TestMethod]
-        public void Opportunities_Serialize()
+        public void Json_Opportunities_Serialize()
         {
             var account = new Account
             {
@@ -53,14 +53,14 @@ namespace Augustus.Domain.Test
         }
 
         [TestMethod]
-        public void Opportunities_Deserialize()
+        public void Json_Opportunities_Deserialize()
         {
             var account = JsonConvert.DeserializeObject<Account>(opportunitiesJson);
             Assert.AreEqual(2, account.Opportunities.Count());
         }
 
         [TestMethod]
-        public void Invoices_Serialize()
+        public void Json_Invoices_Serialize()
         {
             var account = new Account
             {
@@ -87,7 +87,7 @@ namespace Augustus.Domain.Test
         }
         
         [TestMethod]
-        public void Invoices_Deserialize()
+        public void Json_Invoices_Deserialize()
         {
             var acc = JsonConvert.DeserializeObject<Account>(invoicesJson);
             var inv = acc.Opportunities.First().Invoices.First();
@@ -96,7 +96,7 @@ namespace Augustus.Domain.Test
         }
 
         [TestMethod]
-        public void WorkDoneItems_Serialize()
+        public void Json_WorkDoneItems_Serialize()
         {
             var inv = new Invoice
             {
@@ -119,7 +119,7 @@ namespace Augustus.Domain.Test
         }
 
         [TestMethod]
-        public void WorkDoneItems_Deserialize()
+        public void Json_WorkDoneItems_Deserialize()
         {
             var inv = JsonConvert.DeserializeObject<Invoice>(workDoneItemsJson);
             var wdi = inv.WorkDoneItems.First();

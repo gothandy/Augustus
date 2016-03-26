@@ -2,16 +2,13 @@
 <package >
   <metadata>
     <id>Augustus.Domain</id>
-    <version>1.0.0.0</version>
+    <version>1.0.0.1</version>
     <title>Augustus Domain</title>
     <authors>gothandy</authors>
     <owners>gothandy</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Domain objects for Augustus CRM app.</description>
     <copyright>Copyright 2016</copyright>
-    <frameworkAssemblies>
-      <frameworkAssembly assemblyName="System.ComponentModel.DataAnnotations" targetFramework="net45" />
-    </frameworkAssemblies>
   </metadata>
   <files>
     <file src="bin\Release\Augustus.Domain.dll" target="lib\net45" />
