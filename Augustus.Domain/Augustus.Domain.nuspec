@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Augustus.Domain</id>
-    <version>1.0.0.1</version>
+    <version>1.0.0.2</version>
     <title>Augustus Domain Objects</title>
     <authors>gothandy</authors>
     <owners>gothandy</owners>
