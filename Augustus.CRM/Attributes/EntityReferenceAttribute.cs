@@ -1,30 +1,24 @@
-﻿using Microsoft.Xrm.Sdk;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Augustus.CRM.Attributes
 {
-    public static class EntityReferenceAttribute
+    public class EntityReferenceAttribute : Attribute
     {
-        public static Guid? GetAttributeEntityReference(this BaseEntity entity, string attributeLogicalName)
+        private string logicalName;
+        public EntityReferenceAttribute(string logicalName)
         {
-            EntityReference entRef = entity.GetAttributeValue<EntityReference>(attributeLogicalName);
-
-            if (entRef == null)
-            {
-                return null;
-            }
-            else
-            {
-                return entRef.Id;
-            }
+            this.logicalName = logicalName;
         }
 
-        public static void SetAttributeEntityReference(this BaseEntity entity, string attributeLogicalName, string entityLogicalName, Guid? id)
+        public string LogicalName
         {
-            if (id.HasValue)
+            get
             {
-                var entRef = new EntityReference(entityLogicalName, id.Value);
-                entity.SetBaseAttributeValue(attributeLogicalName, entRef);
+                return logicalName;
             }
         }
     }

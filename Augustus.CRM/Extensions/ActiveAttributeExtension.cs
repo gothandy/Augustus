@@ -1,8 +1,8 @@
 ﻿using Microsoft.Xrm.Sdk;
 
-namespace Augustus.CRM.Attributes
+namespace Augustus.CRM.Extensions
 {
-    public static class ActiveAttribute
+    public static class ActiveAttributeExtension
     {
         public static bool? GetAttributeState(this BaseEntity entity)
         {

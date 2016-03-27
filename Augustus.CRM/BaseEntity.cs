@@ -1,6 +1,7 @@
-﻿using Augustus.CRM.Attributes;
+﻿using Augustus.CRM.Extensions;
 using Microsoft.Xrm.Sdk;
 using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace Augustus.CRM
@@ -8,6 +9,8 @@ namespace Augustus.CRM
     [DataContract()]
     public class BaseEntity : Entity
     {
+        public Dictionary<string, Attribute> AttributeCache = new Dictionary<string, Attribute>();
+
         public BaseEntity(string entityLogicalName) : base(entityLogicalName) { }
 
         public void SetBaseIdValue(Guid id)
@@ -23,10 +26,7 @@ namespace Augustus.CRM
         [AttributeLogicalName("createdon")]
         public DateTime? Created
         {
-            get
-            {
-                return this.GetAttributeDateTime("createdon");
-            }
+            get { return this.GetAttributeDateTime(); }
         }
     }
 }

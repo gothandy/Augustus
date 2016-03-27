@@ -85,12 +85,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\EntityReferenceAttribute.cs" />
-    <Compile Include="Attributes\IdAttribute.cs" />
-    <Compile Include="Attributes\OptionSetAttribute.cs" />
-    <Compile Include="Attributes\ActiveAttribute.cs" />
-    <Compile Include="Attributes\StringAttribute.cs" />
-    <Compile Include="Attributes\DateTimeAttribute.cs" />
-    <Compile Include="Attributes\MoneyAttribute.cs" />
+    <Compile Include="Extensions\EntityReferenceAttributeExtension.cs" />
+    <Compile Include="Extensions\IdAttributeExtension.cs" />
+    <Compile Include="Extensions\StatusAttributeExtension.cs" />
+    <Compile Include="Extensions\ActiveAttributeExtension.cs" />
+    <Compile Include="Attributes\StatusLookupAttribute.cs" />
+    <Compile Include="Extensions\StringAttributeExtension.cs" />
+    <Compile Include="Extensions\DateTimeAttributeExtension.cs" />
+    <Compile Include="Extensions\MoneyAttributeExtension.cs" />
+    <Compile Include="AttributeHelper.cs" />
     <Compile Include="BaseQuery.cs" />
     <Compile Include="Converters\AccountConverter.cs" />
     <Compile Include="Converters\InvoiceConverter.cs" />

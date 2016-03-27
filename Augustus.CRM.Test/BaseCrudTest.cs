@@ -111,7 +111,21 @@ namespace Augustus.CRM.Test
 
         private static void deleteAccounts(string name)
         {
-            DeleteEntities(org.Accounts, a => a.Name == name, a => a.Name);
+            var accounts = org.Accounts.Where(i => i.Name == name);
+
+            var save = false;
+
+            foreach (var account in accounts)
+            {
+                if (account.Name.StartsWith("Augustus"))
+                {
+                    org.Delete<AccountEntity>(account);
+                    Console.WriteLine("{0} Account Deleted.", account.Name);
+                    save = true;
+                }
+            }
+
+            if (save) org.SaveChanges();
         }
 
         protected static void deleteAllOpportunities()
@@ -122,7 +136,21 @@ namespace Augustus.CRM.Test
 
         private static void deleteOpportunities(string name)
         {
-            DeleteEntities(org.Opportunities, a => a.Name == name, a => a.Name);
+            var opportunities = org.Opportunities.Where(i => i.Name == name);
+
+            var save = false;
+
+            foreach (var opportunity in opportunities)
+            {
+                if (opportunity.Name.StartsWith("Augustus"))
+                {
+                    org.Delete<OpportunityEntity>(opportunity);
+                    Console.WriteLine("{0} Opportunity Deleted.", opportunity.Name);
+                    save = true;
+                }
+            }
+
+            if (save) org.SaveChanges();
         }
 
         protected static void deleteAllInvoices()
@@ -131,11 +159,23 @@ namespace Augustus.CRM.Test
             deleteInvoices(invoiceRename);
         }
 
-
-
         private static void deleteInvoices(string name)
         {
-            DeleteEntities(org.Invoices, a => a.Name == name, a => a.Name);
+            var invoices = org.Invoices.Where(i => i.Name == name);
+
+            var save = false;
+
+            foreach (var invoice in invoices)
+            {
+                if (invoice.Name.StartsWith("Augustus"))
+                {
+                    org.Delete<InvoiceEntity>(invoice);
+                    Console.WriteLine("{0} Invoice Deleted.", invoice.Name);
+                    save = true;
+                }
+            }
+
+            if (save) org.SaveChanges();
         }
 
         protected static void deleteAllWorkDoneItems()
@@ -144,9 +184,9 @@ namespace Augustus.CRM.Test
             deleteWorkDoneItems(invoiceRename);
         }
 
-        protected static void deleteWorkDoneItems(string invoiceName)
+        protected static void deleteWorkDoneItems(string name)
         {
-            var invoices = org.Invoices.Where(i => i.Name == invoiceName);
+            var invoices = org.Invoices.Where(i => i.Name == name);
 
             var save = false;
 
@@ -165,26 +205,6 @@ namespace Augustus.CRM.Test
                             save = true;
                         }
                     }
-                }
-            }
-
-            if (save) org.SaveChanges();
-        }
-
-        private static void DeleteEntities<T>(IQueryable<T> entities, Func<T, bool> whereClause, Func<T, string> getName) where T : BaseEntity
-        {
-            var entitiesToDelete = entities.Where(whereClause);
-
-            var save = false;
-
-            foreach (var entity in entitiesToDelete)
-            {
-                // Danger, danger, check name just in case whereClause fails and returns everything.
-                if (getName(entity).StartsWith("Augustus"))
-                {
-                    org.Delete<T>(entity);
-                    Console.WriteLine("{0} Entity Deleted.", getName(entity));
-                    save = true;
                 }
             }
 

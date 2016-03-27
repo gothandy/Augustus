@@ -1,4 +1,5 @@
 ﻿using Augustus.CRM.Attributes;
+using Augustus.CRM.Extensions;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Client;
 using System;
@@ -14,31 +15,32 @@ namespace Augustus.CRM.Entities
         public const int EntityTypeCode = 10049;
 
         [AttributeLogicalName("new_invoiceid")]
+        [EntityReference(InvoiceEntity.EntityLogicalName)]
         public Guid? InvoiceId
         {
-            get { return this.GetAttributeEntityReference("new_invoiceid"); }
-            set { this.SetAttributeEntityReference("new_invoiceid", InvoiceEntity.EntityLogicalName, value); }
+            get { return this.GetAttributeEntityReference(); }
+            set { this.SetAttributeEntityReference(value); }
         }
 
         [AttributeLogicalName("new_margin")]
         public decimal? Margin
         {
-            get { return this.GetAttributeMoney("new_margin"); }
-            set { this.SetAttributeMoney("new_margin", value); }
+            get { return this.GetAttributeMoney(); }
+            set { this.SetAttributeMoney(value); }
         }
 
         [AttributeLogicalName("new_workdonedate")]
         public DateTime? WorkDoneDate
         {
-            get { return this.GetAttributeDateTime("new_workdonedate"); }
-            set { this.SetAttributeDateTime("new_workdonedate", value); }
+            get { return this.GetAttributeDateTime(); }
+            set { this.SetAttributeDateTime(value); }
         }
 
         [AttributeLogicalName("new_workdoneitemid")]
         public override Guid Id
         {
-            get { return this.GetAttributeId("new_workdoneitemid"); }
-            set { this.SetAttributeId("new_workdoneitemid", value); }
+            get { return this.GetAttributeId(); }
+            set { this.SetAttributeId(value); }
         }
 
         [AttributeLogicalName("statecode")]
@@ -49,10 +51,11 @@ namespace Augustus.CRM.Entities
         }
 
         [AttributeLogicalName("new_account")]
+        [EntityReference(AccountEntity.EntityLogicalName)]
         public Guid? AccountId
         {
-            get { return this.GetAttributeEntityReference("new_account"); }
-            set { this.SetAttributeEntityReference("new_account", AccountEntity.EntityLogicalName, value); }
+            get { return this.GetAttributeEntityReference(); }
+            set { this.SetAttributeEntityReference(value); }
         }
     }
 }

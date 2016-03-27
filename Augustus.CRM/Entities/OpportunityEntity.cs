@@ -1,4 +1,5 @@
-﻿using Augustus.CRM.Attributes;
+﻿using Augustus.CRM.Extensions;
+using Augustus.CRM.Attributes;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Client;
 using System;
@@ -16,22 +17,23 @@ namespace Augustus.CRM.Entities
         [AttributeLogicalName("opportunityid")]
         public override Guid Id
         {
-            get { return this.GetAttributeId("opportunityid"); }
-            set { this.SetAttributeId("opportunityid", value); }
+            get { return this.GetAttributeId(); }
+            set { this.SetAttributeId(value); }
         }
 
         [AttributeLogicalName("customerid")]
+        [EntityReference(AccountEntity.EntityLogicalName)]
         public Guid? AccountId
         {
-            get { return this.GetAttributeEntityReference("customerid"); }
-            set { this.SetAttributeEntityReference("customerid", AccountEntity.EntityLogicalName, value); }
+            get { return this.GetAttributeEntityReference(); }
+            set { this.SetAttributeEntityReference(value); }
         }
 
         [AttributeLogicalName("name")]
         public string Name
         {
-            get { return this.GetAttributeString("name"); }
-            set { this.SetAttributeString("name", value); }
+            get { return this.GetAttributeString(); }
+            set { this.SetAttributeString(value); }
         }
     }
 }

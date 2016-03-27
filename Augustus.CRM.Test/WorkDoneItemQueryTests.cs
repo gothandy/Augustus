@@ -24,12 +24,20 @@ namespace Augustus.CRM.Test
            
             easyJetJan16Inv = new Guid("28D8BB1A-0DB3-E511-8118-3863BB34FA68");
 
-
+            deleteAllWorkDoneItems();
+            deleteAllInvoices();
+            deleteAllOpportunities();
+            deleteAllAccounts();
         }
 
         [ClassCleanup]
         public static void ClassCleanup()
         {
+            deleteAllWorkDoneItems();
+            deleteAllInvoices();
+            deleteAllOpportunities();
+            deleteAllAccounts();
+
             org.Dispose();
         }
 
@@ -51,11 +59,6 @@ namespace Augustus.CRM.Test
         [TestMethod]
         public void CRM_Query_WorkDoneItem_CrUD()
         {
-            deleteAllWorkDoneItems();
-            deleteAllInvoices();
-            deleteAllOpportunities();
-            deleteAllAccounts();
-
             // Create Account
             createAccount(accountName);
             var account = getAccount(accountName);
