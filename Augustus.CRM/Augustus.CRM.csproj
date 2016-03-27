@@ -84,7 +84,18 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\EntityReferenceAttribute.cs" />
+    <Compile Include="Attributes\IdAttribute.cs" />
+    <Compile Include="Attributes\OptionSetAttribute.cs" />
+    <Compile Include="Attributes\ActiveAttribute.cs" />
+    <Compile Include="Attributes\StringAttribute.cs" />
+    <Compile Include="Attributes\DateTimeAttribute.cs" />
+    <Compile Include="Attributes\MoneyAttribute.cs" />
     <Compile Include="BaseQuery.cs" />
+    <Compile Include="Converters\AccountConverter.cs" />
+    <Compile Include="Converters\InvoiceConverter.cs" />
+    <Compile Include="Converters\OpportunityConverter.cs" />
+    <Compile Include="Converters\WorkDoneItemConverter.cs" />
     <Compile Include="Entities\AccountEntity.cs" />
     <Compile Include="BaseEntity.cs" />
     <Compile Include="BaseOrganization.cs" />

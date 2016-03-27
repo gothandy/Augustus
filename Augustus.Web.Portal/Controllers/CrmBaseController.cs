@@ -132,5 +132,12 @@ namespace Augustus.Web.Portal.Controllers
                 Organization = org
             };
         }
+
+        protected async Task<BulkUpdateQuery> GetBulkUpdateQuery()
+        {
+            var org = await GetOrgQueryable();
+
+            return new BulkUpdateQuery { Organization = org };
+        }
     }
 }

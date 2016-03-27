@@ -201,6 +201,7 @@
     <Compile Include="Controllers\OrganizationController.cs" />
     <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Controllers\OpportunityController.cs" />
+    <Compile Include="Controllers\VincenteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -365,6 +366,7 @@
     <Content Include="Views\Opportunity\Create.cshtml" />
     <Content Include="Views\Opportunity\Breadcrumb.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Account.cshtml" />
+    <Content Include="Views\Vincente\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

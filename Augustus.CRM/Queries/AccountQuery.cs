@@ -1,4 +1,5 @@
 ﻿using Augustus.CRM;
+using Augustus.CRM.Converters;
 using Augustus.CRM.Entities;
 using Augustus.Domain.Interfaces;
 using Augustus.Domain.Objects;
@@ -17,7 +18,7 @@ namespace Augustus.CRM.Queries
         {
             var account = (from a in Organization.Accounts
                            where a.Id == id
-                           select AccountEntity.ToDomainObject(a)).Single();
+                           select AccountConverter.ToDomainObject(a)).Single();
 
             account.Invoices = GetInvoices(id, ActiveAfter);
             account.Opportunities = GetNewAndActiveOpportunities(id, CreatedAfter, ActiveAfter);
@@ -31,7 +32,7 @@ namespace Augustus.CRM.Queries
                     where i.AccountId == accountId
                     && i.InvoiceDate > @from
                     orderby i.InvoiceDate descending
-                    select InvoiceEntity.ToDomainObject(i)).AsEnumerable();
+                    select InvoiceConverter.ToDomain(i)).AsEnumerable();
         }
 
         private IEnumerable<Opportunity> GetActiveOpportunities(Guid accountId, DateTime invoicesFrom)
@@ -42,7 +43,7 @@ namespace Augustus.CRM.Queries
                     where i.InvoiceDate > invoicesFrom
                     && o.AccountId == accountId
                     orderby o.Name ascending
-                    select OpportunityEntity.ToDomainObject(o)).Distinct().AsEnumerable();
+                    select OpportunityConverter.ToDomainObject(o)).Distinct().AsEnumerable();
         }
 
         private IEnumerable<Opportunity> GetNewOpportunities(Guid accountId, DateTime createdAfter)
@@ -51,7 +52,7 @@ namespace Augustus.CRM.Queries
                     where o.Created > createdAfter
                     && o.AccountId == accountId
                     orderby o.Name ascending
-                    select OpportunityEntity.ToDomainObject(o)).AsEnumerable();
+                    select OpportunityConverter.ToDomainObject(o)).AsEnumerable();
         }
 
         private IEnumerable<Opportunity> GetNewAndActiveOpportunities(Guid accountId, DateTime createdAfter, DateTime invoicesFrom)

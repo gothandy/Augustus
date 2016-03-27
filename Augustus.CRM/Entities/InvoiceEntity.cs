@@ -1,17 +1,13 @@
-﻿using Augustus.Domain.Enums;
-using Augustus.Domain.Objects;
+﻿using Augustus.CRM.Attributes;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Client;
 using System;
-using System.Linq;
-using System.Runtime.Serialization;
 
 namespace Augustus.CRM.Entities
 {
     [EntityLogicalName("new_invoice")]
     public class InvoiceEntity : BaseEntity
     {
-
         public InvoiceEntity() : base(EntityLogicalName) { }
 
         public const string EntityLogicalName = "new_invoice";
@@ -22,18 +18,7 @@ namespace Augustus.CRM.Entities
         [AttributeLogicalName("statuscode")]
         public int? Status
         {
-            get
-            {
-                OptionSetValue statusCode = GetAttributeValue<OptionSetValue>("statuscode");
-                if (statusCode == null)
-                {
-                    return null;
-                }
-                else
-                {
-                    return Array.FindIndex(statusLookup, a => statusCode.Value == 100000000 + a);
-                }
-            }
+            get { return this.GetAttributeOptionSet("statuscode", statusLookup); }
             /*set
             {
                 this.SetAttributeValue("statuscode", value);
@@ -41,237 +26,92 @@ namespace Augustus.CRM.Entities
         }
 
         [AttributeLogicalName("new_invoiceid")]
-        public Guid? InvoiceId
-        {
-            get
-            {
-                return GetAttributeValue<Guid?>("new_invoiceid");
-            }
-            set
-            {
-                this.SetAttributeValue("new_invoiceid", value);
-                if (value.HasValue)
-                {
-                    base.Id = value.Value;
-                }
-                else
-                {
-                    base.Id = System.Guid.Empty;
-                }
-            }
-        }
-
-        public void SetUsingDomain(Invoice domain)
-        {
-            var entity = this;
-
-            entity.Name = domain.Name;
-            // AccountId set using lookup on Opportunity in query.
-            entity.OpportunityId = domain.OpportunityId;
-            entity.InvoiceNo = domain.InvoiceNo;
-            entity.PONumber = domain.PONumber;
-            entity.Cost = domain.Cost;
-            entity.Revenue = domain.Revenue;
-            entity.Margin = domain.Margin;
-            entity.InvoiceDate = domain.InvoiceDate;
-            entity.ClientApprovedDate = domain.ClientApprovedDate;
-        }
-
-        public Invoice ToDomainObject()
-        {
-            return InvoiceEntity.ToDomainObject(this);
-        }
-
-        public static Invoice ToDomainObject(InvoiceEntity entity)
-        {
-            var domain = new Invoice();
-
-            domain.Id = entity.Id;
-            domain.Name = entity.Name;
-            domain.AccountId = entity.AccountId;
-            domain.OpportunityId = entity.OpportunityId;
-            domain.ClientApprovedDate = entity.ClientApprovedDate;
-            domain.Created = entity.Created;
-            domain.InvoiceDate = entity.InvoiceDate;
-            domain.InvoiceNo = entity.InvoiceNo;
-            domain.PONumber = entity.PONumber;
-            domain.Revenue = entity.Revenue;
-            domain.Cost = entity.Cost;
-            //Margin is calculated
-            domain.Status = (InvoiceStatus)entity.Status;
-
-            return domain;
-        }
-
-        [AttributeLogicalName("new_invoiceid")]
         public override Guid Id
         {
-            get
-            {
-                return base.Id;
-            }
-            set
-            {
-                this.InvoiceId = value;
-            }
+            get { return this.GetAttributeId("new_invoiceid"); }
+            set { this.SetAttributeId("new_invoiceid", value); }
         }
 
         [AttributeLogicalName("new_invoicedate")]
         public DateTime? InvoiceDate
         {
-            get
-            {
-                return GetAttributeValue<DateTime?>("new_invoicedate");
-            }
-            set
-            {
-                this.SetAttributeValue("new_invoicedate", value);
-            }
+            get { return this.GetAttributeDateTime("new_invoicedate"); }
+            set { this.SetAttributeDateTime("new_invoicedate", value); }
         }
 
         [AttributeLogicalName("new_cost")]
         public decimal? Cost
         {
-            get
-            {
-                return GetAttributeValueMoney("new_cost");
-            }
-            set
-            {
-                SetAttributeValueMoney("new_cost", value);
-            }
+            get { return this.GetAttributeMoney("new_cost"); }
+            set { this.SetAttributeMoney("new_cost", value); }
         }
 
-        private const string AccountIdLogicalName = "new_directclient";
-        [AttributeLogicalName(AccountIdLogicalName)]
+        [AttributeLogicalName("new_directclient")]
         public Guid? AccountId
         {
-            get
-            {
-                return GetAttributeEntityReferenceId("new_directclient");
-            }
-            set
-            {
-                SetAttributeEntityReferenceId(AccountIdLogicalName, AccountEntity.EntityLogicalName, value);
-            }
+            get { return this.GetAttributeEntityReference("new_directclient"); }
+            set { this.SetAttributeEntityReference("new_directclient", AccountEntity.EntityLogicalName, value); }
         }
 
         [AttributeLogicalName("new_clientapproveddate")]
         public DateTime? ClientApprovedDate
         {
-            get
-            {
-                return GetAttributeValue<DateTime?>("new_clientapproveddate");
-            }
-            set
-            {
-                this.SetAttributeValue("new_clientapproveddate", value);
-            }
+            get { return this.GetAttributeDateTime("new_clientapproveddate"); }
+            set { this.SetAttributeDateTime("new_clientapproveddate", value); }
         }
 
         [AttributeLogicalName("new_invoiceno")]
         public string InvoiceNo
         {
-            get
-            {
-                return this.GetAttributeValue<string>("new_invoiceno");
-            }
-            set
-            {
-                this.SetAttributeValue("new_invoiceno", value);
-            }
+            get { return this.GetAttributeString("new_invoiceno"); }
+            set { this.SetAttributeString("new_invoiceno", value); }
         }
 
         [AttributeLogicalName("new_margin")]
         public decimal? Margin
         {
-            get
-            {
-                return GetAttributeValueMoney("new_margin");
-            }
-            set
-            {
-                SetAttributeValueMoney("new_margin", value);
-            }
+            get { return this.GetAttributeMoney("new_margin"); }
+            set { this.SetAttributeMoney("new_margin", value); }
         }
 
         [AttributeLogicalName("new_name")]
         public string Name
         {
-            get
-            {
-                return GetAttributeValue<string>("new_name");
-            }
-            set
-            {
-                SetAttributeValue("new_name", value);
-            }
+            get { return this.GetAttributeString("new_name"); }
+            set { this.SetAttributeString("new_name", value); }
         }
 
-        private const string OpportunityIdLogicalName = "new_opportunity";
-        [AttributeLogicalName(OpportunityIdLogicalName)]
+        [AttributeLogicalName("new_opportunity")]
         public Guid? OpportunityId
         {
-            get
-            {
-                return GetAttributeEntityReferenceId(OpportunityIdLogicalName);
-            }
-            set
-            {
-                SetAttributeEntityReferenceId(OpportunityIdLogicalName, InvoiceEntity.EntityLogicalName, value);
-            }
+            get { return this.GetAttributeEntityReference("new_opportunity"); }
+            set { this.SetAttributeEntityReference("new_opportunity", InvoiceEntity.EntityLogicalName, value); }
         }
 
         [AttributeLogicalName("new_ponumber")]
         public string PONumber
         {
-            get
-            {
-                return GetAttributeValue<string>("new_ponumber");
-            }
-            set
-            {
-                this.SetAttributeValue("new_ponumber", value);
-            }
+            get { return this.GetAttributeString("new_ponumber"); }
+            set { this.SetAttributeString("new_ponumber", value); }
         }
 
         [AttributeLogicalName("new_revenue")]
         public decimal? Revenue
         {
-            get
-            {
-                return GetAttributeValueMoney("new_revenue");
-            }
-            set
-            {
-                SetAttributeValueMoney("new_revenue", value);
-            }
+            get { return this.GetAttributeMoney("new_revenue"); }
+            set { this.SetAttributeMoney("new_revenue", value); }
         }
 
         [AttributeLogicalName("new_wip_current")]
         public decimal? WipCurrent
         {
-            get
-            {
-                return GetAttributeValueMoney("new_wip_current");
-            }
-            /*set
-            {
-                this.SetAttributeValue("new_wip_current", value);
-            }*/
+            get { return this.GetAttributeMoney("new_wip_current"); }
         }
 
         [AttributeLogicalName("new_wip_previous")]
         public decimal? WipPevious
         {
-            get
-            {
-                return GetAttributeValueMoney("new_wip_previous");
-            }
-            /*set
-            {
-                this.SetAttributeValue("new_wip_previous", value);
-            }*/
+            get { return this.GetAttributeMoney("new_wip_previous"); }
         }
     }
 }

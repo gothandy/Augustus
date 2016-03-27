@@ -104,12 +104,21 @@ namespace Augustus.CRM.Test
             Assert.AreEqual(opportunity.Id, inv.OpportunityId);
             Assert.AreEqual(new DateTime(2016, 3, 1), inv.InvoiceDate);
             Assert.AreEqual(account.Id, inv.AccountId);
-            
+
 
             // Update Invoice
-            invoice.Id = id;
-            invoice.Name = invoiceRename;
-            query.Update(invoice);
+            var updateInv = new Invoice
+            {
+                Id = id,
+                Name = invoiceRename
+            };
+            query.Update(updateInv);
+            inv = query.GetItem(id);
+            Assert.AreEqual(invoiceRename, inv.Name);
+            Assert.AreEqual(10000, inv.Margin);
+            Assert.AreEqual(opportunity.Id, inv.OpportunityId);
+            Assert.AreEqual(new DateTime(2016, 3, 1), inv.InvoiceDate);
+            Assert.AreEqual(account.Id, inv.AccountId);
 
             // Delete Invoice
             query.Delete(id);

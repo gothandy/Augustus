@@ -7,6 +7,7 @@ using Augustus.CRM;
 using Augustus.CRM.Entities;
 using Augustus.Domain.Objects;
 using Augustus.Domain.Interfaces;
+using Augustus.CRM.Converters;
 
 namespace Augustus.CRM.Queries
 {
@@ -14,7 +15,7 @@ namespace Augustus.CRM.Queries
     {
         public Opportunity GetItem(Guid id)
         {
-            return OpportunityEntity.ToDomainObject(Organization.Opportunities.Single(o => o.Id == id));
+            return OpportunityConverter.ToDomainObject(Organization.Opportunities.Single(o => o.Id == id));
         }
 
         public Account GetAccount(Guid opportunityId)
@@ -22,7 +23,7 @@ namespace Augustus.CRM.Queries
             var opp = GetItem(opportunityId);
             var acc = Organization.Accounts.Single(a => a.Id == opp.AccountId);
 
-            return AccountEntity.ToDomainObject(acc);
+            return AccountConverter.ToDomainObject(acc);
         }
 
         public IEnumerable<Invoice> GetInvoices(Guid opportunityId)
@@ -30,7 +31,7 @@ namespace Augustus.CRM.Queries
             return (from i in Organization.Invoices
                     where i.OpportunityId == opportunityId
                     orderby i.InvoiceDate descending
-                    select InvoiceEntity.ToDomainObject(i)).AsEnumerable();
+                    select InvoiceConverter.ToDomain(i)).AsEnumerable();
         }
 
         public Guid Create(Opportunity opportunity)

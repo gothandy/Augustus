@@ -1,26 +1,13 @@
-﻿using Augustus.Domain.Objects;
+﻿using Augustus.CRM.Attributes;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Client;
 using System;
-using System.Runtime.Serialization;
 
 namespace Augustus.CRM.Entities
 {
-    [DataContract()]
-    public enum WorkDoneItemState
-    {
-
-        [EnumMember()]
-        Active = 0,
-
-        [EnumMember()]
-        Inactive = 1,
-    }
-
     [EntityLogicalName("new_workdoneitem")]
     public partial class WorkDoneItemEntity : BaseEntity
     {
-
         public WorkDoneItemEntity() : base(EntityLogicalName) { }
 
         public const string EntityLogicalName = "new_workdoneitem";
@@ -29,135 +16,43 @@ namespace Augustus.CRM.Entities
         [AttributeLogicalName("new_invoiceid")]
         public Guid? InvoiceId
         {
-            get
-            {
-                return GetAttributeEntityReferenceId("new_invoiceid");
-            }
-            set
-            {
-                SetAttributeEntityReferenceId("new_invoiceid", InvoiceEntity.EntityLogicalName, value);
-            }
+            get { return this.GetAttributeEntityReference("new_invoiceid"); }
+            set { this.SetAttributeEntityReference("new_invoiceid", InvoiceEntity.EntityLogicalName, value); }
         }
 
         [AttributeLogicalName("new_margin")]
         public decimal? Margin
         {
-            get
-            {
-                return GetAttributeValueMoney("new_margin");
-            }
-            set
-            {
-                if (value.HasValue)
-                {
-                    SetAttributeValue("new_margin", new Money(value.Value));
-                }
-            }
-        }
-
-        public static WorkDoneItem ToDomainObject(WorkDoneItemEntity entity)
-        {
-            return new WorkDoneItem
-            {
-                Id = entity.Id,
-                Created = entity.Created,
-                AccountId = entity.AccountId,
-                InvoiceId = entity.InvoiceId,
-                WorkDoneDate = entity.WorkDoneDate,
-                Margin = entity.Margin
-            };
+            get { return this.GetAttributeMoney("new_margin"); }
+            set { this.SetAttributeMoney("new_margin", value); }
         }
 
         [AttributeLogicalName("new_workdonedate")]
         public DateTime? WorkDoneDate
         {
-            get
-            {
-                return GetAttributeValueDateTime("new_workdonedate");
-            }
-            set
-            {
-                SetAttributeValueDateTime("new_workdonedate", value);
-            }
-        }
-
-        [AttributeLogicalName("new_workdoneitemid")]
-        public Guid? WorkDoneItemId
-        {
-            get
-            {
-                return GetAttributeValue<Guid?>("new_workdoneitemid");
-            }
-            set
-            {
-                SetAttributeValue("new_workdoneitemid", value);
-                if (value.HasValue)
-                {
-                    base.Id = value.Value;
-                }
-                else
-                {
-                    base.Id = System.Guid.Empty;
-                }
-            }
+            get { return this.GetAttributeDateTime("new_workdonedate"); }
+            set { this.SetAttributeDateTime("new_workdonedate", value); }
         }
 
         [AttributeLogicalName("new_workdoneitemid")]
         public override Guid Id
         {
-            get
-            {
-                return base.Id;
-            }
-            set
-            {
-                WorkDoneItemId = value;
-            }
+            get { return this.GetAttributeId("new_workdoneitemid"); }
+            set { this.SetAttributeId("new_workdoneitemid", value); }
         }
-
-
 
         [AttributeLogicalName("statecode")]
-        public WorkDoneItemState? State
+        public bool? Active
         {
-            get
-            {
-                OptionSetValue optionSet = GetAttributeValue<OptionSetValue>("statecode");
-                if ((optionSet != null))
-                {
-                    return ((WorkDoneItemState)(System.Enum.ToObject(typeof(WorkDoneItemState), optionSet.Value)));
-                }
-                else
-                {
-                    return null;
-                }
-            }
-            set
-            {
-                if ((value == null))
-                {
-                    SetAttributeValue("statecode", null);
-                }
-                else
-                {
-                    SetAttributeValue("statecode", new OptionSetValue(((int)(value))));
-                }
-            }
+            get { return this.GetAttributeState(); }
+            set { this.SetAttributeState(value); }
         }
-
 
         [AttributeLogicalName("new_account")]
         public Guid? AccountId
         {
-            get
-            {
-                return GetAttributeEntityReferenceId("new_account");
-            }
-
-            set
-            {
-                SetAttributeEntityReferenceId("new_account", AccountEntity.EntityLogicalName, value);
-            }
+            get { return this.GetAttributeEntityReference("new_account"); }
+            set { this.SetAttributeEntityReference("new_account", AccountEntity.EntityLogicalName, value); }
         }
     }
 }

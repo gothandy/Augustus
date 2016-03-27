@@ -1,4 +1,5 @@
-﻿using Augustus.CRM.Entities;
+﻿using Augustus.CRM.Converters;
+using Augustus.CRM.Entities;
 using Augustus.Domain.Interfaces;
 using Augustus.Domain.Objects;
 using System;
@@ -10,7 +11,7 @@ namespace Augustus.CRM.Queries
     {
         public WorkDoneItem GetItem(Guid id)
         {
-            return WorkDoneItemEntity.ToDomainObject(Organization.WorkDoneItems.Single(i => i.Id == id));
+            return WorkDoneItemConverter.ToDomain(Organization.WorkDoneItems.Single(i => i.Id == id));
         }
 
         public Invoice GetInvoice(Guid workDoneItemId)
@@ -18,7 +19,7 @@ namespace Augustus.CRM.Queries
             var wdi = GetItem(workDoneItemId);
             var inv = Organization.Invoices.Single(i => i.Id == wdi.InvoiceId);
 
-            return inv.ToDomainObject();
+            return inv.ConvertToDomain();
         }
 
         public Opportunity GetOpportunity(Guid workDoneItemId)
@@ -26,7 +27,7 @@ namespace Augustus.CRM.Queries
             var inv = GetInvoice(workDoneItemId);
             var opp = Organization.Opportunities.Single(o => o.Id == inv.OpportunityId);
 
-            return OpportunityEntity.ToDomainObject(opp);
+            return OpportunityConverter.ToDomainObject(opp);
         }
 
         public Account GetAccount(Guid WorkDoneItemId)
@@ -34,7 +35,7 @@ namespace Augustus.CRM.Queries
             var inv = GetOpportunity(WorkDoneItemId);
             var acc = Organization.Accounts.Single(a => a.Id == inv.AccountId);
 
-            return AccountEntity.ToDomainObject(acc);
+            return AccountConverter.ToDomainObject(acc);
         }
 
         public Guid Create(WorkDoneItem workDoneItem)

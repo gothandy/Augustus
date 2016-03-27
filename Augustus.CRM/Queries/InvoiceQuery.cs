@@ -1,4 +1,5 @@
-﻿using Augustus.CRM.Entities;
+﻿using Augustus.CRM.Converters;
+using Augustus.CRM.Entities;
 using Augustus.Domain.Interfaces;
 using Augustus.Domain.Objects;
 using System;
@@ -11,10 +12,10 @@ namespace Augustus.CRM.Queries
     {
         public Invoice GetItem(Guid id)
         {
-            var inv = Organization.Invoices.Single(i => i.Id == id).ToDomainObject();
+            var inv = Organization.Invoices.Single(i => i.Id == id).ConvertToDomain();
 
-            inv.Opportunity = OpportunityEntity.ToDomainObject(Organization.Opportunities.Single(o => o.Id == inv.OpportunityId));
-            inv.Account = AccountEntity.ToDomainObject(Organization.Accounts.Single(a => a.Id == inv.Opportunity.AccountId));
+            inv.Opportunity = OpportunityConverter.ToDomainObject(Organization.Opportunities.Single(o => o.Id == inv.OpportunityId));
+            inv.Account = AccountConverter.ToDomainObject(Organization.Accounts.Single(a => a.Id == inv.Opportunity.AccountId));
             inv.WorkDoneItems = GetWorkDoneItems(id);
             return inv;
         }
@@ -24,7 +25,7 @@ namespace Augustus.CRM.Queries
             return (from i in Organization.WorkDoneItems
                     where i.InvoiceId == id
                     orderby i.WorkDoneDate descending
-                    select WorkDoneItemEntity.ToDomainObject(i)).AsEnumerable();
+                    select WorkDoneItemConverter.ToDomain(i)).AsEnumerable();
         }
 
         public Guid Create(Invoice invoice)

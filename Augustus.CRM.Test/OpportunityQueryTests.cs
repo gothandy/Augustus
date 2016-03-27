@@ -1,4 +1,5 @@
-﻿using Augustus.CRM.Entities;
+﻿using Augustus.CRM.Converters;
+using Augustus.CRM.Entities;
 using Augustus.CRM.Queries;
 using Augustus.Domain.Objects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -33,7 +34,7 @@ namespace Augustus.CRM.Test
         [TestMethod]
         public void CRM_Query_Opportunity_GetInvoices()
         {
-            Opportunity opp = OpportunityEntity.ToDomainObject(org.Opportunities.Single(o => o.Id == new Guid("2d1a82de-4479-e411-be1f-6c3be5becb24")));
+            Opportunity opp = OpportunityConverter.ToDomainObject(org.Opportunities.Single(o => o.Id == new Guid("2d1a82de-4479-e411-be1f-6c3be5becb24")));
 
             var invoices = query.GetInvoices(opp.Id.Value);
 
@@ -48,7 +49,7 @@ namespace Augustus.CRM.Test
         [TestMethod]
         public void CRM_Query_Opportunity_GetAccount()
         {
-            Opportunity opp = OpportunityEntity.ToDomainObject(org.Opportunities.Single(o => o.Id == new Guid("2d1a82de-4479-e411-be1f-6c3be5becb24")));
+            Opportunity opp = OpportunityConverter.ToDomainObject(org.Opportunities.Single(o => o.Id == new Guid("2d1a82de-4479-e411-be1f-6c3be5becb24")));
 
             var account = query.GetAccount(opp.Id.Value);
 
