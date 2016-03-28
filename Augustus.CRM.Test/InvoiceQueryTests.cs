@@ -90,10 +90,12 @@ namespace Augustus.CRM.Test
                 OpportunityId = opportunity.Id,
                 Cost = 5000,
                 Revenue = 15000,
-                ClientApprovedDate = new DateTime(2016, 1, 1),
+                SdnApproved = new DateTime(2016, 1, 1),
+                ProposalApproved = new DateTime(2016, 2, 1),
                 InvoiceDate = new DateTime(2016, 3, 1),
                 InvoiceNo = "Inv No.",
-                PONumber = "PO No."
+                PONumber = "PO No.",
+                Status = InvoiceStatus.Proposed
             };
 
             var id = query.Create(invoice);
@@ -103,8 +105,10 @@ namespace Augustus.CRM.Test
             Assert.AreEqual(10000, inv.Margin);
             Assert.AreEqual(opportunity.Id, inv.OpportunityId);
             Assert.AreEqual(new DateTime(2016, 3, 1), inv.InvoiceDate);
+            Assert.AreEqual(new DateTime(2016, 1, 1), inv.SdnApproved);
+            Assert.AreEqual(new DateTime(2016, 2, 1), inv.ProposalApproved);
             Assert.AreEqual(account.Id, inv.AccountId);
-
+            Assert.AreEqual(InvoiceStatus.Proposed, inv.Status);
 
             // Update Invoice
             var updateInv = new Invoice

@@ -19,10 +19,7 @@ namespace Augustus.CRM.Entities
         public int? Status
         {
             get { return this.GetAttributeStatus(); }
-            /*set
-            {
-                this.SetAttributeValue("statuscode", value);
-            }*/
+            set { this.SetAttributeStatus(value); }
         }
 
         [AttributeLogicalName("new_invoiceid")]
@@ -54,8 +51,15 @@ namespace Augustus.CRM.Entities
             set { this.SetAttributeEntityReference(value); }
         }
 
+        [AttributeLogicalName("new_proposalapproveddate")]
+        public DateTime? ProposalApproved
+        {
+            get { return this.GetAttributeDateTime(); }
+            set { this.SetAttributeDateTime(value); }
+        }
+
         [AttributeLogicalName("new_clientapproveddate")]
-        public DateTime? ClientApprovedDate
+        public DateTime? SdnApproved
         {
             get { return this.GetAttributeDateTime(); }
             set { this.SetAttributeDateTime(value); }

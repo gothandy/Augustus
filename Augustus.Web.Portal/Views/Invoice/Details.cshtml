@@ -34,13 +34,13 @@
             <div class="list-group-item">
                 <div class="row">
                     <div class="col-xs-6"><strong>Proposal Date</strong></div>
-                    <div class="col-xs-6 text-right"></div>
+                    <div class="col-xs-6 text-right">@DateTimeHelper.Format(Model.ProposalApproved)</div>
                 </div>
             </div>
             <div class="list-group-item">
                 <div class="row">
                     <div class="col-xs-6"><strong>SDN Date</strong></div>
-                    <div class="col-xs-6 text-right"></div>
+                    <div class="col-xs-6 text-right">@DateTimeHelper.Format(Model.SdnApproved)</div>
                 </div>
             </div>
             <div class="list-group-item">
@@ -69,10 +69,11 @@
             </div>
             <div class="list-group-item">
                 <div class="row">
-                    <div class="col-xs-6">@Html.LabelFor(m => m.Status)</div>
+                    <div class="col-xs-6"><strong>Status</strong></div>
                     <div class="col-xs-6 text-right">@Html.DisplayFor(m => m.Status)</div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

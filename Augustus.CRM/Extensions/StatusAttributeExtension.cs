@@ -26,5 +26,17 @@ namespace Augustus.CRM.Extensions
                 return Array.FindIndex(statusLookup, a => statusCode.Value == 100000000 + a);
             }
         }
+
+        public static void SetAttributeStatus(this BaseEntity entity, int? value, [CallerMemberName] string caller = "")
+        {
+            var attributeLogicalName = AttributeHelper.GetLogicalName(entity, caller);
+            var statusLookup = AttributeHelper.GetStatusLookup(entity, caller);
+
+            if (value.HasValue)
+            {
+                var statusCode = new OptionSetValue(statusLookup[value.Value] + 100000000);
+                entity.SetBaseAttributeValue(attributeLogicalName, statusCode);
+            }
+        }
     }
 }

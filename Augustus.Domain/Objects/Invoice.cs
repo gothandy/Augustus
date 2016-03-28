@@ -19,6 +19,7 @@ namespace Augustus.Domain.Objects
         public Guid? OpportunityId { get; set; }
 
         [DataMember]
+        [Required]
         public string Name { get; set; }
 
         [DataMember]
@@ -39,8 +40,12 @@ namespace Augustus.Domain.Objects
         public decimal? Revenue { get; set; }
 
         [DataMember]
+        [Display(Name = "Proposal Approved")]
+        public DateTime? ProposalApproved { get; set; }
+
+        [DataMember]
         [Display(Name = "SDN Approved")]
-        public DateTime? ClientApprovedDate { get; set; }
+        public DateTime? SdnApproved { get; set; }
 
         [DataMember]
         public DateTime? Created { get; set; }

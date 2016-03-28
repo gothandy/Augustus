@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
 namespace Augustus.Domain.Objects
@@ -11,6 +12,7 @@ namespace Augustus.Domain.Objects
         public Guid? Id { get; set; }
 
         [DataMember]
+        [Required]
         public string Name { get; set; }
 
         [DataMember]

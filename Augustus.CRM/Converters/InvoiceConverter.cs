@@ -17,7 +17,31 @@ namespace Augustus.CRM.Converters
             entity.Revenue = domain.Revenue;
             entity.Margin = domain.Margin;
             entity.InvoiceDate = domain.InvoiceDate;
-            entity.ClientApprovedDate = domain.ClientApprovedDate;
+            entity.SdnApproved = domain.SdnApproved;
+            entity.ProposalApproved = domain.ProposalApproved;
+            entity.Status = (int?)domain.Status;
+        }
+
+        public static Invoice ToDomain(InvoiceEntity entity)
+        {
+            var domain = new Invoice();
+
+            domain.Id = entity.Id;
+            domain.Name = entity.Name;
+            domain.AccountId = entity.AccountId;
+            domain.OpportunityId = entity.OpportunityId;
+            domain.SdnApproved = entity.SdnApproved;
+            domain.ProposalApproved = entity.ProposalApproved;
+            domain.Created = entity.Created;
+            domain.InvoiceDate = entity.InvoiceDate;
+            domain.InvoiceNo = entity.InvoiceNo;
+            domain.PONumber = entity.PONumber;
+            domain.Revenue = entity.Revenue;
+            domain.Cost = entity.Cost;
+            //Margin is calculated
+            domain.Status = (InvoiceStatus)entity.Status;
+
+            return domain;
         }
 
         public static Invoice ConvertToDomain(this InvoiceEntity entity)
@@ -29,27 +53,6 @@ namespace Augustus.CRM.Converters
         {
             var domain = ToDomain(invoice);
             domain.Opportunity = OpportunityConverter.ToDomainObject(opportunity);
-            return domain;
-        }
-
-        public static Invoice ToDomain(InvoiceEntity entity)
-        {
-            var domain = new Invoice();
-
-            domain.Id = entity.Id;
-            domain.Name = entity.Name;
-            domain.AccountId = entity.AccountId;
-            domain.OpportunityId = entity.OpportunityId;
-            domain.ClientApprovedDate = entity.ClientApprovedDate;
-            domain.Created = entity.Created;
-            domain.InvoiceDate = entity.InvoiceDate;
-            domain.InvoiceNo = entity.InvoiceNo;
-            domain.PONumber = entity.PONumber;
-            domain.Revenue = entity.Revenue;
-            domain.Cost = entity.Cost;
-            //Margin is calculated
-            domain.Status = (InvoiceStatus)entity.Status;
-
             return domain;
         }
     }

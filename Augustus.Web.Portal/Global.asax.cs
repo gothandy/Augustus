@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using Augustus.Web.Portal.Model.Binders;
+using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
@@ -9,9 +10,12 @@ namespace Augustus.Web.Portal
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            ModelBinders.Binders.Add(typeof(decimal?), new DecimalModelBinder());
         }
     }
 }
