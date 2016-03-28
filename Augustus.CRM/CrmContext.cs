@@ -1,44 +1,44 @@
 ﻿using Augustus.CRM.Entities;
+using Microsoft.Xrm.Sdk.Client;
 using System;
 using System.Linq;
 
+[assembly: ProxyTypesAssemblyAttribute()]
+
 namespace Augustus.CRM
 {
-    public class OrgQueryable : BaseOrganization
+    public class CrmContext : IDisposable
     {
-        public OrgQueryable(string connectionString) : base(connectionString) { }
-        public OrgQueryable(Uri crmUrl, string accessToken) : base(crmUrl, accessToken) { }
+        private OrganizationServiceContext context;
+
+        public CrmContext(ICrmService service)
+        {
+            context = new OrganizationServiceContext(service.OrganizationService);
+        }
+
+        public void Dispose()
+        {
+            context.Dispose();
+        }
 
         public IQueryable<AccountEntity> Accounts
         {
-            get
-            {
-                return context.CreateQuery<AccountEntity>();
-            }
+            get { return context.CreateQuery<AccountEntity>(); }
         }
 
         public IQueryable<InvoiceEntity> Invoices
         {
-            get
-            {
-                return context.CreateQuery<InvoiceEntity>();
-            }
+            get { return context.CreateQuery<InvoiceEntity>(); }
         }
 
         public IQueryable<WorkDoneItemEntity> WorkDoneItems
         {
-            get
-            {
-                return context.CreateQuery<WorkDoneItemEntity>();
-            }
+            get { return context.CreateQuery<WorkDoneItemEntity>(); }
         }
 
         public IQueryable<OpportunityEntity> Opportunities
         {
-            get
-            {
-                return context.CreateQuery<OpportunityEntity>();
-            }
+            get { return context.CreateQuery<OpportunityEntity>(); }
         }
 
         public void Create<T>(T entity) where T : BaseEntity

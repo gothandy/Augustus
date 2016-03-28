@@ -85,6 +85,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\EntityReferenceAttribute.cs" />
+    <Compile Include="CrmServiceAccessToken.cs" />
+    <Compile Include="CrmServiceConnectionString.cs" />
     <Compile Include="Extensions\EntityReferenceAttributeExtension.cs" />
     <Compile Include="Extensions\IdAttributeExtension.cs" />
     <Compile Include="Extensions\StatusAttributeExtension.cs" />
@@ -101,17 +103,16 @@
     <Compile Include="Converters\WorkDoneItemConverter.cs" />
     <Compile Include="Entities\AccountEntity.cs" />
     <Compile Include="BaseEntity.cs" />
-    <Compile Include="BaseOrganization.cs" />
     <Compile Include="Entities\OpportunityEntity.cs" />
     <Compile Include="Entities\InvoiceEntity.cs" />
+    <Compile Include="ICrmService.cs" />
     <Compile Include="Queries\BulkUpdateQuery.cs" />
     <Compile Include="Queries\AccountQuery.cs" />
     <Compile Include="Queries\WorkDoneItemQuery.cs" />
     <Compile Include="Queries\InvoiceQuery.cs" />
     <Compile Include="Queries\OrganizationQuery.cs" />
     <Compile Include="Queries\OpportunityQuery.cs" />
-    <Compile Include="Status.cs" />
-    <Compile Include="OrgQueryable.cs" />
+    <Compile Include="CrmContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\WorkDoneItemEntity.cs" />
   </ItemGroup>

@@ -1,0 +1,18 @@
+﻿@model Invoice
+@{
+    ViewBag.Title = "Create Invoice";
+
+    var formButtons = new FormButtons
+    {
+        CancelUrl = @Url.Action("Invoices", "Opportunity", new { id = Model.Opportunity.Id })
+    };
+}
+
+@Html.Partial("Breadcrumb", Model)
+
+@using (Html.BeginForm())
+{
+    @Html.Partial("Form", Model, ViewData)
+
+    @Html.Partial("CreateButtons", formButtons)
+}

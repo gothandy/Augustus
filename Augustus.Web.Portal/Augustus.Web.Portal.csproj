@@ -367,6 +367,10 @@
     <Content Include="Views\Opportunity\Breadcrumb.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Account.cshtml" />
     <Content Include="Views\Vincente\Index.cshtml" />
+    <Content Include="Views\Invoice\Create.cshtml" />
+    <Content Include="Views\Invoice\Breadcrumb.cshtml" />
+    <Content Include="Views\Invoice\Edit.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Opportunity.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

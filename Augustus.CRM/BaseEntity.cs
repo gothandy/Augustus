@@ -9,8 +9,6 @@ namespace Augustus.CRM
     [DataContract()]
     public class BaseEntity : Entity
     {
-        public Dictionary<string, Attribute> AttributeCache = new Dictionary<string, Attribute>();
-
         public BaseEntity(string entityLogicalName) : base(entityLogicalName) { }
 
         public void SetBaseIdValue(Guid id)

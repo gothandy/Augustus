@@ -44,7 +44,7 @@ else
 }
 
 <div>
-    <a class="btn btn-default" href="@Url.Action("Create", "Invoice")">Create Invoice</a>
+    <a class="btn btn-default" href="@Url.Action("Create", "Invoice", new { id = opportunity.Id })">Create Invoice</a>
     <a class="btn btn-default pull-right" href="@Url.Action("Edit", new { id = opportunity.Id })">Edit Opportunity</a>
 </div>
 

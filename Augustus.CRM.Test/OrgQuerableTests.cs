@@ -11,14 +11,16 @@ namespace Augustus.CRM.Test
     [TestClass]
     public class OrgQueryableTests
     {
-        private static OrgQueryable org;
+        private static CrmContext org;
 
         [ClassInitialize]
         public static void ClassInit(TestContext testContext)
         {
             string connectionString = ConfigurationManager.AppSettings["crm:ConnectionString"];
 
-            org = new OrgQueryable(connectionString);
+            var svc = new CrmServiceConnectionString(connectionString);
+
+            org = new CrmContext(svc);
         }
 
         [ClassCleanup]

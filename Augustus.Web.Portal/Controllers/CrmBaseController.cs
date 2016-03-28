@@ -71,29 +71,31 @@ namespace Augustus.Web.Portal.Controllers
             }
         }
 
-        protected async Task<OrgQueryable> GetOrgQueryable()
+        protected async Task<CrmContext> GetCrmContext()
         {
             string useAzureAuth = ConfigurationManager.AppSettings["crm:UseAzureAuth"];
 
             if (useAzureAuth == "true" || useAzureAuth == null)
             {
                 Uri crmUrl = new Uri(ConfigurationManager.AppSettings["crm:Url"]);
-
                 var result = await WaitForAuthenticationResult();
+                var service = new CrmServiceAccessToken(crmUrl, result.AccessToken);
 
-                return new OrgQueryable(crmUrl, result.AccessToken);
+                return new CrmContext(service);
             }
             else
             {
                 string connectionString = ConfigurationManager.AppSettings["crm:ConnectionString"];
 
-                return new OrgQueryable(connectionString);
+                var svc = new CrmServiceConnectionString(connectionString);
+
+                return new CrmContext(svc);
             }
         }
 
         protected async Task<OrganizationQuery> GetOrganizationQuery()
         {
-            var org = await GetOrgQueryable();
+            var org = await GetCrmContext();
 
             return (OrganizationQuery)new OrganizationQuery()
             {
@@ -103,7 +105,7 @@ namespace Augustus.Web.Portal.Controllers
 
         protected async Task<AccountQuery> GetAccountQuery()
         {
-            var org = await GetOrgQueryable();
+            var org = await GetCrmContext();
 
             return (AccountQuery)new AccountQuery()
             {
@@ -115,7 +117,7 @@ namespace Augustus.Web.Portal.Controllers
 
         protected async Task<OpportunityQuery> GetOpportunityQuery()
         {
-            var org = await GetOrgQueryable();
+            var org = await GetCrmContext();
 
             return (OpportunityQuery)new OpportunityQuery()
             {
@@ -125,7 +127,7 @@ namespace Augustus.Web.Portal.Controllers
 
         protected async Task<InvoiceQuery> GetInvoiceQuery()
         {
-            var org = await GetOrgQueryable();
+            var org = await GetCrmContext();
 
             return (InvoiceQuery)new InvoiceQuery()
             {
@@ -135,7 +137,7 @@ namespace Augustus.Web.Portal.Controllers
 
         protected async Task<BulkUpdateQuery> GetBulkUpdateQuery()
         {
-            var org = await GetOrgQueryable();
+            var org = await GetCrmContext();
 
             return new BulkUpdateQuery { Organization = org };
         }

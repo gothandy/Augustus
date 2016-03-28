@@ -3,11 +3,7 @@
     ViewBag.Title = Model.Name;
 }
 
-<ol class="breadcrumb">
-    <li><a class="hidden-xs" href="@Url.Action("ActiveAccounts", "Organization")">True Clarity</a><span class="visible-xs">...</span></li>
-    <li>@Html.ActionLink(Model.Account.Name, "Invoices", "Account", new { id = Model.Account.Id }, null)</li>
-    <li>@Html.ActionLink(Model.Opportunity.Name, "Invoices", "Opportunity", new { id = Model.Opportunity.Id }, null)</li>
-</ol>
+@Html.Partial("Breadcrumb", Model)
 
 <div class="row">
     <div class="col-md-4">

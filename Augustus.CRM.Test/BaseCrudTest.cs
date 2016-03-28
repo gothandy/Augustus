@@ -16,13 +16,15 @@ namespace Augustus.CRM.Test
         protected const string invoiceName = "Augustus Invoice Name";
         protected const string invoiceRename = "Augustus Invoice Rename";
 
-        protected static OrgQueryable org;
+        protected static CrmContext org;
 
         protected static void CreateOrg()
         {
             string connectionString = ConfigurationManager.AppSettings["crm:ConnectionString"];
 
-            org = new OrgQueryable(connectionString);
+            var svc = new CrmServiceConnectionString(connectionString);
+
+            org = new CrmContext(svc);
         }
 
         protected static void createAccount(string name)

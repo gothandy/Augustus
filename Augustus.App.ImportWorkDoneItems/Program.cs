@@ -14,7 +14,9 @@ namespace Augustus.App.ImportWorkDoneItems
         {
             string connectionString = ConfigurationManager.AppSettings["crm:ConnectionString"];
 
-            using (OrgQueryable org = new OrgQueryable(connectionString))
+            var svc = new CrmServiceConnectionString(connectionString);
+       
+            using (var org = new CrmContext(svc))
             {
                 string path = @"E:\SharePoint\Management Team - Documents\Reports\WorkDoneItems2015plus.csv";
 

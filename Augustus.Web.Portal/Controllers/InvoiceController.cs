@@ -26,25 +26,38 @@ namespace Augustus.Web.Portal.Controllers
             }
         }
 
-        // GET: Invoice/Create
-        public ActionResult Create()
+        // GET: Invoice/Create/{id}
+        public async Task<ActionResult> Create(Guid id)
         {
-            return View();
+            var inv = new Invoice();
+
+            using (var query = await GetOpportunityQuery())
+            {
+                inv.Account = query.GetAccount(id);
+                inv.Opportunity = query.GetItem(id);
+            }
+
+            using (var query = await GetAccountQuery())
+            {
+                var acc = query.GetItem(inv.Account.Id.Value);
+
+                ViewBag.Opportunities = acc.Opportunities;
+            }
+
+            return View(inv);
         }
+
+        private const string bindAttributes = "OpportunityId,Revenue,Cost,InvoiceDate,PONumber,InvoiceNo,Status";
 
         // POST: Invoice/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public async Task<ActionResult> Create([Bind(Include = bindAttributes)] Invoice invoice)
         {
-            try
+            using (var query = await GetInvoiceQuery())
             {
-                // TODO: Add insert logic here
+                var id = query.Create(invoice);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
+                return RedirectToAction("Details", new { id = id });
             }
         }
 
@@ -69,9 +82,7 @@ namespace Augustus.Web.Portal.Controllers
 
         // POST: Invoice/Edit/5
         [HttpPost]
-        public async Task<ActionResult> Edit(Guid id,
-            [Bind(Include = "OpportunityId,Revenue,Cost,InvoiceDate,PONumber,InvoiceNo,Status")]
-            Invoice invoice)
+        public async Task<ActionResult> Edit(Guid id, [Bind(Include = bindAttributes)] Invoice invoice)
         {
             using (var query = await GetInvoiceQuery())
             {
