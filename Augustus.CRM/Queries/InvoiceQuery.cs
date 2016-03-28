@@ -10,19 +10,21 @@ namespace Augustus.CRM.Queries
 {
     public class InvoiceQuery : BaseQuery, IQuery<Invoice>
     {
+        public InvoiceQuery(CrmContext context) : base(context) { }
+
         public Invoice GetItem(Guid id)
         {
-            var inv = Organization.Invoices.Single(i => i.Id == id).ConvertToDomain();
+            var inv = Context.Invoices.Single(i => i.Id == id).ConvertToDomain();
 
-            inv.Opportunity = OpportunityConverter.ToDomainObject(Organization.Opportunities.Single(o => o.Id == inv.OpportunityId));
-            inv.Account = AccountConverter.ToDomainObject(Organization.Accounts.Single(a => a.Id == inv.Opportunity.AccountId));
+            inv.Opportunity = OpportunityConverter.ToDomainObject(Context.Opportunities.Single(o => o.Id == inv.OpportunityId));
+            inv.Account = AccountConverter.ToDomainObject(Context.Accounts.Single(a => a.Id == inv.Opportunity.AccountId));
             inv.WorkDoneItems = GetWorkDoneItems(id);
             return inv;
         }
 
         private IEnumerable<WorkDoneItem> GetWorkDoneItems(Guid id)
         {
-            return (from i in Organization.WorkDoneItems
+            return (from i in Context.WorkDoneItems
                     where i.InvoiceId == id
                     orderby i.WorkDoneDate descending
                     select WorkDoneItemConverter.ToDomain(i)).AsEnumerable();
@@ -35,32 +37,32 @@ namespace Augustus.CRM.Queries
             entity.SetUsingDomain(invoice);
 
             // Ignore the AccountId being set on the domain object. Should raise exception?
-            var opp = Organization.Opportunities.Single(o => o.Id == invoice.OpportunityId);
+            var opp = Context.Opportunities.Single(o => o.Id == invoice.OpportunityId);
             entity.AccountId = opp.AccountId;
             
 
-            Organization.Create(entity);
-            Organization.SaveChanges();
+            Context.Create(entity);
+            Context.SaveChanges();
 
             return entity.Id;
         }
 
         public void Delete(Guid invoiceId)
         {
-            var entity = Organization.Invoices.Single(o => o.Id == invoiceId);
+            var entity = Context.Invoices.Single(o => o.Id == invoiceId);
 
-            Organization.Delete(entity);
-            Organization.SaveChanges();
+            Context.Delete(entity);
+            Context.SaveChanges();
         }
 
         public void Update(Invoice invoice)
         {
-            var entity = Organization.Invoices.Single(o => o.Id == invoice.Id);
+            var entity = Context.Invoices.Single(o => o.Id == invoice.Id);
 
             entity.SetUsingDomain(invoice);
 
-            Organization.Update(entity);
-            Organization.SaveChanges();
+            Context.Update(entity);
+            Context.SaveChanges();
         }
     }
 }

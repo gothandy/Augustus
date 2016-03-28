@@ -97,19 +97,15 @@ namespace Augustus.Web.Portal.Controllers
         {
             var org = await GetCrmContext();
 
-            return (OrganizationQuery)new OrganizationQuery()
-            {
-                Organization = org
-            };
+            return (OrganizationQuery)new OrganizationQuery(org);
         }
 
         protected async Task<AccountQuery> GetAccountQuery()
         {
             var org = await GetCrmContext();
 
-            return (AccountQuery)new AccountQuery()
+            return (AccountQuery)new AccountQuery(org)
             {
-                Organization = org,
                 CreatedAfter = lastThreeMonths,
                 ActiveAfter = lastYear
             };
@@ -119,27 +115,21 @@ namespace Augustus.Web.Portal.Controllers
         {
             var org = await GetCrmContext();
 
-            return (OpportunityQuery)new OpportunityQuery()
-            {
-                Organization = org
-            };
+            return (OpportunityQuery)new OpportunityQuery(org);
         }
 
         protected async Task<InvoiceQuery> GetInvoiceQuery()
         {
             var org = await GetCrmContext();
 
-            return (InvoiceQuery)new InvoiceQuery()
-            {
-                Organization = org
-            };
+            return (InvoiceQuery)new InvoiceQuery(org);
         }
 
         protected async Task<BulkUpdateQuery> GetBulkUpdateQuery()
         {
             var org = await GetCrmContext();
 
-            return new BulkUpdateQuery { Organization = org };
+            return new BulkUpdateQuery(org);
         }
     }
 }

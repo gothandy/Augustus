@@ -15,13 +15,13 @@ namespace Augustus.CRM.Test
         public static void ClassInit(TestContext testContext)
         {
             CreateOrg();
-            query = new OrganizationQuery { Organization = org };
+            query = new OrganizationQuery(context);
         }
 
         [ClassCleanup]
         public static void ClassCleanup()
         {
-            org.Dispose();
+            context.Dispose();
         }
 
         [TestMethod]

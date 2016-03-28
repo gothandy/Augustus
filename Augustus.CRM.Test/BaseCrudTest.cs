@@ -16,7 +16,7 @@ namespace Augustus.CRM.Test
         protected const string invoiceName = "Augustus Invoice Name";
         protected const string invoiceRename = "Augustus Invoice Rename";
 
-        protected static CrmContext org;
+        protected static CrmContext context;
 
         protected static void CreateOrg()
         {
@@ -24,7 +24,7 @@ namespace Augustus.CRM.Test
 
             var svc = new CrmServiceConnectionString(connectionString);
 
-            org = new CrmContext(svc);
+            context = new CrmContext(svc);
         }
 
         protected static void createAccount(string name)
@@ -34,32 +34,32 @@ namespace Augustus.CRM.Test
                 Name = name
             };
 
-            org.Create<AccountEntity>(account);
-            org.SaveChanges();
+            context.Create<AccountEntity>(account);
+            context.SaveChanges();
         }
 
         protected static void updateAccount(string name1, string name2)
         {
             AccountEntity account = getAccount(name1);
             account.Name = name2;
-            org.Update<AccountEntity>(account);
-            org.SaveChanges();
+            context.Update<AccountEntity>(account);
+            context.SaveChanges();
         }
 
 
 
         protected static AccountEntity getAccount(string name)
         {
-            return org.Accounts.Single(a => a.Name == name);
+            return context.Accounts.Single(a => a.Name == name);
         }
 
         protected static OpportunityEntity getOpportunity(string name)
         {
-            return org.Opportunities.Single(a => a.Name == name);
+            return context.Opportunities.Single(a => a.Name == name);
         }
         protected static InvoiceEntity getInvoice(string name)
         {
-            return org.Invoices.Single(a => a.Name == name);
+            return context.Invoices.Single(a => a.Name == name);
         }
 
         protected static void createOpportunity(string name, AccountEntity account)
@@ -70,8 +70,8 @@ namespace Augustus.CRM.Test
                 AccountId = account.Id
             };
 
-            org.Create<OpportunityEntity>(newOpp);
-            org.SaveChanges();
+            context.Create<OpportunityEntity>(newOpp);
+            context.SaveChanges();
         }
 
         protected static void createInvoice(string name, OpportunityEntity opportunity)
@@ -83,26 +83,26 @@ namespace Augustus.CRM.Test
                 OpportunityId = opportunity.Id
             };
 
-            org.Create<InvoiceEntity>(newInv);
-            org.SaveChanges();
+            context.Create<InvoiceEntity>(newInv);
+            context.SaveChanges();
         }
 
         protected static void deleteAccount(string name)
         {
-            org.Delete(getAccount(name));
-            org.SaveChanges();
+            context.Delete(getAccount(name));
+            context.SaveChanges();
         }
 
         protected static void deleteOpportunity(string name)
         {
-            org.Delete(getOpportunity(name));
-            org.SaveChanges();
+            context.Delete(getOpportunity(name));
+            context.SaveChanges();
         }
 
         protected static void deleteInvoice(string name)
         {
-            org.Delete(getInvoice(name));
-            org.SaveChanges();
+            context.Delete(getInvoice(name));
+            context.SaveChanges();
         }
 
         protected static void deleteAllAccounts()
@@ -113,7 +113,7 @@ namespace Augustus.CRM.Test
 
         private static void deleteAccounts(string name)
         {
-            var accounts = org.Accounts.Where(i => i.Name == name);
+            var accounts = context.Accounts.Where(i => i.Name == name);
 
             var save = false;
 
@@ -121,13 +121,13 @@ namespace Augustus.CRM.Test
             {
                 if (account.Name.StartsWith("Augustus"))
                 {
-                    org.Delete<AccountEntity>(account);
+                    context.Delete<AccountEntity>(account);
                     Console.WriteLine("{0} Account Deleted.", account.Name);
                     save = true;
                 }
             }
 
-            if (save) org.SaveChanges();
+            if (save) context.SaveChanges();
         }
 
         protected static void deleteAllOpportunities()
@@ -138,7 +138,7 @@ namespace Augustus.CRM.Test
 
         private static void deleteOpportunities(string name)
         {
-            var opportunities = org.Opportunities.Where(i => i.Name == name);
+            var opportunities = context.Opportunities.Where(i => i.Name == name);
 
             var save = false;
 
@@ -146,13 +146,13 @@ namespace Augustus.CRM.Test
             {
                 if (opportunity.Name.StartsWith("Augustus"))
                 {
-                    org.Delete<OpportunityEntity>(opportunity);
+                    context.Delete<OpportunityEntity>(opportunity);
                     Console.WriteLine("{0} Opportunity Deleted.", opportunity.Name);
                     save = true;
                 }
             }
 
-            if (save) org.SaveChanges();
+            if (save) context.SaveChanges();
         }
 
         protected static void deleteAllInvoices()
@@ -163,7 +163,7 @@ namespace Augustus.CRM.Test
 
         private static void deleteInvoices(string name)
         {
-            var invoices = org.Invoices.Where(i => i.Name == name);
+            var invoices = context.Invoices.Where(i => i.Name == name);
 
             var save = false;
 
@@ -171,13 +171,13 @@ namespace Augustus.CRM.Test
             {
                 if (invoice.Name.StartsWith("Augustus"))
                 {
-                    org.Delete<InvoiceEntity>(invoice);
+                    context.Delete<InvoiceEntity>(invoice);
                     Console.WriteLine("{0} Invoice Deleted.", invoice.Name);
                     save = true;
                 }
             }
 
-            if (save) org.SaveChanges();
+            if (save) context.SaveChanges();
         }
 
         protected static void deleteAllWorkDoneItems()
@@ -188,7 +188,7 @@ namespace Augustus.CRM.Test
 
         protected static void deleteWorkDoneItems(string name)
         {
-            var invoices = org.Invoices.Where(i => i.Name == name);
+            var invoices = context.Invoices.Where(i => i.Name == name);
 
             var save = false;
 
@@ -196,13 +196,13 @@ namespace Augustus.CRM.Test
             {
                 if (invoice.Name.StartsWith("Augustus"))
                 {
-                    var items = org.WorkDoneItems.Where(i => i.InvoiceId.Value == invoice.Id);
+                    var items = context.WorkDoneItems.Where(i => i.InvoiceId.Value == invoice.Id);
 
                     foreach (var item in items)
                     {
                         if (item.InvoiceId == invoice.Id)
                         {
-                            org.Delete<WorkDoneItemEntity>(item);
+                            context.Delete<WorkDoneItemEntity>(item);
                             Console.WriteLine("{0} {1} Work Done Item Deleted.", invoice.Name, item.WorkDoneDate);
                             save = true;
                         }
@@ -210,7 +210,7 @@ namespace Augustus.CRM.Test
                 }
             }
 
-            if (save) org.SaveChanges();
+            if (save) context.SaveChanges();
         }
     }
 }

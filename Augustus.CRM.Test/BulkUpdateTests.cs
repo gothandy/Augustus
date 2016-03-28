@@ -31,7 +31,7 @@ namespace Augustus.CRM.Test
             deleteAllOpportunities();
             deleteAllAccounts();
 
-            org.Dispose();
+            context.Dispose();
         }
 
         [TestMethod]
@@ -71,14 +71,14 @@ namespace Augustus.CRM.Test
                 }
             };
 
-            var query = new BulkUpdateQuery { Organization = org };
+            var query = new BulkUpdateQuery(context);
 
             query.BulkUpdate(update);
 
             var acc = getAccount(accountName);
             var opp = getOpportunity(opportunityName);
             var inv = getInvoice(invoiceName);
-            var wdi = (from i in org.WorkDoneItems
+            var wdi = (from i in context.WorkDoneItems
                        where i.InvoiceId.Value == inv.Id
                        select i).First();
 
@@ -92,7 +92,7 @@ namespace Augustus.CRM.Test
             Assert.AreEqual(opp.Id, inv.OpportunityId);
             Assert.AreEqual(inv.Id, wdi.InvoiceId);
 
-            var margin = (from i in org.WorkDoneItems
+            var margin = (from i in context.WorkDoneItems
                           where i.InvoiceId.Value == inv.Id
                           select i).ToList().Sum(i => i.Margin.Value);
             Assert.AreEqual(1000, margin);

@@ -19,8 +19,8 @@ namespace Augustus.CRM.Test
         public static void ClassInit(TestContext testContext)
         {
             CreateOrg();
-            invQuery = new InvoiceQuery { Organization = org };
-            wdiQuery = new WorkDoneItemQuery { Organization = org };
+            invQuery = new InvoiceQuery(context);
+            wdiQuery = new WorkDoneItemQuery(context);
            
             easyJetJan16Inv = new Guid("28D8BB1A-0DB3-E511-8118-3863BB34FA68");
 
@@ -38,7 +38,7 @@ namespace Augustus.CRM.Test
             deleteAllOpportunities();
             deleteAllAccounts();
 
-            org.Dispose();
+            context.Dispose();
         }
 
         [TestMethod]
@@ -95,7 +95,7 @@ namespace Augustus.CRM.Test
             deleteInvoice(invoiceName);
             deleteOpportunity(opportunityName);
             deleteAccount(accountName);
-            org.SaveChanges();
+            context.SaveChanges();
         }
     }
 }

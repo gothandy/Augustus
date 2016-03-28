@@ -19,7 +19,7 @@ namespace Augustus.CRM.Test
         {
             deleteAllOpportunities();
             deleteAllAccounts();
-            org.Dispose();
+            context.Dispose();
         }
 
         [TestMethod]

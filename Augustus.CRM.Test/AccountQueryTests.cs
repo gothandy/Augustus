@@ -19,14 +19,13 @@ namespace Augustus.CRM.Test
         {
             CreateOrg();
 
-            query = new AccountQuery
+            query = new AccountQuery(context)
             {
-                Organization = org,
                 ActiveAfter = DateTime.Now.AddYears(-1),
                 CreatedAfter = DateTime.Now.AddMonths(-3)
             };
 
-            easyJet = org.Accounts.Single(a => a.Name == "easyJet");
+            easyJet = context.Accounts.Single(a => a.Name == "easyJet");
 
             deleteAllAccounts();
         }
@@ -35,7 +34,7 @@ namespace Augustus.CRM.Test
         public static void ClassCleanup()
         {
             deleteAllAccounts();
-            org.Dispose();
+            context.Dispose();
         }
 
         [TestMethod]

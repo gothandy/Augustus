@@ -9,15 +9,17 @@ namespace Augustus.CRM.Queries
 {
     public class WorkDoneItemQuery : BaseQuery, IQuery<WorkDoneItem>
     {
+        public WorkDoneItemQuery(CrmContext context) : base(context) { }
+
         public WorkDoneItem GetItem(Guid id)
         {
-            return WorkDoneItemConverter.ToDomain(Organization.WorkDoneItems.Single(i => i.Id == id));
+            return WorkDoneItemConverter.ToDomain(Context.WorkDoneItems.Single(i => i.Id == id));
         }
 
         public Invoice GetInvoice(Guid workDoneItemId)
         {
             var wdi = GetItem(workDoneItemId);
-            var inv = Organization.Invoices.Single(i => i.Id == wdi.InvoiceId);
+            var inv = Context.Invoices.Single(i => i.Id == wdi.InvoiceId);
 
             return inv.ConvertToDomain();
         }
@@ -25,7 +27,7 @@ namespace Augustus.CRM.Queries
         public Opportunity GetOpportunity(Guid workDoneItemId)
         {
             var inv = GetInvoice(workDoneItemId);
-            var opp = Organization.Opportunities.Single(o => o.Id == inv.OpportunityId);
+            var opp = Context.Opportunities.Single(o => o.Id == inv.OpportunityId);
 
             return OpportunityConverter.ToDomainObject(opp);
         }
@@ -33,7 +35,7 @@ namespace Augustus.CRM.Queries
         public Account GetAccount(Guid WorkDoneItemId)
         {
             var inv = GetOpportunity(WorkDoneItemId);
-            var acc = Organization.Accounts.Single(a => a.Id == inv.AccountId);
+            var acc = Context.Accounts.Single(a => a.Id == inv.AccountId);
 
             return AccountConverter.ToDomainObject(acc);
         }
@@ -48,31 +50,31 @@ namespace Augustus.CRM.Queries
                 Margin = workDoneItem.Margin
             };
 
-            Organization.Create(entity);
-            Organization.SaveChanges();
+            Context.Create(entity);
+            Context.SaveChanges();
 
             return entity.Id;
         }
 
         public void Delete(Guid workDoneItemId)
         {
-            var entity = Organization.WorkDoneItems.Single(o => o.Id == workDoneItemId);
+            var entity = Context.WorkDoneItems.Single(o => o.Id == workDoneItemId);
 
-            Organization.Delete(entity);
-            Organization.SaveChanges();
+            Context.Delete(entity);
+            Context.SaveChanges();
         }
 
         public void Update(WorkDoneItem workDoneItem)
         {
-            var entity = Organization.WorkDoneItems.Single(o => o.Id == workDoneItem.Id);
+            var entity = Context.WorkDoneItems.Single(o => o.Id == workDoneItem.Id);
 
             entity.AccountId = workDoneItem.AccountId;
             entity.InvoiceId = workDoneItem.InvoiceId;
             entity.WorkDoneDate = workDoneItem.WorkDoneDate;
             entity.Margin = workDoneItem.Margin;
 
-            Organization.Update(entity);
-            Organization.SaveChanges();
+            Context.Update(entity);
+            Context.SaveChanges();
         }
     }
 }

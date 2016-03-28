@@ -10,10 +10,11 @@ namespace Augustus.CRM.Queries
 {
     public class OrganizationQuery : BaseQuery
     {
+        public OrganizationQuery(CrmContext context) : base(context) { }
 
         public IEnumerable<Account> GetNewAccounts(DateTime createdAfter)
         {
-            return (from a in Organization.Accounts
+            return (from a in Context.Accounts
                     where a.Created > createdAfter
                     orderby a.Name ascending
                     select AccountConverter.ToDomainObject(a)).AsEnumerable();
@@ -21,8 +22,8 @@ namespace Augustus.CRM.Queries
 
         public IEnumerable<Account> GetActiveAccounts(DateTime withInvoicesFrom)
         {
-            return (from a in Organization.Accounts
-                    join i in Organization.Invoices
+            return (from a in Context.Accounts
+                    join i in Context.Invoices
                     on a.Id equals i.AccountId
                     where i.InvoiceDate > withInvoicesFrom
                     orderby a.Name ascending

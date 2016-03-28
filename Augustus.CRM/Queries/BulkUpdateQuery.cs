@@ -5,15 +5,17 @@ namespace Augustus.CRM.Queries
 {
     public class BulkUpdateQuery : BaseQuery
     {
+        public BulkUpdateQuery(CrmContext context) : base(context) { }
+
         public void BulkUpdate(Account account)
         { 
             var accountEntity =
-                Organization.Accounts.SingleOrDefault(a =>
+                Context.Accounts.SingleOrDefault(a =>
                     a.Name == account.Name);
 
             if (accountEntity == null)
             {
-                var accountQuery = new AccountQuery { Organization = Organization };
+                var accountQuery = new AccountQuery(Context);
 
                 account.Id = accountQuery.Create(account);
             }
@@ -33,13 +35,13 @@ namespace Augustus.CRM.Queries
         public void BulkUpdate(Opportunity opportunity)
         {
             var opportunityEntity =
-                Organization.Opportunities.SingleOrDefault(a =>
+                Context.Opportunities.SingleOrDefault(a =>
                     a.AccountId == opportunity.AccountId &&
                     a.Name == opportunity.Name);
 
             if (opportunityEntity == null)
             {
-                var opportunityQuery = new OpportunityQuery { Organization = Organization };
+                var opportunityQuery = new OpportunityQuery(Context);
 
                 opportunity.Id = opportunityQuery.Create(opportunity);
             }
@@ -60,13 +62,13 @@ namespace Augustus.CRM.Queries
         public void BulkUpdate(Invoice invoice)
         {
             var invoiceEntity =
-                Organization.Invoices.SingleOrDefault(a =>
+                Context.Invoices.SingleOrDefault(a =>
                     a.OpportunityId == invoice.OpportunityId &&
                     a.Name == invoice.Name);
 
             if (invoiceEntity == null)
             {
-                var invoiceQuery = new InvoiceQuery { Organization = Organization };
+                var invoiceQuery = new InvoiceQuery(Context);
 
                 invoice.Id = invoiceQuery.Create(invoice);
             }
@@ -87,13 +89,13 @@ namespace Augustus.CRM.Queries
         public void BulkUpdate(WorkDoneItem workDoneItem)
         {
             var workDoneItemEntity =
-                Organization.WorkDoneItems.SingleOrDefault(a =>
+                Context.WorkDoneItems.SingleOrDefault(a =>
                     a.InvoiceId == workDoneItem.InvoiceId &&
                     a.WorkDoneDate == workDoneItem.WorkDoneDate);
 
             if (workDoneItemEntity == null)
             {
-                var workDoneItemQuery = new WorkDoneItemQuery { Organization = Organization };
+                var workDoneItemQuery = new WorkDoneItemQuery(Context);
 
                 workDoneItem.Id = workDoneItemQuery.Create(workDoneItem);
             }

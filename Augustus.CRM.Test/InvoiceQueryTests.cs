@@ -18,7 +18,7 @@ namespace Augustus.CRM.Test
         public static void ClassInit(TestContext testContext)
         {
             CreateOrg();
-            query = new InvoiceQuery { Organization = org };
+            query = new InvoiceQuery(context);
             easyJetJan16Inv = new Guid("28D8BB1A-0DB3-E511-8118-3863BB34FA68");
 
             deleteAllOpportunities();
@@ -30,7 +30,7 @@ namespace Augustus.CRM.Test
         {
             deleteAllOpportunities();
             deleteAllAccounts();
-            org.Dispose();
+            context.Dispose();
         }
 
         [TestMethod]

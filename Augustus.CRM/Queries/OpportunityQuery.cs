@@ -13,22 +13,24 @@ namespace Augustus.CRM.Queries
 {
     public class OpportunityQuery : BaseQuery, IQuery<Opportunity>
     {
+        public OpportunityQuery(CrmContext context) : base(context) { }
+
         public Opportunity GetItem(Guid id)
         {
-            return OpportunityConverter.ToDomainObject(Organization.Opportunities.Single(o => o.Id == id));
+            return OpportunityConverter.ToDomainObject(Context.Opportunities.Single(o => o.Id == id));
         }
 
         public Account GetAccount(Guid opportunityId)
         {
             var opp = GetItem(opportunityId);
-            var acc = Organization.Accounts.Single(a => a.Id == opp.AccountId);
+            var acc = Context.Accounts.Single(a => a.Id == opp.AccountId);
 
             return AccountConverter.ToDomainObject(acc);
         }
 
         public IEnumerable<Invoice> GetInvoices(Guid opportunityId)
         {
-            return (from i in Organization.Invoices
+            return (from i in Context.Invoices
                     where i.OpportunityId == opportunityId
                     orderby i.InvoiceDate descending
                     select InvoiceConverter.ToDomain(i)).AsEnumerable();
@@ -42,29 +44,29 @@ namespace Augustus.CRM.Queries
                 AccountId = opportunity.AccountId
             };
 
-            Organization.Create(entity);
-            Organization.SaveChanges();
+            Context.Create(entity);
+            Context.SaveChanges();
 
             return entity.Id;
         }
 
         public void Delete(Guid opportunityId)
         {
-            var entity = Organization.Opportunities.Single(o => o.Id == opportunityId);
+            var entity = Context.Opportunities.Single(o => o.Id == opportunityId);
 
-            Organization.Delete(entity);
-            Organization.SaveChanges();
+            Context.Delete(entity);
+            Context.SaveChanges();
         }
 
         public void Update(Opportunity opportunity)
         {
-            var entity = Organization.Opportunities.Single(o => o.Id == opportunity.Id);
+            var entity = Context.Opportunities.Single(o => o.Id == opportunity.Id);
 
             entity.Name = opportunity.Name;
             entity.AccountId = opportunity.AccountId;
 
-            Organization.Update(entity);
-            Organization.SaveChanges();
+            Context.Update(entity);
+            Context.SaveChanges();
         }
     }
 }

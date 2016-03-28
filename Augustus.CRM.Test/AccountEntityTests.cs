@@ -17,7 +17,7 @@ namespace Augustus.CRM.Test
         public static void ClassCleanup()
         {
             deleteAllAccounts();
-            org.Dispose();
+            context.Dispose();
         }
 
         [TestMethod]
