@@ -6,30 +6,35 @@ namespace Augustus.Web.Portal.Controllers
 {
     public class OrganizationController : CrmBaseController
     {
-        private OrganizationQuery query;
-        public OrganizationController() : base()
-        {
-            query = new OrganizationQuery(context);
-        }
 
         // GET: /Organization/ActiveAccounts
-        public ActionResult ActiveAccounts()
+        public async Task<ActionResult> ActiveAccounts()
         {
-            ViewBag.Title = "True Clarity";
+            using (var context = await GetCrmContext())
+            {
+                var query = new OrganizationQuery(context);
 
-            var activeAccounts = query.GetActiveAccounts();
+                ViewBag.Title = "True Clarity";
 
-            return View(activeAccounts);
+                var activeAccounts = query.GetActiveAccounts();
+
+                return View(activeAccounts);
+            }
         }
 
         // GET: /Organization/NewAccounts
-        public ActionResult NewAccounts()
+        public async Task<ActionResult> NewAccounts()
         {
-            ViewBag.Title = "True Clarity";
+            using (var context = await GetCrmContext())
+            {
+                var query = new OrganizationQuery(context);
 
-            var newAccounts = query.GetNewAccounts();
+                ViewBag.Title = "True Clarity";
 
-            return View(newAccounts);
+                var newAccounts = query.GetNewAccounts();
+
+                return View(newAccounts);
+            }
         }
     }
 }

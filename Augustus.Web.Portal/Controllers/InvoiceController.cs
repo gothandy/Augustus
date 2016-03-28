@@ -10,73 +10,84 @@ namespace Augustus.Web.Portal.Controllers
     {
         private const string bindAttributes = "OpportunityId,Name,Revenue,Cost,InvoiceDate,PONumber,InvoiceNo,Status";
 
-        InvoiceQuery query;
-
-        public InvoiceController()
-        {
-            query = new InvoiceQuery(context);
-        }
-
-        // GET: Invoice
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         // GET: Invoice/Details/5
-        public ActionResult Details(Guid id)
+        public async Task<ActionResult> Details(Guid id)
         {
-            return View(query.GetItem(id));
+            using (var context = await GetCrmContext())
+            {
+                var query = new InvoiceQuery(context);
+                return View(query.GetItem(id));
+            }
         }
 
         // GET: Invoice/Create/{id}
-        public ActionResult Create(Guid id)
+        public async Task<ActionResult> Create(Guid id)
         {
-            ViewBag.Opportunities = query.GetParentLookup(id);
+            using (var context = await GetCrmContext())
+            {
+                var query = new InvoiceQuery(context);
+                ViewBag.Opportunities = query.GetParentLookup(id);
 
-            return View(query.GetNew(id));
+                return View(query.GetNew(id));
+            }
         }
 
         // POST: Invoice/Create
         [HttpPost]
-        public ActionResult Create([Bind(Include = bindAttributes)] Invoice invoice)
+        public async Task<ActionResult> Create([Bind(Include = bindAttributes)] Invoice invoice)
         {
-            var id = query.Create(invoice);
+            using (var context = await GetCrmContext())
+            {
+                var query = new InvoiceQuery(context);
+                var id = query.Create(invoice);
 
-            return RedirectToAction("Details", new { id = id });
+                return RedirectToAction("Details", new { id = id });
+            }
         }
 
         // GET: Invoice/Edit/5
-        public ActionResult Edit(Guid id)
+        public async Task<ActionResult> Edit(Guid id)
         {
-            ViewBag.Title = "Edit Invoice";
+            using (var context = await GetCrmContext())
+            {
+                var query = new InvoiceQuery(context);
+                ViewBag.Title = "Edit Invoice";
 
-            var inv = query.GetItem(id);
+                var inv = query.GetItem(id);
 
-            ViewBag.Opportunities = query.GetParentLookup(inv.OpportunityId.Value);
+                ViewBag.Opportunities = query.GetParentLookup(inv.OpportunityId.Value);
 
-            return View(inv);
+                return View(inv);
+            }
         }
 
         // POST: Invoice/Edit/5
         [HttpPost]
-        public ActionResult Edit(Guid id, [Bind(Include = bindAttributes)] Invoice invoice)
+        public async Task<ActionResult> Edit(Guid id, [Bind(Include = bindAttributes)] Invoice invoice)
         {
-            invoice.Id = id;
+            using (var context = await GetCrmContext())
+            {
+                var query = new InvoiceQuery(context);
+                invoice.Id = id;
 
-            query.Update(invoice);
+                query.Update(invoice);
 
-            return RedirectToAction("Details", new { id = id });
+                return RedirectToAction("Details", new { id = id });
+            }
         }
 
         // GET: Invoice/Delete/5
-        public ActionResult Delete(Guid id)
+        public async Task<ActionResult> Delete(Guid id)
         {
-            var inv = query.GetItem(id);
+            using (var context = await GetCrmContext())
+            {
+                var query = new InvoiceQuery(context);
+                var inv = query.GetItem(id);
 
-            query.Delete(id);
+                query.Delete(id);
 
-            return RedirectToAction("Invoices", "Opportunity", new { id = inv.OpportunityId });
+                return RedirectToAction("Invoices", "Opportunity", new { id = inv.OpportunityId });
+            }
         }
     }
 }

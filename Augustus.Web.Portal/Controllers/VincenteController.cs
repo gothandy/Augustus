@@ -10,7 +10,7 @@ namespace Augustus.Web.Portal.Controllers
     public class VincenteController : CrmBaseController
     {
         // GET: Vincente
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
             Account account;
             using (var client = new WebClient())
@@ -19,9 +19,12 @@ namespace Augustus.Web.Portal.Controllers
                 account = JsonConvert.DeserializeObject<Account>(json);
             }
 
-            var query = new BulkUpdateQuery(context);
-            //query.CheckUpdate(account);
-            return View(account);
+            using (var context = await GetCrmContext())
+            {
+                var query = new BulkUpdateQuery(context);
+                //query.CheckUpdate(account);
+                return View(account);
+            }
         }
     }
 }

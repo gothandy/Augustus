@@ -1,5 +1,4 @@
 ﻿using Augustus.CRM;
-using Augustus.CRM.Queries;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
@@ -23,30 +22,6 @@ namespace Augustus.Web.Portal.Controllers
         private DateTime lastYear = DateTime.Now.AddYears(-1);
         private DateTime lastMonth = DateTime.Now.AddMonths(-1);
         private DateTime lastThreeMonths = DateTime.Now.AddMonths(-3);
-
-        protected CrmContext context;
-
-        public CrmBaseController()
-        {
-            var task = Task.Run(async () => { await GetCrmContext(); });
-            task.Wait();
-
-            context.ActiveDate = lastYear;
-            context.NewDate = lastThreeMonths;
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (this.context != null)
-                {
-                    this.context.Dispose();
-                }
-            }
-
-            base.Dispose(disposing);
-        }
 
         private async Task<AuthenticationResult> WaitForAuthenticationResult()
         {
@@ -92,8 +67,10 @@ namespace Augustus.Web.Portal.Controllers
             }
         }
 
-        protected async Task GetCrmContext()
+        protected async Task<CrmContext> GetCrmContext()
         {
+            CrmContext context;
+
             string useAzureAuth = ConfigurationManager.AppSettings["crm:UseAzureAuth"];
 
             if (useAzureAuth == "true" || useAzureAuth == null)
@@ -112,6 +89,11 @@ namespace Augustus.Web.Portal.Controllers
 
                 context = new CrmContext(svc);
             }
+
+            context.ActiveDate = lastYear;
+            context.NewDate = lastThreeMonths;
+
+            return context;
         }
     }
 }
