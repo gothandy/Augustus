@@ -1,13 +1,12 @@
 ﻿using Augustus.CRM.Converters;
 using Augustus.CRM.Entities;
-using Augustus.Domain.Interfaces;
 using Augustus.Domain.Objects;
 using System;
 using System.Linq;
 
 namespace Augustus.CRM.Queries
 {
-    public class WorkDoneItemQuery : BaseQuery, IQuery<WorkDoneItem>
+    public class WorkDoneItemQuery : BaseQuery
     {
         public WorkDoneItemQuery(CrmContext context) : base(context) { }
 

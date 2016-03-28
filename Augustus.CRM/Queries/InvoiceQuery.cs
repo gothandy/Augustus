@@ -1,6 +1,5 @@
 ﻿using Augustus.CRM.Converters;
 using Augustus.CRM.Entities;
-using Augustus.Domain.Interfaces;
 using Augustus.Domain.Objects;
 using System;
 using System.Collections.Generic;
@@ -8,7 +7,7 @@ using System.Linq;
 
 namespace Augustus.CRM.Queries
 {
-    public class InvoiceQuery : BaseQuery, IQuery<Invoice>
+    public class InvoiceQuery : BaseQuery
     {
         public InvoiceQuery(CrmContext context) : base(context) { }
 

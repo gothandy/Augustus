@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 using Augustus.CRM;
 using Augustus.CRM.Entities;
 using Augustus.Domain.Objects;
-using Augustus.Domain.Interfaces;
 using Augustus.CRM.Converters;
 
 namespace Augustus.CRM.Queries
 {
-    public class OpportunityQuery : BaseQuery, IQuery<Opportunity>
+    public class OpportunityQuery : BaseQuery
     {
         public OpportunityQuery(CrmContext context) : base(context) { }
 
