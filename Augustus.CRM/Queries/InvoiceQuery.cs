@@ -21,6 +21,31 @@ namespace Augustus.CRM.Queries
             return inv;
         }
 
+        public Invoice GetNew(Guid parentId)
+        {
+            var opp = OpportunityConverter.ToDomainObject(Context.Opportunities.Single(a => a.Id == parentId));
+
+            var inv = new Invoice
+            {
+                Opportunity = opp
+            };
+
+            return (inv);
+        }
+
+        public IEnumerable<Opportunity> GetParentLookup(Guid parentId)
+        {
+            var accountId = (from o in Context.Opportunities
+                             where o.Id == parentId
+                             select o.AccountId).Single();
+
+            var opportunities = (from o in Context.Opportunities
+                                 where o.AccountId == accountId
+                                 select OpportunityConverter.ToDomainObject(o));
+
+            return opportunities;
+        }
+
         private IEnumerable<WorkDoneItem> GetWorkDoneItems(Guid id)
         {
             return (from i in Context.WorkDoneItems
@@ -38,7 +63,6 @@ namespace Augustus.CRM.Queries
             // Ignore the AccountId being set on the domain object. Should raise exception?
             var opp = Context.Opportunities.Single(o => o.Id == invoice.OpportunityId);
             entity.AccountId = opp.AccountId;
-            
 
             Context.Create(entity);
             Context.SaveChanges();

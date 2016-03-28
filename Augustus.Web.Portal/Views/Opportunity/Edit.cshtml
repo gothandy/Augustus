@@ -1,6 +1,5 @@
 ﻿@model Opportunity
 @{
-    var account = (Account)ViewBag.Account;
     var formButtons = new FormButtons
     {
         Id = Model.Id,
@@ -8,7 +7,7 @@
     };
 }
 
-@Html.Partial("Breadcrumb", account)
+@Html.Partial("Breadcrumb", Model.Account)
 
 @using (Html.BeginForm())
 {

@@ -12,6 +12,7 @@ namespace Augustus.CRM.Test
     public class OpportunityQueryTests : BaseCrudTest
     {
         private static OpportunityQuery query;
+        private Guid easyJet2015Budget = new Guid("2d1a82de-4479-e411-be1f-6c3be5becb24");
 
         [ClassInitialize]
         public static void ClassInit(TestContext testContext)
@@ -34,13 +35,11 @@ namespace Augustus.CRM.Test
         [TestMethod]
         public void CRM_Query_Opportunity_GetInvoices()
         {
-            Opportunity opp = OpportunityConverter.ToDomainObject(context.Opportunities.Single(o => o.Id == new Guid("2d1a82de-4479-e411-be1f-6c3be5becb24")));
+            Opportunity opp = query.GetItem(easyJet2015Budget);
 
-            var invoices = query.GetInvoices(opp.Id.Value);
+            Assert.AreNotEqual(0, opp.Invoices.Count());
 
-            Assert.AreNotEqual(0, invoices.Count());
-
-            foreach(var invoice in invoices)
+            foreach(var invoice in opp.Invoices)
             {
                 Console.WriteLine(invoice.Name);
             }
@@ -49,9 +48,9 @@ namespace Augustus.CRM.Test
         [TestMethod]
         public void CRM_Query_Opportunity_GetAccount()
         {
-            Opportunity opp = OpportunityConverter.ToDomainObject(context.Opportunities.Single(o => o.Id == new Guid("2d1a82de-4479-e411-be1f-6c3be5becb24")));
+            Opportunity opp = query.GetItem(easyJet2015Budget);
 
-            var account = query.GetAccount(opp.Id.Value);
+            var account = opp.Account;
 
             Assert.AreEqual("easyJet", account.Name);
         }

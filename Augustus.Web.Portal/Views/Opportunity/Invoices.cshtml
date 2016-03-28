@@ -1,16 +1,11 @@
-﻿@model IEnumerable<Invoice>
+﻿@model Opportunity
 @{
-    var account = (Account)ViewBag.Account;
-    var opportunity = (Opportunity)ViewBag.Opportunity;
-
-    ViewBag.Title = opportunity.Name;
+    ViewBag.Title = Model.Name;
 }
-<ol class="breadcrumb">
-    <li><a href="@Url.Action("ActiveAccounts", "Organization")">True Clarity</a></li>
-    <li>@Html.ActionLink(account.Name, "Invoices", "Account", new { id = account.Id }, null)</li>
-</ol>
 
-@if (Model.Count() == 0)
+@Html.Partial("Breadcrumb", Model.Account)
+
+@if (Model.Invoices.Count() == 0)
 {
     <div class="well-sm">
         <p>No invoices</p>
@@ -29,8 +24,11 @@ else
                 </tr>
             </thead>
             <tbody>
-                @foreach (var i in Model)
+                @foreach (var i in Model.Invoices)
                 {
+
+                    if (i.Name == null) { i.Name = "null"; }
+
                     <tr>
                         <td>@DateTimeHelper.Format(i.InvoiceDate)</td>
                         <td>@Html.ActionLink(i.Name, "Details", "Invoice", new { id = i.Id }, null)</td>
@@ -43,8 +41,10 @@ else
     </div>
 }
 
-<div>
-    <a class="btn btn-default" href="@Url.Action("Create", "Invoice", new { id = opportunity.Id })">Create Invoice</a>
-    <a class="btn btn-default pull-right" href="@Url.Action("Edit", new { id = opportunity.Id })">Edit Opportunity</a>
+<div class="btn-group">
+    <a class="btn btn-default" href="@Url.Action("Create", "Invoice", new { id = Model.Id })">Create Invoice</a>
+</div>
+<div class="btn-group pull-right">
+    <a class="btn btn-default" href="@Url.Action("Edit", new { id = Model.Id })">Edit Opportunity</a>
 </div>
 

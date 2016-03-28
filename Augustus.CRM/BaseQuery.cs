@@ -2,18 +2,13 @@
 
 namespace Augustus.CRM
 {
-    public class BaseQuery : IDisposable
+    public class BaseQuery
     {
         protected CrmContext Context;
 
         public BaseQuery(CrmContext context)
         {
             this.Context = context;
-        }
-
-        public void Dispose()
-        {
-            Context.Dispose();
         }
     }
 }

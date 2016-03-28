@@ -12,17 +12,14 @@ namespace Augustus.CRM.Queries
     {
         public AccountQuery(CrmContext context) : base(context) { }
 
-        public DateTime ActiveAfter { get; set; }
-        public DateTime CreatedAfter { get; set; }
-
         public Account GetItem(Guid id)
         {
             var account = (from a in Context.Accounts
                            where a.Id == id
                            select AccountConverter.ToDomainObject(a)).Single();
 
-            account.Invoices = GetInvoices(id, ActiveAfter);
-            account.Opportunities = GetNewAndActiveOpportunities(id, CreatedAfter, ActiveAfter);
+            account.Invoices = GetInvoices(id, Context.ActiveDate);
+            account.Opportunities = GetNewAndActiveOpportunities(id, Context.NewDate, Context.ActiveDate);
 
             return account;
         }
@@ -30,10 +27,11 @@ namespace Augustus.CRM.Queries
         private IEnumerable<Invoice> GetInvoices(Guid accountId, DateTime from)
         {
             return (from i in Context.Invoices
-                    where i.AccountId == accountId
+                    join o in Context.Opportunities on i.OpportunityId equals o.Id
+                    where o.AccountId == accountId
                     && i.InvoiceDate > @from
                     orderby i.InvoiceDate descending
-                    select InvoiceConverter.ToDomain(i)).AsEnumerable();
+                    select InvoiceConverter.ToDomain(i,o)).AsEnumerable();
         }
 
         private IEnumerable<Opportunity> GetActiveOpportunities(Guid accountId, DateTime invoicesFrom)

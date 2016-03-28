@@ -25,6 +25,9 @@ namespace Augustus.CRM.Test
             var svc = new CrmServiceConnectionString(connectionString);
 
             context = new CrmContext(svc);
+
+            context.ActiveDate = DateTime.Now.AddYears(-1);
+            context.NewDate = DateTime.Now.AddMonths(-3);
         }
 
         protected static void createAccount(string name)

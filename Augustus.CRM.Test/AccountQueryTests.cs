@@ -19,11 +19,7 @@ namespace Augustus.CRM.Test
         {
             CreateOrg();
 
-            query = new AccountQuery(context)
-            {
-                ActiveAfter = DateTime.Now.AddYears(-1),
-                CreatedAfter = DateTime.Now.AddMonths(-3)
-            };
+            query = new AccountQuery(context);
 
             easyJet = context.Accounts.Single(a => a.Name == "easyJet");
 
@@ -43,6 +39,10 @@ namespace Augustus.CRM.Test
             var acc = query.GetItem(easyJet.Id);
 
             Assert.AreNotEqual(0, acc.Invoices.Count());
+
+            var inv = acc.Invoices.First();
+
+            Assert.IsNotNull(inv.Opportunity);
 
             foreach(var invoice in acc.Invoices)
             {

@@ -1,4 +1,5 @@
-﻿using Augustus.Domain.Objects;
+﻿using Augustus.CRM.Queries;
+using Augustus.Domain.Objects;
 using System;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -7,6 +8,13 @@ namespace Augustus.Web.Portal.Controllers
 {
     public class OpportunityController : CrmBaseController
     {
+        OpportunityQuery query;
+
+        public OpportunityController () : base()
+        {
+            query = new OpportunityQuery(context);
+        }
+
         // GET: Opportunity
         public ActionResult Index()
         {
@@ -14,92 +22,62 @@ namespace Augustus.Web.Portal.Controllers
         }
 
         //GET: /Opportunity/Invoices/{id}
-        public async Task<ActionResult> Invoices(Guid id)
+        public ActionResult Invoices(Guid id)
         {
-            using (var query = await GetOpportunityQuery())
-            {
-                Response.AppendHeader("guid", id.ToString());
+            Response.AppendHeader("guid", id.ToString());
 
-                ViewBag.Account = query.GetAccount(id);
-                ViewBag.Opportunity = query.GetItem(id);
+            var opp = query.GetItem(id);
 
-                return View(query.GetInvoices(id));
-            }
+            return View(opp);
         }
 
         // GET: Opportunity/Create/{id}
-        public async Task<ActionResult> Create(Guid id)
+        public ActionResult Create(Guid id)
         {
-            using (var query = await GetAccountQuery())
-            {
-                ViewBag.Account = query.GetItem(id);
-            }
+            ViewBag.Title = "Create Opportunity";
 
-            using (var query = await GetOrganizationQuery())
-            {
-                ViewBag.Title = "Create Opportunity";
+            ViewBag.Accounts = query.GetParentLookup();
 
-                ViewBag.Accounts = query.GetNewAndActiveAccounts(
-                    createdAfter: lastThreeMonths,
-                    withInvoicesFrom: lastYear);
-
-                return View();
-            }
+            return View(query.GetNew(id));
         }
 
         // POST: Opportunity/Create
         [HttpPost]
-        public async Task<ActionResult> Create([Bind(Include = "Name,AccountId")] Opportunity opportunity)
+        public ActionResult Create([Bind(Include = "Name,AccountId")] Opportunity opportunity)
         {
-            using (var query = await GetOpportunityQuery())
-            {
-                var id = query.Create(opportunity);
+            var id = query.Create(opportunity);
 
-                return RedirectToAction("Invoices", new { id = id });
-            }
+            return RedirectToAction("Invoices", new { id = id });
         }
 
         // GET: Opportunity/Edit/{id}
-        public async Task<ActionResult> Edit(Guid id)
+        public ActionResult Edit(Guid id)
         {
             ViewBag.Title = "Edit Opportunity";
 
-            using (var query = await GetOrganizationQuery())
-            {
-                ViewBag.Accounts = query.GetNewAndActiveAccounts(
-                    createdAfter: DateTime.Now.AddMonths(-3),
-                    withInvoicesFrom: DateTime.Now.AddYears(-1));
-            }
+            ViewBag.Accounts = query.GetParentLookup();
 
-            using (var query = await GetOpportunityQuery())
-            {
-                ViewBag.Account = query.GetAccount(id);
-                return View(query.GetItem(id));
-            }
+            return View(query.GetItem(id));
         }
 
         // POST: Opportunity/Edit/{id}
         [HttpPost]
-        public async Task<ActionResult> Edit(Guid id, [Bind(Include = "Name,AccountId")] Opportunity opportunity)
+        public ActionResult Edit(Guid id, [Bind(Include = "Name,AccountId")] Opportunity opportunity)
         {
-            using (var query = await GetOpportunityQuery())
-            {
-                opportunity.Id = id;
-                query.Update(opportunity);
+            var query = new OpportunityQuery(context);
+            opportunity.Id = id;
+            query.Update(opportunity);
 
-                return RedirectToAction("Invoices", new { Id = id });
-            }
+            return RedirectToAction("Invoices", new { Id = id });
         }
 
         // GET: Opportunity/Delete/5
-        public async Task<ActionResult> Delete(Guid id)
+        public ActionResult Delete(Guid id)
         {
-            using (var query = await GetOpportunityQuery())
-            {
-                var opportunity = query.GetItem(id);
-                query.Delete(id);
-                return RedirectToAction("Opportunities", "Account", new { id = opportunity.AccountId });
-            };
+            var query = new OpportunityQuery(context);
+            var opportunity = query.GetItem(id);
+            query.Delete(id);
+            return RedirectToAction("Opportunities", "Account", new { id = opportunity.AccountId });
         }
     }
 }

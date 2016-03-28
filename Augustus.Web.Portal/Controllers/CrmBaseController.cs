@@ -20,9 +20,33 @@ namespace Augustus.Web.Portal.Controllers
         private const string tenantIdUrl = "http://schemas.microsoft.com/identity/claims/tenantid";
         private const string objectIdentifierUrl = "http://schemas.microsoft.com/identity/claims/objectidentifier";
 
-        protected DateTime lastYear = DateTime.Now.AddYears(-1);
-        protected DateTime lastMonth = DateTime.Now.AddMonths(-1);
-        protected DateTime lastThreeMonths = DateTime.Now.AddMonths(-3);
+        private DateTime lastYear = DateTime.Now.AddYears(-1);
+        private DateTime lastMonth = DateTime.Now.AddMonths(-1);
+        private DateTime lastThreeMonths = DateTime.Now.AddMonths(-3);
+
+        protected CrmContext context;
+
+        public CrmBaseController()
+        {
+            var task = Task.Run(async () => { await GetCrmContext(); });
+            task.Wait();
+
+            context.ActiveDate = lastYear;
+            context.NewDate = lastThreeMonths;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (this.context != null)
+                {
+                    this.context.Dispose();
+                }
+            }
+
+            base.Dispose(disposing);
+        }
 
         private async Task<AuthenticationResult> WaitForAuthenticationResult()
         {
@@ -68,7 +92,7 @@ namespace Augustus.Web.Portal.Controllers
             }
         }
 
-        protected async Task<CrmContext> GetCrmContext()
+        protected async Task GetCrmContext()
         {
             string useAzureAuth = ConfigurationManager.AppSettings["crm:UseAzureAuth"];
 
@@ -78,7 +102,7 @@ namespace Augustus.Web.Portal.Controllers
                 var result = await WaitForAuthenticationResult();
                 var service = new CrmServiceAccessToken(crmUrl, result.AccessToken);
 
-                return new CrmContext(service);
+                context = new CrmContext(service);
             }
             else
             {
@@ -86,47 +110,8 @@ namespace Augustus.Web.Portal.Controllers
 
                 var svc = new CrmServiceConnectionString(connectionString);
 
-                return new CrmContext(svc);
+                context = new CrmContext(svc);
             }
-        }
-
-        protected async Task<OrganizationQuery> GetOrganizationQuery()
-        {
-            var org = await GetCrmContext();
-
-            return (OrganizationQuery)new OrganizationQuery(org);
-        }
-
-        protected async Task<AccountQuery> GetAccountQuery()
-        {
-            var org = await GetCrmContext();
-
-            return (AccountQuery)new AccountQuery(org)
-            {
-                CreatedAfter = lastThreeMonths,
-                ActiveAfter = lastYear
-            };
-        }
-
-        protected async Task<OpportunityQuery> GetOpportunityQuery()
-        {
-            var org = await GetCrmContext();
-
-            return (OpportunityQuery)new OpportunityQuery(org);
-        }
-
-        protected async Task<InvoiceQuery> GetInvoiceQuery()
-        {
-            var org = await GetCrmContext();
-
-            return (InvoiceQuery)new InvoiceQuery(org);
-        }
-
-        protected async Task<BulkUpdateQuery> GetBulkUpdateQuery()
-        {
-            var org = await GetCrmContext();
-
-            return new BulkUpdateQuery(org);
         }
     }
 }

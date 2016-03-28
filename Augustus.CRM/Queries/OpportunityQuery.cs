@@ -16,23 +16,41 @@ namespace Augustus.CRM.Queries
 
         public Opportunity GetItem(Guid id)
         {
-            return OpportunityConverter.ToDomainObject(Context.Opportunities.Single(o => o.Id == id));
+            var opp = OpportunityConverter.ToDomainObject(Context.Opportunities.Single(o => o.Id == id));
+
+            var acc = AccountConverter.ToDomainObject(Context.Accounts.Single(a => a.Id == opp.AccountId));
+
+            opp.Account = acc;
+            opp.Invoices = GetInvoices(id);
+
+            return opp;
         }
 
-        public Account GetAccount(Guid opportunityId)
+        public Opportunity GetNew(Guid parentId)
         {
-            var opp = GetItem(opportunityId);
-            var acc = Context.Accounts.Single(a => a.Id == opp.AccountId);
+            var acc = AccountConverter.ToDomainObject(Context.Accounts.Single(a => a.Id == parentId));
 
-            return AccountConverter.ToDomainObject(acc);
+            var opp = new Opportunity
+            {
+                Account = acc
+            };
+
+            return (opp);
         }
 
-        public IEnumerable<Invoice> GetInvoices(Guid opportunityId)
+        private IEnumerable<Invoice> GetInvoices(Guid opportunityId)
         {
             return (from i in Context.Invoices
                     where i.OpportunityId == opportunityId
                     orderby i.InvoiceDate descending
                     select InvoiceConverter.ToDomain(i)).AsEnumerable();
+        }
+
+        public IEnumerable<Account> GetParentLookup()
+        {
+            var org = new OrganizationQuery(Context);
+
+            return org.GetNewAndActiveAccounts();
         }
 
         public Guid Create(Opportunity opportunity)

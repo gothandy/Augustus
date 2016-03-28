@@ -1,4 +1,5 @@
-﻿using Augustus.Domain.Objects;
+﻿using Augustus.CRM.Queries;
+using Augustus.Domain.Objects;
 using System;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -7,25 +8,24 @@ namespace Augustus.Web.Portal.Controllers
 {
     public class AccountController : CrmBaseController
     {
+        private AccountQuery query;
+        public AccountController() : base()
+        {
+            query = new AccountQuery(context);
+        }
 
         //GET: /Account/Invoices/{id}
-        public async Task<ActionResult> Invoices(Guid id)
+        public ActionResult Invoices(Guid id)
         {
-            using (var query = await GetAccountQuery())
-            {
-                Response.AppendHeader("guid", id.ToString());
-                return View(query.GetItem(id));
-            }
+            Response.AppendHeader("guid", id.ToString());
+            return View(query.GetItem(id));
         }
 
         // GET: /Account/Opportunities/{id}
-        public async Task<ActionResult> Opportunities(Guid id)
+        public ActionResult Opportunities(Guid id)
         {
-            using (var query = await GetAccountQuery())
-            {
-                Response.AppendHeader("guid", id.ToString());
-                return View(query.GetItem(id));
-            }
+            Response.AppendHeader("guid", id.ToString());
+            return View(query.GetItem(id));
         }
 
         public ActionResult Create()
@@ -37,46 +37,34 @@ namespace Augustus.Web.Portal.Controllers
 
         // POST: /Account/Create
         [HttpPost]
-        public async Task<ActionResult> Create([Bind(Include = "Name")] Account account)
+        public ActionResult Create([Bind(Include = "Name")] Account account)
         {
-            using (var query = await GetAccountQuery())
-            {
-                var id = query.Create(account);
-                return RedirectToAction("Invoices", new { id = id });
-            }
+            var id = query.Create(account);
+            return RedirectToAction("Invoices", new { id = id });
         }
 
         // GET: Account/Edit/{id}
-        public async Task<ActionResult> Edit(Guid id)
+        public ActionResult Edit(Guid id)
         {
-            using (var query = await GetAccountQuery())
-            {
-                ViewBag.Title = "Edit Account";
-                ViewBag.SubmitButton = "Edit";
-                return View(query.GetItem(id));
-            }
+            ViewBag.Title = "Edit Account";
+            ViewBag.SubmitButton = "Edit";
+            return View(query.GetItem(id));
         }
 
         // POST: Account/Edit/{id}
         [HttpPost]
-        public async Task<ActionResult> Edit(Guid id, [Bind(Include = "Name")] Account account)
+        public ActionResult Edit(Guid id, [Bind(Include = "Name")] Account account)
         {
-            using (var query = await GetAccountQuery())
-            {
-                account.Id = id;
-                query.Update(account);
-                return RedirectToAction("Invoices", new { Id = id });
-            }
+            account.Id = id;
+            query.Update(account);
+            return RedirectToAction("Invoices", new { Id = id });
         }
 
         // GET: /Account/Delete/{id}
-        public async Task<ActionResult> Delete(Guid id)
+        public ActionResult Delete(Guid id)
         {
-            using (var query = await GetAccountQuery())
-            {
-                query.Delete(id);
-                return RedirectToAction("ActiveAccounts", "Organization");
-            }
+            query.Delete(id);
+            return RedirectToAction("ActiveAccounts", "Organization");
         }
     }
 }

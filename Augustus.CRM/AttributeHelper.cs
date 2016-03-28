@@ -30,18 +30,21 @@ namespace Augustus.CRM
 
             var key = string.Format("{0} {1} {2}", type.Name, caller, typeof(T).Name);
 
-            if (AttributeCache.ContainsKey(key))
+            lock (AttributeCache)
             {
-                return (U)AttributeCache[key];
-            }
-            else
-            {
-                var prop = type.GetProperty(caller);
-                var attr = prop.GetCustomAttribute<T>();
-                var obj = (U)result(attr);
-                AttributeCache.Add(key, obj);
+                if (AttributeCache.ContainsKey(key))
+                {
+                    return (U)AttributeCache[key];
+                }
+                else
+                {
+                    var prop = type.GetProperty(caller);
+                    var attr = prop.GetCustomAttribute<T>();
+                    var obj = (U)result(attr);
+                    AttributeCache.Add(key, obj);
 
-                return obj;
+                    return obj;
+                }
             }
         }
     }

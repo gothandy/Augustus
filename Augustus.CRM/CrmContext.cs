@@ -41,6 +41,9 @@ namespace Augustus.CRM
             get { return context.CreateQuery<OpportunityEntity>(); }
         }
 
+        public DateTime ActiveDate { get; set; }
+        public DateTime NewDate { get; set; }
+
         public void Create<T>(T entity) where T : BaseEntity
         {
             context.AddObject(entity);

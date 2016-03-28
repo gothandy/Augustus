@@ -1,9 +1,6 @@
-﻿using Augustus.CRM;
-using Augustus.CRM.Entities;
+﻿using Augustus.CRM.Queries;
 using Augustus.Domain.Objects;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -11,6 +8,15 @@ namespace Augustus.Web.Portal.Controllers
 {
     public class InvoiceController : CrmBaseController
     {
+        private const string bindAttributes = "OpportunityId,Name,Revenue,Cost,InvoiceDate,PONumber,InvoiceNo,Status";
+
+        InvoiceQuery query;
+
+        public InvoiceController()
+        {
+            query = new InvoiceQuery(context);
+        }
+
         // GET: Invoice
         public ActionResult Index()
         {
@@ -18,100 +24,59 @@ namespace Augustus.Web.Portal.Controllers
         }
 
         // GET: Invoice/Details/5
-        public async Task<ActionResult> Details(Guid id)
+        public ActionResult Details(Guid id)
         {
-            using (var query = await GetInvoiceQuery())
-            {
-                return View(query.GetItem(id));
-            }
+            return View(query.GetItem(id));
         }
 
         // GET: Invoice/Create/{id}
-        public async Task<ActionResult> Create(Guid id)
+        public ActionResult Create(Guid id)
         {
-            var inv = new Invoice();
+            ViewBag.Opportunities = query.GetParentLookup(id);
 
-            using (var query = await GetOpportunityQuery())
-            {
-                inv.Account = query.GetAccount(id);
-                inv.Opportunity = query.GetItem(id);
-            }
+            return View(query.GetNew(id));
+        }
 
-            using (var query = await GetAccountQuery())
-            {
-                var acc = query.GetItem(inv.Account.Id.Value);
+        // POST: Invoice/Create
+        [HttpPost]
+        public ActionResult Create([Bind(Include = bindAttributes)] Invoice invoice)
+        {
+            var id = query.Create(invoice);
 
-                ViewBag.Opportunities = acc.Opportunities;
-            }
+            return RedirectToAction("Details", new { id = id });
+        }
+
+        // GET: Invoice/Edit/5
+        public ActionResult Edit(Guid id)
+        {
+            ViewBag.Title = "Edit Invoice";
+
+            var inv = query.GetItem(id);
+
+            ViewBag.Opportunities = query.GetParentLookup(inv.OpportunityId.Value);
 
             return View(inv);
         }
 
-        private const string bindAttributes = "OpportunityId,Revenue,Cost,InvoiceDate,PONumber,InvoiceNo,Status";
-
-        // POST: Invoice/Create
-        [HttpPost]
-        public async Task<ActionResult> Create([Bind(Include = bindAttributes)] Invoice invoice)
-        {
-            using (var query = await GetInvoiceQuery())
-            {
-                var id = query.Create(invoice);
-
-                return RedirectToAction("Details", new { id = id });
-            }
-        }
-
-        // GET: Invoice/Edit/5
-        public async Task<ActionResult> Edit(Guid id)
-        {
-            ViewBag.Title = "Edit Invoice";
-            Invoice inv = null;
-
-            using (var query = await GetInvoiceQuery())
-            {
-                inv = query.GetItem(id);
-            }
-
-            using (var query = await GetAccountQuery())
-            {
-                ViewBag.Opportunities = query.GetItem(inv.AccountId.Value).Opportunities;
-            }
-
-            return View("Form", inv);
-        }
-
         // POST: Invoice/Edit/5
         [HttpPost]
-        public async Task<ActionResult> Edit(Guid id, [Bind(Include = bindAttributes)] Invoice invoice)
+        public ActionResult Edit(Guid id, [Bind(Include = bindAttributes)] Invoice invoice)
         {
-            using (var query = await GetInvoiceQuery())
-            {
-                query.Update(invoice);
+            invoice.Id = id;
 
-                return RedirectToAction("Invoices", new { id = id });
-            }
+            query.Update(invoice);
+
+            return RedirectToAction("Details", new { id = id });
         }
 
         // GET: Invoice/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Guid id)
         {
-            return View();
-        }
+            var inv = query.GetItem(id);
 
-        // POST: Invoice/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
+            query.Delete(id);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("Invoices", "Opportunity", new { id = inv.OpportunityId });
         }
     }
 }

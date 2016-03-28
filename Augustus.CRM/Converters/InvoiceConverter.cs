@@ -25,6 +25,13 @@ namespace Augustus.CRM.Converters
             return InvoiceConverter.ToDomain(entity);
         }
 
+        public static Invoice ToDomain(InvoiceEntity invoice, OpportunityEntity opportunity)
+        {
+            var domain = ToDomain(invoice);
+            domain.Opportunity = OpportunityConverter.ToDomainObject(opportunity);
+            return domain;
+        }
+
         public static Invoice ToDomain(InvoiceEntity entity)
         {
             var domain = new Invoice();

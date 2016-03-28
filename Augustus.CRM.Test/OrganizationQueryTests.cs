@@ -27,7 +27,7 @@ namespace Augustus.CRM.Test
         [TestMethod]
         public void CRM_Query_Organization_GetActiveAccounts()
         {
-            var accounts = query.GetActiveAccounts(withInvoicesFrom: DateTime.Now.AddYears(-1));
+            var accounts = query.GetActiveAccounts();
 
             Assert.AreNotEqual(0, accounts.Count());
 
@@ -40,7 +40,7 @@ namespace Augustus.CRM.Test
         [TestMethod]
         public void CRM_Query_Organization_GetNewAccounts()
         {
-            var accounts = query.GetNewAccounts(createdAfter:DateTime.Now.AddMonths(-3));
+            var accounts = query.GetNewAccounts();
 
             Assert.AreNotEqual(0, accounts.Count());
 
@@ -53,9 +53,7 @@ namespace Augustus.CRM.Test
         [TestMethod]
         public void CRM_Query_Organization_GetNewAndActiveAccounts()
         {
-            var accounts = query.GetNewAndActiveAccounts(
-                createdAfter: DateTime.Now.AddYears(-1),
-                withInvoicesFrom: DateTime.Now.AddMonths(-3));
+            var accounts = query.GetNewAndActiveAccounts();
 
             Assert.AreNotEqual(0, accounts.Count());
 
