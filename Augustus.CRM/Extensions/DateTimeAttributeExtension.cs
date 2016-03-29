@@ -23,10 +23,9 @@ namespace Augustus.CRM.Extensions
 
         public static void SetAttributeDateTime(this BaseEntity entity, DateTime? value, [CallerMemberName] string caller = "")
         {
-            var attributeLogicalName = AttributeHelper.GetLogicalName(entity, caller);
-
             if (value.HasValue)
             {
+                var attributeLogicalName = AttributeHelper.GetLogicalName(entity, caller);
                 entity.SetBaseAttributeValue(attributeLogicalName, value);
             }
         }

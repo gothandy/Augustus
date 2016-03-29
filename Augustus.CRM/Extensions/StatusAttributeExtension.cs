@@ -29,11 +29,10 @@ namespace Augustus.CRM.Extensions
 
         public static void SetAttributeStatus(this BaseEntity entity, int? value, [CallerMemberName] string caller = "")
         {
-            var attributeLogicalName = AttributeHelper.GetLogicalName(entity, caller);
-            var statusLookup = AttributeHelper.GetStatusLookup(entity, caller);
-
             if (value.HasValue)
             {
+                var attributeLogicalName = AttributeHelper.GetLogicalName(entity, caller);
+                var statusLookup = AttributeHelper.GetStatusLookup(entity, caller);
                 var statusCode = new OptionSetValue(statusLookup[value.Value] + 100000000);
                 entity.SetBaseAttributeValue(attributeLogicalName, statusCode);
             }

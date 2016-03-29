@@ -16,10 +16,10 @@ namespace Augustus.CRM.Extensions
 
         public static void SetAttributeString(this BaseEntity entity, string value, [CallerMemberName] string caller = "")
         {
-            var attributeLogicalName = AttributeHelper.GetLogicalName(entity, caller);
-
             if (value != null)
             {
+                var attributeLogicalName = AttributeHelper.GetLogicalName(entity, caller);
+
                 entity.SetBaseAttributeValue(attributeLogicalName, value);
             }
         }

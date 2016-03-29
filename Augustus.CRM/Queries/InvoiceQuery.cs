@@ -30,15 +30,16 @@ namespace Augustus.CRM.Queries
         {
             foreach(var item in query)
             {
-                var find = list.Find(i => i.WorkDoneDate == item.WorkDoneDate);
+                var exists = list.Exists(i => i.WorkDoneDate == item.WorkDoneDate);
 
-                if (find == null)
+                if (exists)
                 {
-                    list.Add(item);
+                    var index = list.FindIndex(i => i.WorkDoneDate == item.WorkDoneDate);
+                    list[index] = item;
                 }
                 else
                 {
-                    find.Margin = item.Margin;
+                    list.Add(item);
                 }
             }
 
@@ -74,9 +75,7 @@ namespace Augustus.CRM.Queries
             {
                 list.Add(new WorkDoneItem
                 {
-                    WorkDoneDate = last.AddMonths(-i),
-                    InvoiceId = inv.Id,
-                    AccountId = inv.AccountId                   
+                    WorkDoneDate = last.AddMonths(-i)               
                 });
             }
 
@@ -131,11 +130,34 @@ namespace Augustus.CRM.Queries
         public void Update(Invoice invoice)
         {
             var entity = Context.Invoices.Single(o => o.Id == invoice.Id);
-
             entity.SetUsingDomain(invoice);
-
             Context.Update(entity);
             Context.SaveChanges();
+
+            UpdateWorkDoneItems(entity, invoice);
+        }
+
+        private void UpdateWorkDoneItems(InvoiceEntity entity, Invoice invoice)
+        {
+            var workDoneItemQuery = new WorkDoneItemQuery(Context);
+
+            foreach (var item in invoice.WorkDoneItems)
+            {
+                if (item.Margin.HasValue)
+                {
+                    item.AccountId = entity.AccountId;
+                    item.InvoiceId = entity.Id;
+
+                    if (item.Id.HasValue)
+                    {
+                        workDoneItemQuery.Update(item);
+                    }
+                    else
+                    {
+                        workDoneItemQuery.Create(item);
+                    }
+                }
+            }
         }
     }
 }

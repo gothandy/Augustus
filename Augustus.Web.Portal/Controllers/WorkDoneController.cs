@@ -26,14 +26,17 @@ namespace Augustus.Web.Portal.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Edit(Guid id, List<WorkDoneItem> items)
+        public async Task<ActionResult> Edit(Guid id, Invoice invoice)
         {
             using (var context = await GetCrmContext())
             {
-                
+                var query = new InvoiceQuery(context);
 
+                invoice.Id = id;
 
-                return RedirectToAction("Details", new { id = id });
+                query.Update(invoice);
+
+                return RedirectToAction("Details", "Invoice", new { id = id });
             }
         }
 

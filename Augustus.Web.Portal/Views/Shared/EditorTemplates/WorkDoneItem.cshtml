@@ -1,6 +1,10 @@
 ﻿@model WorkDoneItem
 <div class="form-group">
 
+    @Html.HiddenFor(model => model.Id)
+    
+    @Html.HiddenFor(model => model.WorkDoneDate)
+
     <label class="control-label col-sm-3">@Model.WorkDoneDate.Value.ToString("MMM yyyy")</label>
 
     <div class="col-sm-5">

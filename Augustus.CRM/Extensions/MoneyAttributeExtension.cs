@@ -23,10 +23,10 @@ namespace Augustus.CRM.Extensions
 
         public static void SetAttributeMoney(this BaseEntity entity, decimal? value, [CallerMemberName] string caller = "")
         {
-            string attributeLogicalName = AttributeHelper.GetLogicalName(entity, caller);
-
             if (value.HasValue)
             {
+                string attributeLogicalName = AttributeHelper.GetLogicalName(entity, caller);
+
                 var money = new Money(value.Value);
                
                 entity.SetBaseAttributeValue(attributeLogicalName, money);

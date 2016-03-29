@@ -24,11 +24,11 @@ namespace Augustus.CRM.Extensions
 
         public static void SetAttributeEntityReference(this BaseEntity entity, Guid? id, [CallerMemberName] string caller = "")
         {
-            string attributeLogicalName = AttributeHelper.GetLogicalName(entity, caller);
-            string entityReferenceLogicalName = AttributeHelper.GetEntityReferenceLogicalName(entity, caller);
-
             if (id.HasValue)
             {
+                string attributeLogicalName = AttributeHelper.GetLogicalName(entity, caller);
+                string entityReferenceLogicalName = AttributeHelper.GetEntityReferenceLogicalName(entity, caller);
+
                 var entRef = new EntityReference(entityReferenceLogicalName, id.Value);
                 entity.SetBaseAttributeValue(attributeLogicalName, entRef);
             }
