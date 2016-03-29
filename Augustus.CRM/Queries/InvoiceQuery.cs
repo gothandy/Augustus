@@ -134,11 +134,15 @@ namespace Augustus.CRM.Queries
             Context.Update(entity);
             Context.SaveChanges();
 
-            UpdateWorkDoneItems(entity, invoice);
+            if (invoice.WorkDoneItems != null)
+            {
+                UpdateWorkDoneItems(entity, invoice);
+            }
         }
 
         private void UpdateWorkDoneItems(InvoiceEntity entity, Invoice invoice)
         {
+
             var workDoneItemQuery = new WorkDoneItemQuery(Context);
 
             foreach (var item in invoice.WorkDoneItems)

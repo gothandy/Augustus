@@ -21,6 +21,8 @@ namespace Augustus.CRM.Test
             query = new InvoiceQuery(context);
             easyJetJan16Inv = new Guid("28D8BB1A-0DB3-E511-8118-3863BB34FA68");
 
+            deleteAllWorkDoneItems();
+            deleteAllInvoices();
             deleteAllOpportunities();
             deleteAllAccounts();
         }
@@ -28,6 +30,8 @@ namespace Augustus.CRM.Test
         [ClassCleanup]
         public static void ClassCleanup()
         {
+            deleteAllWorkDoneItems();
+            deleteAllInvoices();
             deleteAllOpportunities();
             deleteAllAccounts();
             context.Dispose();
@@ -109,12 +113,21 @@ namespace Augustus.CRM.Test
             Assert.AreEqual(new DateTime(2016, 2, 1), inv.ProposalApproved);
             Assert.AreEqual(account.Id, inv.AccountId);
             Assert.AreEqual(InvoiceStatus.Proposed, inv.Status);
+            Assert.AreEqual(6, inv.WorkDoneItems.Count);
 
-            // Update Invoice
+            // Update with existing
+            inv.WorkDoneItems[0].Margin = 1000;
+            query.Update(inv);
+            inv = query.GetItem(id);
+            Assert.AreEqual(1000, inv.WorkDoneItems[0].Margin);
+            Assert.AreEqual(6, inv.WorkDoneItems.Count);
+
+            // Update with New Invoice
             var updateInv = new Invoice
             {
                 Id = id,
-                Name = invoiceRename
+                Name = invoiceRename,
+
             };
             query.Update(updateInv);
             inv = query.GetItem(id);
