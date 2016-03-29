@@ -1,9 +1,10 @@
-﻿using Microsoft.Xrm.Sdk;
+﻿using System.Threading.Tasks;
 
 namespace Augustus.CRM
 {
     public interface ICrmService
     {
-        IOrganizationService OrganizationService { get; }
+        CrmContext GetContext();
+        Task<CrmContext> GetContextAsync();
     }
 }

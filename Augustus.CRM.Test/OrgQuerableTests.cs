@@ -1,17 +1,15 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.Xrm.Sdk;
-using Microsoft.Xrm.Tooling.Connector;
+﻿using Augustus.CRM.Entities;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Configuration;
 using System.Linq;
-using Augustus.CRM.Entities;
 
 namespace Augustus.CRM.Test
 {
     [TestClass]
     public class OrgQueryableTests
     {
-        private static CrmContext org;
+        private static CrmContext context;
 
         [ClassInitialize]
         public static void ClassInit(TestContext testContext)
@@ -20,33 +18,33 @@ namespace Augustus.CRM.Test
 
             var svc = new CrmServiceConnectionString(connectionString);
 
-            org = new CrmContext(svc);
+            context = svc.GetContext();
         }
 
         [ClassCleanup]
         public static void ClassCleanup()
         {
-            org.Dispose();
+            context.Dispose();
         }
 
         [TestMethod]
         public void OrgQueryable_GetAccount()
         {
-            var account = (AccountEntity)org.Accounts.Single(a => a.Name == "easyJet");
+            var account = (AccountEntity)context.Accounts.Single(a => a.Name == "easyJet");
             Assert.AreEqual(new Guid("33b343c7-a684-e011-8da5-00271336e9df"), account.Id);
         }
 
         [TestMethod]
         public void OrgQueryable_GetIAccount()
         {
-            var account = org.Accounts.Single(a => a.Name == "easyJet");
+            var account = context.Accounts.Single(a => a.Name == "easyJet");
             Assert.AreEqual(new Guid("33b343c7-a684-e011-8da5-00271336e9df"), account.Id);
         }
 
         [TestMethod]
         public void OrgQueryable_GetInvoices()
         {
-            var invoices = (from i in org.Invoices
+            var invoices = (from i in context.Invoices
                             where i.InvoiceDate > new DateTime(2016, 1, 1)
                             select i);
 
@@ -59,8 +57,8 @@ namespace Augustus.CRM.Test
         [TestMethod]
         public void OrgQueryable_AccountJoinInvoice()
         {
-            var activeAccounts = (from a in org.Accounts
-                                  join i in org.Invoices
+            var activeAccounts = (from a in context.Accounts
+                                  join i in context.Invoices
                                   on a.Id equals i.AccountId
                                   where i.InvoiceDate > new DateTime(2015, 1, 1)
                                   select a).Distinct();
@@ -74,7 +72,7 @@ namespace Augustus.CRM.Test
         [TestMethod]
         public void OrgQueryable_AccountByCreated()
         {
-            var newAccounts = from a in org.Accounts
+            var newAccounts = from a in context.Accounts
                               where a.Created > new DateTime(2015, 1, 1)
                               select a;
 

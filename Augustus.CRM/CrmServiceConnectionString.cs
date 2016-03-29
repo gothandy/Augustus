@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Tooling.Connector;
 using System;
+using System.Threading.Tasks;
 
 namespace Augustus.CRM
 {
@@ -27,12 +28,15 @@ namespace Augustus.CRM
             }
         }
 
-        public IOrganizationService OrganizationService
+        public CrmContext GetContext()
         {
-            get
-            {
-                return service;
-            }
+            return new CrmContext(service);
+        }
+
+        public async Task<CrmContext> GetContextAsync()
+        {
+            //return new CrmContext(service);
+            return await Task.Run(() => GetContext());
         }
     }
 }

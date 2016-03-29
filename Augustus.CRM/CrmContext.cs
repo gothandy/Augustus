@@ -1,4 +1,5 @@
 ﻿using Augustus.CRM.Entities;
+using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Client;
 using System;
 using System.Linq;
@@ -11,9 +12,9 @@ namespace Augustus.CRM
     {
         private OrganizationServiceContext context;
 
-        public CrmContext(ICrmService service)
+        public CrmContext(IOrganizationService service)
         {
-            context = new OrganizationServiceContext(service.OrganizationService);
+            context = new OrganizationServiceContext(service);
         }
 
         public void Dispose()
