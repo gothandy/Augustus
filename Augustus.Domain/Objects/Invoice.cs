@@ -55,7 +55,7 @@ namespace Augustus.Domain.Objects
         public DateTime? InvoiceDate { get; set; }
 
         [DataMember]
-        public IEnumerable<WorkDoneItem> WorkDoneItems { get; set; }
+        public List<WorkDoneItem> WorkDoneItems { get; set; }
 
         [DataMember]
         [EnumDataType(typeof(InvoiceStatus))]

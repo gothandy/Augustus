@@ -1,0 +1,26 @@
+﻿@model Invoice
+@{
+    ViewBag.Title = "Edit Work Done";
+
+    var formButtons = new FormButtons
+    {
+        Id = Model.Id,
+        CancelUrl = @Url.Action("Details", "Invoice", new { Id = Model.Id })
+    };
+}
+
+@Html.Partial("~/Views/Invoice/Breadcrumb.cshtml", Model)
+
+@using (Html.BeginForm())
+{
+    <div class="well">
+        <div class="form-horizontal">
+
+        @Html.EditorFor(model => model.WorkDoneItems)
+
+        </div>
+    </div>
+
+    @Html.Partial("EditButtons", formButtons)
+}
+

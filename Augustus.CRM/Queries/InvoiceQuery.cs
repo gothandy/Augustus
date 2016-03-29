@@ -17,8 +17,32 @@ namespace Augustus.CRM.Queries
 
             inv.Opportunity = OpportunityConverter.ToDomainObject(Context.Opportunities.Single(o => o.Id == inv.OpportunityId));
             inv.Account = AccountConverter.ToDomainObject(Context.Accounts.Single(a => a.Id == inv.Opportunity.AccountId));
-            inv.WorkDoneItems = GetWorkDoneItems(id);
+
+            var invEnum = GetEnumerableWorkDoneItems(id);
+            var invList = GetListWorkDoneItems(GetLastDate(inv.InvoiceDate), inv);
+
+            inv.WorkDoneItems = MergeWorkDoneItems(invList, invEnum);
+
             return inv;
+        }
+
+        private List<WorkDoneItem> MergeWorkDoneItems(List<WorkDoneItem> list, IEnumerable<WorkDoneItem> query)
+        {
+            foreach(var item in query)
+            {
+                var find = list.Find(i => i.WorkDoneDate == item.WorkDoneDate);
+
+                if (find == null)
+                {
+                    list.Add(item);
+                }
+                else
+                {
+                    find.Margin = item.Margin;
+                }
+            }
+
+            return list;
         }
 
         public Invoice GetNew(Guid parentId)
@@ -27,10 +51,44 @@ namespace Augustus.CRM.Queries
 
             var inv = new Invoice
             {
-                Opportunity = opp
+                Opportunity = opp,
+                AccountId = opp.AccountId,
+                OpportunityId = parentId
             };
 
+            inv.WorkDoneItems = GetListWorkDoneItems(GetLastDate(null), inv);
+
             return (inv);
+        }
+        private DateTime GetLastDate(DateTime? invoice)
+        {
+            var last = invoice.GetValueOrDefault(DateTime.Now);
+            return new DateTime(last.Year, last.Month, 1);
+        }
+
+        private List<WorkDoneItem> GetListWorkDoneItems(DateTime last, Invoice inv)
+        {
+            var list = new List<WorkDoneItem>();
+
+            for(var i = 0; i< 6; i++)
+            {
+                list.Add(new WorkDoneItem
+                {
+                    WorkDoneDate = last.AddMonths(-i),
+                    InvoiceId = inv.Id,
+                    AccountId = inv.AccountId                   
+                });
+            }
+
+            return list;
+        }
+
+        private IEnumerable<WorkDoneItem> GetEnumerableWorkDoneItems(Guid id)
+        {
+            return (from i in Context.WorkDoneItems
+                    where i.InvoiceId == id
+                    orderby i.WorkDoneDate descending
+                    select WorkDoneItemConverter.ToDomain(i)).AsEnumerable();
         }
 
         public IEnumerable<Opportunity> GetParentLookup(Guid parentId)
@@ -44,14 +102,6 @@ namespace Augustus.CRM.Queries
                                  select OpportunityConverter.ToDomainObject(o));
 
             return opportunities;
-        }
-
-        private IEnumerable<WorkDoneItem> GetWorkDoneItems(Guid id)
-        {
-            return (from i in Context.WorkDoneItems
-                    where i.InvoiceId == id
-                    orderby i.WorkDoneDate descending
-                    select WorkDoneItemConverter.ToDomain(i)).AsEnumerable();
         }
 
         public Guid Create(Invoice invoice)

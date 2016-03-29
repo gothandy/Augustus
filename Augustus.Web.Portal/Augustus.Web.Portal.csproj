@@ -194,6 +194,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\WorkDoneController.cs" />
     <Compile Include="Models\Binders\DecimalModelBinder.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -374,6 +375,8 @@
     <Content Include="Views\Shared\EditorTemplates\Opportunity.cshtml" />
     <Content Include="Views\Organization\List.cshtml" />
     <Content Include="Views\Organization\Buttons.cshtml" />
+    <Content Include="Views\WorkDone\Edit.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\WorkDoneItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

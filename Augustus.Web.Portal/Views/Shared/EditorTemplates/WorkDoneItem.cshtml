@@ -1,0 +1,13 @@
+﻿@model WorkDoneItem
+<div class="form-group">
+
+    <label class="control-label col-sm-3">@Model.WorkDoneDate.Value.ToString("MMM yyyy")</label>
+
+    <div class="col-sm-5">
+        @Html.TextBoxFor(model => model.Margin, "{0:n2}", new { @class = "form-control number" })
+    </div>
+
+    <div class="col-sm-4">
+        @Html.ValidationMessageFor(model => model.Margin, null, new { @class = "help-block text-danger" })
+    </div>
+</div>

@@ -46,13 +46,19 @@ namespace Augustus.CRM.Test
         {
             var inv = invQuery.GetItem(easyJetJan16Inv);
 
-            Assert.AreEqual(5, inv.WorkDoneItems.Count());
+            foreach(var item in inv.WorkDoneItems)
+            {
+                Console.WriteLine("{0} {1}", item.WorkDoneDate, item.Margin);
+            }
+
+            Assert.AreEqual(6, inv.WorkDoneItems.Count());
 
             var wdi = inv.WorkDoneItems.First();
 
             Assert.AreEqual(inv.AccountId, wdi.AccountId);
             Assert.AreEqual((decimal)99684.3, wdi.Margin);
             Assert.AreEqual(new DateTime(2016,1,1), wdi.WorkDoneDate);
+            Assert.IsNull(inv.WorkDoneItems[5].Margin);
 
         }
 

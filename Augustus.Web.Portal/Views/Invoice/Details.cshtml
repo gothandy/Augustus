@@ -90,10 +90,13 @@
             </thead>
             @foreach (var i in Model.WorkDoneItems)
             {
+                if (i.Margin.HasValue)
+                {
                 <tr>
                     <td>@DateTimeHelper.Format(i.WorkDoneDate)</td>
                     <td class="currency">@CurrencyHelper.Format(i.Margin)</td>
                 </tr>
+                }
             }
             <tfoot>
                 <tr>
@@ -105,7 +108,11 @@
     </div>
 </div>
 
-<div>
+<div class="btn-group">
     <a class="btn btn-default" target="_blank" href="https://trueclarity4.crm4.dynamics.com/main.aspx?etc=10010&id={@Model.Id}&pagetype=entityrecord">Open in CRM</a>
-    <a class="btn btn-default pull-right" href="@Url.Action("Edit", new { id = Model.Id })">Edit Invoice</a>
+</div>
+
+<div class="btn-group pull-right">
+    <a class="btn btn-default" href="@Url.Action("Edit", "WorkDone", new { id = Model.Id })">Edit Work Done</a>
+    <a class="btn btn-default" href="@Url.Action("Edit", new { id = Model.Id })">Edit Invoice</a>
 </div>

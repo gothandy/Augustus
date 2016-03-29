@@ -63,7 +63,7 @@ namespace Augustus.CRM.Test
         {
             var inv = query.GetItem(easyJetJan16Inv);
 
-            Assert.AreEqual(5, inv.WorkDoneItems.Count());
+            Assert.AreEqual(6, inv.WorkDoneItems.Count());
 
             foreach(var item in inv.WorkDoneItems)
             {
