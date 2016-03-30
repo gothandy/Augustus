@@ -12,7 +12,7 @@ namespace Augustus.Domain.Objects
         public Guid? Id { get; set; }
 
         [DataMember]
-        [Required]
+        [Required(ErrorMessage = "An account name is required.")]
         public string Name { get; set; }
 
         [DataMember]

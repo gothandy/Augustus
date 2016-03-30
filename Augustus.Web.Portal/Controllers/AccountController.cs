@@ -35,8 +35,6 @@ namespace Augustus.Web.Portal.Controllers
             using (var context = await GetCrmContext())
             {
                 var query = new AccountQuery(context);
-                ViewBag.Title = "New Account";
-                ViewBag.SubmitButton = "Create";
                 return View();
             }
         }
@@ -45,6 +43,8 @@ namespace Augustus.Web.Portal.Controllers
         [HttpPost]
         public async Task<ActionResult> Create([Bind(Include = "Name")] Account account)
         {
+            if (!ModelState.IsValid) return View(account);
+
             using (var context = await GetCrmContext())
             {
                 var query = new AccountQuery(context);
