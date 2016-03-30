@@ -9,11 +9,14 @@ namespace Augustus.CRM.Extensions
         {
             var attributeLogicalName = AttributeHelper.GetLogicalName(entity, caller);
 
-            var date = entity.GetAttributeValue<DateTime?>(attributeLogicalName);
+            var utcDateTime = entity.GetAttributeValue<DateTime?>(attributeLogicalName);
 
-            if (date.HasValue)
+            if (utcDateTime.HasValue)
             {
-                return date.Value.ToLocalTime();
+                var gmtStandardTime = TimeZoneInfo.FindSystemTimeZoneById("GMT Standard Time");
+                var localDateTime = TimeZoneInfo.ConvertTime(utcDateTime.Value, gmtStandardTime);
+
+                return localDateTime;
             }
             else
             {
@@ -26,7 +29,7 @@ namespace Augustus.CRM.Extensions
             if (value.HasValue)
             {
                 var attributeLogicalName = AttributeHelper.GetLogicalName(entity, caller);
-                entity.SetBaseAttributeValue(attributeLogicalName, value.Value.ToUniversalTime());
+                entity.SetBaseAttributeValue(attributeLogicalName, value);
             }
         }
     }
