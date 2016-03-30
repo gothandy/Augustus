@@ -377,6 +377,12 @@
     <Content Include="Views\Organization\Buttons.cshtml" />
     <Content Include="Views\WorkDone\Edit.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\WorkDoneItem.cshtml" />
+    <Content Include="Views\Invoice\WorkDone.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\ListGroupDecimal.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Decimal.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\ListGroupDateTime.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\ListGroupDefault.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\ListGroupEnum.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

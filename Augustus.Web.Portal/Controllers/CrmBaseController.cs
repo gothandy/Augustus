@@ -5,9 +5,12 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OpenIdConnect;
 using System;
 using System.Configuration;
+using System.Globalization;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace Augustus.Web.Portal.Controllers
 {
@@ -32,6 +35,15 @@ namespace Augustus.Web.Portal.Controllers
                 service = GetConnectionStringService();
             }
         }
+        protected override void Initialize(RequestContext requestContext)
+        {
+            base.Initialize(requestContext);
+
+            var enGB = new CultureInfo("en-GB");
+            Thread.CurrentThread.CurrentUICulture = enGB;
+            Thread.CurrentThread.CurrentCulture = enGB;
+        }
+
 
         private ICrmService GetConnectionStringService()
         {

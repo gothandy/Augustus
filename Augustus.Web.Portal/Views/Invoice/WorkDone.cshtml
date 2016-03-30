@@ -1,0 +1,31 @@
+﻿@model List<WorkDoneItem>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Work Done</div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th class="currency">Margin</th>
+                </tr>
+            </thead>
+            @foreach (var i in Model)
+            {
+                if (i.Margin.HasValue)
+                {
+                    <tr>
+                        <td>@DateTimeHelper.Format(i.WorkDoneDate)</td>
+                        <td class="currency">@CurrencyHelper.Format(i.Margin)</td>
+                    </tr>
+                }
+            }
+            <tfoot>
+                <tr>
+                    <td>Total</td>
+                    <td class="currency">@CurrencyHelper.Format(Model.Sum(i => i.Margin))</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

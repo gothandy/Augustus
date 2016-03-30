@@ -11,9 +11,11 @@
         return String.Empty;
     }
 }
+<div class="list-group-item">
+    <div class="row">
+        <div class="col-xs-6"><strong>@Html.DisplayNameFor(model => model)</strong></div>
+        <div class="col-xs-6 text-right">@GetDisplayName()</div>
+    </div>
+</div>
 
-@if (EnumHelper.IsValidForEnumHelper(ViewData.ModelMetadata))
-{
-    @Html.DisplayTextFor(model => GetDisplayName())
-}
 

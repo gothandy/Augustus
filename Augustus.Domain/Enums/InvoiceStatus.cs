@@ -27,5 +27,6 @@ namespace Augustus.Domain.Enums
 
         [Display(Name = "Invoice Paid")]
         InvoicePaid
+
     }
 }

@@ -8,105 +8,30 @@
 <div class="row">
     <div class="col-md-4">
         <div class="list-group">
-            <div class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-6"><strong>Margin</strong></div>
-                    <div class="col-xs-6 text-right">@CurrencyHelper.Format(Model.Margin)</div>
-                </div>
-            </div>
-            <div class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-6"><strong>Cost</strong></div>
-                    <div class="col-xs-6 text-right">@CurrencyHelper.Format(Model.Cost)</div>
-                </div>
-            </div>
-            <div class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-6"><strong>Revenue</strong></div>
-                    <div class="col-xs-6 text-right">@CurrencyHelper.Format(Model.Revenue)</div>
-                </div>
-            </div>
+            @Html.DisplayFor(model => model.Margin, "ListGroupDecimal")
+            @Html.DisplayFor(model => model.Cost, "ListGroupDecimal")
+            @Html.DisplayFor(model => model.Revenue, "ListGroupDecimal")
         </div>
     </div>
 
     <div class="col-md-4">
         <div class="list-group">
-            <div class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-6"><strong>Proposal Date</strong></div>
-                    <div class="col-xs-6 text-right">@DateTimeHelper.Format(Model.ProposalApproved)</div>
-                </div>
-            </div>
-            <div class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-6"><strong>SDN Date</strong></div>
-                    <div class="col-xs-6 text-right">@DateTimeHelper.Format(Model.SdnApproved)</div>
-                </div>
-            </div>
-            <div class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-6"><strong>Invoice Date</strong></div>
-                    <div class="col-xs-6 text-right">@DateTimeHelper.Format(Model.InvoiceDate)</div>
-                </div>
-            </div>
+            @Html.DisplayFor(model => model.ProposalApproved, "ListGroupDateTime")
+            @Html.DisplayFor(model => model.SdnApproved, "ListGroupDateTime")
+            @Html.DisplayFor(model => model.InvoiceDate, "ListGroupDateTime")
         </div>
     </div>
 
     <div class="col-md-4">
         <div class="list-group">
-
-            <div class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-6"><strong>PO No.</strong></div>
-                    <div class="col-xs-6 text-right">@Model.PONumber</div>
-                </div>
-            </div>
-            <div class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-6"><strong>Invoice No.</strong></div>
-                    <div class="col-xs-6 text-right">@Model.InvoiceNo</div>
-                </div>
-            </div>
-            <div class="list-group-item">
-                <div class="row">
-                    <div class="col-xs-6"><strong>Status</strong></div>
-                    <div class="col-xs-6 text-right">@Html.DisplayFor(m => m.Status)</div>
-                </div>
-            </div>
-
+            @Html.DisplayFor(model => model.PONumber, "ListGroupDefault")
+            @Html.DisplayFor(model => model.InvoiceNo, "ListGroupDefault")
+            @Html.DisplayFor(model => model.Status, "ListGroupEnum")
         </div>
     </div>
 </div>
 
-<div class="panel panel-default">
-    <div class="panel-heading">Work Done</div>
-    <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th class="currency">Margin</th>
-                </tr>
-            </thead>
-            @foreach (var i in Model.WorkDoneItems)
-            {
-                if (i.Margin.HasValue)
-                {
-                <tr>
-                    <td>@i.WorkDoneDate.Value.ToShortDateString() @i.WorkDoneDate.Value.ToShortTimeString()</td>
-                    <td class="currency">@CurrencyHelper.Format(i.Margin)</td>
-                </tr>
-                }
-            }
-            <tfoot>
-                <tr>
-                    <td>Total</td>
-                    <td class="currency">@CurrencyHelper.Format(Model.WorkDoneItems.Sum(i => i.Margin))</td>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
-</div>
+@Html.Partial("WorkDone", Model.WorkDoneItems)
 
 <div class="btn-group">
     <a class="btn btn-default" target="_blank" href="https://trueclarity4.crm4.dynamics.com/main.aspx?etc=10010&id={@Model.Id}&pagetype=entityrecord">
