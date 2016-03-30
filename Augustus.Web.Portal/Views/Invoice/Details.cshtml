@@ -8,25 +8,25 @@
 <div class="row">
     <div class="col-md-4">
         <div class="list-group">
-            @Html.DisplayFor(model => model.Margin, "ListGroupDecimal")
-            @Html.DisplayFor(model => model.Cost, "ListGroupDecimal")
-            @Html.DisplayFor(model => model.Revenue, "ListGroupDecimal")
+            @Html.Partial("ListGroup", FieldGroup.DisplayFor(Html, model => model.Margin))
+            @Html.Partial("ListGroup", FieldGroup.DisplayFor(Html, model => model.Cost))
+            @Html.Partial("ListGroup", FieldGroup.DisplayFor(Html, model => model.Revenue))
         </div>
     </div>
 
     <div class="col-md-4">
         <div class="list-group">
-            @Html.DisplayFor(model => model.ProposalApproved, "ListGroupDateTime")
-            @Html.DisplayFor(model => model.SdnApproved, "ListGroupDateTime")
-            @Html.DisplayFor(model => model.InvoiceDate, "ListGroupDateTime")
+            @Html.Partial("ListGroup", FieldGroup.DisplayFor(Html, model => model.ProposalApproved))
+            @Html.Partial("ListGroup", FieldGroup.DisplayFor(Html, model => model.SdnApproved))
+            @Html.Partial("ListGroup", FieldGroup.DisplayFor(Html, model => model.InvoiceDate))
         </div>
     </div>
 
     <div class="col-md-4">
         <div class="list-group">
-            @Html.DisplayFor(model => model.PONumber, "ListGroupDefault")
-            @Html.DisplayFor(model => model.InvoiceNo, "ListGroupDefault")
-            @Html.DisplayFor(model => model.Status, "ListGroupEnum")
+            @Html.Partial("ListGroup", FieldGroup.DisplayFor(Html, model => model.PONumber))
+            @Html.Partial("ListGroup", FieldGroup.DisplayFor(Html, model => model.InvoiceNo))
+            @Html.Partial("ListGroup", FieldGroup.DisplayFor(Html, model => model.Status))
         </div>
     </div>
 </div>

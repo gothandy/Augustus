@@ -1,19 +1,3 @@
 ﻿@model Enum
-@functions
-{
-    private string GetDisplayName()
-    {
-        foreach (SelectListItem item in EnumHelper.GetSelectList(ViewData.ModelMetadata, Model))
-        {
-            if (item.Selected) return item.Text;
-        }
-
-        return String.Empty;
-    }
-}
-
-@if (EnumHelper.IsValidForEnumHelper(ViewData.ModelMetadata))
-{
-    @Html.DisplayTextFor(model => GetDisplayName())
-}
+@Html.EnumDisplayTextFor(model => model)
 

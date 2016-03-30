@@ -8,7 +8,7 @@ using System.Web.Mvc.Html;
 
 namespace Augustus.Web.Portal.Helpers
 {
-    public static class IsValidHelper
+    public static class ValidationMessageHelper
     {
         public static bool IsValidFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper, Expression<Func<TModel, TProperty>> expression)
         {
