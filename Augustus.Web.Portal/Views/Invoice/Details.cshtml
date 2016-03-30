@@ -93,7 +93,7 @@
                 if (i.Margin.HasValue)
                 {
                 <tr>
-                    <td>@DateTimeHelper.Format(i.WorkDoneDate)</td>
+                    <td>@i.WorkDoneDate.Value.ToShortDateString() @i.WorkDoneDate.Value.ToShortTimeString()</td>
                     <td class="currency">@CurrencyHelper.Format(i.Margin)</td>
                 </tr>
                 }

@@ -26,7 +26,7 @@ namespace Augustus.CRM.Extensions
             if (value.HasValue)
             {
                 var attributeLogicalName = AttributeHelper.GetLogicalName(entity, caller);
-                entity.SetBaseAttributeValue(attributeLogicalName, value);
+                entity.SetBaseAttributeValue(attributeLogicalName, value.Value.ToUniversalTime());
             }
         }
     }
