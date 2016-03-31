@@ -1,0 +1,21 @@
+﻿@model Breadcrumb
+
+<ol class="breadcrumb">
+    <li><a href="@Url.Action("ActiveAccounts", "Organization")">True Clarity</a></li>
+
+    @if (Model.Account != null)
+    {
+        <li><a href="@Url.Action("Opportunities", "Account", new { id = Model.Account.Id })">@Model.Account.Name</a></li>
+    }
+
+    @if (Model.Opportunity != null)
+    {
+        <li>@Html.ActionLink(Model.Opportunity.Name, "Invoices", "Opportunity", new { id = Model.Opportunity.Id }, null)</li>
+    }
+
+    @if (Model.Invoice != null)
+    {
+        <li>@Html.ActionLink(Model.Invoice.Name, "Invoices", "Opportunity", new { id = Model.Invoice.Id }, null)</li>
+    }
+    
+</ol>

@@ -1,16 +1,8 @@
 ﻿@model Opportunity
-@{
-    var formButtons = new FormButtons
-    {
-        CancelUrl = @Url.Action("Opportunities", "Account", new { id = Model.Account.Id })
-    };
-}
-
-@Html.Partial("Breadcrumb", Model.Account)
 
 @using (Html.BeginForm())
 {
     @Html.Partial("Form", Model, ViewData)
 
-    @Html.Partial("CreateButtons", formButtons)
+    @Html.Partial("CreateButtons", (FormButtons)ViewBag.FormButtons)
 }

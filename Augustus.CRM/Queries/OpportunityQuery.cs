@@ -1,16 +1,14 @@
-﻿using System;
+﻿using Augustus.CRM.Converters;
+using Augustus.CRM.Entities;
+using Augustus.Domain.Interfaces;
+using Augustus.Domain.Objects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Augustus.CRM;
-using Augustus.CRM.Entities;
-using Augustus.Domain.Objects;
-using Augustus.CRM.Converters;
 
 namespace Augustus.CRM.Queries
 {
-    public class OpportunityQuery : BaseQuery
+    public class OpportunityQuery : BaseQuery, IQuery<Opportunity>
     {
         public OpportunityQuery(CrmContext context) : base(context) { }
 
@@ -18,24 +16,15 @@ namespace Augustus.CRM.Queries
         {
             var opp = OpportunityConverter.ToDomainObject(Context.Opportunities.Single(o => o.Id == id));
 
-            var acc = AccountConverter.ToDomainObject(Context.Accounts.Single(a => a.Id == opp.AccountId));
-
-            opp.Account = acc;
             opp.Invoices = GetInvoices(id);
 
             return opp;
         }
 
-        public Opportunity GetNew(Guid parentId)
+        public Account GetParent(Guid id)
         {
-            var acc = AccountConverter.ToDomainObject(Context.Accounts.Single(a => a.Id == parentId));
-
-            var opp = new Opportunity
-            {
-                Account = acc
-            };
-
-            return (opp);
+            var parentId = Context.Opportunities.Single(o => o.Id == id).AccountId;
+            return AccountConverter.ToDomainObject(Context.Accounts.Single(a => a.Id == parentId));
         }
 
         private IEnumerable<Invoice> GetInvoices(Guid opportunityId)
@@ -44,13 +33,6 @@ namespace Augustus.CRM.Queries
                     where i.OpportunityId == opportunityId
                     orderby i.InvoiceDate descending
                     select InvoiceConverter.ToDomain(i)).AsEnumerable();
-        }
-
-        public IEnumerable<Account> GetParentLookup()
-        {
-            var org = new OrganizationQuery(Context);
-
-            return org.GetNewAndActiveAccounts();
         }
 
         public Guid Create(Opportunity opportunity)
@@ -67,14 +49,6 @@ namespace Augustus.CRM.Queries
             return entity.Id;
         }
 
-        public void Delete(Guid opportunityId)
-        {
-            var entity = Context.Opportunities.Single(o => o.Id == opportunityId);
-
-            Context.Delete(entity);
-            Context.SaveChanges();
-        }
-
         public void Update(Opportunity opportunity)
         {
             var entity = Context.Opportunities.Single(o => o.Id == opportunity.Id);
@@ -84,6 +58,18 @@ namespace Augustus.CRM.Queries
 
             Context.Update(entity);
             Context.SaveChanges();
+        }
+
+        public Guid? Delete(Guid opportunityId)
+        {
+            var entity = Context.Opportunities.Single(o => o.Id == opportunityId);
+
+            var parentId = entity.AccountId;
+
+            Context.Delete(entity);
+            Context.SaveChanges();
+
+            return parentId;
         }
     }
 }

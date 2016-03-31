@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Augustus.Web.Portal.Controllers
 {
-    public class InvoiceController : CrmBaseController
+    public class InvoiceController : BaseCrmController
     {
         private const string bindAttributes = "OpportunityId,Name,Revenue,Cost,InvoiceDate,PONumber,InvoiceNo,Status";
 
@@ -28,7 +28,7 @@ namespace Augustus.Web.Portal.Controllers
                 var query = new InvoiceQuery(context);
                 ViewBag.Opportunities = query.GetParentLookup(id);
 
-                return View(query.GetNew(id));
+                return View(query.GetNewItem(id));
             }
         }
 

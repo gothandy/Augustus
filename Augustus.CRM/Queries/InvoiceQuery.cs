@@ -46,7 +46,7 @@ namespace Augustus.CRM.Queries
             return list;
         }
 
-        public Invoice GetNew(Guid parentId)
+        public Invoice GetNewItem(Guid parentId)
         {
             var opp = OpportunityConverter.ToDomainObject(Context.Opportunities.Single(a => a.Id == parentId));
 

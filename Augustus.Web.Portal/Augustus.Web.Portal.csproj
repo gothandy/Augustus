@@ -194,6 +194,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\BaseWriteController.cs" />
     <Compile Include="Controllers\WorkDoneController.cs" />
     <Compile Include="Helpers\EnumFieldHelper.cs" />
     <Compile Include="Helpers\ValidationMessageHelper.cs" />
@@ -201,7 +202,7 @@
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CrmAuthorizeAttribute.cs" />
-    <Compile Include="Controllers\CrmBaseController.cs" />
+    <Compile Include="Controllers\BaseCrmController.cs" />
     <Compile Include="Controllers\OrganizationController.cs" />
     <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Controllers\OpportunityController.cs" />
@@ -211,6 +212,7 @@
     </Compile>
     <Compile Include="Helpers\CurrencyHelper.cs" />
     <Compile Include="Helpers\DateTimeHelper.cs" />
+    <Compile Include="Models\Breadcrumb.cs" />
     <Compile Include="Models\FieldGroup.cs" />
     <Compile Include="Models\FormButtons.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -366,14 +368,12 @@
     <Content Include="Views\Account\Create.cshtml" />
     <Content Include="Views\Account\Form.cshtml" />
     <Content Include="Views\Shared\CreateButtons.cshtml" />
-    <Content Include="Views\Account\Breadcrumb.cshtml" />
     <Content Include="Views\Opportunity\Edit.cshtml" />
     <Content Include="Views\Opportunity\Create.cshtml" />
-    <Content Include="Views\Opportunity\Breadcrumb.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Account.cshtml" />
     <Content Include="Views\Vincente\Index.cshtml" />
     <Content Include="Views\Invoice\Create.cshtml" />
-    <Content Include="Views\Invoice\Breadcrumb.cshtml" />
+    <Content Include="Views\Shared\Breadcrumb.cshtml" />
     <Content Include="Views\Invoice\Edit.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Opportunity.cshtml" />
     <Content Include="Views\Organization\List.cshtml" />
@@ -388,6 +388,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Extensions\" />
+    <Folder Include="Views\ReadWriteBase\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -30,6 +30,12 @@
         <div class="page-header">
             <h1>@ViewBag.Title</h1>
         </div>
+
+        @if (ViewBag.Breadcrumb != null)
+        {
+            @Html.Partial("Breadcrumb", (Breadcrumb)ViewBag.Breadcrumb)
+        }
+
         @RenderBody()
         <hr />
         <footer>

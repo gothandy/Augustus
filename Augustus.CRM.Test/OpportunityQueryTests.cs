@@ -46,16 +46,6 @@ namespace Augustus.CRM.Test
         }
 
         [TestMethod]
-        public void CRM_Query_Opportunity_GetAccount()
-        {
-            Opportunity opp = query.GetItem(easyJet2015Budget);
-
-            var account = opp.Account;
-
-            Assert.AreEqual("easyJet", account.Name);
-        }
-
-        [TestMethod]
         public void CRM_Query_Opportunity_CrUD()
         {
             // Create Account

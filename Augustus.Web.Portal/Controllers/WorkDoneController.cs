@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Augustus.Web.Portal.Controllers
 {
-    public class WorkDoneController : CrmBaseController
+    public class WorkDoneController : BaseCrmController
     {
         // GET: WorkDone/Edit/{id}
         public async Task<ActionResult> Edit(Guid id)

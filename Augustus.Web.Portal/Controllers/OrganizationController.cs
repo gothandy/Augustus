@@ -4,7 +4,7 @@ using Augustus.CRM.Queries;
 
 namespace Augustus.Web.Portal.Controllers
 {
-    public class OrganizationController : CrmBaseController
+    public class OrganizationController : BaseCrmController
     {
 
         // GET: /Organization/ActiveAccounts

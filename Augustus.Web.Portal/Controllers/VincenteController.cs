@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace Augustus.Web.Portal.Controllers
 {
-    public class VincenteController : CrmBaseController
+    public class VincenteController : BaseCrmController
     {
         // GET: Vincente
         public async Task<ActionResult> Index()

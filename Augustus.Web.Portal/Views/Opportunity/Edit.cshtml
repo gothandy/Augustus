@@ -1,19 +1,9 @@
 ﻿@model Opportunity
-@{
-    var formButtons = new FormButtons
-    {
-        Id = Model.Id,
-        CancelUrl = @Url.Action("Invoices", new { Id = Model.Id })
-    };
-}
-
-@Html.Partial("Breadcrumb", Model.Account)
 
 @using (Html.BeginForm())
 {
     @Html.Partial("Form", Model, ViewData)
-
-    @Html.Partial("EditButtons", formButtons)
+    @Html.Partial("EditButtons", (FormButtons)ViewBag.FormButtons)
 }
 
 

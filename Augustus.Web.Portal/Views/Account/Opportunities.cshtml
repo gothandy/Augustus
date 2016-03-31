@@ -3,8 +3,6 @@
     ViewBag.Title = Model.Name;
 }
 
-@Html.Partial("Breadcrumb")
-
 <ul class="nav nav-tabs">
     <li role="presentation"><a href="@Url.Action("Invoices", new { id = Model.Id })">Invoices</a></li>
     <li role="presentation" class="active"><a href="@Url.Action("Opportunities", new { id = Model.Id })">Opportunities</a></li>

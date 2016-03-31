@@ -1,18 +1,8 @@
 ﻿@model Account
-@{
-    ViewBag.Title = "New Account";
-
-    var formButtons = new FormButtons
-    {
-        CancelUrl = @Url.Action("ActiveAccounts", "Organization")
-    };
-}
-
-@Html.Partial("Breadcrumb")
 
 @using (Html.BeginForm())
 {
     @Html.Partial("Form", Model)
 
-    @Html.Partial("CreateButtons", formButtons)
+    @Html.Partial("CreateButtons", (FormButtons)ViewBag.FormButtons)
 }

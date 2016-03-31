@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Augustus.Domain.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
@@ -6,7 +7,7 @@ using System.Runtime.Serialization;
 namespace Augustus.Domain.Objects
 {
     [DataContract]
-    public class Opportunity
+    public class Opportunity : IDomainObject
     {
         [DataMember]
         public Guid? AccountId { get; set; }
@@ -23,8 +24,6 @@ namespace Augustus.Domain.Objects
 
         [DataMember]
         public IEnumerable<Invoice> Invoices { get; set; }
-
-        public Account Account {get;set;}
 
         public override bool Equals(object obj)
         {

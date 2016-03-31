@@ -1,6 +1,7 @@
 ﻿using Augustus.CRM;
 using Augustus.CRM.Converters;
 using Augustus.CRM.Entities;
+using Augustus.Domain.Interfaces;
 using Augustus.Domain.Objects;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Linq;
 
 namespace Augustus.CRM.Queries
 {
-    public class AccountQuery : BaseQuery
+    public class AccountQuery : BaseQuery, IQuery<Account>
     {
         public AccountQuery(CrmContext context) : base(context) { }
 
@@ -81,12 +82,18 @@ namespace Augustus.CRM.Queries
             Context.SaveChanges();
         }
 
-        public void Delete(Guid id)
+        public Guid? Delete(Guid id)
         {
             var entity = Context.Accounts.Single(a => a.Id == id);
 
             Context.Delete<AccountEntity>(entity);
             Context.SaveChanges();
+            return null;
+        }
+
+        public Guid? GetParentId(Guid id)
+        {
+            return null;
         }
     }
 }

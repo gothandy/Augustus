@@ -1,9 +1,7 @@
 ﻿@model Opportunity
 @{
-    ViewBag.Title = Model.Name;
+    
 }
-
-@Html.Partial("Breadcrumb", Model.Account)
 
 @if (Model.Invoices.Count() == 0)
 {

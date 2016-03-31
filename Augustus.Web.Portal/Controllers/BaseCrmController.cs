@@ -15,7 +15,7 @@ using System.Web.Routing;
 namespace Augustus.Web.Portal.Controllers
 {
     [CrmAuthorize]
-    public class CrmBaseController : Controller
+    public class BaseCrmController : Controller
     {
         ICrmService service;
 
@@ -23,7 +23,7 @@ namespace Augustus.Web.Portal.Controllers
         private DateTime lastMonth = DateTime.Now.AddMonths(-1);
         private DateTime lastThreeMonths = DateTime.Now.AddMonths(-3);
 
-        public CrmBaseController() : base()
+        public BaseCrmController() : base()
         {
             string useAzureAuth = ConfigurationManager.AppSettings["crm:UseAzureAuth"];
             if (useAzureAuth == "true" || useAzureAuth == null)

@@ -8,8 +8,8 @@
         @Html.TextBoxFor(model => model, new { @class = "form-control" })
     </div>
 
-    <div class="col-sm-4">
-        @Html.ValidationMessageFor(model => model, null, new { @class = " help-block text-danger" })
-    </div>
+    <p class="help-block col-sm-4">
+        @Html.ValidationMessageFor(model => model, null, new { @class = "danger-text" })
+    </p>
 
 </div>
