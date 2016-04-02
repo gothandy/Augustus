@@ -38,5 +38,14 @@ namespace Augustus.CRM.Authentication
             // Requires Async method.
             throw new NotImplementedException();
         }
+
+        public static ICrmService GetAccessTokenService(Action tokenAcquisitionFail)
+        {
+            var crmUrl = ConfigurationManager.AppSettings["crm:Url"];
+            var clientId = ConfigurationManager.AppSettings["ida:ClientId"];
+            var clientSecret = ConfigurationManager.AppSettings["ida:ClientSecret"];
+            var authentication = new AccessTokenAuthentication(clientId, clientSecret, tokenAcquisitionFail);
+            return new CrmServiceAccessToken(crmUrl, authentication);
+        }
     }
 }

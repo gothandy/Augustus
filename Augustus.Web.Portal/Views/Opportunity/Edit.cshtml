@@ -1,9 +1,10 @@
-﻿@model Opportunity
+﻿@model OpportunityWriteViewModel
 
 @using (Html.BeginForm())
 {
-    @Html.Partial("Form", Model, ViewData)
-    @Html.Partial("EditButtons", (FormButtons)ViewBag.FormButtons)
+    @Html.Partial("Form", Model)
+
+    @Html.Partial("EditButtons", Model.FormButtons)
 }
 
 

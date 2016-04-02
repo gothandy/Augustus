@@ -1,5 +1,6 @@
 ﻿using Augustus.CRM.Converters;
 using Augustus.CRM.Entities;
+using Augustus.Domain.Interfaces;
 using Augustus.Domain.Objects;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Linq;
 
 namespace Augustus.CRM.Queries
 {
-    public class InvoiceQuery : BaseQuery
+    public class InvoiceQuery : BaseQuery, IQuery<Invoice>
     {
         public InvoiceQuery(CrmContext context) : base(context) { }
 
@@ -119,12 +120,16 @@ namespace Augustus.CRM.Queries
             return entity.Id;
         }
 
-        public void Delete(Guid invoiceId)
+        public Guid? Delete(Guid invoiceId)
         {
             var entity = Context.Invoices.Single(o => o.Id == invoiceId);
 
+            var opportunityId = entity.OpportunityId;
+
             Context.Delete(entity);
             Context.SaveChanges();
+
+            return opportunityId;
         }
 
         public void Update(Invoice invoice)

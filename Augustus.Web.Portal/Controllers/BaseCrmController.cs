@@ -19,22 +19,19 @@ namespace Augustus.Web.Portal.Controllers
     {
         ICrmService service;
 
-        private DateTime lastYear = DateTime.Now.AddYears(-1);
-        private DateTime lastMonth = DateTime.Now.AddMonths(-1);
-        private DateTime lastThreeMonths = DateTime.Now.AddMonths(-3);
-
         public BaseCrmController() : base()
         {
             string useAzureAuth = ConfigurationManager.AppSettings["crm:UseAzureAuth"];
             if (useAzureAuth == "true" || useAzureAuth == null)
             {
-                service = GetAccessTokenService();
+                service = CrmServiceAccessToken.GetAccessTokenService(ForceSignOut);
             }
             else
             {
-                service = GetConnectionStringService();
+                service = new CrmServiceConnectionString();
             }
         }
+
         protected override void Initialize(RequestContext requestContext)
         {
             base.Initialize(requestContext);
@@ -42,22 +39,6 @@ namespace Augustus.Web.Portal.Controllers
             var enGB = new CultureInfo("en-GB");
             Thread.CurrentThread.CurrentUICulture = enGB;
             Thread.CurrentThread.CurrentCulture = enGB;
-        }
-
-
-        private ICrmService GetConnectionStringService()
-        {
-            var connectionString = ConfigurationManager.AppSettings["crm:ConnectionString"];
-            return new CrmServiceConnectionString(connectionString);
-        }
-
-        private ICrmService GetAccessTokenService()
-        {
-            var crmUrl = ConfigurationManager.AppSettings["crm:Url"];
-            var clientId = ConfigurationManager.AppSettings["ida:ClientId"];
-            var clientSecret = ConfigurationManager.AppSettings["ida:ClientSecret"];
-            var authentication = new AccessTokenAuthentication(clientId, clientSecret, tokenAcquisitionFail: ForceSignOut);
-            return new CrmServiceAccessToken(crmUrl, authentication);
         }
 
         private void ForceSignOut()
@@ -74,8 +55,8 @@ namespace Augustus.Web.Portal.Controllers
         {
             CrmContext context = await service.GetContextAsync();
 
-            context.ActiveDate = lastYear;
-            context.NewDate = lastThreeMonths;
+            context.ActiveDate = DateTime.Now.AddYears(-1);
+            context.NewDate = DateTime.Now.AddMonths(-3);
 
             return context;
         }

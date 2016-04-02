@@ -1,20 +1,19 @@
-﻿@model Invoice
-
+﻿@model InvoiceWriteViewModel
 <div class="well">
     <div class="form-horizontal">
 
-        @Html.ValidationSummary(true)
+        <!--Html.ValidationSummary(true)-->
 
-        @Html.EditorFor(m => m.OpportunityId, "Opportunity")
-        @Html.EditorFor(m => m.Name)
-        @Html.EditorFor(m => m.Revenue)
-        @Html.EditorFor(m => m.Cost)
-        @Html.EditorFor(m => m.ProposalApproved)
-        @Html.EditorFor(m => m.SdnApproved)
-        @Html.EditorFor(m => m.InvoiceDate)
-        @Html.EditorFor(m => m.PONumber)
-        @Html.EditorFor(m => m.InvoiceNo)
-        @Html.EditorFor(m => m.Status)
+        @Html.EditorFor(model => model.Invoice.OpportunityId, "Opportunity")
+        @Html.EditorFor(model => model.Invoice.Name)
+        @Html.EditorFor(model => model.Invoice.Revenue)
+        @Html.EditorFor(model => model.Invoice.Cost)
+        @Html.EditorFor(model => model.Invoice.ProposalApproved)
+        @Html.EditorFor(model => model.Invoice.SdnApproved)
+        @Html.EditorFor(model => model.Invoice.InvoiceDate)
+        @Html.EditorFor(model => model.Invoice.PONumber)
+        @Html.EditorFor(model => model.Invoice.InvoiceNo)
+        @Html.EditorFor(model => model.Invoice.Status)
 
     </div>
 </div>

@@ -1,14 +1,11 @@
-﻿@model Account
-@{
-    ViewBag.Title = Model.Name;
-}
+﻿@model AccountReadViewModel
 
 <ul class="nav nav-tabs">
-    <li role="presentation"><a href="@Url.Action("Invoices", new { id = Model.Id })">Invoices</a></li>
-    <li role="presentation" class="active"><a href="@Url.Action("Opportunities", new { id = Model.Id })">Opportunities</a></li>
+    <li role="presentation"><a href="@Url.Action("Invoices", new { id = Model.Account.Id })">Invoices</a></li>
+    <li role="presentation" class="active"><a href="@Url.Action("Opportunities", new { id = Model.Account.Id })">Opportunities</a></li>
 </ul>
 
-@if (Model.Opportunities.Count() == 0)
+@if (Model.Account.Opportunities.Count() == 0)
 {
     <div class="well-sm">
         <div class="panel">No opportunities.</div>
@@ -25,7 +22,7 @@ else
                     </tr>
                 </thead>
                 <tbody>
-                @foreach (var i in Model.Opportunities)
+                @foreach (var i in Model.Account.Opportunities)
                 {
                     <tr>
                         <td>@Html.ActionLink((i.Name == null ? "Null" : i.Name), "Invoices", "Opportunity", new { id = i.Id }, null)</td>
@@ -38,6 +35,6 @@ else
 }
 
     <div>
-        <a class="btn btn-default" href="@Url.Action("Create", "Opportunity", new { id = Model.Id })">Create Opportunity</a>
-        <a class="btn btn-default pull-right" href="@Url.Action("Edit", "Account", new { id = Model.Id })">Edit Account</a>
+        <a class="btn btn-default" href="@Url.Action("Create", "Opportunity", new { id = Model.Account.Id })">Create Opportunity</a>
+        <a class="btn btn-default pull-right" href="@Url.Action("Edit", "Account", new { id = Model.Account.Id })">Edit Account</a>
     </div>

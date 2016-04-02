@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Augustus.Web.Portal.Helpers
+namespace Augustus.Web.Framework.Helpers
 {
     public class CurrencyHelper
     {

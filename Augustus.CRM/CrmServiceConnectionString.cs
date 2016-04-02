@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Tooling.Connector;
 using System;
+using System.Configuration;
 using System.Threading.Tasks;
 
 namespace Augustus.CRM
@@ -9,7 +10,18 @@ namespace Augustus.CRM
     {
         private IOrganizationService service;
 
+        public CrmServiceConnectionString()
+        {
+            var connectionString = ConfigurationManager.AppSettings["crm:ConnectionString"];
+            CreateService(connectionString);
+        }
+
         public CrmServiceConnectionString(string connectionString)
+        {
+            CreateService(connectionString);
+        }
+
+        private void CreateService(string connectionString)
         {
             CrmServiceClient crmSvc = new CrmServiceClient(connectionString);
 

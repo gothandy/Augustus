@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Augustus.Web.Portal.Models
+namespace Augustus.Web.Portal.ViewModels
 {
     public class FormButtons
     {

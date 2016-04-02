@@ -5,7 +5,6 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AEC8F121-94D3-4535-B4BC-3FEB2A598BB2}"
 	ProjectSection(SolutionItems) = preProject
-		Local.testsettings = Local.testsettings
 		nuget.config = nuget.config
 		README.md = README.md
 	EndProjectSection
@@ -29,6 +28,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.Domain.Test", "Augustus.Domain.Test\Augustus.Domain.Test.csproj", "{79B67937-E758-441C-BEBC-D0C304D0CE3E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.CRM.Authentication", "Augustus.CRM.Authentication\Augustus.CRM.Authentication.csproj", "{A95D5F1F-4BD6-4621-BDEC-374EEC4425AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.Web.Framework", "Augustus.Web.Framework\Augustus.Web.Framework.csproj", "{0076647A-8D03-4A58-B45B-603881FE8581}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -76,6 +77,10 @@ Global
 		{A95D5F1F-4BD6-4621-BDEC-374EEC4425AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A95D5F1F-4BD6-4621-BDEC-374EEC4425AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A95D5F1F-4BD6-4621-BDEC-374EEC4425AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0076647A-8D03-4A58-B45B-603881FE8581}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0076647A-8D03-4A58-B45B-603881FE8581}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0076647A-8D03-4A58-B45B-603881FE8581}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0076647A-8D03-4A58-B45B-603881FE8581}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

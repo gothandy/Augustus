@@ -1,49 +1,46 @@
-﻿@model Invoice
-@{
-    ViewBag.Title = Model.Name;
-}
+﻿@model InvoiceReadViewModel
 
 <div class="row">
     <div class="col-md-4">
         <div class="list-group">
-            @Html.Partial("ListGroup", FieldGroup.DisplayFor(Html, model => model.Margin))
-            @Html.Partial("ListGroup", FieldGroup.DisplayFor(Html, model => model.Cost))
-            @Html.Partial("ListGroup", FieldGroup.DisplayFor(Html, model => model.Revenue))
+            @Html.Partial("ListGroup", FieldGroup.DisplayFor(Html, model => model.Invoice.Margin))
+            @Html.Partial("ListGroup", FieldGroup.DisplayFor(Html, model => model.Invoice.Cost))
+            @Html.Partial("ListGroup", FieldGroup.DisplayFor(Html, model => model.Invoice.Revenue))
         </div>
     </div>
 
     <div class="col-md-4">
         <div class="list-group">
-            @Html.Partial("ListGroup", FieldGroup.DisplayFor(Html, model => model.ProposalApproved))
-            @Html.Partial("ListGroup", FieldGroup.DisplayFor(Html, model => model.SdnApproved))
-            @Html.Partial("ListGroup", FieldGroup.DisplayFor(Html, model => model.InvoiceDate))
+            @Html.Partial("ListGroup", FieldGroup.DisplayFor(Html, model => model.Invoice.ProposalApproved))
+            @Html.Partial("ListGroup", FieldGroup.DisplayFor(Html, model => model.Invoice.SdnApproved))
+            @Html.Partial("ListGroup", FieldGroup.DisplayFor(Html, model => model.Invoice.InvoiceDate))
         </div>
     </div>
 
     <div class="col-md-4">
         <div class="list-group">
-            @Html.Partial("ListGroup", FieldGroup.DisplayFor(Html, model => model.PONumber))
-            @Html.Partial("ListGroup", FieldGroup.DisplayFor(Html, model => model.InvoiceNo))
-            @Html.Partial("ListGroup", FieldGroup.DisplayFor(Html, model => model.Status))
+            @Html.Partial("ListGroup", FieldGroup.DisplayFor(Html, model => model.Invoice.PONumber))
+            @Html.Partial("ListGroup", FieldGroup.DisplayFor(Html, model => model.Invoice.InvoiceNo))
+            @Html.Partial("ListGroup", FieldGroup.DisplayFor(Html, model => model.Invoice.Status))
         </div>
     </div>
 </div>
 
-@Html.Partial("WorkDone", Model.WorkDoneItems)
+@Html.Partial("WorkDone", Model.Invoice.WorkDoneItems)
 
 <div class="btn-group">
-    <a class="btn btn-default" target="_blank" href="https://trueclarity4.crm4.dynamics.com/main.aspx?etc=10010&id={@Model.Id}&pagetype=entityrecord">
+    <a class="btn btn-default" target="_blank" href="https://trueclarity4.crm4.dynamics.com/main.aspx?etc=10010&id={@Model.Invoice.Id}&pagetype=entityrecord">
         <span class="visible-xs">CRM</span>
         <span class="hidden-xs">Open In CRM</span>
     </a>
 </div>
 
 <div class="btn-group pull-right">
-    <a class="btn btn-default" href="@Url.Action("Edit", "WorkDone", new { id = Model.Id })">
+    <a class="btn btn-default" href="@Url.Action("Edit", "WorkDone", new { id = Model.Invoice.Id })">
         <span class="visible-xs">Work Done</span>
         <span class="hidden-xs">Edit Work Done</span>
     </a>
-    <a class="btn btn-default" href="@Url.Action("Edit", new { id = Model.Id })">
+    <a class="btn btn-default" href="@Url.Action("Edit", new { id = Model.Invoice.Id })">
         <span class="visible-xs">Invoice</span>
         <span class="hidden-xs">Edit Invoice</span>
     </a>

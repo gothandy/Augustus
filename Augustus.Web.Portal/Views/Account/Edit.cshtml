@@ -1,10 +1,10 @@
-﻿@model Account
+﻿@model AccountWriteViewModel
 
 @using (Html.BeginForm())
 {
-    @Html.Partial("Form", Model)
+    @Html.PartialFor(model => model.Account, "Form")
 
-    @Html.Partial("EditButtons", (FormButtons)ViewBag.FormButtons)
+    @Html.Partial("EditButtons", Model.FormButtons)
 }
 
 

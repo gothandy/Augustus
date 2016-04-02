@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 
-namespace Augustus.Web.Portal.Helpers
+namespace Augustus.Web.Framework.Extensions
 {
     public static class ValidationMessageHelper
     {

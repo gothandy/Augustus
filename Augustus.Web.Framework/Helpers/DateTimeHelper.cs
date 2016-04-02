@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace Augustus.Web.Portal.Helpers
+namespace Augustus.Web.Framework.Helpers
 {
     public class DateTimeHelper
     {

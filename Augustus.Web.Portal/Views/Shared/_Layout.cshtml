@@ -1,9 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@model IPageViewModel
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title</title>
+    <title>@Model.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -28,12 +29,12 @@
     </div>
     <div class="container body-content">
         <div class="page-header">
-            <h1>@ViewBag.Title</h1>
+            <h1>@Model.Title</h1>
         </div>
 
-        @if (ViewBag.Breadcrumb != null)
+        @if (Model.Breadcrumb != null)
         {
-            @Html.Partial("Breadcrumb", (Breadcrumb)ViewBag.Breadcrumb)
+            @Html.Partial("Breadcrumb", Model.Breadcrumb)
         }
 
         @RenderBody()

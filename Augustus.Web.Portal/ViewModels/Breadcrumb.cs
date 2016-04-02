@@ -1,6 +1,6 @@
 ﻿using Augustus.Domain.Objects;
 
-namespace Augustus.Web.Portal.Models
+namespace Augustus.Web.Portal.ViewModels
 {
     public class Breadcrumb
     {

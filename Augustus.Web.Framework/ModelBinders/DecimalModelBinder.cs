@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Web.Mvc;
 
-namespace Augustus.Web.Portal.Model.Binders
+namespace Augustus.Web.Framework.ModelBinders
 {
     public class DecimalModelBinder : IModelBinder
     {

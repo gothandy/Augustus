@@ -1,9 +1,6 @@
-﻿@model Opportunity
-@{
-    
-}
+﻿@model OpportunityReadViewModel
 
-@if (Model.Invoices.Count() == 0)
+@if (Model.Opportunity.Invoices.Count() == 0)
 {
     <div class="well-sm">
         <p>No invoices</p>
@@ -22,7 +19,7 @@ else
                 </tr>
             </thead>
             <tbody>
-                @foreach (var i in Model.Invoices)
+                @foreach (var i in Model.Opportunity.Invoices)
                 {
 
                     if (i.Name == null) { i.Name = "null"; }
@@ -40,9 +37,9 @@ else
 }
 
 <div class="btn-group">
-    <a class="btn btn-default" href="@Url.Action("Create", "Invoice", new { id = Model.Id })">Create Invoice</a>
+    <a class="btn btn-default" href="@Url.Action("Create", "Invoice", new { id = Model.Opportunity.Id })">Create Invoice</a>
 </div>
 <div class="btn-group pull-right">
-    <a class="btn btn-default" href="@Url.Action("Edit", new { id = Model.Id })">Edit Opportunity</a>
+    <a class="btn btn-default" href="@Url.Action("Edit", new { id = Model.Opportunity.Id })">Edit Opportunity</a>
 </div>
 

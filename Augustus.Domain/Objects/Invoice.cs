@@ -1,4 +1,5 @@
 ﻿using Augustus.Domain.Enums;
+using Augustus.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +8,7 @@ using System.Runtime.Serialization;
 namespace Augustus.Domain.Objects
 {
     [DataContract]
-    public class Invoice
+    public class Invoice : IDomainObject
     {
         [DataMember]
         public Guid? Id { get; set; }

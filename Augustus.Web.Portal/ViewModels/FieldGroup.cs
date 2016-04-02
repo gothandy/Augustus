@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 
-namespace Augustus.Web.Portal.Models
+namespace Augustus.Web.Portal.ViewModels
 {
     public class FieldGroup
     {

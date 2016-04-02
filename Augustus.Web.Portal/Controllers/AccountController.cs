@@ -5,34 +5,32 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using Augustus.CRM;
 using Augustus.Domain.Interfaces;
-using Augustus.Web.Portal.Models;
+using Augustus.Web.Portal.ViewModels;
+using Augustus.Web.Portal.Helpers;
 
 namespace Augustus.Web.Portal.Controllers
 {
-    public class AccountController : BaseWriteController<Account>
+    public class AccountController : BaseWriteController<AccountWriteViewModel, Account>
     {
-        public AccountController():base()
-        {
-            bindInclude = "Name";
-        }
+        private const string bindAttributes = "Name";
 
         protected override IQuery<Account> GetQuery(CrmContext context)
         {
             return new AccountQuery(context);
         }
 
-        protected override void SetCreateViewBag(CrmContext context, Guid? parentId)
+        protected override void RefreshCreateViewModel(CrmContext context, Guid? parentId, ref AccountWriteViewModel model)
         {
-            ViewBag.Title = "Create Account";
-            ViewBag.FormButtons = new FormButtons(GetParentUrl(parentId));
-            ViewBag.Breadcrumb = new Breadcrumb();
+            model.Title = "Create Account";
+            model.Breadcrumb = new Breadcrumb();
+            model.FormButtons = new FormButtons(GetParentUrl(parentId));
         }
 
-        protected override void SetEditViewBag(CrmContext context, Guid id)
+        protected override void RefreshEditViewModel(CrmContext context, Guid id, ref AccountWriteViewModel model)
         {
-            ViewBag.Title = "Edit Account";
-            ViewBag.FormButtons = new FormButtons(id, GetDefaultUrl(id));
-            ViewBag.Breadcrumb = new Breadcrumb
+            model.Title = "Edit Account";
+            model.FormButtons = new FormButtons(id, GetDefaultUrl(id));
+            model.Breadcrumb = new Breadcrumb
             {
                 Account = new AccountQuery(context).GetItem(id)
             };
@@ -55,11 +53,16 @@ namespace Augustus.Web.Portal.Controllers
             using (var context = await GetCrmContext())
             {
                 var query = GetQuery(context);
-                var model = query.GetItem(id);
 
-                ViewBag.Title = model.Name;
-                ViewBag.Breadcrumb = new Breadcrumb();
-                return View(model);
+                var model = query.GetItem(id);
+                var viewModel = new AccountReadViewModel
+                {
+                    Title = model.Name,
+                    Breadcrumb = new Breadcrumb(),
+                    Account = model
+                };
+
+                return View(viewModel);
             }
         }
 
@@ -73,9 +76,14 @@ namespace Augustus.Web.Portal.Controllers
                 var query = GetQuery(context);
                 var model = query.GetItem(id);
 
-                ViewBag.Title = model.Name;
-                ViewBag.Breadcrumb = new Breadcrumb();
-                return View(model);
+                var viewModel = new AccountReadViewModel
+                {
+                    Title = model.Name,
+                    Breadcrumb = new Breadcrumb(),
+                    DomainModel = model
+                };
+                
+                return View(viewModel);
             }
         }
     }

@@ -194,27 +194,37 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Authentication\AuthenticationAreaRegistration.cs" />
     <Compile Include="Controllers\BaseWriteController.cs" />
+    <Compile Include="Controllers\InvoiceController.cs" />
+    <Compile Include="Controllers\OpportunityController.cs" />
     <Compile Include="Controllers\WorkDoneController.cs" />
-    <Compile Include="Helpers\EnumFieldHelper.cs" />
-    <Compile Include="Helpers\ValidationMessageHelper.cs" />
-    <Compile Include="Models\Binders\DecimalModelBinder.cs" />
+    <Compile Include="Helpers\HtmlOpportunityDropDownFor.cs" />
+    <Compile Include="Helpers\HtmlAccountDropDownFor.cs" />
+    <Compile Include="Interfaces\IPageViewModel.cs" />
+    <Compile Include="Interfaces\IReadViewModel.cs" />
+    <Compile Include="Interfaces\IWriteModelView.cs" />
+    <Compile Include="ViewModels\AccountReadViewModel.cs" />
+    <Compile Include="Interfaces\IOpportunityDropDown.cs" />
+    <Compile Include="Interfaces\IAccountDropDown.cs" />
+    <Compile Include="ViewModels\FieldGroup.cs" />
+    <Compile Include="ViewModels\FormButtons.cs" />
+    <Compile Include="ViewModels\InvoiceReadViewModel.cs" />
+    <Compile Include="ViewModels\OpportunityReadViewModel.cs" />
+    <Compile Include="ViewModels\InvoiceWriteViewModel.cs" />
+    <Compile Include="ViewModels\OpportunityWriteViewModel.cs" />
+    <Compile Include="ViewModels\AccountWriteViewModel.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CrmAuthorizeAttribute.cs" />
     <Compile Include="Controllers\BaseCrmController.cs" />
     <Compile Include="Controllers\OrganizationController.cs" />
-    <Compile Include="Controllers\InvoiceController.cs" />
-    <Compile Include="Controllers\OpportunityController.cs" />
     <Compile Include="Controllers\VincenteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\CurrencyHelper.cs" />
-    <Compile Include="Helpers\DateTimeHelper.cs" />
-    <Compile Include="Models\Breadcrumb.cs" />
-    <Compile Include="Models\FieldGroup.cs" />
-    <Compile Include="Models\FormButtons.cs" />
+    <Compile Include="ViewModels\Breadcrumb.cs" />
+    <Compile Include="ViewModels\OrganizationViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -251,6 +261,7 @@
     <Content Include="Content\bootstrap-datepicker.standalone.css.map" />
     <Content Include="Content\bootstrap-datepicker.min.css.map" />
     <Content Include="Content\bootstrap-datepicker.css.map" />
+    <Content Include="Areas\Authentication\Views\web.config" />
     <None Include="Properties\PublishProfiles\AugustusWebPortal.pubxml" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-datepicker.min.js" />
@@ -387,8 +398,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Extensions\" />
-    <Folder Include="Views\ReadWriteBase\" />
+    <Folder Include="Areas\Authentication\Controllers\" />
+    <Folder Include="Areas\Authentication\Models\" />
+    <Folder Include="Areas\Authentication\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -405,6 +417,10 @@
     <ProjectReference Include="..\Augustus.Domain\Augustus.Domain.csproj">
       <Project>{08d81a8f-f287-4460-9b3d-11d54cc1e7ad}</Project>
       <Name>Augustus.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Augustus.Web.Framework\Augustus.Web.Framework.csproj">
+      <Project>{0076647a-8d03-4a58-b45b-603881fe8581}</Project>
+      <Name>Augustus.Web.Framework</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

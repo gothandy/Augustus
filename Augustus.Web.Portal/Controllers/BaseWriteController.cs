@@ -1,19 +1,23 @@
 ﻿using Augustus.CRM;
 using Augustus.Domain.Interfaces;
-using Augustus.Web.Portal.Models;
+using Augustus.Web.Portal.Interfaces;
+using Augustus.Web.Portal.ViewModels;
 using System;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace Augustus.Web.Portal.Controllers
 {
-    public abstract class BaseWriteController<T> : BaseCrmController where T : IDomainObject
+    public abstract class BaseWriteController<TViewModel, TModel> : BaseCrmController
+        where TViewModel : IWriteModelView<TModel>, new()
+        where TModel : IDomainObject, new()
+
     {
         protected string bindInclude;
 
-        protected abstract IQuery<T> GetQuery(CrmContext context);
-        protected abstract void SetCreateViewBag(CrmContext context, Guid? parentId);
-        protected abstract void SetEditViewBag(CrmContext context, Guid id);
+        protected abstract IQuery<TModel> GetQuery(CrmContext context);
+        protected abstract void RefreshCreateViewModel(CrmContext context, Guid? parentId, ref TViewModel model);
+        protected abstract void RefreshEditViewModel(CrmContext context, Guid id, ref TViewModel model);
         protected abstract string GetDefaultUrl(Guid id);
         protected abstract string GetParentUrl(Guid? parentId);
 
@@ -22,28 +26,30 @@ namespace Augustus.Web.Portal.Controllers
         {
             using (var context = await GetCrmContext())
             {
-                var query = GetQuery(context);
+                TViewModel viewModel = new TViewModel();
+                viewModel.DomainModel = new TModel();
 
-                SetCreateViewBag(context, id);
+                RefreshCreateViewModel(context, id, ref viewModel);
 
-                return View();
+                return View(viewModel);
             }
         }
 
         // POST: /{controller}/Create/{id}
         [HttpPost]
-        public async Task<ActionResult> Create(Guid? id, T model)
+        public async Task<ActionResult> Create(Guid? id, TViewModel model)
         {
             using (var context = await GetCrmContext())
             {
                 if (!ModelState.IsValid)
                 {
-                    SetCreateViewBag(context, id);
+                    RefreshCreateViewModel(context, id, ref model);
                     return View(model);
+
                 }
 
                 var query = GetQuery(context);
-                var newId = query.Create(model);
+                var newId = query.Create(model.DomainModel);
                 return Redirect(GetDefaultUrl(newId));
             }
         }
@@ -54,15 +60,16 @@ namespace Augustus.Web.Portal.Controllers
             using (var context = await GetCrmContext())
             {
                 var query = GetQuery(context);
-                var model = query.GetItem(id);
-                SetEditViewBag(context, id);
+                var model = new TViewModel();
+                model.DomainModel = query.GetItem(id);
+                RefreshEditViewModel(context, id, ref model);
                 return View(model);
             }
         }
 
         // POST: {Controller}/Edit/{id}
         [HttpPost]
-        public async Task<ActionResult> Edit(Guid id, T model)
+        public async Task<ActionResult> Edit(Guid id, TViewModel model)
         {
             // [Bind(Include = bindInclude)] removed for now.
 
@@ -70,13 +77,13 @@ namespace Augustus.Web.Portal.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    SetEditViewBag(context, id);
+                    RefreshEditViewModel(context, id, ref model);
                     return View(model);
                 }
 
                 var query = GetQuery(context);
-                model.Id = id;
-                query.Update(model);
+                model.DomainModel.Id = id;
+                query.Update(model.DomainModel);
                 return Redirect(GetDefaultUrl(id));
             }
         }

@@ -2,39 +2,41 @@
 using Augustus.CRM.Queries;
 using Augustus.Domain.Interfaces;
 using Augustus.Domain.Objects;
-using Augustus.Web.Portal.Models;
+using Augustus.Web.Portal.ViewModels;
 using System;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace Augustus.Web.Portal.Controllers
 {
-    public class OpportunityController : BaseWriteController<Opportunity>
+    public class OpportunityController : BaseWriteController<OpportunityWriteViewModel, Opportunity>
     {
-        public OpportunityController():base()
-        {
-            bindInclude = "Name,AccountId";
-        }
+        private const string bindAttributes =  "Name,AccountId";
 
         protected override IQuery<Opportunity> GetQuery(CrmContext context)
         {
             return new OpportunityQuery(context);
         }
 
-        protected override void SetCreateViewBag(CrmContext context, Guid? parentId)
+        protected override void RefreshCreateViewModel(CrmContext context, Guid? parentId, ref OpportunityWriteViewModel model)
         {
-            ViewBag.Title = "Create Opportunity";
-            ViewBag.FormButtons = new FormButtons(GetParentUrl(parentId));
-            ViewBag.Accounts = new OrganizationQuery(context).GetNewAndActiveAccounts();
-            ViewBag.Account = new AccountQuery(context).GetItem(parentId.Value);
+            model.Title = "Create Opportunity";
+            model.FormButtons = new FormButtons(GetParentUrl(parentId));
+            model.Accounts = new OrganizationQuery(context).GetNewAndActiveAccounts();
+            model.AccountId = parentId.Value;
+            model.Breadcrumb = new Breadcrumb
+            {
+                Account = new AccountQuery(context).GetItem(parentId.Value)
+            };
         }
 
-        protected override void SetEditViewBag(CrmContext context, Guid id)
+        protected override void RefreshEditViewModel(CrmContext context, Guid id, ref OpportunityWriteViewModel model)
         {
-            ViewBag.Title = "Edit Opportunity";
-            ViewBag.FormButtons = new FormButtons(id, GetDefaultUrl(id));
-            ViewBag.Accounts = new OrganizationQuery(context).GetNewAndActiveAccounts();
-            ViewBag.Breadcrumb = new Breadcrumb
+            model.Title = "Edit Opportunity";
+            model.FormButtons = new FormButtons(id, GetDefaultUrl(id));
+            model.Accounts = new OrganizationQuery(context).GetNewAndActiveAccounts();
+            model.AccountId = new OpportunityQuery(context).GetParent(id).Id.Value;
+            model.Breadcrumb = new Breadcrumb
             {
                 Account = new OpportunityQuery(context).GetParent(id),
                 Opportunity = new OpportunityQuery(context).GetItem(id)
@@ -60,13 +62,16 @@ namespace Augustus.Web.Portal.Controllers
             {
                 var query = new OpportunityQuery(context);
                 var model = query.GetItem(id);
-
-                ViewBag.Title = model.Name;
-                ViewBag.Breadcrumb = new Breadcrumb
+                var viewModel = new OpportunityReadViewModel
                 {
-                    Account = query.GetParent(id)
+                    Title = model.Name,
+                    Opportunity = model,
+                    Breadcrumb = new Breadcrumb
+                    {
+                        Account = query.GetParent(id)
+                    }
                 };
-                return View(model);
+                return View(viewModel);
             }
         }
     }

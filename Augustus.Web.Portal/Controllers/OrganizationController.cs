@@ -1,6 +1,8 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Mvc;
 using Augustus.CRM.Queries;
+using Augustus.Web.Portal.ViewModels;
+using Augustus.Domain.Objects;
 
 namespace Augustus.Web.Portal.Controllers
 {
@@ -14,11 +16,13 @@ namespace Augustus.Web.Portal.Controllers
             {
                 var query = new OrganizationQuery(context);
 
-                ViewBag.Title = "True Clarity";
+                var viewModel = new OrganizationViewModel
+                {
+                    Title = "True Clarity",
+                    Accounts = query.GetActiveAccounts()
+                };
 
-                var activeAccounts = query.GetActiveAccounts();
-
-                return View(activeAccounts);
+                return View(viewModel);
             }
         }
 
@@ -29,11 +33,13 @@ namespace Augustus.Web.Portal.Controllers
             {
                 var query = new OrganizationQuery(context);
 
-                ViewBag.Title = "True Clarity";
+                var viewModel = new OrganizationViewModel
+                {
+                    Title = "True Clarity",
+                    Accounts = query.GetNewAccounts()
+                };
 
-                var newAccounts = query.GetNewAccounts();
-
-                return View(newAccounts);
+                return View(viewModel);
             }
         }
     }

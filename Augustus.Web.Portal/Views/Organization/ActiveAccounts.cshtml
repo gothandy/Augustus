@@ -1,11 +1,11 @@
-﻿@model IEnumerable<Account>
+﻿@model OrganizationViewModel
 
 <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active"><a href="@Url.Action("ActiveAccounts")"><span class="visible-xs">Active</span><span class="hidden-xs">Active Accounts</span></a></li>
     <li role="presentation"><a href="@Url.Action("NewAccounts")"><span class="visible-xs">New</span><span class="hidden-xs">New Accounts</span></a></li>
 </ul>
 
-@Html.Partial("List", Model)
+@Html.Partial("List", Model.Accounts)
 
 @Html.Partial("Buttons")
 

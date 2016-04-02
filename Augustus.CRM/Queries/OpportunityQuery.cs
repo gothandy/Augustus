@@ -14,7 +14,8 @@ namespace Augustus.CRM.Queries
 
         public Opportunity GetItem(Guid id)
         {
-            var opp = OpportunityConverter.ToDomainObject(Context.Opportunities.Single(o => o.Id == id));
+            var entity = Context.Opportunities.Single(o => o.Id == id);
+            var opp = OpportunityConverter.ToDomainObject(entity);
 
             opp.Invoices = GetInvoices(id);
 
