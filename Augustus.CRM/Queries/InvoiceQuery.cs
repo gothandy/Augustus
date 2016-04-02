@@ -19,10 +19,13 @@ namespace Augustus.CRM.Queries
             inv.Opportunity = OpportunityConverter.ToDomainObject(Context.Opportunities.Single(o => o.Id == inv.OpportunityId));
             inv.Account = AccountConverter.ToDomainObject(Context.Accounts.Single(a => a.Id == inv.Opportunity.AccountId));
 
-            var invEnum = GetEnumerableWorkDoneItems(id);
-            var invList = GetListWorkDoneItems(GetLastDate(inv.InvoiceDate), inv);
+            if (inv.Margin.GetValueOrDefault(0) != 0 && inv.InvoiceDate.HasValue)
+            {
+                var invEnum = GetEnumerableWorkDoneItems(id);
+                var invList = GetListWorkDoneItems(inv.InvoiceDate.Value, inv);
 
-            inv.WorkDoneItems = MergeWorkDoneItems(invList, invEnum);
+                inv.WorkDoneItems = MergeWorkDoneItems(invList, invEnum);
+            }
 
             return inv;
         }

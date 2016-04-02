@@ -1,5 +1,6 @@
 ﻿using Augustus.CRM;
 using Augustus.Domain.Interfaces;
+using Augustus.Web.Framework.ActionFilters;
 using Augustus.Web.Portal.Interfaces;
 using Augustus.Web.Portal.ViewModels;
 using System;
@@ -37,6 +38,8 @@ namespace Augustus.Web.Portal.Controllers
 
         // POST: /{controller}/Create/{id}
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        [PreventDuplicateRequest]
         public async Task<ActionResult> Create(Guid? id, TViewModel model)
         {
             using (var context = await GetCrmContext())
@@ -69,6 +72,8 @@ namespace Augustus.Web.Portal.Controllers
 
         // POST: {Controller}/Edit/{id}
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        [PreventDuplicateRequest]
         public async Task<ActionResult> Edit(Guid id, TViewModel model)
         {
             // [Bind(Include = bindInclude)] removed for now.

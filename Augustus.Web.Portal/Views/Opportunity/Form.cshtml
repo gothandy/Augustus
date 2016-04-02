@@ -1,4 +1,9 @@
 ﻿@model OpportunityWriteViewModel
+
+@Html.AntiForgeryToken()
+
+@Html.ValidationSummary(true)
+
 <div class="well">
     <div class="form-horizontal">
 

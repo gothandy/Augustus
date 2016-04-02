@@ -1,8 +1,13 @@
-﻿@model Account
+﻿@model AccountWriteViewModel
+
+@Html.AntiForgeryToken()
+
+@Html.ValidationSummary(true)
+
 <div class="well">
     <div class="form-horizontal">
 
-        @Html.EditorFor(model => model.Name)
+        @Html.EditorFor(model => model.Account.Name)
 
     </div>
 </div>

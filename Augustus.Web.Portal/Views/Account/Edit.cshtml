@@ -2,7 +2,7 @@
 
 @using (Html.BeginForm())
 {
-    @Html.PartialFor(model => model.Account, "Form")
+    @Html.Partial("Form", Model)
 
     @Html.Partial("EditButtons", Model.FormButtons)
 }

@@ -1,4 +1,9 @@
 ﻿@model InvoiceWriteViewModel
+
+@Html.AntiForgeryToken()
+
+@Html.ValidationSummary(true)
+
 <h2>Invoice</h2>
 <div class="well">
     <div class="form-horizontal">

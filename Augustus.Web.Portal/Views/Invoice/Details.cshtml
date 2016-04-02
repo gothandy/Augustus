@@ -26,7 +26,10 @@
     </div>
 </div>
 
-@Html.Partial("WorkDone", Model.Invoice.WorkDoneItems)
+@if (Model.Invoice.WorkDoneItems != null)
+{
+    @Html.Partial("WorkDone", Model.Invoice.WorkDoneItems)
+}
 
 <div class="btn-group">
     <a class="btn btn-default" target="_blank" href="https://trueclarity4.crm4.dynamics.com/main.aspx?etc=10010&id={@Model.Invoice.Id}&pagetype=entityrecord">
@@ -36,10 +39,6 @@
 </div>
 
 <div class="btn-group pull-right">
-    <a class="btn btn-default" href="@Url.Action("Edit", "WorkDone", new { id = Model.Invoice.Id })">
-        <span class="visible-xs">Work Done</span>
-        <span class="hidden-xs">Edit Work Done</span>
-    </a>
     <a class="btn btn-default" href="@Url.Action("Edit", new { id = Model.Invoice.Id })">
         <span class="visible-xs">Invoice</span>
         <span class="hidden-xs">Edit Invoice</span>
