@@ -1,47 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<WebTest Name="WebTest1" Id="b76578b3-4f2e-43a0-a137-dc82a00f4136" Owner="" Priority="2147483647" Enabled="True" CssProjectStructure="" CssIteration="" Timeout="0" WorkItemIds="" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" Description="" CredentialUserName="" CredentialPassword="" PreAuthenticate="True" Proxy="default" StopOnError="False" RecordedResultFile="WebTest1.7b2d05c1-015d-4fc4-ac01-4629a57772ca.rec.webtestresult" ResultsLocale="">
+<WebTest Name="WebTest1" Id="b76578b3-4f2e-43a0-a137-dc82a00f4136" Owner="" Priority="2147483647" Enabled="True" CssProjectStructure="" CssIteration="" Timeout="0" WorkItemIds="" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" Description="" CredentialUserName="" CredentialPassword="" PreAuthenticate="True" Proxy="default" StopOnError="False" RecordedResultFile="WebTest1.ba71a110-655e-494a-9342-ea3c71d24e28.rec.webtestresult" ResultsLocale="">
   <Items>
-    <Request Method="GET" Guid="a22516db-ac28-49f2-abcc-68ca7ab2ab99" Version="1.1" Url="https://localhost:44300/Invoice/Create/8dcb4638-e6f4-e511-865c-9e01f4cec3e0" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
-      <CorrelationExtractionRules>
-        <ExtractionRule Classname="Microsoft.VisualStudio.TestTools.WebTesting.Rules.ExtractText, Microsoft.VisualStudio.QualityTools.WebTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" VariableName="FormPostParam1.Invoice.OpportunityId" DisplayName="" Description="">
-          <RuleParameters>
-            <RuleParameter Name="StartsWith" Value="lue=&quot;" />
-            <RuleParameter Name="EndsWith" Value="&quot;&gt;Tes" />
-            <RuleParameter Name="Index" Value="0" />
-            <RuleParameter Name="IgnoreCase" Value="False" />
-            <RuleParameter Name="UseRegularExpression" Value="False" />
-            <RuleParameter Name="HtmlDecode" Value="True" />
-            <RuleParameter Name="Required" Value="False" />
-          </RuleParameters>
-        </ExtractionRule>
-        <ExtractionRule Classname="Microsoft.VisualStudio.TestTools.WebTesting.Rules.ExtractText, Microsoft.VisualStudio.QualityTools.WebTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" VariableName="FormPostParam2.Invoice.Status" DisplayName="" Description="">
-          <RuleParameters>
-            <RuleParameter Name="StartsWith" Value="lue=&quot;" />
-            <RuleParameter Name="EndsWith" Value="&quot;&gt;In " />
-            <RuleParameter Name="Index" Value="14" />
-            <RuleParameter Name="IgnoreCase" Value="False" />
-            <RuleParameter Name="UseRegularExpression" Value="False" />
-            <RuleParameter Name="HtmlDecode" Value="True" />
-            <RuleParameter Name="Required" Value="False" />
-          </RuleParameters>
-        </ExtractionRule>
-      </CorrelationExtractionRules>
-    </Request>
-    <Request Method="POST" Guid="6601432a-ad6d-4b56-b7da-69bc214a824f" Version="1.1" Url="https://localhost:44300/Invoice/Create/8dcb4638-e6f4-e511-865c-9e01f4cec3e0" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="https://localhost:44300/Invoice/Details/802ff7b8-c5f8-e511-865e-89643a5cb311" ReportingName="" IgnoreHttpStatusCode="False">
-      <Headers>
-        <Header Name="Referer" Value="https://localhost:44300/Invoice/Create/8dcb4638-e6f4-e511-865c-9e01f4cec3e0" />
-      </Headers>
+    <Request Method="GET" Guid="ff7821fd-7fb6-4a61-922d-90f7ce928604" Version="1.1" Url="https://localhost:44300/Invoice/Edit/59be847d-50f4-e511-865c-9e01f4cec3e0" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False" />
+    <Request Method="POST" Guid="a7df91e3-c8dc-498f-acf4-314709155b86" Version="1.1" Url="https://localhost:44300/Invoice/Edit/59be847d-50f4-e511-865c-9e01f4cec3e0" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="https://localhost:44300/Invoice/Details/59be847d-50f4-e511-865c-9e01f4cec3e0" ReportingName="" IgnoreHttpStatusCode="False">
       <FormPostHttpBody>
-        <FormPostParameter Name="Invoice.OpportunityId" Value="8dcb4638-e6f4-e511-865c-9e01f4cec3e0" RecordedValue="8dcb4638-e6f4-e511-865c-9e01f4cec3e0" CorrelationBinding="{{FormPostParam1.Invoice.OpportunityId}}" UrlEncode="True" />
-        <FormPostParameter Name="Invoice.Name" Value="Invoice 1" RecordedValue="Invoice 1" CorrelationBinding="" UrlEncode="True" />
-        <FormPostParameter Name="Invoice.Revenue" Value="1,000.0" RecordedValue="1,000.0" CorrelationBinding="" UrlEncode="True" />
-        <FormPostParameter Name="Invoice.Cost" Value="50" RecordedValue="50" CorrelationBinding="" UrlEncode="True" />
-        <FormPostParameter Name="Invoice.ProposalApproved" Value="08/06/2005" RecordedValue="08/06/2005" CorrelationBinding="" UrlEncode="True" />
-        <FormPostParameter Name="Invoice.SdnApproved" Value="08/06/2005" RecordedValue="08/06/2005" CorrelationBinding="" UrlEncode="True" />
-        <FormPostParameter Name="Invoice.InvoiceDate" Value="08/06/2005" RecordedValue="08/06/2005" CorrelationBinding="" UrlEncode="True" />
-        <FormPostParameter Name="Invoice.PONumber" Value="PO No." RecordedValue="PO No." CorrelationBinding="" UrlEncode="True" />
-        <FormPostParameter Name="Invoice.InvoiceNo" Value="Inv No." RecordedValue="Inv No." CorrelationBinding="" UrlEncode="True" />
-        <FormPostParameter Name="Invoice.Status" Value="3" RecordedValue="3" CorrelationBinding="{{FormPostParam2.Invoice.Status}}" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.OpportunityId" Value="8dcb4638-e6f4-e511-865c-9e01f4cec3e0" RecordedValue="8dcb4638-e6f4-e511-865c-9e01f4cec3e0" CorrelationBinding="{{FormPostParam6.Invoice.OpportunityId}}" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.Name" Value="New Inv3" RecordedValue="New Inv3" CorrelationBinding="{{FormPostParam1.Invoice.Name}}" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.Revenue" Value="1,000.00" RecordedValue="1,000.00" CorrelationBinding="{{FormPostParam2.Invoice.Revenue}}" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.Cost" Value="100.00" RecordedValue="100.00" CorrelationBinding="{{FormPostParam3.Invoice.Cost}}" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.ProposalApproved" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.SdnApproved" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.InvoiceDate" Value="13/07/2005" RecordedValue="13/07/2005" CorrelationBinding="{{FormPostParam4.Invoice.InvoiceDate}}" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.PONumber" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.InvoiceNo" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.Status" Value="1" RecordedValue="1" CorrelationBinding="{{FormPostParam7.Invoice.Status}}" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[0].Id" Value="{{$HIDDEN1.Invoice.WorkDoneItems[0].Id}}" RecordedValue="23502482-e3f5-e511-9403-0003ff7b242d" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[0].WorkDoneDate" Value="{{$HIDDEN1.Invoice.WorkDoneItems[0].WorkDoneDate}}" RecordedValue="01/07/2005 00:00:00" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[0].Margin" Value="546.00" RecordedValue="546.00" CorrelationBinding="{{FormPostParam5.Invoice.WorkDoneItems[0].Margin}}" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[1].Id" Value="{{$HIDDEN1.Invoice.WorkDoneItems[1].Id}}" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[1].WorkDoneDate" Value="{{$HIDDEN1.Invoice.WorkDoneItems[1].WorkDoneDate}}" RecordedValue="01/06/2005 00:00:00" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[1].Margin" Value="547" RecordedValue="547" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[2].Id" Value="{{$HIDDEN1.Invoice.WorkDoneItems[2].Id}}" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[2].WorkDoneDate" Value="{{$HIDDEN1.Invoice.WorkDoneItems[2].WorkDoneDate}}" RecordedValue="01/05/2005 00:00:00" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[2].Margin" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[3].Id" Value="{{$HIDDEN1.Invoice.WorkDoneItems[3].Id}}" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[3].WorkDoneDate" Value="{{$HIDDEN1.Invoice.WorkDoneItems[3].WorkDoneDate}}" RecordedValue="01/04/2005 00:00:00" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[3].Margin" Value="548" RecordedValue="548" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[4].Id" Value="{{$HIDDEN1.Invoice.WorkDoneItems[4].Id}}" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[4].WorkDoneDate" Value="{{$HIDDEN1.Invoice.WorkDoneItems[4].WorkDoneDate}}" RecordedValue="01/03/2005 00:00:00" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[4].Margin" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[5].Id" Value="{{$HIDDEN1.Invoice.WorkDoneItems[5].Id}}" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[5].WorkDoneDate" Value="{{$HIDDEN1.Invoice.WorkDoneItems[5].WorkDoneDate}}" RecordedValue="01/02/2005 00:00:00" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[5].Margin" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
       </FormPostHttpBody>
     </Request>
   </Items>

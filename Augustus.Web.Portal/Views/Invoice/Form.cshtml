@@ -1,4 +1,5 @@
 ﻿@model InvoiceWriteViewModel
+<h2>Invoice</h2>
 <div class="well">
     <div class="form-horizontal">
 
@@ -17,6 +18,18 @@
 
     </div>
 </div>
+
+@if (Model.Invoice.WorkDoneItems != null)
+{
+    <h2>Work Done</h2>
+    <div class="well">
+        <div class="form-horizontal">
+
+            @Html.EditorFor(model => model.Invoice.WorkDoneItems)
+
+        </div>
+    </div>
+}
 
 
 

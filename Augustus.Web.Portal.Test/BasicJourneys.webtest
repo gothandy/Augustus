@@ -1,19 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <WebTest Name="BasicJourneys" Id="c05b68f9-6937-4a47-a019-7da863e9c075" Owner="" Priority="2147483647" Enabled="True" CssProjectStructure="" CssIteration="" Timeout="0" WorkItemIds="" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" Description="" CredentialUserName="" CredentialPassword="" PreAuthenticate="True" Proxy="default" StopOnError="False" RecordedResultFile="BasicJourneys.ae64137f-399b-41ca-b236-a9848c7bcc24.rec.webtestresult" ResultsLocale="">
   <Items>
-    <Request Method="GET" Guid="7a2b1a1b-4bf8-4eb0-945e-8ecd2b98655a" Version="1.1" Url="https://localhost:44300/" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Organization Active Accounts" IgnoreHttpStatusCode="False" />
-    <Request Method="GET" Guid="c6b94c05-a2a1-46c4-b835-ebf9cc1a7161" Version="1.1" Url="https://localhost:44300/Organization/NewAccounts" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Organization New Accounts" IgnoreHttpStatusCode="False" />
-    <Request Method="GET" Guid="92c3cd8d-c28e-48d6-810b-dec1c4dda325" Version="1.1" Url="https://localhost:44300/Account/Invoices/{{easyJet}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="easyJet Invoices" IgnoreHttpStatusCode="False" />
-    <Request Method="GET" Guid="46a32e65-2c3c-492d-9608-6c6d1167ec13" Version="1.1" Url="https://localhost:44300/Account/Opportunities/{{easyJet}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="easyJet Opportunities" IgnoreHttpStatusCode="False" />
-    <Request Method="GET" Guid="66acf76f-34c0-4797-8a2d-6351e4757f3d" Version="1.1" Url="https://localhost:44300/Opportunity/Invoices/{{Budget2015}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="easyJet Budget 2015" IgnoreHttpStatusCode="False" />
-    <Request Method="GET" Guid="6ae7212c-b1f1-4bda-8a11-88d2fb9dc884" Version="1.1" Url="https://localhost:44300/Invoice/Details/{{Dec2015Invoice}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="easyJet Dec 2015 Invoice" IgnoreHttpStatusCode="False" />
-    <Request Method="GET" Guid="237c5bd5-9d45-485b-83de-254b36990763" Version="1.1" Url="https://localhost:44300/Account/Create" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Account Create" IgnoreHttpStatusCode="False" />
-    <Request Method="POST" Guid="b131224e-c5a4-4809-aab3-83cbeb785395" Version="1.1" Url="https://localhost:44300/Account/Create" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Account Create (Validation)" IgnoreHttpStatusCode="False">
+    <Request Method="GET" Guid="7a2b1a1b-4bf8-4eb0-945e-8ecd2b98655a" Version="1.1" Url="{{WebServer}}/" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Organization Active Accounts" IgnoreHttpStatusCode="False" />
+    <Request Method="GET" Guid="c6b94c05-a2a1-46c4-b835-ebf9cc1a7161" Version="1.1" Url="{{WebServer}}/Organization/NewAccounts" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Organization New Accounts" IgnoreHttpStatusCode="False" />
+    <Request Method="GET" Guid="92c3cd8d-c28e-48d6-810b-dec1c4dda325" Version="1.1" Url="{{WebServer}}/Account/Invoices/{{easyJet}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="easyJet Invoices" IgnoreHttpStatusCode="False" />
+    <Request Method="GET" Guid="46a32e65-2c3c-492d-9608-6c6d1167ec13" Version="1.1" Url="{{WebServer}}/Account/Opportunities/{{easyJet}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="easyJet Opportunities" IgnoreHttpStatusCode="False" />
+    <Request Method="GET" Guid="66acf76f-34c0-4797-8a2d-6351e4757f3d" Version="1.1" Url="{{WebServer}}/Opportunity/Invoices/{{Budget2015}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="easyJet Budget 2015" IgnoreHttpStatusCode="False" />
+    <Request Method="GET" Guid="6ae7212c-b1f1-4bda-8a11-88d2fb9dc884" Version="1.1" Url="{{WebServer}}/Invoice/Details/{{Dec2015Invoice}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="easyJet Dec 2015 Invoice" IgnoreHttpStatusCode="False" />
+    <Request Method="GET" Guid="237c5bd5-9d45-485b-83de-254b36990763" Version="1.1" Url="{{WebServer}}/Account/Create" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Account Create" IgnoreHttpStatusCode="False" />
+    <Request Method="POST" Guid="b131224e-c5a4-4809-aab3-83cbeb785395" Version="1.1" Url="{{WebServer}}/Account/Create" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Account Create (Validation)" IgnoreHttpStatusCode="False">
       <FormPostHttpBody>
         <FormPostParameter Name="Account.Name" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
       </FormPostHttpBody>
     </Request>
-    <Request Method="POST" Guid="b131224e-c5a4-4809-aab3-83cbeb785395" Version="1.1" Url="https://localhost:44300/Account/Create" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Account Create (Submit)" IgnoreHttpStatusCode="False">
+    <Request Method="POST" Guid="b131224e-c5a4-4809-aab3-83cbeb785395" Version="1.1" Url="{{WebServer}}/Account/Create" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Account Create (Submit)" IgnoreHttpStatusCode="False">
       <ExtractionRules>
         <ExtractionRule Classname="Microsoft.VisualStudio.TestTools.WebTesting.Rules.ExtractHttpHeader, Microsoft.VisualStudio.QualityTools.WebTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" VariableName="AccountId" DisplayName="Extract HTTP Header" Description="Extract the value of an HTTP header and place it into the test context.">
           <RuleParameters>
@@ -26,25 +26,25 @@
         <FormPostParameter Name="Account.Name" Value="Web Perf Test Account" RecordedValue="Web Perf Test Account" CorrelationBinding="" UrlEncode="True" />
       </FormPostHttpBody>
     </Request>
-    <Request Method="GET" Guid="33b45d1c-2caf-4ba4-94e7-fce23f26b07e" Version="1.1" Url="https://localhost:44300/Account/Edit/{{AccountId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Account Edit" IgnoreHttpStatusCode="False" />
-    <Request Method="POST" Guid="a1bb6ee5-c58d-4535-9628-04516b6e5b9c" Version="1.1" Url="https://localhost:44300/Account/Edit/{{AccountId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="https://localhost:44300/Account/Invoices/{{AccountId}}" ReportingName="Account Edit (Validation)" IgnoreHttpStatusCode="False">
+    <Request Method="GET" Guid="33b45d1c-2caf-4ba4-94e7-fce23f26b07e" Version="1.1" Url="{{WebServer}}/Account/Edit/{{AccountId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Account Edit" IgnoreHttpStatusCode="False" />
+    <Request Method="POST" Guid="a1bb6ee5-c58d-4535-9628-04516b6e5b9c" Version="1.1" Url="{{WebServer}}/Account/Edit/{{AccountId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Account Edit (Validation)" IgnoreHttpStatusCode="False">
       <FormPostHttpBody>
         <FormPostParameter Name="Account.Name" Value="" RecordedValue="Web Perf Test Account 2" CorrelationBinding="" UrlEncode="True" />
       </FormPostHttpBody>
     </Request>
-    <Request Method="POST" Guid="a1bb6ee5-c58d-4535-9628-04516b6e5b9c" Version="1.1" Url="https://localhost:44300/Account/Edit/{{AccountId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="https://localhost:44300/Account/Invoices/{{AccountId}}" ReportingName="Account Edit (Submit)" IgnoreHttpStatusCode="False">
+    <Request Method="POST" Guid="a1bb6ee5-c58d-4535-9628-04516b6e5b9c" Version="1.1" Url="{{WebServer}}/Account/Edit/{{AccountId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Account Edit (Submit)" IgnoreHttpStatusCode="False">
       <FormPostHttpBody>
         <FormPostParameter Name="Account.Name" Value="Web Perf Test Account 2" RecordedValue="Web Perf Test Account 2" CorrelationBinding="" UrlEncode="True" />
       </FormPostHttpBody>
     </Request>
-    <Request Method="GET" Guid="fa4d49cf-0ecb-416b-93bf-886fb706fae3" Version="1.1" Url="https://localhost:44300/Opportunity/Create/{{AccountId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Opportunity Create" IgnoreHttpStatusCode="False" />
-    <Request Method="POST" Guid="9f1de90b-9392-45ec-be0d-98aab7dd465b" Version="1.1" Url="https://localhost:44300/Opportunity/Create/{{AccountId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="https://localhost:44300/Opportunity/Invoices/ce72f2ad-18ed-e511-865c-9e01f4cec3e0" ReportingName="Opportunity Create (Validation)" IgnoreHttpStatusCode="False">
+    <Request Method="GET" Guid="fa4d49cf-0ecb-416b-93bf-886fb706fae3" Version="1.1" Url="{{WebServer}}/Opportunity/Create/{{AccountId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Opportunity Create" IgnoreHttpStatusCode="False" />
+    <Request Method="POST" Guid="9f1de90b-9392-45ec-be0d-98aab7dd465b" Version="1.1" Url="{{WebServer}}/Opportunity/Create/{{AccountId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Opportunity Create (Validation)" IgnoreHttpStatusCode="False">
       <FormPostHttpBody>
         <FormPostParameter Name="Opportunity.AccountId" Value="{{AccountId}}" RecordedValue="c223139c-18ed-e511-865c-9e01f4cec3e0" CorrelationBinding="{{FormPostParam1.AccountId}}" UrlEncode="True" />
         <FormPostParameter Name="Opportunity.Name" Value="" RecordedValue="Web Perf Test Opportunity" CorrelationBinding="" UrlEncode="True" />
       </FormPostHttpBody>
     </Request>
-    <Request Method="POST" Guid="9f1de90b-9392-45ec-be0d-98aab7dd465b" Version="1.1" Url="https://localhost:44300/Opportunity/Create/{{AccountId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="https://localhost:44300/Opportunity/Invoices/ce72f2ad-18ed-e511-865c-9e01f4cec3e0" ReportingName="Opportunity Create (Submit)" IgnoreHttpStatusCode="False">
+    <Request Method="POST" Guid="9f1de90b-9392-45ec-be0d-98aab7dd465b" Version="1.1" Url="{{WebServer}}/Opportunity/Create/{{AccountId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Opportunity Create (Submit)" IgnoreHttpStatusCode="False">
       <ExtractionRules>
         <ExtractionRule Classname="Microsoft.VisualStudio.TestTools.WebTesting.Rules.ExtractHttpHeader, Microsoft.VisualStudio.QualityTools.WebTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" VariableName="OpportunityId" DisplayName="Extract HTTP Header" Description="Extract the value of an HTTP header and place it into the test context.">
           <RuleParameters>
@@ -58,20 +58,20 @@
         <FormPostParameter Name="Opportunity.Name" Value="Web Perf Test Opportunity" RecordedValue="Web Perf Test Opportunity" CorrelationBinding="" UrlEncode="True" />
       </FormPostHttpBody>
     </Request>
-    <Request Method="GET" Guid="c5327bcf-4908-4450-ba87-cf51c15b506a" Version="1.1" Url="https://localhost:44300/Opportunity/Edit/{{OpportunityId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Opportunity Edit" IgnoreHttpStatusCode="False" />
-    <Request Method="POST" Guid="c5327bcf-4908-4450-ba87-cf51c15b506a" Version="1.1" Url="https://localhost:44300/Opportunity/Edit/{{OpportunityId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Opportunity Edit (Validation)" IgnoreHttpStatusCode="False">
+    <Request Method="GET" Guid="c5327bcf-4908-4450-ba87-cf51c15b506a" Version="1.1" Url="{{WebServer}}/Opportunity/Edit/{{OpportunityId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Opportunity Edit" IgnoreHttpStatusCode="False" />
+    <Request Method="POST" Guid="c5327bcf-4908-4450-ba87-cf51c15b506a" Version="1.1" Url="{{WebServer}}/Opportunity/Edit/{{OpportunityId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Opportunity Edit (Validation)" IgnoreHttpStatusCode="False">
       <FormPostHttpBody>
         <FormPostParameter Name="Opportunity.AccountId" Value="{{AccountId}}" RecordedValue="c223139c-18ed-e511-865c-9e01f4cec3e0" CorrelationBinding="{{FormPostParam1.AccountId}}" UrlEncode="True" />
         <FormPostParameter Name="Opportunity.Name" Value="" RecordedValue="Web Perf Test Opportunity" CorrelationBinding="" UrlEncode="True" />
       </FormPostHttpBody>
     </Request>
-    <Request Method="POST" Guid="c5327bcf-4908-4450-ba87-cf51c15b506a" Version="1.1" Url="https://localhost:44300/Opportunity/Edit/{{OpportunityId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Opportunity Edit (Submit)" IgnoreHttpStatusCode="False">
+    <Request Method="POST" Guid="c5327bcf-4908-4450-ba87-cf51c15b506a" Version="1.1" Url="{{WebServer}}/Opportunity/Edit/{{OpportunityId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Opportunity Edit (Submit)" IgnoreHttpStatusCode="False">
       <FormPostHttpBody>
         <FormPostParameter Name="Opportunity.AccountId" Value="{{AccountId}}" RecordedValue="c223139c-18ed-e511-865c-9e01f4cec3e0" CorrelationBinding="{{FormPostParam1.AccountId}}" UrlEncode="True" />
         <FormPostParameter Name="Opportunity.Name" Value="Web Perf Test Opportunity2" RecordedValue="Web Perf Test Opportunity" CorrelationBinding="" UrlEncode="True" />
       </FormPostHttpBody>
     </Request>
-    <Request Method="GET" Guid="a22516db-ac28-49f2-abcc-68ca7ab2ab99" Version="1.1" Url="https://localhost:44300/Invoice/Create/{{OpportunityId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Invoice Create" IgnoreHttpStatusCode="False">
+    <Request Method="GET" Guid="a22516db-ac28-49f2-abcc-68ca7ab2ab99" Version="1.1" Url="{{WebServer}}/Invoice/Create/{{OpportunityId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Invoice Create" IgnoreHttpStatusCode="False">
       <CorrelationExtractionRules>
         <ExtractionRule Classname="Microsoft.VisualStudio.TestTools.WebTesting.Rules.ExtractText, Microsoft.VisualStudio.QualityTools.WebTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" VariableName="FormPostParam1.Invoice.OpportunityId" DisplayName="" Description="">
           <RuleParameters>
@@ -97,7 +97,7 @@
         </ExtractionRule>
       </CorrelationExtractionRules>
     </Request>
-    <Request Method="POST" Guid="6601432a-ad6d-4b56-b7da-69bc214a824f" Version="1.1" Url="https://localhost:44300/Invoice/Create/{{OpportunityId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Invoice Create (Validate)" IgnoreHttpStatusCode="False">
+    <Request Method="POST" Guid="6601432a-ad6d-4b56-b7da-69bc214a824f" Version="1.1" Url="{{WebServer}}/Invoice/Create/{{OpportunityId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Invoice Create (Validate)" IgnoreHttpStatusCode="False">
       <FormPostHttpBody>
         <FormPostParameter Name="Invoice.OpportunityId" Value="{{OpportunityId}}" RecordedValue="8dcb4638-e6f4-e511-865c-9e01f4cec3e0" CorrelationBinding="{{FormPostParam1.Invoice.OpportunityId}}" UrlEncode="True" />
         <FormPostParameter Name="Invoice.Name" Value="" RecordedValue="Invoice 1" CorrelationBinding="" UrlEncode="True" />
@@ -111,7 +111,7 @@
         <FormPostParameter Name="Invoice.Status" Value="" RecordedValue="3" CorrelationBinding="{{FormPostParam2.Invoice.Status}}" UrlEncode="True" />
       </FormPostHttpBody>
     </Request>
-    <Request Method="POST" Guid="6601432a-ad6d-4b56-b7da-69bc214a824f" Version="1.1" Url="https://localhost:44300/Invoice/Create/{{OpportunityId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Invoice Create (Submit)" IgnoreHttpStatusCode="False">
+    <Request Method="POST" Guid="6601432a-ad6d-4b56-b7da-69bc214a824f" Version="1.1" Url="{{WebServer}}/Invoice/Create/{{OpportunityId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Invoice Create (Submit)" IgnoreHttpStatusCode="False">
       <ExtractionRules>
         <ExtractionRule Classname="Microsoft.VisualStudio.TestTools.WebTesting.Rules.ExtractHttpHeader, Microsoft.VisualStudio.QualityTools.WebTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" VariableName="InvoiceId" DisplayName="Extract HTTP Header" Description="Extract the value of an HTTP header and place it into the test context.">
           <RuleParameters>
@@ -125,23 +125,89 @@
         <FormPostParameter Name="Invoice.Name" Value="Web Perf Test Invoice 1" RecordedValue="Invoice 1" CorrelationBinding="" UrlEncode="True" />
         <FormPostParameter Name="Invoice.Revenue" Value="10,000.0" RecordedValue="1,000.0" CorrelationBinding="" UrlEncode="True" />
         <FormPostParameter Name="Invoice.Cost" Value="£50" RecordedValue="50" CorrelationBinding="" UrlEncode="True" />
-        <FormPostParameter Name="Invoice.ProposalApproved" Value="28/05/2005" RecordedValue="08/06/2005" CorrelationBinding="" UrlEncode="True" />
-        <FormPostParameter Name="Invoice.SdnApproved" Value="28/06/2005" RecordedValue="08/06/2005" CorrelationBinding="" UrlEncode="True" />
-        <FormPostParameter Name="Invoice.InvoiceDate" Value="08/08/2005" RecordedValue="08/06/2005" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.ProposalApproved" Value="11/07/2005" RecordedValue="08/06/2005" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.SdnApproved" Value="12/07/2005" RecordedValue="08/06/2005" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.InvoiceDate" Value="13/07/2005" RecordedValue="08/06/2005" CorrelationBinding="" UrlEncode="True" />
         <FormPostParameter Name="Invoice.PONumber" Value="PO No." RecordedValue="PO No." CorrelationBinding="" UrlEncode="True" />
         <FormPostParameter Name="Invoice.InvoiceNo" Value="Inv No." RecordedValue="Inv No." CorrelationBinding="" UrlEncode="True" />
         <FormPostParameter Name="Invoice.Status" Value="3" RecordedValue="3" CorrelationBinding="{{FormPostParam2.Invoice.Status}}" UrlEncode="True" />
       </FormPostHttpBody>
     </Request>
-    <Request Method="GET" Guid="fbc8deaf-6ded-44e0-b0e3-3696f0319f6d" Version="1.1" Url="https://localhost:44300/Invoice/Details/{{InvoiceId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Invoice Details" IgnoreHttpStatusCode="False" />
-    <Request Method="GET" Guid="fbc8deaf-6ded-44e0-b0e3-3696f0319f6d" Version="1.1" Url="https://localhost:44300/Opportunity/Invoices/{{OpportunityId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Opportunity Invoices" IgnoreHttpStatusCode="False" />
-    <Request Method="GET" Guid="d8c8f39d-2827-42b8-9819-be6b6e505951" Version="1.1" Url="https://localhost:44300/Account/Opportunities/{{AccountId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Account Opportunities" IgnoreHttpStatusCode="False" />
-    <Request Method="GET" Guid="22416a73-d792-4898-9ca6-cc19b8ae16da" Version="1.1" Url="https://localhost:44300/Account/Invoices/{{AccountId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Account Invoices" IgnoreHttpStatusCode="False" />
-    <Request Method="GET" Guid="c9fbb2a8-1036-47d6-bd97-8e9bab224264" Version="1.1" Url="https://localhost:44300/Invoice/Delete/{{InvoiceId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Invoice Delete" IgnoreHttpStatusCode="False" />
-    <Request Method="GET" Guid="c9fbb2a8-1036-47d6-bd97-8e9bab224264" Version="1.1" Url="https://localhost:44300/Opportunity/Delete/{{OpportunityId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Opportunity Delete" IgnoreHttpStatusCode="False" />
-    <Request Method="GET" Guid="142dcf06-0afc-487c-99f1-afc17077e6cf" Version="1.1" Url="https://localhost:44300/Account/Delete/{{AccountId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Account Delete" IgnoreHttpStatusCode="False" />
+    <Request Method="GET" Guid="a7df91e3-c8dc-498f-acf4-314709155b86" Version="1.1" Url="{{WebServer}}/Invoice/Edit/{{InvoiceId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Invoice Edit" IgnoreHttpStatusCode="False" />
+    <Request Method="POST" Guid="a7df91e3-c8dc-498f-acf4-314709155b86" Version="1.1" Url="{{WebServer}}/Invoice/Edit/{{InvoiceId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Invoice Edit (Submit)" IgnoreHttpStatusCode="False">
+      <FormPostHttpBody>
+        <FormPostParameter Name="Invoice.OpportunityId" Value="{{OpportunityId}}" RecordedValue="8dcb4638-e6f4-e511-865c-9e01f4cec3e0" CorrelationBinding="{{FormPostParam6.Invoice.OpportunityId}}" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.Name" Value="" RecordedValue="New Inv3" CorrelationBinding="{{FormPostParam1.Invoice.Name}}" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.Revenue" Value="" RecordedValue="1,000.00" CorrelationBinding="{{FormPostParam2.Invoice.Revenue}}" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.Cost" Value="" RecordedValue="100.00" CorrelationBinding="{{FormPostParam3.Invoice.Cost}}" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.ProposalApproved" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.SdnApproved" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.InvoiceDate" Value="" RecordedValue="13/07/2005" CorrelationBinding="{{FormPostParam4.Invoice.InvoiceDate}}" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.PONumber" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.InvoiceNo" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.Status" Value="1" RecordedValue="1" CorrelationBinding="{{FormPostParam7.Invoice.Status}}" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[0].Id" Value="" RecordedValue="23502482-e3f5-e511-9403-0003ff7b242d" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[0].WorkDoneDate" Value="01/07/2005 00:00:00" RecordedValue="01/07/2005 00:00:00" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[0].Margin" Value="" RecordedValue="546.00" CorrelationBinding="{{FormPostParam5.Invoice.WorkDoneItems[0].Margin}}" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[1].Id" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[1].WorkDoneDate" Value="01/06/2005 00:00:00" RecordedValue="01/06/2005 00:00:00" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[1].Margin" Value="" RecordedValue="547" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[2].Id" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[2].WorkDoneDate" Value="01/05/2005 00:00:00" RecordedValue="01/05/2005 00:00:00" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[2].Margin" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[3].Id" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[3].WorkDoneDate" Value="01/04/2005 00:00:00" RecordedValue="01/04/2005 00:00:00" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[3].Margin" Value="" RecordedValue="548" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[4].Id" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[4].WorkDoneDate" Value="01/03/2005 00:00:00" RecordedValue="01/03/2005 00:00:00" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[4].Margin" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[5].Id" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[5].WorkDoneDate" Value="01/02/2005 00:00:00" RecordedValue="01/02/2005 00:00:00" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[5].Margin" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+      </FormPostHttpBody>
+    </Request>
+    <Request Method="POST" Guid="a7df91e3-c8dc-498f-acf4-314709155b86" Version="1.1" Url="{{WebServer}}/Invoice/Edit/{{InvoiceId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Invoice Edit (Submit)" IgnoreHttpStatusCode="False">
+      <FormPostHttpBody>
+        <FormPostParameter Name="Invoice.OpportunityId" Value="8dcb4638-e6f4-e511-865c-9e01f4cec3e0" RecordedValue="8dcb4638-e6f4-e511-865c-9e01f4cec3e0" CorrelationBinding="{{FormPostParam6.Invoice.OpportunityId}}" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.Name" Value="New Inv3" RecordedValue="New Inv3" CorrelationBinding="{{FormPostParam1.Invoice.Name}}" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.Revenue" Value="1,000.00" RecordedValue="1,000.00" CorrelationBinding="{{FormPostParam2.Invoice.Revenue}}" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.Cost" Value="100.00" RecordedValue="100.00" CorrelationBinding="{{FormPostParam3.Invoice.Cost}}" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.ProposalApproved" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.SdnApproved" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.InvoiceDate" Value="13/07/2005" RecordedValue="13/07/2005" CorrelationBinding="{{FormPostParam4.Invoice.InvoiceDate}}" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.PONumber" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.InvoiceNo" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.Status" Value="1" RecordedValue="1" CorrelationBinding="{{FormPostParam7.Invoice.Status}}" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[0].Id" Value="" RecordedValue="23502482-e3f5-e511-9403-0003ff7b242d" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[0].WorkDoneDate" Value="01/07/2005 00:00:00" RecordedValue="01/07/2005 00:00:00" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[0].Margin" Value="546.00" RecordedValue="546.00" CorrelationBinding="{{FormPostParam5.Invoice.WorkDoneItems[0].Margin}}" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[1].Id" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[1].WorkDoneDate" Value="01/06/2005 00:00:00" RecordedValue="01/06/2005 00:00:00" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[1].Margin" Value="547" RecordedValue="547" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[2].Id" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[2].WorkDoneDate" Value="01/05/2005 00:00:00" RecordedValue="01/05/2005 00:00:00" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[2].Margin" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[3].Id" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[3].WorkDoneDate" Value="01/04/2005 00:00:00" RecordedValue="01/04/2005 00:00:00" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[3].Margin" Value="548" RecordedValue="548" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[4].Id" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[4].WorkDoneDate" Value="01/03/2005 00:00:00" RecordedValue="01/03/2005 00:00:00" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[4].Margin" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[5].Id" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[5].WorkDoneDate" Value="01/02/2005 00:00:00" RecordedValue="01/02/2005 00:00:00" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Invoice.WorkDoneItems[5].Margin" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
+      </FormPostHttpBody>
+    </Request>
+    <Request Method="GET" Guid="fbc8deaf-6ded-44e0-b0e3-3696f0319f6d" Version="1.1" Url="{{WebServer}}/Invoice/Details/{{InvoiceId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Invoice Details" IgnoreHttpStatusCode="False" />
+    <Request Method="GET" Guid="fbc8deaf-6ded-44e0-b0e3-3696f0319f6d" Version="1.1" Url="{{WebServer}}/Opportunity/Invoices/{{OpportunityId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Opportunity Invoices" IgnoreHttpStatusCode="False" />
+    <Request Method="GET" Guid="d8c8f39d-2827-42b8-9819-be6b6e505951" Version="1.1" Url="{{WebServer}}/Account/Opportunities/{{AccountId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Account Opportunities" IgnoreHttpStatusCode="False" />
+    <Request Method="GET" Guid="22416a73-d792-4898-9ca6-cc19b8ae16da" Version="1.1" Url="{{WebServer}}/Account/Invoices/{{AccountId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Account Invoices" IgnoreHttpStatusCode="False" />
+    <Request Method="GET" Guid="c9fbb2a8-1036-47d6-bd97-8e9bab224264" Version="1.1" Url="{{WebServer}}/Invoice/Delete/{{InvoiceId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Invoice Delete" IgnoreHttpStatusCode="False" />
+    <Request Method="GET" Guid="c9fbb2a8-1036-47d6-bd97-8e9bab224264" Version="1.1" Url="{{WebServer}}/Opportunity/Delete/{{OpportunityId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Opportunity Delete" IgnoreHttpStatusCode="False" />
+    <Request Method="GET" Guid="142dcf06-0afc-487c-99f1-afc17077e6cf" Version="1.1" Url="{{WebServer}}/Account/Delete/{{AccountId}}" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="Account Delete" IgnoreHttpStatusCode="False" />
   </Items>
   <ContextParameters>
+    <ContextParameter Name="WebServer" Value="https://localhost:44300" />
     <ContextParameter Name="easyJet" Value="33b343c7-a684-e011-8da5-00271336e9df" />
     <ContextParameter Name="Budget2015" Value="2d1a82de-4479-e411-be1f-6c3be5becb24" />
     <ContextParameter Name="Dec2015Invoice" Value="41f6ecb5-5698-e511-810c-3863bb343bf8" />
@@ -149,11 +215,4 @@
     <ContextParameter Name="OpportunityId" Value="" />
     <ContextParameter Name="InvoiceId" Value="" />
   </ContextParameters>
-  <ValidationRules>
-    <ValidationRule Classname="Microsoft.VisualStudio.TestTools.WebTesting.Rules.ValidationRuleResponseTimeGoal, Microsoft.VisualStudio.QualityTools.WebTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" DisplayName="Response Time Goal" Description="Validates that the response time for the request is less than or equal to the response time goal as specified on the request.  Response time goals of zero will be ignored." Level="Low" ExectuionOrder="AfterDependents">
-      <RuleParameters>
-        <RuleParameter Name="Tolerance" Value="0" />
-      </RuleParameters>
-    </ValidationRule>
-  </ValidationRules>
 </WebTest>
