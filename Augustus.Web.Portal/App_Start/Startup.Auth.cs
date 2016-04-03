@@ -8,6 +8,7 @@ using System.Configuration;
 using System.IdentityModel.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Helpers;
 
 namespace Augustus.Web.Portal
 {
@@ -22,6 +23,9 @@ namespace Augustus.Web.Portal
 
         public void ConfigureAuth(IAppBuilder app)
         {
+
+            AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.Name;
+
             app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType);
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions());
