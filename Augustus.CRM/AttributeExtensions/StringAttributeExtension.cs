@@ -1,9 +1,6 @@
-﻿using Augustus.CRM.Entities;
-using Microsoft.Xrm.Sdk;
-using System.Reflection;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 
-namespace Augustus.CRM.Extensions
+namespace Augustus.CRM.AttributeExtensions
 {
     public static class StringAttributeExtension
     {
@@ -20,7 +17,12 @@ namespace Augustus.CRM.Extensions
             {
                 var attributeLogicalName = AttributeHelper.GetLogicalName(entity, caller);
 
-                entity.SetBaseAttributeValue(attributeLogicalName, value);
+                var oldValue = entity.GetAttributeValue<string>(attributeLogicalName);
+
+                if (value != oldValue)
+                {
+                    entity.SetBaseAttributeValue(attributeLogicalName, value);
+                }
             }
         }
     }

@@ -22,7 +22,7 @@ namespace Augustus.CRM.Queries
             if (inv.Margin.GetValueOrDefault(0) != 0 && inv.InvoiceDate.HasValue)
             {
                 var invEnum = GetEnumerableWorkDoneItems(id);
-                var invList = GetListWorkDoneItems(inv.InvoiceDate.Value, inv);
+                var invList = GetListWorkDoneItems(GetStartOfMonth(inv.InvoiceDate), inv);
 
                 inv.WorkDoneItems = MergeWorkDoneItems(invList, invEnum);
             }
@@ -61,11 +61,11 @@ namespace Augustus.CRM.Queries
                 OpportunityId = parentId
             };
 
-            inv.WorkDoneItems = GetListWorkDoneItems(GetLastDate(null), inv);
+            inv.WorkDoneItems = GetListWorkDoneItems(GetStartOfMonth(null), inv);
 
             return (inv);
         }
-        private DateTime GetLastDate(DateTime? invoice)
+        private DateTime GetStartOfMonth(DateTime? invoice)
         {
             var last = invoice.GetValueOrDefault(DateTime.Now);
             return new DateTime(last.Year, last.Month, 1);

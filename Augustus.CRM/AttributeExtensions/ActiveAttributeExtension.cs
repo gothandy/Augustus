@@ -1,12 +1,12 @@
 ﻿using Microsoft.Xrm.Sdk;
 
-namespace Augustus.CRM.Extensions
+namespace Augustus.CRM.AttributeExtensions
 {
     public static class ActiveAttributeExtension
     {
         public static bool? GetAttributeState(this BaseEntity entity)
         {
-            OptionSetValue optionSet = entity.GetAttributeValue<OptionSetValue>("statecode");
+            var optionSet = entity.GetAttributeValue<OptionSetValue>("statecode");
             if ((optionSet != null))
             {
                 return (optionSet.Value == 0);
@@ -21,7 +21,13 @@ namespace Augustus.CRM.Extensions
         {
             if (value.HasValue)
             {
-                entity.SetBaseAttributeValue("statecode", new OptionSetValue(value.Value ? 0: 1));
+                var newOptionSetValue = new OptionSetValue(value.Value ? 0 : 1);
+                var oldOptionSetValue = entity.GetAttributeValue<OptionSetValue>("statecode");
+
+                if (newOptionSetValue.Value != oldOptionSetValue.Value)
+                {
+                    entity.SetBaseAttributeValue("statecode",newOptionSetValue);
+                }
             }
         }
     }

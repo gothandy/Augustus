@@ -2,7 +2,7 @@
 using System;
 using System.Runtime.CompilerServices;
 
-namespace Augustus.CRM.Extensions
+namespace Augustus.CRM.AttributeExtensions
 {
     public static class EntityReferenceAttributeExtension
     {
@@ -10,7 +10,7 @@ namespace Augustus.CRM.Extensions
         {
             string attributeLogicalName = AttributeHelper.GetLogicalName(entity, caller);
 
-            EntityReference entRef = entity.GetAttributeValue<EntityReference>(attributeLogicalName);
+            var entRef = entity.GetAttributeValue<EntityReference>(attributeLogicalName);
 
             if (entRef == null)
             {
@@ -29,8 +29,13 @@ namespace Augustus.CRM.Extensions
                 string attributeLogicalName = AttributeHelper.GetLogicalName(entity, caller);
                 string entityReferenceLogicalName = AttributeHelper.GetEntityReferenceLogicalName(entity, caller);
 
-                var entRef = new EntityReference(entityReferenceLogicalName, id.Value);
-                entity.SetBaseAttributeValue(attributeLogicalName, entRef);
+                var newEntRef = new EntityReference(entityReferenceLogicalName, id.Value);
+                var oldEntRef = entity.GetAttributeValue<EntityReference>(attributeLogicalName);
+
+                if (newEntRef.Id != oldEntRef.Id)
+                {
+                    entity.SetBaseAttributeValue(attributeLogicalName, newEntRef);
+                }
             }
         }
     }

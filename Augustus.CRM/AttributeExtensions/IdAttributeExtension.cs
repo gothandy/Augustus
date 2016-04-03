@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 
-namespace Augustus.CRM.Extensions
+namespace Augustus.CRM.AttributeExtensions
 {
     public static class IdAttributeExtension
     {
@@ -16,8 +16,13 @@ namespace Augustus.CRM.Extensions
         {
             string attributeLogicalName = AttributeHelper.GetLogicalName(entity, caller);
 
-            entity.SetBaseAttributeValue(attributeLogicalName, (Guid?)value);
-            entity.SetBaseIdValue(value);
+            var oldValue = entity.GetAttributeValue<Guid>(attributeLogicalName);
+
+            if (value != oldValue)
+            {
+                entity.SetBaseAttributeValue(attributeLogicalName, (Guid?)value);
+                entity.SetBaseIdValue(value);
+            }
         }
     }
 }

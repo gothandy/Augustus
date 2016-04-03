@@ -91,14 +91,14 @@
   <ItemGroup>
     <Compile Include="Attributes\EntityReferenceAttribute.cs" />
     <Compile Include="CrmServiceConnectionString.cs" />
-    <Compile Include="Extensions\EntityReferenceAttributeExtension.cs" />
-    <Compile Include="Extensions\IdAttributeExtension.cs" />
-    <Compile Include="Extensions\StatusAttributeExtension.cs" />
-    <Compile Include="Extensions\ActiveAttributeExtension.cs" />
+    <Compile Include="AttributeExtensions\EntityReferenceAttributeExtension.cs" />
+    <Compile Include="AttributeExtensions\IdAttributeExtension.cs" />
+    <Compile Include="AttributeExtensions\StatusAttributeExtension.cs" />
+    <Compile Include="AttributeExtensions\ActiveAttributeExtension.cs" />
     <Compile Include="Attributes\StatusLookupAttribute.cs" />
-    <Compile Include="Extensions\StringAttributeExtension.cs" />
-    <Compile Include="Extensions\DateTimeAttributeExtension.cs" />
-    <Compile Include="Extensions\MoneyAttributeExtension.cs" />
+    <Compile Include="AttributeExtensions\StringAttributeExtension.cs" />
+    <Compile Include="AttributeExtensions\DateTimeAttributeExtension.cs" />
+    <Compile Include="AttributeExtensions\MoneyAttributeExtension.cs" />
     <Compile Include="AttributeHelper.cs" />
     <Compile Include="BaseQuery.cs" />
     <Compile Include="Converters\AccountConverter.cs" />

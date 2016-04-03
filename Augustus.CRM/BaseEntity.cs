@@ -1,4 +1,4 @@
-﻿using Augustus.CRM.Extensions;
+﻿using Augustus.CRM.AttributeExtensions;
 using Microsoft.Xrm.Sdk;
 using System;
 using System.Collections.Generic;

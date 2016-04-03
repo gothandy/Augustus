@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xrm.Sdk;
 using System.Runtime.CompilerServices;
 
-namespace Augustus.CRM.Extensions
+namespace Augustus.CRM.AttributeExtensions
 {
     public static class MoneyAttributeExtension
     {
@@ -27,9 +27,13 @@ namespace Augustus.CRM.Extensions
             {
                 string attributeLogicalName = AttributeHelper.GetLogicalName(entity, caller);
 
-                var money = new Money(value.Value);
-               
-                entity.SetBaseAttributeValue(attributeLogicalName, money);
+                var newMoney = new Money(value.Value);
+                var oldMoney = entity.GetAttributeValue<Money>(attributeLogicalName);
+
+                if (newMoney.Value != oldMoney.Value)
+                {
+                    entity.SetBaseAttributeValue(attributeLogicalName, newMoney);
+                }
             }
         }
     }

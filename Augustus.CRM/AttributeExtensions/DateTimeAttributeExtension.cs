@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 
-namespace Augustus.CRM.Extensions
+namespace Augustus.CRM.AttributeExtensions
 {
     public static class DateTimeAttributeExtension
     {
@@ -29,7 +29,14 @@ namespace Augustus.CRM.Extensions
             if (value.HasValue)
             {
                 var attributeLogicalName = AttributeHelper.GetLogicalName(entity, caller);
-                entity.SetBaseAttributeValue(attributeLogicalName, value);
+
+                var oldUtcDateTime = entity.GetAttributeValue<DateTime?>(attributeLogicalName);
+                var newUtcDateTime = value.Value.ToUniversalTime();
+
+                if (oldUtcDateTime != newUtcDateTime)
+                {
+                    entity.SetBaseAttributeValue(attributeLogicalName, value);
+                }
             }
         }
     }

@@ -1,12 +1,8 @@
 ﻿using Microsoft.Xrm.Sdk;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Augustus.CRM.Extensions
+namespace Augustus.CRM.AttributeExtensions
 {
     public static class StatusAttributeExtension
     {
@@ -33,8 +29,15 @@ namespace Augustus.CRM.Extensions
             {
                 var attributeLogicalName = AttributeHelper.GetLogicalName(entity, caller);
                 var statusLookup = AttributeHelper.GetStatusLookup(entity, caller);
-                var statusCode = new OptionSetValue(statusLookup[value.Value] + 100000000);
-                entity.SetBaseAttributeValue(attributeLogicalName, statusCode);
+
+
+                var newStatusCode = new OptionSetValue(statusLookup[value.Value] + 100000000);
+                var oldStatusCode = entity.GetAttributeValue<OptionSetValue>(attributeLogicalName);
+
+                if (newStatusCode.Value != oldStatusCode.Value)
+                {
+                    entity.SetBaseAttributeValue(attributeLogicalName, newStatusCode);
+                }
             }
         }
     }
