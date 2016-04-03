@@ -1,11 +1,10 @@
 ﻿using Augustus.Web.Portal.Interfaces;
-using Augustus.Web.Portal.ViewModels;
 using System;
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
 
-namespace Augustus.Web.Portal.Helpers
+namespace Augustus.Web.Portal.Extensions
 {
     public static class HtmlOpportunityDropDownFor
     {

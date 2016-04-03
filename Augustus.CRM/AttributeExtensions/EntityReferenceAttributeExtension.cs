@@ -32,7 +32,7 @@ namespace Augustus.CRM.AttributeExtensions
                 var newEntRef = new EntityReference(entityReferenceLogicalName, id.Value);
                 var oldEntRef = entity.GetAttributeValue<EntityReference>(attributeLogicalName);
 
-                if (newEntRef.Id != oldEntRef.Id)
+                if (oldEntRef == null || newEntRef.Id != oldEntRef.Id)
                 {
                     entity.SetBaseAttributeValue(attributeLogicalName, newEntRef);
                 }

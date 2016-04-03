@@ -34,7 +34,7 @@ namespace Augustus.CRM.AttributeExtensions
                 var newStatusCode = new OptionSetValue(statusLookup[value.Value] + 100000000);
                 var oldStatusCode = entity.GetAttributeValue<OptionSetValue>(attributeLogicalName);
 
-                if (newStatusCode.Value != oldStatusCode.Value)
+                if (oldStatusCode == null || newStatusCode.Value != oldStatusCode.Value)
                 {
                     entity.SetBaseAttributeValue(attributeLogicalName, newStatusCode);
                 }

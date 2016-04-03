@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OpenIdConnect;
 using Microsoft.Owin.Security;
+using Augustus.Web.Portal.ViewModels;
 
 namespace Augustus.Web.Portal.Controllers
 {
@@ -16,7 +17,11 @@ namespace Augustus.Web.Portal.Controllers
             // Send an OpenID Connect sign-in request.
             if (!Request.IsAuthenticated)
             {
-                HttpContext.GetOwinContext().Authentication.Challenge(new AuthenticationProperties { RedirectUri = "/" },
+                HttpContext.GetOwinContext().Authentication.Challenge(
+                    new AuthenticationProperties
+                    {
+                        RedirectUri = Url.Action("ActiveAccounts", "Organization")
+                    },
                     OpenIdConnectAuthenticationDefaults.AuthenticationType);
             }
         }
@@ -38,7 +43,7 @@ namespace Augustus.Web.Portal.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            return View();
+            return View(new HomeViewModel { Title = "Sign Out" } );
         }
     }
 }

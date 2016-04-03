@@ -6,7 +6,6 @@ using System.Web.Mvc;
 using Augustus.CRM;
 using Augustus.Domain.Interfaces;
 using Augustus.Web.Portal.ViewModels;
-using Augustus.Web.Portal.Helpers;
 
 namespace Augustus.Web.Portal.Controllers
 {

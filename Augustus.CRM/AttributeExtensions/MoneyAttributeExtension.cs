@@ -30,7 +30,7 @@ namespace Augustus.CRM.AttributeExtensions
                 var newMoney = new Money(value.Value);
                 var oldMoney = entity.GetAttributeValue<Money>(attributeLogicalName);
 
-                if (newMoney.Value != oldMoney.Value)
+                if (oldMoney == null || newMoney.Value != oldMoney.Value)
                 {
                     entity.SetBaseAttributeValue(attributeLogicalName, newMoney);
                 }

@@ -1,5 +1,6 @@
 ﻿using Augustus.CRM;
 using Augustus.CRM.Authentication;
+using Augustus.Web.Portal.Attributes;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OpenIdConnect;
@@ -21,8 +22,9 @@ namespace Augustus.Web.Portal.Controllers
 
         public BaseCrmController() : base()
         {
-            string useAzureAuth = ConfigurationManager.AppSettings["crm:UseAzureAuth"];
-            if (useAzureAuth == "true" || useAzureAuth == null)
+            var useAzureAuth = (ConfigurationManager.AppSettings["crm:UseAzureAuth"] ?? "true") == "true";
+
+            if (useAzureAuth)
             {
                 service = CrmServiceAccessToken.GetAccessTokenService(ForceSignOut);
             }

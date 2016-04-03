@@ -24,7 +24,7 @@ namespace Augustus.CRM.AttributeExtensions
                 var newOptionSetValue = new OptionSetValue(value.Value ? 0 : 1);
                 var oldOptionSetValue = entity.GetAttributeValue<OptionSetValue>("statecode");
 
-                if (newOptionSetValue.Value != oldOptionSetValue.Value)
+                if (oldOptionSetValue == null || newOptionSetValue.Value != oldOptionSetValue.Value)
                 {
                     entity.SetBaseAttributeValue("statecode",newOptionSetValue);
                 }
