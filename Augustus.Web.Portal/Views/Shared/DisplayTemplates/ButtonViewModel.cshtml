@@ -1,0 +1,5 @@
+﻿@model ButtonViewModel
+<a class="btn @Model.Type" @(Model.Verb == "Open" ? "target='_blank'" : "" ) href="@Model.Url">
+    <span class="visible-xs"><span class="glyphicon @Model.Icon"></span> @Model.Name</span>
+    <span class="hidden-xs"><span class="glyphicon @Model.Icon"></span> @Model.Verb @Model.Name</span>
+</a>

@@ -8,6 +8,7 @@ using Augustus.CRM;
 using Augustus.Domain.Interfaces;
 using Augustus.Web.Portal.ViewModels;
 using System.Collections.Generic;
+using Augustus.CRM.Entities;
 
 namespace Augustus.Web.Portal.Controllers
 {
@@ -29,7 +30,6 @@ namespace Augustus.Web.Portal.Controllers
             model.Title = "Create Invoice";
             model.OpportunityId = opportunity.Id.Value;
             model.Opportunities = new InvoiceQuery(context).GetParentLookup(opportunityId);
-            
             model.FormButtons = new FormButtons(GetParentUrl(parentId));
             model.Breadcrumb = new Breadcrumb
             {
@@ -74,7 +74,6 @@ namespace Augustus.Web.Portal.Controllers
             {
                 var query = new InvoiceQuery(context);
                 var model = query.GetItem(id);
-                List<AlertViewModel> alerts = CheckForAlerts(model);
 
                 var viewModel = new InvoiceReadViewModel
                 {
@@ -85,7 +84,9 @@ namespace Augustus.Web.Portal.Controllers
                         Account = new OpportunityQuery(context).GetParent(model.OpportunityId.Value),
                         Opportunity = new OpportunityQuery(context).GetItem(model.OpportunityId.Value)
                     },
-                    Alerts = alerts
+                    Alerts = CheckForAlerts(model),
+                    OpenButton = ButtonViewModel.Create(ButtonViewModel.Open, "CRM", string.Format("https://trueclarity4.crm4.dynamics.com/main.aspx?etc={0}&id={{{1}}}&pagetype=entityrecord", InvoiceEntity.EntityTypeCode, model.Id)),
+                    EditButton = ButtonViewModel.Create(ButtonViewModel.Edit, "Invoice", Url.Action("Edit", new { id = model.Id }))
                 };
 
                 return View(viewModel);

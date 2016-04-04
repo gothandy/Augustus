@@ -34,15 +34,9 @@
 }
 
 <div class="btn-group">
-    <a class="btn btn-default" target="_blank" href="https://trueclarity4.crm4.dynamics.com/main.aspx?etc=10010&id={@Model.Invoice.Id}&pagetype=entityrecord">
-        <span class="visible-xs">CRM</span>
-        <span class="hidden-xs">Open In CRM</span>
-    </a>
+    @Html.DisplayFor(m => m.OpenButton)
 </div>
 
 <div class="btn-group pull-right">
-    <a class="btn btn-default" href="@Url.Action("Edit", new { id = Model.Invoice.Id })">
-        <span class="visible-xs">Invoice</span>
-        <span class="hidden-xs">Edit Invoice</span>
-    </a>
+    @Html.DisplayFor(m => m.EditButton)
 </div>

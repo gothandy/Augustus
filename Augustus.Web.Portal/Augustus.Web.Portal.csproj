@@ -209,6 +209,7 @@
     <Compile Include="Interfaces\IOpportunityDropDown.cs" />
     <Compile Include="Interfaces\IAccountDropDown.cs" />
     <Compile Include="ViewModels\AlertViewModel.cs" />
+    <Compile Include="ViewModels\ButtonViewModel.cs" />
     <Compile Include="ViewModels\FieldGroup.cs" />
     <Compile Include="ViewModels\FormButtons.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
@@ -398,6 +399,7 @@
     <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\AlertViewModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\ButtonViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
