@@ -98,13 +98,11 @@ namespace Augustus.CRM.Queries
         {
             var accountId = (from o in Context.Opportunities
                              where o.Id == parentId
-                             select o.AccountId).Single();
+                             select o.AccountId).Single().Value;
 
-            var opportunities = (from o in Context.Opportunities
-                                 where o.AccountId == accountId
-                                 select OpportunityConverter.ToDomainObject(o));
+            var account = new AccountQuery(Context).GetItem(accountId);
 
-            return opportunities;
+            return account.Opportunities;
         }
 
         public Guid Create(Invoice invoice)

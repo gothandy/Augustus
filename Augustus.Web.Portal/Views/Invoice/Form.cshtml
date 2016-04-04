@@ -8,8 +8,6 @@
 <div class="well">
     <div class="form-horizontal">
 
-        <!--Html.ValidationSummary(true)-->
-
         @Html.EditorFor(model => model.Invoice.OpportunityId, "Opportunity")
         @Html.EditorFor(model => model.Invoice.Name)
         @Html.EditorFor(model => model.Invoice.Revenue)
@@ -24,7 +22,11 @@
     </div>
 </div>
 
-@if (Model.Invoice.WorkDoneItems != null)
+@if (Model.Invoice.WorkDoneItems == null)
+{
+    <div class="alert alert-info">Invoices without Margin and an Invoice Date will not allow Work Done to be added against them.</div>
+}
+ else
 {
     <h2>Work Done</h2>
     <div class="well">
