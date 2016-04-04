@@ -58,7 +58,10 @@ namespace Augustus.Web.Portal.Controllers
                 {
                     Title = model.Name,
                     Breadcrumb = new Breadcrumb(),
-                    Account = model
+                    Account = model,
+                    EditButton = ButtonViewModel.Create(
+                        ButtonViewModel.Edit, "Account", 
+                        Url.Action("Edit", "Account", new { id = model.Id }))
                 };
 
                 return View(viewModel);
@@ -79,7 +82,14 @@ namespace Augustus.Web.Portal.Controllers
                 {
                     Title = model.Name,
                     Breadcrumb = new Breadcrumb(),
-                    DomainModel = model
+                    DomainModel = model,
+                    CreateButton = ButtonViewModel.Create(
+                        ButtonViewModel.New, "Opportunity",
+                        Url.Action("Create", "Opportunity", new { id = model.Id })
+                        ),
+                    EditButton = ButtonViewModel.Create(
+                        ButtonViewModel.Edit, "Account",
+                        Url.Action("Edit", "Account", new { id = model.Id }))
                 };
                 
                 return View(viewModel);

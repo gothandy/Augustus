@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\InvoiceStatus.cs" />
-    <Compile Include="Interfaces\IDomainObject.cs" />
+    <Compile Include="Interfaces\BaseDomainObject.cs" />
     <Compile Include="Interfaces\IQuery.cs" />
     <Compile Include="Objects\Account.cs" />
     <Compile Include="Objects\Invoice.cs" />

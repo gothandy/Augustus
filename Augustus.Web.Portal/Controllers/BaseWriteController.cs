@@ -10,7 +10,7 @@ namespace Augustus.Web.Portal.Controllers
 {
     public abstract class BaseWriteController<TViewModel, TModel> : BaseCrmController
         where TViewModel : IWriteModelView<TModel>, new()
-        where TModel : IDomainObject, new()
+        where TModel : BaseDomainObject, new()
 
     {
         protected string bindInclude;

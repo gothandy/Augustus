@@ -9,5 +9,7 @@ namespace Augustus.Web.Portal.ViewModels
         public string Title { get; set; }
         public Account Account { get; set; }
         public Account DomainModel { get { return Account; } set { Account = value; } }
+        public ButtonViewModel CreateButton { get; set; }
+        public ButtonViewModel EditButton { get; set; }
     }
 }

@@ -7,11 +7,8 @@ using System.Runtime.Serialization;
 namespace Augustus.Domain.Objects
 {
     [DataContract]
-    public class Account : IDomainObject
+    public class Account : BaseDomainObject
     {
-        [DataMember]
-        public Guid? Id { get; set; }
-
         [DataMember]
         [Required(ErrorMessage = "An account name is required.")]
         public string Name { get; set; }
@@ -23,6 +20,7 @@ namespace Augustus.Domain.Objects
         public IEnumerable<Opportunity> Opportunities { get; set; }
 
         public IEnumerable<Invoice> Invoices { get; set; }
+
 
     }
 }

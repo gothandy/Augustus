@@ -34,7 +34,9 @@ else
     </div>
 }
 
-    <div>
-        <a class="btn btn-default" href="@Url.Action("Create", "Opportunity", new { id = Model.Account.Id })">Create Opportunity</a>
-        <a class="btn btn-default pull-right" href="@Url.Action("Edit", "Account", new { id = Model.Account.Id })">Edit Account</a>
-    </div>
+<div class="btn-group">
+    @Html.DisplayFor(m => m.CreateButton)
+</div>
+<div class="btn-group pull-right">
+    @Html.DisplayFor(m => m.EditButton)
+</div>

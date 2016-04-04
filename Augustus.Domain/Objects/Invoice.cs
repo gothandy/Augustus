@@ -8,10 +8,8 @@ using System.Runtime.Serialization;
 namespace Augustus.Domain.Objects
 {
     [DataContract]
-    public class Invoice : IDomainObject
+    public class Invoice : BaseDomainObject
     {
-        [DataMember]
-        public Guid? Id { get; set; }
 
         [DataMember]
         public Guid? AccountId { get; set; }
