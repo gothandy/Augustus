@@ -22,7 +22,7 @@ namespace Augustus.Web.Portal
         private static string clientSecret = ConfigurationManager.AppSettings["ida:ClientSecret"];
         private static string authority = aadInstance + tenantId;
 
-        public static void ConfigureAuth(IAppBuilder app)
+        public static void ConfigureApp(IAppBuilder app)
         {
             AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.NameIdentifier;
 

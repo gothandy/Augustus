@@ -6,7 +6,7 @@ namespace Augustus.Web.Portal
     {
         public void Configuration(IAppBuilder app)
         {
-            AuthenticationConfig.ConfigureAuth(app);
+            AuthenticationConfig.ConfigureApp(app);
         }
     }
 }
