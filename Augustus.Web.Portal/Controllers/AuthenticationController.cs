@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using Augustus.Web.Portal.ViewModels;
+using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OpenIdConnect;
-using Microsoft.Owin.Security;
-using Augustus.Web.Portal.ViewModels;
+using System.Web;
+using System.Web.Mvc;
 
 namespace Augustus.Web.Portal.Controllers
 {

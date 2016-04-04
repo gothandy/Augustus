@@ -24,36 +24,49 @@ namespace Augustus.Web.Portal
         public void ConfigureAuth(IAppBuilder app)
         {
 
-            AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.Name;
+            AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.NameIdentifier;
 
             app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType);
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions());
 
-            app.UseOpenIdConnectAuthentication(
-                new OpenIdConnectAuthenticationOptions
+            var notifications = new OpenIdConnectAuthenticationNotifications()
+            {
+                AuthorizationCodeReceived = (context) =>
                 {
-                    ClientId = clientId,
-                    Authority = authority,
-                    PostLogoutRedirectUri = postLogoutRedirectUri,
-                    Notifications = new OpenIdConnectAuthenticationNotifications()
-                    {
-                        AuthorizationCodeReceived = (context) =>
-                        {
-                            var code = context.Code;
+                    var code = context.Code;
 
-                            ClientCredential credential = new ClientCredential(clientId, clientSecret);
-                            string tenantID = context.AuthenticationTicket.Identity.FindFirst("http://schemas.microsoft.com/identity/claims/tenantid").Value;
-                            string signedInUserID = context.AuthenticationTicket.Identity.FindFirst(ClaimTypes.NameIdentifier).Value;
+                    ClientCredential credential = new ClientCredential(clientId, clientSecret);
 
-                            AuthenticationContext authContext = new AuthenticationContext(string.Format("https://login.windows.net/{0}", tenantID));
-                            AuthenticationResult result = authContext.AcquireTokenByAuthorizationCode(code, new Uri(HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path)), credential, "Microsoft.CRM");
+                    var identityTenantID = context.AuthenticationTicket.Identity.FindFirst(
+                        "http://schemas.microsoft.com/identity/claims/tenantid").Value;
 
-                            return Task.FromResult(0);
-                        }
-                    },
-                    ClientSecret = clientSecret
-                });
+                    var signedInUserID = context.AuthenticationTicket.Identity.FindFirst(
+                        ClaimTypes.NameIdentifier).Value;
+
+                    var authContext = new AuthenticationContext(
+                        string.Format("https://login.windows.net/{0}", identityTenantID));
+
+                    var redirectUri = new Uri(HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path));
+
+                    var result = authContext.AcquireTokenByAuthorizationCode(
+                        code, redirectUri, credential, "Microsoft.CRM");
+
+                    return Task.FromResult(0);
+                }
+            };
+
+            var authenticationOptions = new OpenIdConnectAuthenticationOptions
+            {
+                ClientId = clientId,
+                ClientSecret = clientSecret,
+                Authority = authority,
+                PostLogoutRedirectUri = postLogoutRedirectUri,
+                Notifications = notifications
+            };
+
+            app.UseOpenIdConnectAuthentication(authenticationOptions);
+
         }
     }
 }
