@@ -1,11 +1,13 @@
 ﻿using Augustus.CRM.Queries;
 using Augustus.Domain.Objects;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Augustus.CRM;
 using Augustus.Domain.Interfaces;
 using Augustus.Web.Portal.ViewModels;
+using System.Collections.Generic;
 
 namespace Augustus.Web.Portal.Controllers
 {
@@ -72,6 +74,7 @@ namespace Augustus.Web.Portal.Controllers
             {
                 var query = new InvoiceQuery(context);
                 var model = query.GetItem(id);
+                List<AlertViewModel> alerts = CheckForAlerts(model);
 
                 var viewModel = new InvoiceReadViewModel
                 {
@@ -81,10 +84,34 @@ namespace Augustus.Web.Portal.Controllers
                     {
                         Account = new OpportunityQuery(context).GetParent(model.OpportunityId.Value),
                         Opportunity = new OpportunityQuery(context).GetItem(model.OpportunityId.Value)
-                    }
+                    },
+                    Alerts = alerts
                 };
 
                 return View(viewModel);
+            }
+        }
+
+        private static List<AlertViewModel> CheckForAlerts(Invoice model)
+        {
+            List<AlertViewModel> alerts = new List<AlertViewModel>();
+
+            CheckMarginEqualsWorkDoneTotal(model, alerts);
+
+            return (alerts.Count == 0) ? null : alerts;
+        }
+
+        private static void CheckMarginEqualsWorkDoneTotal(Invoice model, List<AlertViewModel> alerts)
+        {
+            if (model.WorkDoneItems != null && model.Margin != model.WorkDoneItems.Sum(i => i.Margin))
+            {
+                alerts.Add(
+                    new AlertViewModel
+                    {
+                        Text = "The total of Work Done margin should equal the invoice margin amount.",
+                        Level = AlertLevel.Warning
+                    });
+
             }
         }
     }

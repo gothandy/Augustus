@@ -202,12 +202,13 @@
     <Compile Include="Controllers\OpportunityController.cs" />
     <Compile Include="Extensions\HtmlOpportunityDropDownFor.cs" />
     <Compile Include="Extensions\HtmlAccountDropDownFor.cs" />
-    <Compile Include="Interfaces\IPageViewModel.cs" />
+    <Compile Include="Interfaces\ISharedLayoutViewModel.cs" />
     <Compile Include="Interfaces\IReadViewModel.cs" />
     <Compile Include="Interfaces\IWriteModelView.cs" />
     <Compile Include="ViewModels\AccountReadViewModel.cs" />
     <Compile Include="Interfaces\IOpportunityDropDown.cs" />
     <Compile Include="Interfaces\IAccountDropDown.cs" />
+    <Compile Include="ViewModels\AlertViewModel.cs" />
     <Compile Include="ViewModels\FieldGroup.cs" />
     <Compile Include="ViewModels\FormButtons.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
@@ -396,6 +397,7 @@
     <Content Include="Views\Shared\ListGroup.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\AlertViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

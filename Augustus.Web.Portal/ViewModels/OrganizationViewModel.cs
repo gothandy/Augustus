@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Augustus.Web.Portal.ViewModels
 {
-    public class OrganizationViewModel : IPageViewModel
+    public class OrganizationViewModel : ISharedLayoutViewModel
     {
         public Breadcrumb Breadcrumb { get; set; }
         public string Title { get; set; }

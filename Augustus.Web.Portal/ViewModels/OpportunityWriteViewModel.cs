@@ -5,7 +5,7 @@ using Augustus.Web.Portal.Interfaces;
 
 namespace Augustus.Web.Portal.ViewModels
 {
-    public class OpportunityWriteViewModel : IPageViewModel, IWriteModelView<Opportunity>, IAccountDropDown
+    public class OpportunityWriteViewModel : ISharedLayoutViewModel, IWriteModelView<Opportunity>, IAccountDropDown
     {
         public Breadcrumb Breadcrumb { get; set; }
         public string Title { get; set; }

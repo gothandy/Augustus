@@ -27,7 +27,10 @@ namespace Augustus.Web.Portal
             AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.NameIdentifier;
 
             app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType);
-            app.UseCookieAuthentication(new CookieAuthenticationOptions());
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                CookieSecure = CookieSecureOption.SameAsRequest
+            });
             app.UseOpenIdConnectAuthentication(GetAuthenticationOptions());
         }
 

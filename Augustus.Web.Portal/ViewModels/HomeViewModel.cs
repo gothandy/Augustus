@@ -2,7 +2,7 @@
 
 namespace Augustus.Web.Portal.ViewModels
 {
-    public class HomeViewModel : IPageViewModel
+    public class HomeViewModel : ISharedLayoutViewModel
     {
         public Breadcrumb Breadcrumb
         {
