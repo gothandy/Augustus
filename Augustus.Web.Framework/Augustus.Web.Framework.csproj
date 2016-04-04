@@ -70,6 +70,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionFilters\PreventDuplicateRequestAttribute.cs" />
+    <Compile Include="Filters\AntiForgeryTokenAuthorizationFilter.cs" />
+    <Compile Include="Filters\PreventDuplicatePostActionFilter.cs" />
     <Compile Include="Helpers\CurrencyHelper.cs" />
     <Compile Include="Helpers\DateTimeHelper.cs" />
     <Compile Include="Extensions\EnumFieldHelper.cs" />

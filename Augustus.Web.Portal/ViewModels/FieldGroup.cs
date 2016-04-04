@@ -13,7 +13,6 @@ namespace Augustus.Web.Portal.ViewModels
 
         public FieldGroup()
         {
-
         }
 
         public FieldGroup(MvcHtmlString label, MvcHtmlString value)

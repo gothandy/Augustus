@@ -195,15 +195,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\AuthenticationConfig.cs" />
     <Compile Include="Controllers\BaseWriteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Controllers\OpportunityController.cs" />
     <Compile Include="Extensions\HtmlOpportunityDropDownFor.cs" />
     <Compile Include="Extensions\HtmlAccountDropDownFor.cs" />
-    <Compile Include="Filters\CrmAntiForgeryTokenFilter.cs" />
-    <Compile Include="Filters\PreventDuplicateRequestFilter.cs" />
     <Compile Include="Interfaces\IPageViewModel.cs" />
     <Compile Include="Interfaces\IReadViewModel.cs" />
     <Compile Include="Interfaces\IWriteModelView.cs" />
@@ -399,9 +397,7 @@
     <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
@@ -422,9 +418,6 @@
       <Project>{0076647a-8d03-4a58-b45b-603881fe8581}</Project>
       <Name>Augustus.Web.Framework</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,7 +1,6 @@
-﻿using Augustus.Web.Framework.ModelBinders;
-using Augustus.Web.Portal.Filters;
+﻿using Augustus.Web.Framework.Filters;
+using Augustus.Web.Framework.ModelBinders;
 using System.Configuration;
-using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -22,8 +21,8 @@ namespace Augustus.Web.Portal
 
             if (useAzureAuth)
             {
-                GlobalFilters.Filters.Add(new CrmAntiForgeryTokenFilter());
-                GlobalFilters.Filters.Add(new PreventDuplicateRequestFilter());
+                GlobalFilters.Filters.Add(new AntiForgeryTokenAuthorizationFilter());
+                GlobalFilters.Filters.Add(new PreventDuplicatePostActionFilter());
             }
        }
     }

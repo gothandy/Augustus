@@ -1,13 +1,10 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Augustus.Web.Portal.Filters
+namespace Augustus.Web.Framework.Filters
 {
-    // http://stackoverflow.com/questions/4250604/how-do-i-prevent-multiple-form-submission-in-net-mvc-without-using-javascript
-
-    public class PreventDuplicateRequestFilter : IActionFilter
+    public class PreventDuplicatePostActionFilter : IActionFilter
     {
         public void OnActionExecuting(ActionExecutingContext filterContext)
         {
@@ -19,7 +16,7 @@ namespace Augustus.Web.Portal.Filters
 
         public void OnActionExecuted(ActionExecutedContext filterContext)
         {
-            // do nothing.
+            // Nothing to do.
         }
 
         private static bool IsHttpPostRequest(ActionExecutingContext filterContext)
@@ -29,27 +26,28 @@ namespace Augustus.Web.Portal.Filters
 
         private  void doStuff(ActionExecutingContext filterContext)
         {
-            var currentTokenRequest = HttpContext.Current.Request["__RequestVerificationToken"];
-            if (currentTokenRequest == null) return;
-            var currentToken = currentTokenRequest.ToString();
+            var currentToken = (HttpContext.Current.Request["__RequestVerificationToken"] ?? string.Empty).ToString();
 
-            if (HttpContext.Current.Session["LastProcessedToken"] == null)
+            if (currentToken != string.Empty)
             {
-                HttpContext.Current.Session["LastProcessedToken"] = currentToken;
-                return;
+                LockAndCheckLastProcessedToken(filterContext, currentToken);
             }
+        }
 
+        private static void LockAndCheckLastProcessedToken(ActionExecutingContext filterContext, string currentToken)
+        {
             lock (HttpContext.Current.Session["LastProcessedToken"])
             {
-                var lastToken = HttpContext.Current.Session["LastProcessedToken"].ToString();
+                var lastToken = (HttpContext.Current.Session["LastProcessedToken"] ?? string.Empty).ToString();
 
-                if (lastToken == currentToken)
+                if (lastToken != string.Empty && lastToken == currentToken)
                 {
                     filterContext.Controller.ViewData.ModelState.AddModelError("", "The form was submitted twice.");
-                    return;
                 }
-
-                HttpContext.Current.Session["LastProcessedToken"] = currentToken;
+                else
+                {
+                    HttpContext.Current.Session["LastProcessedToken"] = currentToken;
+                }
             }
         }
     }
