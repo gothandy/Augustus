@@ -26,21 +26,31 @@ namespace Augustus.Web.Framework.Filters
 
         private  void doStuff(ActionExecutingContext filterContext)
         {
-            var currentToken = (HttpContext.Current.Request["__RequestVerificationToken"] ?? string.Empty).ToString();
-
-            if (currentToken != string.Empty)
+            if (HttpContext.Current.Request["__RequestVerificationToken"] != null)
             {
-                LockAndCheckLastProcessedToken(filterContext, currentToken);
+                CheckLastProcessedToken(filterContext, HttpContext.Current.Request["__RequestVerificationToken"].ToString());
             }
         }
 
-        private static void LockAndCheckLastProcessedToken(ActionExecutingContext filterContext, string currentToken)
+        private static void CheckLastProcessedToken(ActionExecutingContext filterContext, string currentToken)
+        {
+            if (HttpContext.Current.Session["LastProcessedToken"] == null)
+            {
+                HttpContext.Current.Session["LastProcessedToken"] = currentToken;
+            }
+            else
+            {
+                LockLastProcessedToken(filterContext, currentToken);
+            }
+        }
+
+        private static void LockLastProcessedToken(ActionExecutingContext filterContext, string currentToken)
         {
             lock (HttpContext.Current.Session["LastProcessedToken"])
             {
-                var lastToken = (HttpContext.Current.Session["LastProcessedToken"] ?? string.Empty).ToString();
+                var lastToken = HttpContext.Current.Session["LastProcessedToken"].ToString();
 
-                if (lastToken != string.Empty && lastToken == currentToken)
+                if (lastToken == currentToken)
                 {
                     filterContext.Controller.ViewData.ModelState.AddModelError("", "The form was submitted twice.");
                 }
