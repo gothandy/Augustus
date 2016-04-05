@@ -21,14 +21,14 @@ namespace Augustus.CRM.Test
             query = new OpportunityQuery(context);
 
             deleteAllOpportunities();
-            deleteAllAccounts();
+            deleteAllTestAccounts();
         }
 
         [ClassCleanup]
         public static void ClassCleanup()
         {
             deleteAllOpportunities();
-            deleteAllAccounts();
+            deleteAllTestAccounts();
             context.Dispose();
         }
 

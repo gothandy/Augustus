@@ -5,14 +5,25 @@ namespace Augustus.CRM.Converters
 {
     public static class AccountConverter
     {
-        public static Account ToDomainObject(AccountEntity a)
+        public static void SetUsingDomain(this AccountEntity entity, Account domain)
         {
+            entity.Name = domain.Name;
+            entity.FullName = domain.FullName;
+        }
 
+        public static Account ConvertToDomain(this AccountEntity entity)
+        {
+            return AccountConverter.ToDomain(entity);
+        }
+
+        public static Account ToDomain(AccountEntity entity)
+        {
             return new Account
             {
-                Id = a.Id,
-                Name = a.Name,
-                Created = a.Created
+                Id = entity.Id,
+                Name = entity.Name,
+                FullName = entity.FullName,
+                Created = entity.Created
             };
         }
     }

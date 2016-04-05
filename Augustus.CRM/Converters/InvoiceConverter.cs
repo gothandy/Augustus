@@ -22,6 +22,11 @@ namespace Augustus.CRM.Converters
             entity.Status = (int?)domain.Status;
         }
 
+        public static Invoice ConvertToDomain(this InvoiceEntity entity)
+        {
+            return InvoiceConverter.ToDomain(entity);
+        }
+
         public static Invoice ToDomain(InvoiceEntity entity)
         {
             var domain = new Invoice();
@@ -42,11 +47,6 @@ namespace Augustus.CRM.Converters
             domain.Status = (InvoiceStatus)entity.Status;
 
             return domain;
-        }
-
-        public static Invoice ConvertToDomain(this InvoiceEntity entity)
-        {
-            return InvoiceConverter.ToDomain(entity);
         }
 
         public static Invoice ToDomain(InvoiceEntity invoice, OpportunityEntity opportunity)

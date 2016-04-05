@@ -27,7 +27,7 @@ namespace Augustus.CRM.Test
             deleteAllWorkDoneItems();
             deleteAllInvoices();
             deleteAllOpportunities();
-            deleteAllAccounts();
+            deleteAllTestAccounts();
         }
 
         [ClassCleanup]
@@ -36,7 +36,7 @@ namespace Augustus.CRM.Test
             deleteAllWorkDoneItems();
             deleteAllInvoices();
             deleteAllOpportunities();
-            deleteAllAccounts();
+            deleteAllTestAccounts();
 
             context.Dispose();
         }

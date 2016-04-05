@@ -14,6 +14,10 @@ namespace Augustus.Domain.Objects
         public string Name { get; set; }
 
         [DataMember]
+        [Display(Name="Full Name")]
+        public string FullName { get; set; }
+
+        [DataMember]
         public DateTime? Created { get; set; }
 
         [DataMember]

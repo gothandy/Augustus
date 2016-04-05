@@ -17,7 +17,7 @@ namespace Augustus.CRM.Queries
             var inv = Context.Invoices.Single(i => i.Id == id).ConvertToDomain();
 
             inv.Opportunity = OpportunityConverter.ToDomainObject(Context.Opportunities.Single(o => o.Id == inv.OpportunityId));
-            inv.Account = AccountConverter.ToDomainObject(Context.Accounts.Single(a => a.Id == inv.Opportunity.AccountId));
+            inv.Account = AccountConverter.ToDomain(Context.Accounts.Single(a => a.Id == inv.Opportunity.AccountId));
 
             if (inv.Margin.GetValueOrDefault(0) != 0 && inv.InvoiceDate.HasValue)
             {

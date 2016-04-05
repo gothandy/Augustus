@@ -10,13 +10,13 @@ namespace Augustus.CRM.Test
         public static void ClassInit(TestContext testContext)
         {
             CreateOrg();
-            deleteAllAccounts();
+            deleteAllTestAccounts();
         }
 
         [ClassCleanup]
         public static void ClassCleanup()
         {
-            deleteAllAccounts();
+            deleteAllTestAccounts();
             context.Dispose();
         }
 

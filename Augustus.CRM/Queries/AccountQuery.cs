@@ -17,7 +17,7 @@ namespace Augustus.CRM.Queries
         {
             var account = (from a in Context.Accounts
                            where a.Id == id
-                           select AccountConverter.ToDomainObject(a)).Single();
+                           select AccountConverter.ToDomain(a)).Single();
 
             account.Invoices = GetInvoices(id, Context.ActiveDate);
             account.Opportunities = GetNewAndActiveOpportunities(id, Context.NewDate, Context.ActiveDate);
@@ -62,10 +62,9 @@ namespace Augustus.CRM.Queries
 
         public Guid Create(Account account)
         {
-            var entity = new AccountEntity
-            {
-                Name = account.Name
-            };
+            var entity = new AccountEntity();
+
+            entity.SetUsingDomain(account);
 
             Context.Create<AccountEntity>(entity);
             Context.SaveChanges();
@@ -77,7 +76,8 @@ namespace Augustus.CRM.Queries
         {
             var entity = Context.Accounts.Single(a => a.Id == account.Id);
 
-            entity.Name = account.Name;
+            entity.SetUsingDomain(account);
+
             Context.Update<AccountEntity>(entity);
             Context.SaveChanges();
         }

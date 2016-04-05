@@ -36,7 +36,7 @@ namespace Augustus.CRM.Queries
             var inv = GetOpportunity(WorkDoneItemId);
             var acc = Context.Accounts.Single(a => a.Id == inv.AccountId);
 
-            return AccountConverter.ToDomainObject(acc);
+            return AccountConverter.ToDomain(acc);
         }
 
         public Guid Create(WorkDoneItem workDoneItem)

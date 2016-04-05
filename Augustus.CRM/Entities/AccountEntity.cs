@@ -27,5 +27,12 @@ namespace Augustus.CRM.Entities
             get { return this.GetAttributeString(); }
             set { this.SetAttributeString(value); }
         }
+
+        [AttributeLogicalName("new_full_name")]
+        public string FullName
+        {
+            get { return this.GetAttributeString(); }
+            set { this.SetAttributeString(value); }
+        }
     }
 }

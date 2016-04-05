@@ -108,7 +108,7 @@ namespace Augustus.CRM.Test
             context.SaveChanges();
         }
 
-        protected static void deleteAllAccounts()
+        protected static void deleteAllTestAccounts()
         {
             deleteAccounts(accountName);
             deleteAccounts(accountRename);

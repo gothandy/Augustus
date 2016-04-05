@@ -23,13 +23,13 @@ namespace Augustus.CRM.Test
 
             easyJet = context.Accounts.Single(a => a.Name == "easyJet");
 
-            deleteAllAccounts();
+            deleteAllTestAccounts();
         }
 
         [ClassCleanup]
         public static void ClassCleanup()
         {
-            deleteAllAccounts();
+            deleteAllTestAccounts();
             context.Dispose();
         }
 
@@ -72,15 +72,30 @@ namespace Augustus.CRM.Test
         public void CRM_Query_Account_CrUD()
         {
             // Create
-            Account account = new Account { Name = accountName };
+            Account account = new Account
+            {
+                Name = accountName,
+                FullName = accountName + " Full Name"
+            };
             var id = query.Create(account);
 
+            // Get
+            account = query.GetItem(id);
+            Assert.AreEqual(accountName, account.Name);
+            Assert.AreEqual(accountName + " Full Name", account.FullName);
+
+
             // Updated
-            account.Id = id;
-            account.Name = accountRename;
+            account = new Account
+            {
+                Id = id,
+                Name = accountRename,
+                FullName = accountRename + " Full Name"
+            };
             query.Update(account);
             var accountEntity = getAccount(accountRename);
             Assert.AreEqual(accountRename, accountEntity.Name);
+            Assert.AreEqual(accountRename + " Full Name", accountEntity.FullName);
 
             // Delete
             query.Delete(id);

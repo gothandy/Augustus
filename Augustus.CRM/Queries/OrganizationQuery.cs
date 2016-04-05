@@ -15,7 +15,7 @@ namespace Augustus.CRM.Queries
             return (from a in Context.Accounts
                     where a.Created > Context.NewDate
                     orderby a.Name ascending
-                    select AccountConverter.ToDomainObject(a)).AsEnumerable();
+                    select AccountConverter.ToDomain(a)).AsEnumerable();
         }
 
         public IEnumerable<Account> GetActiveAccounts()
@@ -25,7 +25,7 @@ namespace Augustus.CRM.Queries
                     on a.Id equals i.AccountId
                     where i.InvoiceDate > Context.ActiveDate
                     orderby a.Name ascending
-                    select AccountConverter.ToDomainObject(a)).Distinct().AsEnumerable();
+                    select AccountConverter.ToDomain(a)).Distinct().AsEnumerable();
         }
 
         public IEnumerable<Account> GetNewAndActiveAccounts()

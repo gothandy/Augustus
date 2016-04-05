@@ -25,7 +25,7 @@ namespace Augustus.CRM.Queries
         public Account GetParent(Guid id)
         {
             var parentId = Context.Opportunities.Single(o => o.Id == id).AccountId;
-            return AccountConverter.ToDomainObject(Context.Accounts.Single(a => a.Id == parentId));
+            return AccountConverter.ToDomain(Context.Accounts.Single(a => a.Id == parentId));
         }
 
         private IEnumerable<Invoice> GetInvoices(Guid opportunityId)
