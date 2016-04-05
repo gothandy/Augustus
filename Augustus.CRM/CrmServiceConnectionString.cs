@@ -10,12 +10,6 @@ namespace Augustus.CRM
     {
         private IOrganizationService service;
 
-        public CrmServiceConnectionString()
-        {
-            var connectionString = ConfigurationManager.AppSettings["crm:ConnectionString"];
-            CreateService(connectionString);
-        }
-
         public CrmServiceConnectionString(string connectionString)
         {
             CreateService(connectionString);

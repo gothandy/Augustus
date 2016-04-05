@@ -15,8 +15,6 @@ namespace Augustus.Web.Portal
 {
     public class AuthenticationConfig
     {
-        private static string authority = AppSettings.AadInstance + AppSettings.TenantId;
-
         public static void ConfigureApp(IAppBuilder app)
         {
             AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.NameIdentifier;
@@ -24,7 +22,7 @@ namespace Augustus.Web.Portal
             app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType);
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
-                CookieSecure = CookieSecureOption.SameAsRequest
+                CookieSecure = CookieSecureOption.Always
             });
             app.UseOpenIdConnectAuthentication(GetAuthenticationOptions());
         }
@@ -35,7 +33,7 @@ namespace Augustus.Web.Portal
             {
                 ClientId = AppSettings.ClientId,
                 ClientSecret = AppSettings.ClientSecret,
-                Authority = authority,
+                Authority = AppSettings.Authority,
                 PostLogoutRedirectUri = AppSettings.PostLogoutRedirectUri,
                 Notifications = GetNotifications()
             };
@@ -60,19 +58,10 @@ namespace Augustus.Web.Portal
 
             ClientCredential credential = new ClientCredential(AppSettings.ClientId, AppSettings.ClientSecret);
 
-            var identityTenantID = context.AuthenticationTicket.Identity.FindFirst(
-                "http://schemas.microsoft.com/identity/claims/tenantid").Value;
-
-            var signedInUserID = context.AuthenticationTicket.Identity.FindFirst(
-                ClaimTypes.NameIdentifier).Value;
-
-            var authContext = new AuthenticationContext(
-                string.Format("https://login.windows.net/{0}", identityTenantID));
-
-            var redirectUri = new Uri(HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Path));
-
-            var result = authContext.AcquireTokenByAuthorizationCode(
-                code, redirectUri, credential, "Microsoft.CRM");
+            var signedInUserID = context.AuthenticationTicket.Identity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var authContext = new AuthenticationContext(string.Format("https://login.windows.net/{0}", AppSettings.TenantId));
+            var redirectUri = new Uri(AppSettings.PostLoginRedirectUri);
+            var result = authContext.AcquireTokenByAuthorizationCode(code, redirectUri, credential, "Microsoft.CRM");
 
             return Task.FromResult(0);
         }

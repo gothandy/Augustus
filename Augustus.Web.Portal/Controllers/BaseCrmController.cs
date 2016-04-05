@@ -26,11 +26,12 @@ namespace Augustus.Web.Portal.Controllers
         {
             if (AppSettings.UseAzureAuth)
             {
-                service = CrmServiceAccessToken.GetAccessTokenService(ForceSignOut);
+                var authentication = new AccessTokenAuthentication(AppSettings.ClientId, AppSettings.ClientSecret, ForceSignOut);
+                service = new CrmServiceAccessToken(AppSettings.CrmUrl, authentication);
             }
             else
             {
-                service = new CrmServiceConnectionString();
+                service = new CrmServiceConnectionString(AppSettings.CrmConnectionString);
             }
         }
 
