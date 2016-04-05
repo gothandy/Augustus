@@ -1,12 +1,10 @@
 ﻿using Augustus.Domain.Objects;
-using System;
-using System.Collections.Generic;
+using Augustus.Web.Portal.ViewModels;
 
 namespace Augustus.Web.Portal.Interfaces
 {
     public interface IAccountDropDown
     {
-        Guid AccountId { get; set; }
-        IEnumerable<Account> Accounts { get; set; }
+        DropDownViewModel<Account> AccountDropDown { get; set; }
     }
 }

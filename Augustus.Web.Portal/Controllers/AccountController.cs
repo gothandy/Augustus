@@ -23,17 +23,29 @@ namespace Augustus.Web.Portal.Controllers
             model.Title = "Create Account";
             model.Breadcrumb = new Breadcrumb();
             model.FormButtons = new FormButtons(GetParentUrl(parentId));
+            model.AccountDropDown = new DropDownViewModel<Account>
+            {
+                SelectedId = model.Account.ParentAccountId,
+                Items = new OrganizationQuery(context).GetNewAccounts(),
+                AllowNull = true,
+                HideSelfId = model.Account.Id
+            };
         }
 
         protected override void RefreshEditViewModel(CrmContext context, Guid id, ref AccountWriteViewModel model)
         {
             model.Title = "Edit Account";
             model.FormButtons = new FormButtons(id, GetDefaultUrl(id));
-            model.Breadcrumb = new Breadcrumb
+            model.Breadcrumb = new Breadcrumb { Account = new AccountQuery(context).GetItem(id) };
+            model.AccountDropDown = new DropDownViewModel<Account>
             {
-                Account = new AccountQuery(context).GetItem(id)
+                SelectedId = model.Account.ParentAccountId,
+                Items = new OrganizationQuery(context).GetNewAccounts(),
+                AllowNull = true,
+                HideSelfId = model.Account.Id
             };
         }
+
         protected override string GetParentUrl(Guid? parentId)
         {
             return Url.Action("ActiveAccounts", "Organization");
@@ -51,7 +63,7 @@ namespace Augustus.Web.Portal.Controllers
 
             using (var context = await GetCrmContext())
             {
-                var query = GetQuery(context);
+                var query = new AccountQuery(context);
 
                 var model = query.GetItem(id);
                 var viewModel = new AccountReadViewModel

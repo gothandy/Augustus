@@ -18,6 +18,6 @@ namespace Augustus.Web.Portal.ViewModels
         }
 
         public Guid OpportunityId { get; set; }
-        public IEnumerable<Opportunity> Opportunities { get; set; }
+        public IEnumerable<Opportunity> OpportunityLookup { get; set; }
     }
 }

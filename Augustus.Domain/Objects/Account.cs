@@ -23,8 +23,11 @@ namespace Augustus.Domain.Objects
         [DataMember]
         public IEnumerable<Opportunity> Opportunities { get; set; }
 
+        [DataMember]
+        [Display(Name="Parent Account")]
+        public Guid? ParentAccountId { get; set; }
+
         public IEnumerable<Invoice> Invoices { get; set; }
-
-
+        
     }
 }

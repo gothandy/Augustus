@@ -11,13 +11,14 @@ namespace Augustus.Web.Portal.ViewModels
         public string Title { get; set; }
         public FormButtons FormButtons { get; set; }
         public Opportunity Opportunity { get; set; }
+
         public Opportunity DomainModel
         {
             get { return Opportunity; }
             set { Opportunity = value; }
         }
 
-        public Guid AccountId { get; set; }
-        public IEnumerable<Account> Accounts { get; set; }
+        public DropDownViewModel<Account> AccountDropDown { get; set; }
+
     }
 }

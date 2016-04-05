@@ -22,8 +22,14 @@ namespace Augustus.Web.Portal.Controllers
         {
             model.Title = "Create Opportunity";
             model.FormButtons = new FormButtons(GetParentUrl(parentId));
-            model.Accounts = new OrganizationQuery(context).GetNewAndActiveAccounts();
-            model.AccountId = parentId.Value;
+
+            model.AccountDropDown = new DropDownViewModel<Account>
+            {
+                SelectedId = parentId,
+                Items = new OrganizationQuery(context).GetNewAndActiveAccounts(),
+                AllowNull = false
+            };
+
             model.Breadcrumb = new Breadcrumb
             {
                 Account = new AccountQuery(context).GetItem(parentId.Value)
@@ -34,8 +40,14 @@ namespace Augustus.Web.Portal.Controllers
         {
             model.Title = "Edit Opportunity";
             model.FormButtons = new FormButtons(id, GetDefaultUrl(id));
-            model.Accounts = new OrganizationQuery(context).GetNewAndActiveAccounts();
-            model.AccountId = new OpportunityQuery(context).GetParent(id).Id.Value;
+
+            model.AccountDropDown = new DropDownViewModel<Account>
+            {
+                SelectedId = new OpportunityQuery(context).GetParent(id).Id.Value,
+                Items = new OrganizationQuery(context).GetNewAndActiveAccounts(),
+                AllowNull = false
+            };
+
             model.Breadcrumb = new Breadcrumb
             {
                 Account = new OpportunityQuery(context).GetParent(id),

@@ -14,6 +14,7 @@ namespace Augustus.Domain.Objects
         public string Name { get; set; }
 
         [DataMember]
+        [Display(Name = "Account")]
         public Guid? AccountId { get; set; }
 
         [DataMember]

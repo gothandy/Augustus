@@ -9,6 +9,7 @@ namespace Augustus.CRM.Converters
         {
             entity.Name = domain.Name;
             entity.FullName = domain.FullName;
+            entity.ParentAccountId = domain.ParentAccountId;
         }
 
         public static Account ConvertToDomain(this AccountEntity entity)
@@ -23,6 +24,7 @@ namespace Augustus.CRM.Converters
                 Id = entity.Id,
                 Name = entity.Name,
                 FullName = entity.FullName,
+                ParentAccountId = entity.ParentAccountId,
                 Created = entity.Created
             };
         }

@@ -1,4 +1,5 @@
 ﻿using Augustus.CRM.AttributeExtensions;
+using Augustus.CRM.Attributes;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Client;
 using System;
@@ -33,6 +34,14 @@ namespace Augustus.CRM.Entities
         {
             get { return this.GetAttributeString(); }
             set { this.SetAttributeString(value); }
+        }
+
+        [AttributeLogicalName("parentaccountid")]
+        [EntityReference(AccountEntity.EntityLogicalName)]
+        public Guid? ParentAccountId
+        {
+            get { return this.GetAttributeEntityReference(); }
+            set { this.SetAttributeEntityReference(value); }
         }
     }
 }

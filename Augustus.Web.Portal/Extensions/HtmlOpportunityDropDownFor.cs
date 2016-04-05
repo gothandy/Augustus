@@ -12,7 +12,7 @@ namespace Augustus.Web.Portal.Extensions
         {
             var container = (IOpportunityDropDown)ModelMetadata.FromLambdaExpression(expression, htmlHelper.ViewData).Container;
 
-            var selectList = new SelectList(container.Opportunities, "Id", "Name", container.OpportunityId);
+            var selectList = new SelectList(container.OpportunityLookup, "Id", "Name", container.OpportunityId);
 
             return htmlHelper.DropDownListFor<TModel, TProperty>(expression, selectList, htmlAttributes);
         }

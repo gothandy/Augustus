@@ -47,22 +47,6 @@ namespace Augustus.CRM.Test
         }
 
         [TestMethod]
-        public void CRM_Query_Invoice_GetAccount()
-        {
-            var inv = query.GetItem(easyJetJan16Inv);
-
-            Assert.AreEqual("easyJet", inv.Account.Name);
-        }
-
-        [TestMethod]
-        public void CRM_Query_Invoice_GetOpportunity()
-        {
-            var inv = query.GetItem(easyJetJan16Inv);
-
-            Assert.AreEqual(new DateTime(2016,1,11,11,42,34), inv.Opportunity.Created);
-        }
-
-        [TestMethod]
         public void CRM_Query_Invoice_GetWorkDoneItems()
         {
             var inv = query.GetItem(easyJetJan16Inv);

@@ -29,7 +29,7 @@ namespace Augustus.Web.Portal.Controllers
 
             model.Title = "Create Invoice";
             model.OpportunityId = opportunity.Id.Value;
-            model.Opportunities = new InvoiceQuery(context).GetParentLookup(opportunityId);
+            model.OpportunityLookup = new InvoiceQuery(context).GetParentLookup(opportunityId);
             model.FormButtons = new FormButtons(GetParentUrl(parentId));
             model.Breadcrumb = new Breadcrumb
             {
@@ -44,15 +44,19 @@ namespace Augustus.Web.Portal.Controllers
             var opportunityId = invoice.OpportunityId.Value;
 
             model.Title = "Edit Invoice";
-            model.Opportunities = new InvoiceQuery(context).GetParentLookup(opportunityId);
-            model.OpportunityId = opportunityId;
             model.FormButtons = new FormButtons(id, GetDefaultUrl(id));
+
             model.Breadcrumb = new Breadcrumb
             {
                 Account = new OpportunityQuery(context).GetParent(opportunityId),
                 Opportunity = new OpportunityQuery(context).GetItem(opportunityId),
                 Invoice = invoice
             };
+
+            // Move the lookup call above the breadcrumb and the GetItem call returns null.
+            model.OpportunityId = opportunityId;
+            model.OpportunityLookup = new InvoiceQuery(context).GetParentLookup(opportunityId);
+            
         }
 
         protected override string GetDefaultUrl(Guid id)

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Augustus.Domain.Interfaces
 {
+    [DataContract]
     public class BaseDomainObject
     {
         [DataMember]

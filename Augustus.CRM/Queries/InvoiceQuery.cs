@@ -16,8 +16,8 @@ namespace Augustus.CRM.Queries
         {
             var inv = Context.Invoices.Single(i => i.Id == id).ConvertToDomain();
 
-            inv.Opportunity = OpportunityConverter.ToDomainObject(Context.Opportunities.Single(o => o.Id == inv.OpportunityId));
-            inv.Account = AccountConverter.ToDomain(Context.Accounts.Single(a => a.Id == inv.Opportunity.AccountId));
+            //inv.Opportunity = OpportunityConverter.ToDomainObject(Context.Opportunities.Single(o => o.Id == inv.OpportunityId));
+            //inv.Account = AccountConverter.ToDomain(Context.Accounts.Single(a => a.Id == inv.Opportunity.AccountId));
 
             if (inv.Margin.GetValueOrDefault(0) != 0 && inv.InvoiceDate.HasValue)
             {
@@ -50,21 +50,6 @@ namespace Augustus.CRM.Queries
             return list;
         }
 
-        public Invoice GetNewItem(Guid parentId)
-        {
-            var opp = OpportunityConverter.ToDomainObject(Context.Opportunities.Single(a => a.Id == parentId));
-
-            var inv = new Invoice
-            {
-                Opportunity = opp,
-                AccountId = opp.AccountId,
-                OpportunityId = parentId
-            };
-
-            inv.WorkDoneItems = GetListWorkDoneItems(GetStartOfMonth(null), inv);
-
-            return (inv);
-        }
         private DateTime GetStartOfMonth(DateTime? invoice)
         {
             var last = invoice.GetValueOrDefault(DateTime.Now);
