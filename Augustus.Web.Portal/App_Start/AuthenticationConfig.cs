@@ -1,11 +1,11 @@
-﻿using Microsoft.IdentityModel.Clients.ActiveDirectory;
+﻿using Augustus.Web.Config;
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.OpenIdConnect;
 using Microsoft.Owin.Security.Notifications;
+using Microsoft.Owin.Security.OpenIdConnect;
 using Owin;
 using System;
-using System.Configuration;
 using System.IdentityModel.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -15,12 +15,7 @@ namespace Augustus.Web.Portal
 {
     public class AuthenticationConfig
     {
-        private static string clientId = ConfigurationManager.AppSettings["ida:ClientId"];
-        private static string aadInstance = ConfigurationManager.AppSettings["ida:AADInstance"];
-        private static string tenantId = ConfigurationManager.AppSettings["ida:TenantId"];
-        private static string postLogoutRedirectUri = ConfigurationManager.AppSettings["ida:PostLogoutRedirectUri"];
-        private static string clientSecret = ConfigurationManager.AppSettings["ida:ClientSecret"];
-        private static string authority = aadInstance + tenantId;
+        private static string authority = AppSettings.AadInstance + AppSettings.TenantId;
 
         public static void ConfigureApp(IAppBuilder app)
         {
@@ -38,10 +33,10 @@ namespace Augustus.Web.Portal
         {
             var authenticationOptions = new OpenIdConnectAuthenticationOptions
             {
-                ClientId = clientId,
-                ClientSecret = clientSecret,
+                ClientId = AppSettings.ClientId,
+                ClientSecret = AppSettings.ClientSecret,
                 Authority = authority,
-                PostLogoutRedirectUri = postLogoutRedirectUri,
+                PostLogoutRedirectUri = AppSettings.PostLogoutRedirectUri,
                 Notifications = GetNotifications()
             };
 
@@ -63,7 +58,7 @@ namespace Augustus.Web.Portal
         {
             var code = context.Code;
 
-            ClientCredential credential = new ClientCredential(clientId, clientSecret);
+            ClientCredential credential = new ClientCredential(AppSettings.ClientId, AppSettings.ClientSecret);
 
             var identityTenantID = context.AuthenticationTicket.Identity.FindFirst(
                 "http://schemas.microsoft.com/identity/claims/tenantid").Value;

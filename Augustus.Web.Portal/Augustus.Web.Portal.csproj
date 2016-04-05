@@ -128,7 +128,6 @@
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -192,6 +191,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\BinderConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -417,6 +417,10 @@
     <ProjectReference Include="..\Augustus.Domain\Augustus.Domain.csproj">
       <Project>{08d81a8f-f287-4460-9b3d-11d54cc1e7ad}</Project>
       <Name>Augustus.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Augustus.Web.Config\Augustus.Web.Config.csproj">
+      <Project>{0249bcdf-3bc7-4f84-ae33-08cea255f912}</Project>
+      <Name>Augustus.Web.Config</Name>
     </ProjectReference>
     <ProjectReference Include="..\Augustus.Web.Framework\Augustus.Web.Framework.csproj">
       <Project>{0076647a-8d03-4a58-b45b-603881fe8581}</Project>

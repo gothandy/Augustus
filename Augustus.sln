@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.CRM.Authentication
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.Web.Framework", "Augustus.Web.Framework\Augustus.Web.Framework.csproj", "{0076647A-8D03-4A58-B45B-603881FE8581}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.Web.Config", "Augustus.Web.Config\Augustus.Web.Config.csproj", "{0249BCDF-3BC7-4F84-AE33-08CEA255F912}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{0076647A-8D03-4A58-B45B-603881FE8581}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0076647A-8D03-4A58-B45B-603881FE8581}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0076647A-8D03-4A58-B45B-603881FE8581}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0249BCDF-3BC7-4F84-AE33-08CEA255F912}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0249BCDF-3BC7-4F84-AE33-08CEA255F912}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0249BCDF-3BC7-4F84-AE33-08CEA255F912}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0249BCDF-3BC7-4F84-AE33-08CEA255F912}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

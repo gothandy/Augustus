@@ -11,19 +11,10 @@ namespace Augustus.Web.Portal
     {
         protected void Application_Start()
         {
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            FilterConfig.RegisterFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-            ModelBinders.Binders.Add(typeof(decimal?), new DecimalModelBinder());
-
-            var useAzureAuth = (ConfigurationManager.AppSettings["crm:UseAzureAuth"] ?? "true") == "true";
-
-            if (useAzureAuth)
-            {
-                GlobalFilters.Filters.Add(new AntiForgeryTokenAuthorizationFilter());
-                GlobalFilters.Filters.Add(new PreventDuplicatePostActionFilter());
-            }
+            BinderConfig.RegisterBinders(ModelBinders.Binders);
        }
     }
 }

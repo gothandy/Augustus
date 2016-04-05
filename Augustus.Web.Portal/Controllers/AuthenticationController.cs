@@ -36,11 +36,12 @@ namespace Augustus.Web.Portal.Controllers
         {
             if (Request.IsAuthenticated)
             {
-                // Redirect to home page if the user is authenticated.
                 return RedirectToAction("Index", "Home");
             }
-
-            return View(new HomeViewModel { Title = "Sign Out" } );
+            else
+            {
+                return RedirectToAction("Index", "Home", new { signOut = true });
+            }
         }
     }
 }

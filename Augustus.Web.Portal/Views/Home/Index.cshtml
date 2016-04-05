@@ -1,3 +1,7 @@
-﻿<div class="btn-group">
+﻿@model HomeViewModel
+
+@Html.DisplayFor(m => m.Alerts)
+
+<div class="btn-group">
     <a class="btn btn-default" href="@Url.Action("SignIn", "Authentication")">Sign In</a>
 </div>

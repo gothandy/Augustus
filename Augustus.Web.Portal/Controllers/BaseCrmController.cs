@@ -1,5 +1,6 @@
 ﻿using Augustus.CRM;
 using Augustus.CRM.Authentication;
+using Augustus.Web.Config;
 using Augustus.Web.Portal.Attributes;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
@@ -16,15 +17,14 @@ using System.Web.Routing;
 namespace Augustus.Web.Portal.Controllers
 {
     [CrmAuthorize]
+    [RequireHttps]
     public class BaseCrmController : Controller
     {
         ICrmService service;
 
         public BaseCrmController() : base()
         {
-            var useAzureAuth = (ConfigurationManager.AppSettings["crm:UseAzureAuth"] ?? "true") == "true";
-
-            if (useAzureAuth)
+            if (AppSettings.UseAzureAuth)
             {
                 service = CrmServiceAccessToken.GetAccessTokenService(ForceSignOut);
             }

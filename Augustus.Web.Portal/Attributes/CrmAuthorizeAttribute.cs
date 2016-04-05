@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Augustus.Web.Config;
+using System;
 using System.Configuration;
 using System.Web;
 using System.Web.Mvc;
@@ -10,9 +11,7 @@ namespace Augustus.Web.Portal.Attributes
     {
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
-            var useAzureAuth = (ConfigurationManager.AppSettings["crm:UseAzureAuth"] ?? "true") == "true";
-
-            if (useAzureAuth)
+            if (AppSettings.UseAzureAuth)
             {
                 return base.AuthorizeCore(httpContext);
             }
