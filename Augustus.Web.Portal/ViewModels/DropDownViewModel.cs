@@ -8,6 +8,6 @@ namespace Augustus.Web.Portal.ViewModels
         public Guid? SelectedId { get; set; }
         public bool AllowNull { get; set; }
         public IEnumerable<TModel> Items { get; set; }
-        public Guid? HideSelfId { get; set; }
+        public Guid? RemoveSelfId { get; set; }
     }
 }

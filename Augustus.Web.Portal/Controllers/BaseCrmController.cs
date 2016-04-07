@@ -22,7 +22,7 @@ namespace Augustus.Web.Portal.Controllers
     {
         ICrmService service;
 
-        public BaseCrmController() : base()
+        private void GetCrmService()
         {
             if (AppSettings.UseAzureAuth)
             {
@@ -42,6 +42,13 @@ namespace Augustus.Web.Portal.Controllers
             var enGB = new CultureInfo("en-GB");
             Thread.CurrentThread.CurrentUICulture = enGB;
             Thread.CurrentThread.CurrentCulture = enGB;
+        }
+
+        protected override IAsyncResult BeginExecute(RequestContext requestContext, AsyncCallback callback, object state)
+        {
+            GetCrmService();
+
+            return base.BeginExecute(requestContext, callback, state);
         }
 
         private void ForceSignOut()

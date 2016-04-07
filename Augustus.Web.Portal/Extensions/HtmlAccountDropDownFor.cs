@@ -21,9 +21,10 @@ namespace Augustus.Web.Portal.Extensions
                 list.Insert(0, new Account { Name = " " });
             }
 
-            if (dropDown.HideSelfId.HasValue)
+            if (dropDown.RemoveSelfId.HasValue)
             {
-                list.Remove(list.Single(i => i.Id == dropDown.HideSelfId.Value));
+                var self = list.SingleOrDefault(i => i.Id == dropDown.RemoveSelfId.Value);
+                if (self != null) list.Remove(self);
             }
 
             var selectList = new SelectList(list, "Id", "Name", dropDown.SelectedId);

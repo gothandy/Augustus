@@ -28,7 +28,7 @@ namespace Augustus.Web.Portal.Controllers
                 SelectedId = model.Account.ParentAccountId,
                 Items = new OrganizationQuery(context).GetNewAccounts(),
                 AllowNull = true,
-                HideSelfId = model.Account.Id
+                RemoveSelfId = model.Account.Id
             };
         }
 
@@ -42,7 +42,7 @@ namespace Augustus.Web.Portal.Controllers
                 SelectedId = model.Account.ParentAccountId,
                 Items = new OrganizationQuery(context).GetNewAccounts(),
                 AllowNull = true,
-                HideSelfId = model.Account.Id
+                RemoveSelfId = model.Account.Id
             };
         }
 
