@@ -59,7 +59,7 @@ namespace Augustus.CRM.Queries
         }
 
 
-        public List<ReportAccount> GetAccounts(DateTime date)
+        public IEnumerable<ReportAccount> GetAccounts(DateTime date)
         {
             var list = new List<ReportAccount>();
 
@@ -68,7 +68,7 @@ namespace Augustus.CRM.Queries
                 list.Add(GetReport(date,id));
             }
 
-            return list;
+            return list.OrderBy(a => a.Account);
         }
 
         private ReportAccount GetReport(DateTime date, Guid id)

@@ -8,7 +8,7 @@ namespace Augustus.Web.Portal.ViewModels
     {
         public Breadcrumb Breadcrumb { get; set; }
         public string Title { get; set; }
-        public List<ReportAccount> Accounts { get; set; }
+        public IEnumerable<ReportAccount> Accounts { get; set; }
 
     }
 }
