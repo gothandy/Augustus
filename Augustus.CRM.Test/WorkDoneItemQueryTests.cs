@@ -9,7 +9,7 @@ using System.Linq;
 namespace Augustus.CRM.Test
 {
     [TestClass]
-    public class WorkDoneItemQueryTests : BaseCrudTest
+    public class WorkDoneItemQueryTests : BaseQueryTest
     {
         private static Guid easyJetJan16Inv;
         private static InvoiceQuery invQuery;

@@ -50,6 +50,8 @@
     <Compile Include="Interfaces\IQuery.cs" />
     <Compile Include="Objects\Account.cs" />
     <Compile Include="Objects\Invoice.cs" />
+    <Compile Include="Objects\ReportMonth.cs" />
+    <Compile Include="Objects\ReportAccount.cs" />
     <Compile Include="Objects\Opportunity.cs" />
     <Compile Include="Objects\Organization.cs" />
     <Compile Include="Objects\WorkDoneItem.cs" />

@@ -9,7 +9,7 @@ using System.Linq;
 namespace Augustus.CRM.Test
 {
     [TestClass]
-    public class OpportunityQueryTests : BaseCrudTest
+    public class OpportunityQueryTests : BaseQueryTest
     {
         private static OpportunityQuery query;
         private Guid easyJet2015Budget = new Guid("2d1a82de-4479-e411-be1f-6c3be5becb24");

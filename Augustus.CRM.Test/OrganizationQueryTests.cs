@@ -7,7 +7,7 @@ using System.Linq;
 namespace Augustus.CRM.Test
 {
     [TestClass]
-    public class OrganizationQueryTests : BaseCrudTest
+    public class OrganizationQueryTests : BaseQueryTest
     {
         private static OrganizationQuery query;
 

@@ -14,6 +14,12 @@ namespace Augustus.Web.Portal
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Reporting",
+                url: "Reporting/Month/{year}/{month}",
+                defaults: new { controller = "Reporting", action = "Month", month = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

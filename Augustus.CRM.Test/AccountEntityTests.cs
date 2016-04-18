@@ -4,7 +4,7 @@ using System.Configuration;
 namespace Augustus.CRM.Test
 {
     [TestClass]
-    public class AccountEntityTests : BaseCrudTest
+    public class AccountEntityTests : BaseQueryTest
     {
         [ClassInitialize]
         public static void ClassInit(TestContext testContext)

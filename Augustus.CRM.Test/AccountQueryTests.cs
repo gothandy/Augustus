@@ -11,7 +11,7 @@ namespace Augustus.CRM.Test
 
 
     [TestClass]
-    public class AccountQueryTests : BaseCrudTest
+    public class AccountQueryTests : BaseQueryTest
     {
         private static Guid child = new Guid("2fd8a9d7-7dfa-e511-8119-3863bb343bf8");
         private static Guid parent = new Guid("5863a90f-16fb-e511-8124-3863bb34fa68");

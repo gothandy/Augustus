@@ -9,7 +9,7 @@ using System.Linq;
 namespace Augustus.CRM.Test
 {
     [TestClass]
-    public class BulkUpdateTests : BaseCrudTest
+    public class BulkUpdateTests : BaseQueryTest
     {
 
         [ClassInitialize]

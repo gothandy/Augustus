@@ -108,10 +108,11 @@
     <Compile Include="OrganizationQueryTests.cs" />
     <Compile Include="AccountQueryTests.cs" />
     <Compile Include="AccountEntityTests.cs" />
-    <Compile Include="BaseCrudTest.cs" />
+    <Compile Include="BaseQueryTest.cs" />
     <Compile Include="OpportunityEntityTests.cs" />
     <Compile Include="OrgQuerableTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportQueryTest.cs" />
     <Compile Include="WorkDoneItemQueryTests.cs" />
   </ItemGroup>
   <ItemGroup>

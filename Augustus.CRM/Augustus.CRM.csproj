@@ -111,6 +111,7 @@
     <Compile Include="ICrmService.cs" />
     <Compile Include="Queries\BulkUpdateQuery.cs" />
     <Compile Include="Queries\AccountQuery.cs" />
+    <Compile Include="Queries\ReportQuery.cs" />
     <Compile Include="Queries\WorkDoneItemQuery.cs" />
     <Compile Include="Queries\InvoiceQuery.cs" />
     <Compile Include="Queries\OrganizationQuery.cs" />

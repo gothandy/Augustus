@@ -23,13 +23,18 @@ namespace Augustus.Web.Portal.Extensions
 
             if (dropDown.RemoveSelfId.HasValue)
             {
-                var self = list.SingleOrDefault(i => i.Id == dropDown.RemoveSelfId.Value);
-                if (self != null) list.Remove(self);
+                RemoveSelf(dropDown, list);
             }
 
             var selectList = new SelectList(list, "Id", "Name", dropDown.SelectedId);
 
             return htmlHelper.DropDownListFor<TModel, TProperty>(expression, selectList, htmlAttributes);
+        }
+
+        private static void RemoveSelf(ViewModels.DropDownViewModel<Account> dropDown, System.Collections.Generic.List<Account> list)
+        {
+            var self = list.SingleOrDefault(i => i.Id == dropDown.RemoveSelfId.Value);
+            if (self != null) list.Remove(self);
         }
     }
 }

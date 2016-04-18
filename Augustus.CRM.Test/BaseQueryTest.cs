@@ -7,7 +7,7 @@ using System.Linq;
 namespace Augustus.CRM.Test
 {
     [TestClass]
-    public class BaseCrudTest
+    public class BaseQueryTest
     {
         protected const string accountName = "Augustus Account Name";
         protected const string accountRename = "Augustus  Account Rename";
