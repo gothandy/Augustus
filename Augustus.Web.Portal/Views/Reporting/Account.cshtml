@@ -1,0 +1,26 @@
+﻿@model ReportAccountViewModel
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Invoice Date</th>
+                <th>Account</th>
+                <th class="currency">Margin</th>
+                <th class="currency">Work Done This Month</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in Model.Invoices)
+            {
+                <tr>
+                    <td>@DateTimeHelper.Format(m.InvoiceDate)</td>
+                    <td>@Html.ActionLink(m.InvoiceName, "Details", "Invoice", new { id = m.InvoiceId }, null)</td>
+                    <td class="currency">@CurrencyHelper.Format(m.Margin)</td>
+                    <td class="currency">@CurrencyHelper.Format(m.WorkDoneThisMonth)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

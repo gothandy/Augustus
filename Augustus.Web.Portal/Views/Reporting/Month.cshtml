@@ -1,4 +1,4 @@
-﻿@model MonthReportViewModel
+﻿@model ReportMonthViewModel
 
 <div class="table-responsive">
     <table class="table table-hover">
@@ -6,9 +6,7 @@
             <tr>
                 <th>Account</th>
                 <th class="currency">Invoice Total</th>
-                <th class="currency">Work Not Done and Invoiced</th>
-                <th class="currency">Work Done and Invoiced</th>
-                <th class="currency">Work Done and Not Invoiced</th>
+                <th class="currency">Work Done And Invoiced</th>
                 <th class="currency">Work Done Total</th>
             </tr>
         </thead>
@@ -16,11 +14,9 @@
             @foreach (var m in Model.Accounts)
             {
                 <tr>
-                    <td>@m.Account</td>
+                    <td><a href="/Reporting/Account/@Model.Year/@Model.Month/@m.AccountId">@m.AccountName</td>
                     <td class="currency">@CurrencyHelper.Format(m.InvoiceTotal)</td>
-                    <td class="currency">@CurrencyHelper.Format(m.WorkNotDoneAndInvoiced)</td>
                     <td class="currency">@CurrencyHelper.Format(m.WorkDoneAndInvoiced)</td>
-                    <td class="currency">@CurrencyHelper.Format(m.WorkDoneAndNotInvoiced)</td>
                     <td class="currency">@CurrencyHelper.Format(m.WorkDoneTotal)</td>
                 </tr>
             }

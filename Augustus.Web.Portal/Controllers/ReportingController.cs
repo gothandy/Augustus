@@ -18,7 +18,7 @@ namespace Augustus.Web.Portal.Controllers
             {
                 var query = new ReportQuery(context);
 
-                var viewModel = new MonthlyReportViewModel
+                var viewModel = new ReportOrganizatonViewModel
                 {
                     Title = "Monthly Report",
                     Breadcrumb = new Breadcrumb(),
@@ -29,22 +29,45 @@ namespace Augustus.Web.Portal.Controllers
             }
         }
 
-        // GET: Reporting/{year}/{month}
-        public async Task<ActionResult> Month(int year, int? month)
+        // GET: Reporting/Month/{year}/{month}
+        public async Task<ActionResult> Month(int year, int month)
         {
             using (var context = await GetCrmContext())
             {
                 var query = new ReportQuery(context);
-                var date = new DateTime(year, month.Value, 1);
+                var date = new DateTime(year, month, 1);
 
-                var viewModel = new MonthReportViewModel
+                var viewModel = new ReportMonthViewModel
                 {
                     Title = date.ToShortDateString(),
                     Breadcrumb = new Breadcrumb(),
-                    Accounts = query.GetAccounts(date)
-
+                    Accounts = query.GetAccounts(date),
+                    Year = year,
+                    Month = month
                 };
                 
+                return View(viewModel);
+            }
+        }
+
+        // GET: Reporting/Account/{year}/{month}/{account}
+        public async Task<ActionResult> Account(int year, int month, Guid? account)
+        {
+            using (var context = await GetCrmContext())
+            {
+                var query = new ReportQuery(context);
+                var date = new DateTime(year, month, 1);
+
+                var viewModel = new ReportAccountViewModel
+                {
+                    Title = date.ToShortDateString(),
+                    Breadcrumb = new Breadcrumb(),
+                    Invoices = query.GetInvoices(date, account.Value),
+                    Year = year,
+                    Month = month,
+                    Account = new AccountQuery(context).GetItem(account.Value)
+                };
+
                 return View(viewModel);
             }
         }

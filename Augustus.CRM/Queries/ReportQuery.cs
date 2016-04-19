@@ -68,7 +68,38 @@ namespace Augustus.CRM.Queries
                 list.Add(GetReport(date,id));
             }
 
-            return list.OrderBy(a => a.Account);
+            return list.OrderBy(a => a.AccountName);
+        }
+
+        public IEnumerable<ReportInvoice> GetInvoices(DateTime date, Guid id)
+        {
+            var invoicesWithWork = (from i in invoices
+                    join w in workDoneItems on i.Id equals w.InvoiceId
+                    where GetMonthStart(w.WorkDoneDate) == date && i.AccountId == id
+                    select new ReportInvoice
+                    {
+                        InvoiceName = i.Name,
+                        InvoiceId = i.Id,
+                        InvoiceDate = i.InvoiceDate.Value,
+                        Margin = i.Margin.GetValueOrDefault(),
+                        WorkDoneThisMonth = w.Margin.GetValueOrDefault()
+                    });
+
+            var invoicesWithoutWork = (from i in invoices
+                                       where
+                                           GetMonthStart(i.InvoiceDate) == date &&
+                                           i.AccountId == id &&
+                                           !invoicesWithWork.Any(b => b.InvoiceId == i.Id)
+                                       select new ReportInvoice
+                                       {
+                                           InvoiceName = i.Name,
+                                           InvoiceId = i.Id,
+                                           InvoiceDate = i.InvoiceDate.Value,
+                                           Margin = i.Margin.GetValueOrDefault(),
+                                           WorkDoneThisMonth = 0
+                                       });
+
+            return invoicesWithWork.Union(invoicesWithoutWork).OrderBy(i => i.InvoiceDate);
         }
 
         private ReportAccount GetReport(DateTime date, Guid id)
@@ -76,15 +107,12 @@ namespace Augustus.CRM.Queries
             var report = new ReportAccount
             {
                 AccountId = id,
-                Account = GetAccountName(id),
+                AccountName = GetAccountName(id),
                 InvoiceTotal = GetInvoiceTotal(date, id),
                 WorkDoneAndInvoiced = GetWorkDoneAndInvoiced(date,id),
                 WorkDoneTotal = GetWorkDoneTotal(date,id)
 
             };
-
-            report.WorkNotDoneAndInvoiced = report.InvoiceTotal - report.WorkDoneAndInvoiced;
-            report.WorkDoneAndNotInvoiced = report.WorkDoneTotal - report.WorkDoneAndInvoiced;
 
             return report;
         }

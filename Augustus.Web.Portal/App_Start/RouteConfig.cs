@@ -15,14 +15,24 @@ namespace Augustus.Web.Portal
 
             routes.MapRoute(
                 name: "Reporting",
-                url: "Reporting/Month/{year}/{month}",
-                defaults: new { controller = "Reporting", action = "Month", month = UrlParameter.Optional }
+                url: "Reporting/{action}/{year}/{month}/{account}",
+                defaults: new
+                {
+                    controller = "Reporting",
+                    action = "Month",
+                    account = UrlParameter.Optional
+                }
             );
 
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new
+                {
+                    controller = "Home",
+                    action = "Index",
+                    id = UrlParameter.Optional
+                }
             );
         }
     }

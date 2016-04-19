@@ -48,13 +48,27 @@ namespace Augustus.CRM.Test
 
             foreach(var a in accounts)
             {
-                Console.WriteLine("{0} {1} {2} {3} {4} {5}",
-                    a.Account,
+                Console.WriteLine("{0} {1} {2} {3}",
+                    a.AccountName,
                     a.InvoiceTotal,
-                    a.WorkNotDoneAndInvoiced,
                     a.WorkDoneAndInvoiced,
-                    a.WorkDoneAndNotInvoiced,
                     a.WorkDoneTotal);
+            }
+        }
+
+        //Reporting/Account/2016/3/b371603e-776a-e411-85fd-6c3be5becb24
+        [TestMethod]
+        public void CRM_ReportQuery_GetInvoices()
+        {
+            var invoices = query.GetInvoices(new DateTime(2016, 3, 1), new Guid("b371603e-776a-e411-85fd-6c3be5becb24"));
+
+            foreach (var a in invoices)
+            {
+                Console.WriteLine("{0} {1} {2} {3}",
+                    a.InvoiceName,
+                    a.InvoiceDate,
+                    a.Margin,
+                    a.WorkDoneThisMonth);
             }
         }
     }
