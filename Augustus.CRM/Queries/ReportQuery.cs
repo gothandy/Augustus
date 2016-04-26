@@ -82,7 +82,7 @@ namespace Augustus.CRM.Queries
                         InvoiceId = i.Id,
                         InvoiceDate = i.InvoiceDate.Value,
                         Margin = i.Margin.GetValueOrDefault(),
-                        WorkDoneThisMonth = w.Margin.GetValueOrDefault()
+                        WorkDone = w.Margin.GetValueOrDefault()
                     });
 
             var invoicesWithoutWork = (from i in invoices
@@ -96,7 +96,7 @@ namespace Augustus.CRM.Queries
                                            InvoiceId = i.Id,
                                            InvoiceDate = i.InvoiceDate.Value,
                                            Margin = i.Margin.GetValueOrDefault(),
-                                           WorkDoneThisMonth = 0
+                                           WorkDone = 0
                                        });
 
             return invoicesWithWork.Union(invoicesWithoutWork).OrderBy(i => i.InvoiceDate);
@@ -149,6 +149,29 @@ namespace Augustus.CRM.Queries
                             select g.Key.Value).ToList();
 
             return invoiced.Union(workdone);
+        }
+
+        public IEnumerable<ReportInvoice> GetWorkDoneErrors()
+        {
+            var query = (from i in invoices
+                         join w in workDoneItems on i.Id equals w.InvoiceId
+                         group w by new
+                         {
+                             Id = i.Id,
+                             Name = i.Name,
+                             InvoiceDate = i.InvoiceDate,
+                             Margin = i.Margin
+                         } into g
+                         select new ReportInvoice
+                         {
+                             InvoiceId = g.Key.Id,
+                             InvoiceName = g.Key.Name,
+                             InvoiceDate = g.Key.InvoiceDate.Value,
+                             Margin = g.Key.Margin.Value,
+                             WorkDone = g.Sum(w => w.Margin).GetValueOrDefault()
+                         }).ToList();
+
+            return query.Where(i => i.Margin != i.WorkDone);
         }
     }
 }

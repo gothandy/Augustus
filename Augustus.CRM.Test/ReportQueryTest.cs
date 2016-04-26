@@ -68,7 +68,22 @@ namespace Augustus.CRM.Test
                     a.InvoiceName,
                     a.InvoiceDate,
                     a.Margin,
-                    a.WorkDoneThisMonth);
+                    a.WorkDone);
+            }
+        }
+
+        [TestMethod]
+        public void CRM_ReportQuery_GetWorkDoneErrors()
+        {
+            var invoices = query.GetWorkDoneErrors();
+
+            foreach (var a in invoices)
+            {
+                Console.WriteLine("{0} {1} {2} {3}",
+                    a.InvoiceName,
+                    a.InvoiceDate,
+                    a.Margin,
+                    a.WorkDone);
             }
         }
     }

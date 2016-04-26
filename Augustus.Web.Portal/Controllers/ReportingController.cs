@@ -71,5 +71,23 @@ namespace Augustus.Web.Portal.Controllers
                 return View(viewModel);
             }
         }
+
+        // GET: Reporting/Errors
+        public async Task<ActionResult> Errors()
+        {
+            using (var context = await GetCrmContext())
+            {
+                var query = new ReportQuery(context);
+
+                var viewModel = new ReportErrorsViewModel
+                {
+                    Title = "Work Done Errors",
+                    Breadcrumb = new Breadcrumb(),
+                    Invoices = query.GetWorkDoneErrors()
+                };
+
+                return View(viewModel);
+            }
+        }
     }
 }

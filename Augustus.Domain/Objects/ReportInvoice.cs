@@ -8,6 +8,6 @@ namespace Augustus.Domain.Objects
         public string InvoiceName { get; set; }
         public DateTime InvoiceDate { get; set; }
         public decimal Margin { get; set; }
-        public decimal WorkDoneThisMonth { get; set; }
+        public decimal WorkDone { get; set; }
     }
 }
