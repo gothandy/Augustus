@@ -1,4 +1,5 @@
-﻿using Augustus.CRM.Entities;
+﻿using Augustus.CRM.Converters;
+using Augustus.CRM.Entities;
 using Augustus.Domain.Objects;
 using System;
 using System.Collections.Generic;
@@ -8,11 +9,13 @@ namespace Augustus.CRM.Queries
 {
     public class ReportQuery : BaseQuery
     {
+        private List<AccountEntity> accounts;
         private List<InvoiceEntity> invoices;
         private List<WorkDoneItemEntity> workDoneItems;
 
         public ReportQuery(CrmContext context) : base(context)
         {
+            accounts = Context.Accounts.ToList();
             invoices = Context.Invoices.ToList();
             workDoneItems = Context.WorkDoneItems.ToList();
         }
@@ -172,6 +175,20 @@ namespace Augustus.CRM.Queries
                          }).ToList();
 
             return query.Where(i => i.Margin != i.WorkDone);
+        }
+
+        public IEnumerable<ReportWorkDoneItem> GetExportData()
+        {
+            return (from a in accounts
+                    join i in invoices on a.Id equals i.AccountId
+                    join w in workDoneItems on i.Id equals w.InvoiceId
+                    select new ReportWorkDoneItem
+                    {
+                        Account = AccountConverter.ConvertToDomain(a),
+                        Invoice = InvoiceConverter.ConvertToDomain(i),
+                        WorkDoneItem = WorkDoneItemConverter.ConvertToDomain(w)
+                    });
+
         }
     }
 }

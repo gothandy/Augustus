@@ -86,5 +86,19 @@ namespace Augustus.CRM.Test
                     a.WorkDone);
             }
         }
+
+        [TestMethod]
+        public void CRM_ReportQuery_GetExportData()
+        {
+            var data = query.GetExportData();
+
+            foreach (var d in data)
+            {
+                Console.WriteLine("{0} {1} {2}",
+                    d.Account.Name,
+                    d.Invoice.Name,
+                    d.WorkDoneItem.WorkDoneDate);
+            }
+        }
     }
 }

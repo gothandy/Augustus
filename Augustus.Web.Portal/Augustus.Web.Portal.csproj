@@ -217,6 +217,7 @@
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\InvoiceReadViewModel.cs" />
     <Compile Include="ViewModels\ReportAccountViewModel.cs" />
+    <Compile Include="ViewModels\ReportExportViewModel.cs" />
     <Compile Include="ViewModels\ReportErrorsViewModel.cs" />
     <Compile Include="ViewModels\ReportMonthViewModel.cs" />
     <Compile Include="ViewModels\OpportunityReadViewModel.cs" />
@@ -410,6 +411,7 @@
     <Content Include="Views\Reporting\Month.cshtml" />
     <Content Include="Views\Reporting\Account.cshtml" />
     <Content Include="Views\Reporting\Errors.cshtml" />
+    <Content Include="Views\Reporting\Export.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

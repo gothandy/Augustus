@@ -89,5 +89,23 @@ namespace Augustus.Web.Portal.Controllers
                 return View(viewModel);
             }
         }
+
+        // GET: Reporting/Export
+        public async Task<ActionResult> Export()
+        {
+            using (var context = await GetCrmContext())
+            {
+                var query = new ReportQuery(context);
+
+                var viewModel = new ReportExportViewModel
+                {
+                    Title = "Export",
+                    Breadcrumb = new Breadcrumb(),
+                    Items = query.GetExportData()
+                };
+
+                return View(viewModel);
+            }
+        }
     }
 }

@@ -55,6 +55,7 @@
     <Compile Include="Objects\ReportAccount.cs" />
     <Compile Include="Objects\Opportunity.cs" />
     <Compile Include="Objects\Organization.cs" />
+    <Compile Include="Objects\ReportWorkDoneItem.cs" />
     <Compile Include="Objects\WorkDoneItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,0 +1,30 @@
+﻿@model ReportExportViewModel
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Account</th>
+                <th>Invoice Name</th>
+                <th>Invoice Date</th>
+                <th class="currency">Invoice Margin</th>
+                <th>Work Done Date</th>
+                <th class="currency">Work Done Margin</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in Model.Items)
+            {
+                <tr>
+                    <td>@m.Account.Name</td>
+                    <td>@Html.ActionLink(m.Invoice.Name, "Details", "Invoice", new { id = m.Invoice.Id }, null)</td>
+                    <td>@DateTimeHelper.Format(m.Invoice.InvoiceDate)</td>
+                    <td class="currency">@CurrencyHelper.Format(m.Invoice.Margin)</td>
+                    <td>@DateTimeHelper.Format(m.WorkDoneItem.WorkDoneDate)</td>
+                    <td class="currency">@CurrencyHelper.Format(m.WorkDoneItem.Margin)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
