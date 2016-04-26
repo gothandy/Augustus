@@ -121,40 +121,14 @@
     <Compile Include="Entities\WorkDoneItemEntity.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="bin\Debug\Augustus.CRM.dll" />
-    <Content Include="bin\Debug\Augustus.CRM.pdb" />
-    <Content Include="bin\Debug\Microsoft.Crm.Sdk.Proxy.dll" />
-    <Content Include="bin\Debug\Microsoft.Crm.Sdk.Proxy.xml" />
-    <Content Include="bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.dll" />
-    <Content Include="bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.WindowsForms.dll" />
-    <Content Include="bin\Debug\Microsoft.IdentityModel.Clients.ActiveDirectory.xml" />
-    <Content Include="bin\Debug\Microsoft.IdentityModel.dll" />
-    <Content Include="bin\Debug\Microsoft.Xrm.Sdk.Deployment.dll" />
-    <Content Include="bin\Debug\Microsoft.Xrm.Sdk.Deployment.xml" />
-    <Content Include="bin\Debug\Microsoft.Xrm.Sdk.dll" />
-    <Content Include="bin\Debug\Microsoft.Xrm.Sdk.Workflow.dll" />
-    <Content Include="bin\Debug\Microsoft.Xrm.Sdk.Workflow.xml" />
-    <Content Include="bin\Debug\Microsoft.Xrm.Sdk.xml" />
-    <Content Include="bin\Debug\Microsoft.Xrm.Tooling.Connector.dll" />
-    <Content Include="bin\Debug\Microsoft.Xrm.Tooling.Connector.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="bin\Release\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Augustus.Domain\Augustus.Domain.csproj">
       <Project>{08d81a8f-f287-4460-9b3d-11d54cc1e7ad}</Project>
       <Name>Augustus.Domain</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
