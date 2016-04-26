@@ -1,12 +1,13 @@
 ﻿using Augustus.CRM.Converters;
 using Augustus.CRM.Entities;
+using Augustus.Domain.Interfaces;
 using Augustus.Domain.Objects;
 using System;
 using System.Linq;
 
 namespace Augustus.CRM.Queries
 {
-    public class WorkDoneItemQuery : BaseQuery
+    public class WorkDoneItemQuery : BaseQuery, IQuery<WorkDoneItem>
     {
         public WorkDoneItemQuery(CrmContext context) : base(context) { }
 
@@ -55,12 +56,16 @@ namespace Augustus.CRM.Queries
             return entity.Id;
         }
 
-        public void Delete(Guid workDoneItemId)
+        public Guid? Delete(Guid workDoneItemId)
         {
             var entity = Context.WorkDoneItems.Single(o => o.Id == workDoneItemId);
 
+            var invoiceId = entity.InvoiceId;
+
             Context.Delete(entity);
             Context.SaveChanges();
+
+            return invoiceId;
         }
 
         public void Update(WorkDoneItem workDoneItem)

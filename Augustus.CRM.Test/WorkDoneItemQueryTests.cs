@@ -95,7 +95,8 @@ namespace Augustus.CRM.Test
             Assert.AreEqual((decimal?)12345.67, item.Margin);
 
             // Delete Work Done Item
-            wdiQuery.Delete(id);
+            var invoiceId = wdiQuery.Delete(id);
+            Assert.AreEqual(invoice.Id, invoiceId);
 
             // Delete Others
             deleteInvoice(invoiceName);

@@ -10,6 +10,7 @@ namespace Augustus.Domain.Interfaces
 
         void Update(T domain);
 
+        /// <returns>Id of the parent item or null if no parent.</returns>
         Guid? Delete(Guid id);
     }
 }
