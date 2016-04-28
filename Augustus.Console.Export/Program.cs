@@ -35,17 +35,14 @@ namespace Augustus.Console.Export
                 });
             }
 
-            var azureConnectionString = "DefaultEndpointsProtocol=https;AccountName=augustusexport;AccountKey=MRR/7VNJTLCgpoVicRDICk7USjCcuczZqXcBC9WYsNfLGE8Mfk2Utt2tTSfCLfvNSLgyuXjA3hvg9q4pfIP5RQ==";
-            var azureStorageAccount = CloudStorageAccount.Parse(azureConnectionString);
+            var azureStorageAccount = CloudStorageAccount.Parse(AppSettings.AzureStorageConnectionString);
             var azureBlobClient = azureStorageAccount.CreateCloudBlobClient();
-            var azureBlobContainer = azureBlobClient.GetContainerReference("workdoneexport");
+            var azureBlobContainer = azureBlobClient.GetContainerReference(AppSettings.AzureExportBlobContainer);
 
-            var blob = azureBlobContainer.GetBlockBlobReference("export.xml");
+            var blob = azureBlobContainer.GetBlockBlobReference(AppSettings.AzureExportBlobName);
             var xml = Serialize<Export>(export);
             blob.UploadText(xml);
         }
-
-       
 
         private static string Serialize<T>(T dataToSerialize)
         {

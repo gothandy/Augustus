@@ -20,6 +20,9 @@ namespace Augustus.Web.Config
         public static string CrmUrl { get { return appSettings["crm:Url"]; } }
         public static bool UseAzureAuth { get { return (appSettings["crm:UseAzureAuth"] ?? "true") == "true"; } }
 
-            
+        public static string AzureStorageConnectionString { get { return appSettings["azure:StorageConnectionString"]; } }
+        public static string AzureExportBlobContainer { get { return appSettings["azure:ExportBlobContainer"]; } }
+        public static string AzureExportBlobName { get { return appSettings["azure:ExportBlobName"]; } }
+
     }
 }
