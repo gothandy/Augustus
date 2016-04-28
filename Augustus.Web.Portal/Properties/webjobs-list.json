@@ -1,0 +1,8 @@
+﻿{
+  "$schema": "http://schemastore.org/schemas/json/webjobs-list.json",
+  "WebJobs": [
+    {
+      "filePath": "../Augustus.Console.Export/Augustus.Console.Export.csproj"
+    }
+  ]
+}

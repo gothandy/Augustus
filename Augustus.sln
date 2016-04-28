@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AEC8F121-94D3-4535-B4BC-3FEB2A598BB2}"
 	ProjectSection(SolutionItems) = preProject
@@ -32,6 +32,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.Web.Framework", "Augustus.Web.Framework\Augustus.Web.Framework.csproj", "{0076647A-8D03-4A58-B45B-603881FE8581}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.Web.Config", "Augustus.Web.Config\Augustus.Web.Config.csproj", "{0249BCDF-3BC7-4F84-AE33-08CEA255F912}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.Console.Export", "Augustus.Console.Export\Augustus.Console.Export.csproj", "{0439810D-146E-4631-B3D9-FCDA82AEC912}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +89,10 @@ Global
 		{0249BCDF-3BC7-4F84-AE33-08CEA255F912}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0249BCDF-3BC7-4F84-AE33-08CEA255F912}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0249BCDF-3BC7-4F84-AE33-08CEA255F912}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0439810D-146E-4631-B3D9-FCDA82AEC912}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0439810D-146E-4631-B3D9-FCDA82AEC912}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0439810D-146E-4631-B3D9-FCDA82AEC912}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0439810D-146E-4631-B3D9-FCDA82AEC912}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
