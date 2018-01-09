@@ -1,5 +1,9 @@
 # Augustus
 
+## Production Issues
+
+If the data goes stale check the [AugustusConsoleExport WebJob Dashboard](https://augustuswebportal.scm.azurewebsites.net/azurejobs/#/jobs/triggered/AugustusConsoleExport). If you get a `Unable to Login to Dynamics CRM` then update the `crm:ConnectionString` in `Application settings` for the `AugustusWebPortal`.
+
 ## Configuration Settings
 
 For the Console Apps and test harnesses a connection string is used.
@@ -49,9 +53,9 @@ I tend to use `machine.config` found here `%WinDir%\Microsoft.NET\Framework\v4.0
 
 http://crm.davidyack.com/building-multi-tenant-web-apps-talking-to-crm/
 
-1. Find the ‘Permissions to Other Applications’ section and add a new application
-2. Select ‘Dynamics CRM Online’ and save
-3. Back to the screen with the ‘Permissions to Other Applications’, add the delegate permission ‘Access CRM Online as organization users’
+1. Find the â€˜Permissions to Other Applicationsâ€™ section and add a new application
+2. Select â€˜Dynamics CRM Onlineâ€™ and save
+3. Back to the screen with the â€˜Permissions to Other Applicationsâ€™, add the delegate permission â€˜Access CRM Online as organization usersâ€™
 
 ## Generated Code
 
