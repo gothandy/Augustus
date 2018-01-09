@@ -2,7 +2,7 @@
 
 ## Production Issues
 
-If the data goes stale check the [AugustusConsoleExport WebJob Dashboard](https://augustuswebportal.scm.azurewebsites.net/azurejobs/#/jobs/triggered/AugustusConsoleExport). If you get a `Unable to Login to Dynamics CRM` then update the `crm:ConnectionString` in `Application settings` for the `AugustusWebPortal`.
+If the data goes stale check the [AugustusConsoleExport WebJob Dashboard](https://augustuswebportal.scm.azurewebsites.net/azurejobs/#/jobs/triggered/AugustusConsoleExport). If you get a `Unable to Login to Dynamics CRM` then update the `crm:ConnectionString` in `Application settings` for the `AugustusWebPortal`. Make sure you hit save. Staying on the `AugustusWebPortal` page, hit run on the `WebJobs` tab as the job is scheduled to run every hour.
 
 ## Configuration Settings
 
