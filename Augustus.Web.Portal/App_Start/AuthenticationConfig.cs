@@ -61,7 +61,7 @@ namespace Augustus.Web.Portal
             var signedInUserID = context.AuthenticationTicket.Identity.FindFirst(ClaimTypes.NameIdentifier).Value;
             var authContext = new AuthenticationContext(string.Format("https://login.windows.net/{0}", AppSettings.TenantId));
             var redirectUri = new Uri(AppSettings.PostLoginRedirectUri);
-            var result = authContext.AcquireTokenByAuthorizationCode(code, redirectUri, credential, "Microsoft.CRM");
+            var result = authContext.AcquireTokenByAuthorizationCodeAsync(code, redirectUri, credential, "Microsoft.CRM");
 
             return Task.FromResult(0);
         }
