@@ -14,13 +14,6 @@ namespace Augustus.CRM.Entities
         public const string EntityLogicalName = "new_invoice";
         public const int EntityTypeCode = 10010;
 
-        [AttributeLogicalName("statecode")]
-        public bool? Active
-        {
-            get { return this.GetAttributeState(); }
-            set { this.SetAttributeState(value); }
-        }
-
         [AttributeLogicalName("statuscode")]
         [StatusLookup(new int[] { 4, 0, 5, 6, 7, 1, 8, 2, 3 })]
         public int? Status

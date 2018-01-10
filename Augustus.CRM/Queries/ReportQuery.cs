@@ -182,13 +182,13 @@ namespace Augustus.CRM.Queries
             return (from a in accounts
                     join i in invoices on a.Id equals i.AccountId
                     join w in workDoneItems on i.Id equals w.InvoiceId
-                    where (bool)w.Active && (bool)i.Active
                     select new ReportWorkDoneItem
-                    { 
+                    {
                         Account = AccountConverter.ConvertToDomain(a),
                         Invoice = InvoiceConverter.ConvertToDomain(i),
                         WorkDoneItem = WorkDoneItemConverter.ConvertToDomain(w)
                     });
+
         }
     }
 }
