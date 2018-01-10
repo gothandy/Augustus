@@ -2,27 +2,35 @@
 
 ## Production Issues
 
-If the data goes stale check the [AugustusConsoleExport WebJob Dashboard](https://augustuswebportal.scm.azurewebsites.net/azurejobs/#/jobs/triggered/AugustusConsoleExport). If you get a `Unable to Login to Dynamics CRM` then update the `crm:ConnectionString` in `Application settings` for the `AugustusWebPortal`. Make sure you hit save. Staying on the `AugustusWebPortal` page, hit run on the `WebJobs` tab as the job is scheduled to run every hour.
+If the data goes stale check the
+[AugustusConsoleExport WebJob Dashboard](https://augustuswebportal.scm.azurewebsites.net/azurejobs/#/jobs/triggered/AugustusConsoleExport).
+If you get a `Unable to Login to Dynamics CRM` then update the `crm:ConnectionString` in
+`Application settings` for the `AugustusWebPortal`. Make sure you hit save.
+Staying on the `AugustusWebPortal` page, hit run on the `WebJobs` tab as the job is scheduled to run every hour.
 
 ## Configuration Settings
 
 For the Console Apps and test harnesses a connection string is used.
 There are two options. The first is preferred as no password is stored. 
 However it can be problematic if you have multiple accounts for testing.
-To find the CRM url simply login to CRM and use the url given there of the format `https://xxx.dynamics.com`. Goto the Office 365 Admin page select Azure AD this will take you to the Azure portal. Here select the True Clarity AD, select Applications and select augustus. You will be able to get the client id and the redirect uris from here. I generally put the token cache store path in the solution folder for dev.
+To find the CRM url simply login to CRM and use the url given there of the
+format `https://xxx.dynamics.com`. Goto the Office 365 Admin page select Azure
+AD this will take you to the Azure portal. Here select the True Clarity AD,
+select Applications and select augustus. You will be able to get the client id
+and the redirect uris from here. I generally put the token cache store path in the solution folder for dev.
 
 ```
 <appSettings>
-  <add key="crm:ConnectionString" value="AuthType=OAuth; Url={url}; AppId={client id}; RedirectUri={redirect uris}; TokenCacheStorePath={path}; LoginPrompt=Auto"/>
+  <add key="crm:ConnectionString" value="AuthType=OAuth; Url={url}; AppId={client id}; RedirectUri={redirect uris}; TokenCacheStorePath={path}; LoginPrompt=Auto;"/>
+  <add key="azure:StorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName={account name};AccountKey={account key};"/>
 </appSettings>
 ```
-
-
-or simpler but less secure
+or simpler but less secure (so use machine.config see below).
 
 ```
 <appSettings>
   <add key="crm:ConnectionString" value="AuthType=Office365; Url={url}; AppId={client id}; Username={username}; Password={password}"/>
+  <add key="azure:StorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName={account name};AccountKey={account key};"/>
 </appSettings>
 ```
 

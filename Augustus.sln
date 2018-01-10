@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AEC8F121-94D3-4535-B4BC-3FEB2A598BB2}"
 	ProjectSection(SolutionItems) = preProject
@@ -20,8 +20,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.App.ImportWorkDoneItems", "Augustus.App.ImportWorkDoneItems\Augustus.App.ImportWorkDoneItems.csproj", "{98FC2D9D-A3BA-40A3-AB08-A1EC59CD59D5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.Web.Portal", "Augustus.Web.Portal\Augustus.Web.Portal.csproj", "{9A77BFE5-C00D-4544-8EE4-783A58429C7F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.Web.Portal.Test", "Augustus.Web.Portal.Test\Augustus.Web.Portal.Test.csproj", "{56CCE622-D8EC-4CFB-B9F6-F820C0D31D09}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Augustus.Domain", "Augustus.Domain\Augustus.Domain.csproj", "{08D81A8F-F287-4460-9B3D-11D54CC1E7AD}"
 EndProject
@@ -65,10 +63,6 @@ Global
 		{9A77BFE5-C00D-4544-8EE4-783A58429C7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A77BFE5-C00D-4544-8EE4-783A58429C7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A77BFE5-C00D-4544-8EE4-783A58429C7F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{56CCE622-D8EC-4CFB-B9F6-F820C0D31D09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{56CCE622-D8EC-4CFB-B9F6-F820C0D31D09}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{56CCE622-D8EC-4CFB-B9F6-F820C0D31D09}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{56CCE622-D8EC-4CFB-B9F6-F820C0D31D09}.Release|Any CPU.Build.0 = Release|Any CPU
 		{08D81A8F-F287-4460-9B3D-11D54CC1E7AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{08D81A8F-F287-4460-9B3D-11D54CC1E7AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08D81A8F-F287-4460-9B3D-11D54CC1E7AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -96,5 +90,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C4C3BD01-5342-482F-A3AD-FFD2085E24D3}
 	EndGlobalSection
 EndGlobal
