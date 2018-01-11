@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using Augustus.Domain.Enums;
 
 namespace Augustus.Console.Export
 {
@@ -29,6 +30,9 @@ namespace Augustus.Console.Export
         [XmlElement("InvoiceMargin")]
         public Decimal InvoiceMargin { get; set; }
 
+        [XmlElement("InvoiceStatus")]
+        public InvoiceStatus InvoiceStatus { get; set; }
+
         [XmlElement("WorkDoneDate")]
         public DateTime WorkDoneDate { get; set; }
 
@@ -37,5 +41,7 @@ namespace Augustus.Console.Export
 
         [XmlElement("WorkDoneForecast")]
         public decimal WorkDoneForecast { get; set; }
+
+
     }
 }

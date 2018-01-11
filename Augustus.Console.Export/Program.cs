@@ -30,6 +30,7 @@ namespace Augustus.Console.Export
                     InvoiceName = w.Invoice.Name,
                     InvoiceDate = MonthStart(w.Invoice.InvoiceDate),
                     InvoiceMargin = w.Invoice.Margin.GetValueOrDefault(),
+                    InvoiceStatus = w.Invoice.Status.GetValueOrDefault(),
                     WorkDoneDate = MonthStart(w.WorkDoneItem.WorkDoneDate),
                     WorkDoneMargin = w.WorkDoneItem.Margin.GetValueOrDefault(),
                     WorkDoneForecast = w.WorkDoneItem.Forecast.GetValueOrDefault()
