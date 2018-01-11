@@ -29,6 +29,13 @@ namespace Augustus.CRM.Entities
             set { this.SetAttributeMoney(value); }
         }
 
+        [AttributeLogicalName("new_forecast")]
+        public decimal? Forecast
+        {
+            get { return this.GetAttributeMoney(); }
+            set { this.SetAttributeMoney(value); }
+        }
+
         [AttributeLogicalName("new_workdonedate")]
         public DateTime? WorkDoneDate
         {

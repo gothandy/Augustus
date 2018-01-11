@@ -24,7 +24,8 @@ namespace Augustus.CRM.Converters
                 AccountId = entity.AccountId,
                 InvoiceId = entity.InvoiceId,
                 WorkDoneDate = entity.WorkDoneDate,
-                Margin = entity.Margin
+                Margin = entity.Margin,
+                Forecast = entity.Forecast
             };
         }
     }

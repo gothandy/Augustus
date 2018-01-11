@@ -14,5 +14,6 @@ namespace Augustus.Domain.Objects
         public Guid? InvoiceId { get; set; }
         public decimal? Margin { get; set; }
         public DateTime? WorkDoneDate { get; set; }
+        public decimal? Forecast { get; set; }
     }
 }

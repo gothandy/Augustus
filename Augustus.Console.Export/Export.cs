@@ -34,5 +34,8 @@ namespace Augustus.Console.Export
 
         [XmlElement("WorkDoneMargin")]
         public Decimal WorkDoneMargin { get; set; }
+
+        [XmlElement("WorkDoneForecast")]
+        public decimal WorkDoneForecast { get; set; }
     }
 }
