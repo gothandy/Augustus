@@ -76,7 +76,7 @@ CrmSvcUtil.exe /url:{url}/XRMServices/2011/Organization.svc /out:GeneratedCode.c
 
 ## NuGet
 
-This is the one package required to add CRM access to a project Microsoft.CrmSdk.XrmTooling.CoreAssembly [8.0.2].  
+This is the one package required to add CRM access to a project Microsoft.CrmSdk.XrmTooling.CoreAssembly. Use the latest version to keep in step with CRM Online.  
 
 
 
