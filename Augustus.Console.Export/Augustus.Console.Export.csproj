@@ -85,6 +85,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DateTimeQuarter.cs" />
     <Compile Include="WorkDoneExport.cs" />
     <Compile Include="ProfitExport.cs" />
     <Compile Include="Program.cs" />

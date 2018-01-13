@@ -37,19 +37,28 @@ namespace Augustus.Console.Export
 
             IEnumerable<MonthExport> months =
                 from p in profitItems
-                select new MonthExport
-                {
-                    Account = p.Account.Name,
-                    Month = MonthStart(p.AvailabilityItem.AvailabilityDate),
-                    Cost = p.AvailabilityItem.Cost.GetValueOrDefault(),
-                    Margin = p.WorkDoneMargin.GetValueOrDefault(),
-                    Profit = p.WorkDoneMargin.GetValueOrDefault() - p.AvailabilityItem.Cost.GetValueOrDefault(),
-                    Days = p.AvailabilityItem.AvailableDays.GetValueOrDefault()
-                };
+                select NewMonthExport(p);
 
             profit.AddRange(months);
 
             return profit;
+        }
+
+        private static MonthExport NewMonthExport(ReportProfitItem p)
+        {
+            MonthExport e = new MonthExport();
+
+            e.Account = p.Account.Name;
+            e.Date = MonthStart(p.AvailabilityItem.AvailabilityDate);
+            e.Year = e.Date.Year;
+            e.Quarter = e.Date.GetQuarter();
+            e.Month = e.Date.Month;
+            e.Cost = p.AvailabilityItem.Cost.GetValueOrDefault();
+            e.Margin = p.WorkDoneMargin.GetValueOrDefault();
+            e.Days = p.AvailabilityItem.AvailableDays.GetValueOrDefault();
+            e.Profit = e.Margin - e.Cost;
+
+            return e;
         }
 
         private static WorkDoneExport GetWorkDoneExport(ReportQuery query)

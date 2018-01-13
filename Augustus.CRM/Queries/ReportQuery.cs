@@ -214,9 +214,13 @@ namespace Augustus.CRM.Queries
 
         private decimal? GetWorkDoneMargin(Guid id, DateTime monthStart)
         {
-            return workDoneItems.
-                Where(i => (i.AccountId == id) && (GetMonthStart(i.WorkDoneDate) == monthStart)).
-                Sum(i => i.Margin);
+            return (from a in accounts
+                    join i in invoices on a.Id equals i.AccountId
+                    join w in workDoneItems on i.Id equals w.InvoiceId
+                    where (bool)w.Active && (bool)i.Active
+                        && a.Id == id
+                        && GetMonthStart(w.WorkDoneDate) == monthStart
+                    select w.Margin).Sum();
         }
     }
 }
