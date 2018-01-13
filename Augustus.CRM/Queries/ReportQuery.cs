@@ -12,12 +12,14 @@ namespace Augustus.CRM.Queries
         private List<AccountEntity> accounts;
         private List<InvoiceEntity> invoices;
         private List<WorkDoneItemEntity> workDoneItems;
+        private List<AvailabilityItemEntity> availabilityItems;
 
         public ReportQuery(CrmContext context) : base(context)
         {
             accounts = Context.Accounts.ToList();
             invoices = Context.Invoices.ToList();
             workDoneItems = Context.WorkDoneItems.ToList();
+            availabilityItems = Context.AvailabilityItems.ToList();
         }
 
         public IEnumerable<ReportMonth> GetMonths()
@@ -33,6 +35,13 @@ namespace Augustus.CRM.Queries
                         WorkDone = g.Sum(i => i.Margin).Value
                     }).AsEnumerable();
 
+        }
+
+        public object GetAvailability()
+        {
+            return (from ai in availabilityItems
+                    where (bool)ai.Active
+                    select AvailabilityItemConverter.ConvertToDomain(ai));
         }
 
         private DateTime GetMonthStart(DateTime? month)
@@ -177,7 +186,7 @@ namespace Augustus.CRM.Queries
             return query.Where(i => i.Margin != i.WorkDone);
         }
 
-        public IEnumerable<ReportWorkDoneItem> GetExportData()
+        public IEnumerable<ReportWorkDoneItem> GetWorkDoneItems()
         {
             return (from a in accounts
                     join i in invoices on a.Id equals i.AccountId
@@ -189,6 +198,25 @@ namespace Augustus.CRM.Queries
                         Invoice = InvoiceConverter.ConvertToDomain(i),
                         WorkDoneItem = WorkDoneItemConverter.ConvertToDomain(w)
                     });
+        }
+
+        public IEnumerable<ReportProfitItem> GetProfitData()
+        {
+            return (from a in accounts
+                    join p in availabilityItems on a.Id equals p.AccountId
+                    select new ReportProfitItem
+                    {
+                        Account = AccountConverter.ConvertToDomain(a),
+                        AvailabilityItem = AvailabilityItemConverter.ConvertToDomain(p),
+                        WorkDoneMargin = GetWorkDoneMargin(a.Id, GetMonthStart(p.AvailabilityDate))
+                    });
+        }
+
+        private decimal? GetWorkDoneMargin(Guid id, DateTime monthStart)
+        {
+            return workDoneItems.
+                Where(i => (i.AccountId == id) && (GetMonthStart(i.WorkDoneDate) == monthStart)).
+                Sum(i => i.Margin);
         }
     }
 }

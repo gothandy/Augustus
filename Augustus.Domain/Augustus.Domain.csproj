@@ -49,12 +49,14 @@
     <Compile Include="Interfaces\BaseDomainObject.cs" />
     <Compile Include="Interfaces\IQuery.cs" />
     <Compile Include="Objects\Account.cs" />
+    <Compile Include="Objects\AvailabilityItem.cs" />
     <Compile Include="Objects\Invoice.cs" />
     <Compile Include="Objects\ReportInvoice.cs" />
     <Compile Include="Objects\ReportMonth.cs" />
     <Compile Include="Objects\ReportAccount.cs" />
     <Compile Include="Objects\Opportunity.cs" />
     <Compile Include="Objects\Organization.cs" />
+    <Compile Include="Objects\ReportProfitItem.cs" />
     <Compile Include="Objects\ReportWorkDoneItem.cs" />
     <Compile Include="Objects\WorkDoneItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

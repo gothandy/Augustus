@@ -90,7 +90,7 @@ namespace Augustus.CRM.Test
         [TestMethod]
         public void CRM_ReportQuery_GetExportData()
         {
-            var data = query.GetExportData();
+            var data = query.GetWorkDoneItems();
 
             foreach (var d in data)
             {

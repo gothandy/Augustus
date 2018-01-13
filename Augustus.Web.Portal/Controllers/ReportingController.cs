@@ -101,7 +101,7 @@ namespace Augustus.Web.Portal.Controllers
                 {
                     Title = "Export",
                     Breadcrumb = new Breadcrumb(),
-                    Items = query.GetExportData()
+                    Items = query.GetWorkDoneItems()
                 };
 
                 return View(viewModel);

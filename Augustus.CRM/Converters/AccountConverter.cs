@@ -14,7 +14,7 @@ namespace Augustus.CRM.Converters
 
         public static Account ConvertToDomain(this AccountEntity entity)
         {
-            return AccountConverter.ToDomain(entity);
+            return ToDomain(entity);
         }
 
         public static Account ToDomain(AccountEntity entity)

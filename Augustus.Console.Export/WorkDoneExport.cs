@@ -6,15 +6,15 @@ using Augustus.Domain.Enums;
 namespace Augustus.Console.Export
 {
     [XmlRoot("Export")]
-    public class Export : List<Item>
+    public class WorkDoneExport : List<WorkDoneItem>
     {
 
     }
 
     [XmlRoot("Item")]
-    public class Item
+    public class WorkDoneItem
     {
-        public Item()
+        public WorkDoneItem()
         {
         }
 
