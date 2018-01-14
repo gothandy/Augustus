@@ -56,6 +56,13 @@ namespace Augustus.CRM.Entities
             get { return this.GetAttributeEntityReference(); }
             set { this.SetAttributeEntityReference(value); }
         }
+
+        [AttributeLogicalName("new_forecast")]
+        public decimal? Forecast
+        {
+            get { return this.GetAttributeMoney(); }
+            set { this.SetAttributeMoney(value); }
+        }
     }
 }
 

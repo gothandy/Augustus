@@ -18,8 +18,9 @@ namespace Augustus.CRM.Converters
                 Created = entity.Created,
                 AccountId = entity.AccountId,
                 AvailabilityDate = entity.AvailabilityDate,
+                AvailableDays = entity.AvailableDays,
                 Cost = entity.Cost,
-                AvailableDays = entity.AvailableDays
+                Forecast = entity.Forecast
             };
         }
     }

@@ -46,5 +46,8 @@ namespace Augustus.Console.Export
         [XmlElement("Profit")]
         public Decimal Profit { get; set; }
 
+        [XmlElement("Forecast")]
+        public Decimal Forecast { get; set; }
+
     }
 }

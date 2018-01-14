@@ -57,6 +57,7 @@ namespace Augustus.Console.Export
             e.Margin = p.WorkDoneMargin.GetValueOrDefault();
             e.Days = p.AvailabilityItem.AvailableDays.GetValueOrDefault();
             e.Profit = e.Margin - e.Cost;
+            e.Forecast = p.AvailabilityItem.Forecast.GetValueOrDefault();
 
             return e;
         }
