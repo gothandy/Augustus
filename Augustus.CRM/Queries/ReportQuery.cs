@@ -167,12 +167,13 @@ namespace Augustus.CRM.Queries
         {
             var query = (from i in invoices
                          join w in workDoneItems on i.Id equals w.InvoiceId
+                         where (bool)i.Active && (bool)w.Active
                          group w by new
                          {
-                             Id = i.Id,
-                             Name = i.Name,
-                             InvoiceDate = i.InvoiceDate,
-                             Margin = i.Margin
+                             i.Id,
+                             i.Name,
+                             i.InvoiceDate,
+                             i.Margin
                          } into g
                          select new ReportInvoice
                          {
