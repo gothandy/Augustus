@@ -4,7 +4,7 @@
     {
         public Account Account { get; set; }
         public Invoice Invoice { get; set; }
-        public AvailabilityItem AvailabilityItem { get; set; }
+        public Allocation Allocation { get; set; }
         public WorkDoneItem WorkDoneItem { get; set; }
     }
 }

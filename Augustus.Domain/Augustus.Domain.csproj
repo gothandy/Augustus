@@ -49,7 +49,7 @@
     <Compile Include="Interfaces\BaseDomainObject.cs" />
     <Compile Include="Interfaces\IQuery.cs" />
     <Compile Include="Objects\Account.cs" />
-    <Compile Include="Objects\AvailabilityItem.cs" />
+    <Compile Include="Objects\Allocation.cs" />
     <Compile Include="Objects\Invoice.cs" />
     <Compile Include="Objects\ReportInvoice.cs" />
     <Compile Include="Objects\ReportMonth.cs" />

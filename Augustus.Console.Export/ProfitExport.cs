@@ -7,23 +7,23 @@ using Augustus.Domain.Objects;
 namespace Augustus.Console.Export
 {
     [XmlRoot("Profit")]
-    public class ProfitExport : List<MonthExport>
+    public class ProfitExport : List<AccountByMonthExport>
     {
 
     }
 
-    [XmlRoot("Month")]
-    public class MonthExport
+    [XmlRoot("AccountByMonth")]
+    public class AccountByMonthExport
     {
-        public MonthExport()
+        public AccountByMonthExport()
         {
         }
 
         [XmlElement("Account")]
         public string Account { get; set; }
 
-        [XmlElement("Date")]
-        public DateTime Date { get; set; }
+        [XmlElement("MonthStart")]
+        public DateTime MonthStart { get; set; }
 
         [XmlElement("Year")]
         public int Year { get; set; }
@@ -34,11 +34,11 @@ namespace Augustus.Console.Export
         [XmlElement("Month")]
         public int Month { get; set; }
 
-        [XmlElement("Days")]
-        public Decimal Days { get; set; }
+        [XmlElement("BillableDays")]
+        public Decimal BillableDays { get; set; }
         
-        [XmlElement("Cost")]
-        public Decimal Cost { get; set; }
+        [XmlElement("CostAllocation")]
+        public Decimal CostAllocation { get; set; }
 
         [XmlElement("Margin")]
         public Decimal Margin { get; set; }
@@ -46,8 +46,10 @@ namespace Augustus.Console.Export
         [XmlElement("Profit")]
         public Decimal Profit { get; set; }
 
-        [XmlElement("Forecast")]
-        public Decimal Forecast { get; set; }
+        [XmlElement("ForecastDayRate")]
+        public Decimal ForecastDayRate { get; set; }
 
+        [XmlElement("ForecastMargin")]
+        public decimal ForecastMargin { get; set; }
     }
 }

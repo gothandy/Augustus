@@ -6,12 +6,12 @@ using System;
 
 namespace Augustus.CRM.Entities
 {
-    [EntityLogicalName("new_availablity")]
-    public partial class AvailabilityItemEntity : BaseEntity
+    [EntityLogicalName("new_allocation")]
+    public partial class AllocationEntity : BaseEntity
     {
-        public AvailabilityItemEntity() : base(EntityLogicalName) { }
+        public AllocationEntity() : base(EntityLogicalName) { }
 
-        public const string EntityLogicalName = "new_availablity";
+        public const string EntityLogicalName = "new_allocation";
         public const int EntityTypeCode = 10049;
 
         [AttributeLogicalName("new_cost")]
@@ -21,21 +21,21 @@ namespace Augustus.CRM.Entities
             set { this.SetAttributeMoney(value); }
         }
 
-        [AttributeLogicalName("new_availabledays")]
-        public decimal? AvailableDays
+        [AttributeLogicalName("new_days")]
+        public decimal? Days
         {
             get { return this.GetAttributeDecimal(); }
             set { this.SetAttributeDecimal(value); }
         }
 
-        [AttributeLogicalName("new_availabilitydate")]
-        public DateTime? AvailabilityDate
+        [AttributeLogicalName("new_month")]
+        public DateTime? Month
         {
             get { return this.GetAttributeDateTime(); }
             set { this.SetAttributeDateTime(value); }
         }
 
-        [AttributeLogicalName("new_availablityid")]
+        [AttributeLogicalName("new_allocationid")]
         public override Guid Id
         {
             get { return this.GetAttributeId(); }
@@ -57,8 +57,8 @@ namespace Augustus.CRM.Entities
             set { this.SetAttributeEntityReference(value); }
         }
 
-        [AttributeLogicalName("new_forecast")]
-        public decimal? Forecast
+        [AttributeLogicalName("new_dayrate")]
+        public decimal? DayRate
         {
             get { return this.GetAttributeMoney(); }
             set { this.SetAttributeMoney(value); }

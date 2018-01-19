@@ -79,7 +79,7 @@
   <ItemGroup>
     <Compile Include="AttributeExtensions\DecimalAttributeExtension.cs" />
     <Compile Include="Attributes\EntityReferenceAttribute.cs" />
-    <Compile Include="Converters\AvailabilityItemConverter.cs" />
+    <Compile Include="Converters\AllocationConverter.cs" />
     <Compile Include="CrmServiceConnectionString.cs" />
     <Compile Include="AttributeExtensions\EntityReferenceAttributeExtension.cs" />
     <Compile Include="AttributeExtensions\IdAttributeExtension.cs" />
@@ -97,7 +97,7 @@
     <Compile Include="Converters\WorkDoneItemConverter.cs" />
     <Compile Include="Entities\AccountEntity.cs" />
     <Compile Include="BaseEntity.cs" />
-    <Compile Include="Entities\AvailabilityItemEntity.cs" />
+    <Compile Include="Entities\AllocationEntity.cs" />
     <Compile Include="Entities\OpportunityEntity.cs" />
     <Compile Include="Entities\InvoiceEntity.cs" />
     <Compile Include="ICrmService.cs" />

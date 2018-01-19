@@ -37,9 +37,9 @@ namespace Augustus.CRM
             get { return context.CreateQuery<WorkDoneItemEntity>(); }
         }
 
-        public IQueryable<AvailabilityItemEntity> AvailabilityItems
+        public IQueryable<AllocationEntity> Allocations
         {
-            get { return context.CreateQuery<AvailabilityItemEntity>(); }
+            get { return context.CreateQuery<AllocationEntity>(); }
         }
 
         public IQueryable<OpportunityEntity> Opportunities

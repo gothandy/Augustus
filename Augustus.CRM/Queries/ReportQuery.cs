@@ -12,14 +12,14 @@ namespace Augustus.CRM.Queries
         private List<AccountEntity> accounts;
         private List<InvoiceEntity> invoices;
         private List<WorkDoneItemEntity> workDoneItems;
-        private List<AvailabilityItemEntity> availabilityItems;
+        private List<AllocationEntity> allocations;
 
         public ReportQuery(CrmContext context) : base(context)
         {
             accounts = Context.Accounts.ToList();
             invoices = Context.Invoices.ToList();
             workDoneItems = Context.WorkDoneItems.ToList();
-            availabilityItems = Context.AvailabilityItems.ToList();
+            allocations = Context.Allocations.ToList();
         }
 
         public IEnumerable<ReportMonth> GetMonths()
@@ -39,9 +39,9 @@ namespace Augustus.CRM.Queries
 
         public object GetAvailability()
         {
-            return (from ai in availabilityItems
+            return (from ai in allocations
                     where (bool)ai.Active
-                    select AvailabilityItemConverter.ConvertToDomain(ai));
+                    select AllocationConverter.ConvertToDomain(ai));
         }
 
         private DateTime GetMonthStart(DateTime? month)
@@ -204,12 +204,12 @@ namespace Augustus.CRM.Queries
         public IEnumerable<ReportProfitItem> GetProfitData()
         {
             return (from a in accounts
-                    join p in availabilityItems on a.Id equals p.AccountId
+                    join p in allocations on a.Id equals p.AccountId
                     select new ReportProfitItem
                     {
                         Account = AccountConverter.ConvertToDomain(a),
-                        AvailabilityItem = AvailabilityItemConverter.ConvertToDomain(p),
-                        WorkDoneMargin = GetWorkDoneMargin(a.Id, GetMonthStart(p.AvailabilityDate))
+                        Allocation = AllocationConverter.ConvertToDomain(p),
+                        WorkDoneMargin = GetWorkDoneMargin(a.Id, GetMonthStart(p.Month))
                     });
         }
 

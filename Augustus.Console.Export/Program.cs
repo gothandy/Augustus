@@ -35,7 +35,7 @@ namespace Augustus.Console.Export
 
             var profit = new ProfitExport();
 
-            IEnumerable<MonthExport> months =
+            IEnumerable<AccountByMonthExport> months =
                 from p in profitItems
                 select NewMonthExport(p);
 
@@ -44,20 +44,21 @@ namespace Augustus.Console.Export
             return profit;
         }
 
-        private static MonthExport NewMonthExport(ReportProfitItem p)
+        private static AccountByMonthExport NewMonthExport(ReportProfitItem p)
         {
-            MonthExport e = new MonthExport();
+            AccountByMonthExport e = new AccountByMonthExport();
 
             e.Account = p.Account.Name;
-            e.Date = MonthStart(p.AvailabilityItem.AvailabilityDate);
-            e.Year = e.Date.Year;
-            e.Quarter = e.Date.GetQuarter();
-            e.Month = e.Date.Month;
-            e.Cost = p.AvailabilityItem.Cost.GetValueOrDefault();
+            e.MonthStart = MonthStart(p.Allocation.Month);
+            e.Year = e.MonthStart.Year;
+            e.Quarter = e.MonthStart.GetQuarter();
+            e.Month = e.MonthStart.Month;
+            e.CostAllocation = p.Allocation.Cost.GetValueOrDefault();
             e.Margin = p.WorkDoneMargin.GetValueOrDefault();
-            e.Days = p.AvailabilityItem.AvailableDays.GetValueOrDefault();
-            e.Profit = e.Margin - e.Cost;
-            e.Forecast = p.AvailabilityItem.Forecast.GetValueOrDefault();
+            e.BillableDays = p.Allocation.Days.GetValueOrDefault();
+            e.Profit = e.Margin - e.CostAllocation;
+            e.ForecastDayRate = p.Allocation.DayRate.GetValueOrDefault();
+            e.ForecastMargin = e.ForecastDayRate * e.BillableDays;
 
             return e;
         }
